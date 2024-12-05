@@ -9,8 +9,8 @@ const Navigation = () => {
   };
 
   return (
-    <nav className=" dark:bg-green-900 fixed w-full">
-      <div className="max-w-screen-xl flex flex-wrap items-center justify-between mx-auto p-4">
+    <nav className="h-15 dark:bg-green-900 fixed w-full">
+      <div className="max-w-screen-xl flex flex-wrap items-center justify-between mx-auto p-4 md:p-4 lg:py-1.5">
         <a href="#" className="flex items-center space-x-3 rtl:space-x-reverse">
           <span className="self-center flex text-2xl font-semibold whitespace-nowrap dark:text-white">
             <img
@@ -24,7 +24,7 @@ const Navigation = () => {
         <button
           data-collapse-toggle="navbar-multi-level"
           type="button"
-          className="inline-flex items-center p-2 w-10 h-10 justify-center text-sm text-gray-500 rounded-lg md:hidden hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-200 dark:text-gray-400 dark:hover:bg-gray-700 dark:focus:ring-gray-600"
+          className="inline-flex items-center w-10 h-8 justify-center text-sm text-gray-500 rounded-lg md:hidden hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-200 dark:text-gray-400 dark:hover:bg-gray-700 dark:focus:ring-gray-600"
           aria-controls="navbar-multi-level"
           aria-expanded="false"
         >
@@ -47,10 +47,10 @@ const Navigation = () => {
         </button>
 
         {/* Search Bar*/}
-        <div className="relative w-80">
+        <div className="relative w-96 hidden lg:block">
           <div className="absolute inset-y-0 start-0 flex items-center ps-3 pointer-events-none">
             <svg
-              className="h-4 text-gray-500 dark:text-gray-400"
+              className="h-5 px-1 text-gray-500 dark:text-gray-400"
               aria-hidden="true"
               xmlns="http://www.w3.org/2000/svg"
               fill="none"
@@ -68,7 +68,7 @@ const Navigation = () => {
           <input
             type="search"
             id="default-search"
-            className="block w-full p-4 ps-10 text-sm text-gray-900 border border-gray-300 rounded-full bg-gray-50 dark:bg-gray-900 dark:border-opacity-0 dark:placeholder-gray-400 dark:text-white focus:outline-none"
+            className="block w-full p-4 ps-10 text-sm text-gray-900 border border-gray-300 rounded-full bg-gray-50 dark:bg-zinc-900 dark:border-opacity-0 dark:placeholder-gray-400 dark:text-white focus:outline-none"
             placeholder="Search Teams, Players..."
             required
           />
@@ -216,14 +216,6 @@ const Navigation = () => {
                 className="block py-2 px-3 text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:p-0 dark:text-white  dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent"
               >
                 Pricing
-              </a>
-            </li>
-            <li>
-              <a
-                href="#"
-                className="block py-2 px-3 text-gray-900 rounded md:hover:bg-transparent md:border-0 md:p-0 dark:text-white "
-              >
-                Contact
               </a>
             </li>
           </ul>
