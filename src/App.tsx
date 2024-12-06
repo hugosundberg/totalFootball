@@ -1,23 +1,29 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Navigation from "./Navigation";
-import Home from "./pages/Home";
 import League from "./pages/League";
 import footballApi from "./services";
+import Team from "./pages/Team";
 
 export default function App() {
-  const [teams, setTeams] = useState([]);
+  const [teams, setTeams] = useState<Team[]>([]);
 
-  const handleFetchTeams = () => {
-    footballApi.fetchTeams();
+  useEffect(() => {
+    handleFetchTeams();
+  }, []);
+
+  const handleFetchTeams = async () => {
+    try {
+      const fetchedTeams = await footballApi.fetchTeams();
+      setTeams(fetchedTeams || []);
+    } catch (error) {
+      console.error("Error fetching teams:", error);
+    }
   };
 
   return (
     <>
       <Navigation />
-      <button className="h-40" onClick={handleFetchTeams}>
-        TEAMS
-      </button>
-      <League />
+      <Team team={teams[0]} />
     </>
   );
 }

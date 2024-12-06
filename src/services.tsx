@@ -21,8 +21,18 @@ const fetchTeams = async () => {
     }
 
     const data = await response.json();
-    console.log(data);
-    return data;
+
+    const teams: Team[] = data.response.map((team: any) => ({
+      id: team.team.id,
+      name: team.team.name,
+      country: team.team.country,
+      logo: team.team.logo,
+      code: team.team.code,
+      venue: team.venue.name,
+    }));
+
+    console.log(teams);
+    return teams;
   } catch (error) {
     console.error("Error fetching teams:", error);
   }
