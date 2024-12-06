@@ -3,6 +3,7 @@ import Navigation from "./Navigation";
 import League from "./pages/League";
 import footballApi from "./services";
 import Team from "./pages/Team";
+import Home from "./pages/Home";
 
 export default function App() {
   const [teams, setTeams] = useState<Team[]>([]);
@@ -23,7 +24,7 @@ export default function App() {
   return (
     <>
       <Navigation />
-      <Team team={teams[0]} />
+      <Home />
     </>
   );
 }
