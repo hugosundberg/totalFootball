@@ -15,7 +15,7 @@ const Home = () => {
               <button className="league-btn">Ligue 1</button>
             </div>
           </div>
-          <div className="flex justify-center ml-4 text-white bg-zinc-900 h-1/2 w-full p-10 rounded-2xl">
+          <div className="flex justify-center md:md:ml-4 text-white bg-zinc-900 h-1/2 w-full p-10 rounded-2xl">
             Today
           </div>
           <div className="hidden md:lg:flex gap-4 h-fit ml-4 text-white bg-zinc-900 w-1/4 rounded-2xl flex-col overflow-hidden">

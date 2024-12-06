@@ -9,7 +9,7 @@ const Navigation = () => {
   };
 
   return (
-    <nav className="h-15 dark:bg-green-900 fixed w-full z-50">
+    <nav className="h-15 bg-white dark:bg-green-900 fixed w-full z-50">
       <div className="max-w-screen-xl flex flex-wrap items-center justify-between mx-auto p-4 md:p-4 lg:py-1.5">
         <a href="#" className="flex items-center space-x-3 rtl:space-x-reverse">
           <span className="self-center flex text-2xl font-semibold whitespace-nowrap dark:text-white">
@@ -74,7 +74,7 @@ const Navigation = () => {
           />
           <button
             type="submit"
-            className="text-white absolute end-2.5 bottom-2.5 hover:bg-green-800 font-medium rounded-full text-sm px-4 py-2 dark:bg-gray-800 dark:hover:bg-green-900 focus:outline-none"
+            className="absolute end-2.5 bottom-2.5 hover:bg-green-800 font-medium rounded-full text-sm px-4 py-2 text-white bg-gray-800 dark:hover:bg-green-900 focus:outline-none"
           >
             Search
           </button>
@@ -89,7 +89,7 @@ const Navigation = () => {
             <li>
               <a
                 href="#"
-                className="block py-2 px-3 text-white rounded md:bg-transparent md:p-0  hover:underline"
+                className="block py-2 px-3 dark:text-white rounded md:bg-transparent md:p-0  hover:underline"
                 aria-current="page"
               >
                 Home
