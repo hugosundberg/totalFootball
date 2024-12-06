@@ -1,5 +1,6 @@
 import { useState } from "react";
 import football from "../assets/football.webp";
+import football2 from "../assets/football2.webp";
 
 const Navigation = () => {
   const [isDropdownVisible, setDropdownVisible] = useState(false);
@@ -15,7 +16,12 @@ const Navigation = () => {
           <span className="self-center flex text-2xl font-semibold whitespace-nowrap dark:text-white">
             <img
               src={football}
-              className="h-8 self-center mr-2"
+              className=" hidden dark:block h-8 self-center mr-2"
+              alt="Flowbite Logo"
+            />
+            <img
+              src={football2}
+              className="h-8 self-center mr-2 dark:hidden"
               alt="Flowbite Logo"
             />
             Total Football
