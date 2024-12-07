@@ -1,8 +1,7 @@
 import "../index.css";
 import Table from "./Table";
-const apiKey = import.meta.env.VITE_FOOTBALL_API_KEY;
 
-const Home = ({ standing }: any) => {
+const Home = ({ standing, currentLeague }: any) => {
   return (
     <>
       <script
@@ -21,7 +20,8 @@ const Home = ({ standing }: any) => {
               <button className="league-btn">Ligue 1</button>
             </div>
           </div>
-          <div className="flex justify-center md:md:ml-4 text-white bg-zinc-900 h-1/2 w-full p-10 rounded-2xl">
+          <div className="flex justify-center md:md:ml-4 text-white bg-zinc-900 h-fit w-full p-10 rounded-2xl">
+            <h2>{currentLeague}</h2>
             <Table standing={standing} />
           </div>
           <div className="hidden md:lg:flex gap-4 h-fit ml-4 text-white bg-zinc-900 w-1/4 rounded-2xl flex-col overflow-hidden">

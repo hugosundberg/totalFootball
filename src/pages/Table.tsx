@@ -20,7 +20,7 @@ interface TableProps {
 
 const Table = ({ standing }: TableProps) => {
   return (
-    <div className="bg-blue-800 h-full w-1/2">
+    <div className="bg-blue-800 h-fit w-full">
       <div className="flex flex-col">
         {standing && standing.length > 0 ? (
           standing.map((team) => (
