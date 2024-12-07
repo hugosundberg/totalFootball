@@ -31,7 +31,7 @@ const Table = ({ standing }: TableProps) => {
   stringFormatter(testString);
 
   return (
-    <div className="bg-slate-800 h-fit w-full pt-3 rounded-lg overflow-hidden">
+    <div className="bg-slate-800 h-fit w-full pt-3 rounded-2xl overflow-hidden">
       <div className="flex flex-col">
         {standing && (
           <div className="flex flex-row justify-between">

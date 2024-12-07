@@ -20,7 +20,7 @@ const Home = ({ standing, currentLeague }: any) => {
               <button className="league-btn">Ligue 1</button>
             </div>
           </div>
-          <div className="flex justify-center md:md:ml-4 text-white bg-zinc-900 h-fit w-full p-10 rounded-2xl">
+          <div className="flex justify-center md:md:ml-4 text-white bg-zinc-900 h-fit w-full rounded-2xl">
             <h2>{currentLeague}</h2>
             <Table standing={standing} />
           </div>
