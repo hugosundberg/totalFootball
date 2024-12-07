@@ -4,7 +4,6 @@ import League from "./pages/League";
 import footballApi from "./services";
 import Team from "./pages/Team";
 import Home from "./pages/Home";
-import Table from "./pages/Table";
 
 export default function App() {
   const [teams, setTeams] = useState<Team[]>([]);
@@ -31,9 +30,9 @@ export default function App() {
 
   return (
     <>
+      <button onClick={handleFetchStandings}>FETCH</button>
       <Navigation />
       <Home standing={standing} />
-      <button onClick={handleFetchStandings}>FETCH</button>
     </>
   );
 }

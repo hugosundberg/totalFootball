@@ -87,7 +87,7 @@ const Table = ({ standing }: TableProps) => {
             </>
           ))
         ) : (
-          <p>No standings available</p>
+          <p className="px-4 pb-4">No standings available</p>
         )}
       </div>
     </div>

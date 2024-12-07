@@ -3,5 +3,5 @@
 @tailwind utilities;
 
 .league-btn {
-  @apply hover:bg-slate-600 py-2 px-4 flex;
+  @apply text-black bg-white hover:bg-slate-200 dark:hover:bg-slate-600 dark:bg-zinc-900 dark:text-white py-4 px-4 flex;
 }
