@@ -31,9 +31,9 @@ export default function App() {
 
   return (
     <>
-      <button onClick={handleFetchStandings}>FETCH</button>
       <Navigation />
       <Home standing={standing} />
+      <button onClick={handleFetchStandings}>FETCH</button>
     </>
   );
 }
