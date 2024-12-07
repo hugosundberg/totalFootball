@@ -36,12 +36,14 @@ const Table = ({ standing }: TableProps) => {
                 <p className="hidden md:md:block">Form</p>
               </div>
             </div>
-            <span className="w-full bg-slate-400 dark:bg-slate-700 h-0.5 mt-1" />
           </>
         )}
         {standing && standing.length > 0 ? (
           standing.map((team, index) => (
             <>
+              {index !== standing.length && (
+                <span className="w-full bg-slate-200 dark:bg-slate-700 h-0.5" />
+              )}
               <div
                 key={team.team.id}
                 className="flex flex-row p-3 hover:cursor-pointer hover:bg-slate-100  dark:hover:bg-slate-700 justify-between"
@@ -81,9 +83,6 @@ const Table = ({ standing }: TableProps) => {
                   </p>
                 </div>
               </div>
-              {index !== standing.length - 1 && (
-                <span className="w-full bg-slate-400 dark:bg-slate-700 h-0.5" />
-              )}
             </>
           ))
         ) : (
