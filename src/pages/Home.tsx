@@ -1,8 +1,14 @@
 import "../index.css";
+import Table from "./Table";
+const apiKey = import.meta.env.VITE_FOOTBALL_API_KEY;
 
-const Home = () => {
+const Home = ({ standing }: any) => {
   return (
     <>
+      <script
+        type="module"
+        src="https://widgets.api-sports.io/2.0.3/widgets.js"
+      ></script>
       <div className="body flex relative pt-10 px-4 top-10 z-0 h-screen bg-black w-full justify-center">
         <div className="content flex w-screen bg-black max-w-screen-xl">
           <div className="league-container hidden md:md:flex flex-col left-0 text-white bg-zinc-900 w-60 h-fit rounded-2xl overflow-hidden">
@@ -16,7 +22,7 @@ const Home = () => {
             </div>
           </div>
           <div className="flex justify-center md:md:ml-4 text-white bg-zinc-900 h-1/2 w-full p-10 rounded-2xl">
-            Today
+            <Table standing={standing} />
           </div>
           <div className="hidden md:lg:flex gap-4 h-fit ml-4 text-white bg-zinc-900 w-1/4 rounded-2xl flex-col overflow-hidden">
             <h2 className="bg-zinc-800 p-4">Premier League</h2>

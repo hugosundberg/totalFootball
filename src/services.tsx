@@ -38,4 +38,31 @@ const fetchTeams = async () => {
   }
 };
 
-export default { fetchTeams };
+const fetchStandings = async () => {
+  try {
+    const response = await fetch(
+      `https://v3.football.api-sports.io/standings?league=${leagueID}&season=${season}`,
+      {
+        method: "GET",
+        headers: {
+          "x-rapidapi-host": "v3.football.api-sports.io",
+          "x-rapidapi-key": apiKey,
+        },
+      }
+    );
+
+    if (!response.ok) {
+      throw new Error(`HTTP error! status: ${response.status}`);
+    }
+
+    const data = await response.json();
+
+    const standings = data.response[0].league.standings[0];
+    console.log(standings);
+    return standings;
+  } catch (error) {
+    console.error("Error fetching standings: ", error);
+  }
+};
+
+export default { fetchTeams, fetchStandings };
