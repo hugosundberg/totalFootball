@@ -20,16 +20,6 @@ interface TableProps {
 }
 
 const Table = ({ standing }: TableProps) => {
-  const testString = "WWLWDW";
-
-  const stringFormatter = (string: string) => {
-    for (let index = 0; index <= string.length; index++) {
-      console.log(string.charAt(index));
-    }
-  };
-
-  stringFormatter(testString);
-
   return (
     <div className="bg-slate-800 h-fit w-full pt-3 rounded-2xl overflow-hidden">
       <div className="flex flex-col">
