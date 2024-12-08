@@ -1,12 +1,9 @@
 import { useState } from "react";
 import football from "../assets/football.webp";
 import football2 from "../assets/football2.webp";
-import { useNavigate } from "react-router-dom";
 
 const Navigation = () => {
   const [isDropdownVisible, setDropdownVisible] = useState(false);
-
-  const navigate = useNavigate();
 
   const toggleDropdown = () => {
     setDropdownVisible(!isDropdownVisible);

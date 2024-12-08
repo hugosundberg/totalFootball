@@ -3,7 +3,6 @@ import Navigation from "./Navigation";
 import footballApi from "./services";
 import Team from "./pages/Team";
 import Home from "./pages/Home";
-import SideBar from "./SideBar";
 import { Route, Routes, useNavigate } from "react-router-dom";
 import About from "./pages/About";
 

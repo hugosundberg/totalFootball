@@ -1,5 +1,3 @@
-import { useNavigate } from "react-router-dom";
-
 interface TeamStats {
   played: number;
 }
@@ -23,8 +21,6 @@ interface TableProps {
 }
 
 const Table = ({ standing, handleFetchTeam }: TableProps) => {
-  const navigate = useNavigate();
-
   return (
     <div className="bg-white text-black dark:text-white dark:bg-slate-800 h-fit w-full pt-3 rounded-2xl overflow-hidden">
       <div className="flex flex-col">
