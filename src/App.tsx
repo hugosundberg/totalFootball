@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import Navigation from "./Navigation";
 import footballApi from "./services";
 import Team from "./pages/Team";
@@ -11,16 +11,17 @@ export default function App() {
   const [standing, setStanding] = useState();
   const navigate = useNavigate();
 
-  const handleFetchTeam = async (id: number) => {
-    try {
-      const fetchedTeam = await footballApi.fetchTeam(id);
-      setCurrentTeam(fetchedTeam);
-
-      navigate(`/team/${id}`);
-    } catch (error) {
-      console.error("Error fetching team: ", error);
-    }
-  };
+  const handleFetchTeam = useCallback(
+    async (id: number) => {
+      try {
+        const fetchedTeam = await footballApi.fetchTeam(id);
+        setCurrentTeam(fetchedTeam);
+      } catch (error) {
+        console.error("Error fetching team: ", error);
+      }
+    },
+    [navigate] // Dependencies that do not change
+  );
 
   const handleFetchStandings = async () => {
     try {
@@ -37,7 +38,6 @@ export default function App() {
 
   return (
     <>
-      <button onClick={() => handleFetchTeam(40)}>CLICK ME</button>
       <Navigation />
       <Routes>
         <Route
@@ -47,9 +47,13 @@ export default function App() {
           }
         />
         <Route
-          path="/team/:id"
+          path="/team/:id/*"
           element={
-            <Team team={currentTeam} handleFetchTeam={handleFetchTeam} />
+            <Team
+              team={currentTeam}
+              standing={standing}
+              handleFetchTeam={handleFetchTeam}
+            />
           }
         />
         <Route path="/about" element={<About />} />

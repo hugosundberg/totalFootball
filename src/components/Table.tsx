@@ -1,26 +1,19 @@
-interface TeamStats {
-  played: number;
-}
-
-interface TeamStanding {
-  rank: number;
-  team: {
-    name: string;
-    id: number;
-    logo: string;
-  };
-  all: TeamStats;
-  goalsDiff: number;
-  points: number;
-  form: string;
-}
+import { useNavigate } from "react-router-dom";
 
 interface TableProps {
   standing: TeamStanding[];
   handleFetchTeam: (id: number) => void;
+  currentTeam?: Team;
 }
 
-const Table = ({ standing, handleFetchTeam }: TableProps) => {
+const Table = ({ standing, handleFetchTeam, currentTeam }: TableProps) => {
+  const navigate = useNavigate();
+
+  const handleTeamClick = (id: number) => {
+    handleFetchTeam(id);
+    navigate(`/team/${id}`);
+  };
+
   return (
     <div className="bg-white text-black dark:text-white dark:bg-slate-800 h-fit w-full pt-3 rounded-2xl overflow-hidden">
       <div className="flex flex-col">
@@ -47,8 +40,12 @@ const Table = ({ standing, handleFetchTeam }: TableProps) => {
               )}
               <div
                 key={team.team.id}
-                className="flex flex-row p-3 hover:cursor-pointer hover:bg-slate-100  dark:hover:bg-slate-700 justify-between"
-                onClick={() => handleFetchTeam(team.team.id)}
+                className={`flex flex-row p-3 hover:cursor-pointer justify-between ${
+                  currentTeam?.id === team.team.id
+                    ? "bg-blue-100 dark:bg-slate-600"
+                    : "dark:hover:bg-slate-700"
+                }`}
+                onClick={() => handleTeamClick(team.team.id)}
               >
                 <div className="flex flex-row gap-4">
                   <p className="w-5 text-center">{team.rank}</p>
