@@ -2,6 +2,7 @@ import { useEffect } from "react";
 import { NavLink, useParams, Route, Routes } from "react-router-dom";
 import Squad from "../components/Squad";
 import Table from "../components/Table";
+import TeamStats from "../components/TeamStats";
 
 interface TeamProps {
   team?: Team;
@@ -39,39 +40,57 @@ const Team = ({ team, handleFetchTeam, standing }: TeamProps) => {
                 <p>{team.country}</p>
               </div>
             </div>
-            <div className="text-white top-0 flex gap-10 pt-10">
+            <div className="text-white top-0 flex gap-10 pt-10 pb">
               <NavLink
                 to={`/team/${id}`}
                 className={({ isActive }) =>
-                  isActive ? "text-blue-500 font-bold" : "text-gray-500"
+                  isActive
+                    ? "font-bold border-b-4 border-green-700 "
+                    : "text-gray-500"
                 }
                 end
               >
-                Overview
+                <div className="pb-2 px-2">Overview</div>
               </NavLink>
               <NavLink
                 to={`/team/${id}/table`}
                 className={({ isActive }) =>
-                  isActive ? "text-blue-500 font-bold" : "text-gray-500"
+                  isActive
+                    ? "font-bold border-b-4 border-green-700"
+                    : "text-gray-500"
                 }
               >
-                Table
+                <div className="pb-2 px-2">Table</div>
               </NavLink>
               <NavLink
                 to={`/team/${id}/fixtures`}
                 className={({ isActive }) =>
-                  isActive ? "text-blue-500 font-bold" : "text-gray-500"
+                  isActive
+                    ? "font-bold border-b-4 border-green-700"
+                    : "text-gray-500"
                 }
               >
-                Fixtures
+                <div className="pb-2 px-2">Matches</div>
               </NavLink>
               <NavLink
                 to={`/team/${id}/squad`}
                 className={({ isActive }) =>
-                  isActive ? "text-blue-500 font-bold" : "text-gray-500"
+                  isActive
+                    ? "font-bold border-b-4 border-green-700"
+                    : "text-gray-500"
                 }
               >
-                Squad
+                <div className="pb-2 px-2">Squad</div>
+              </NavLink>
+              <NavLink
+                to={`/team/${id}/stats`}
+                className={({ isActive }) =>
+                  isActive
+                    ? "font-bold border-b-4 border-green-700"
+                    : "text-gray-500"
+                }
+              >
+                <div className="pb-2 px-2">Stats</div>
               </NavLink>
             </div>
           </div>
@@ -93,6 +112,7 @@ const Team = ({ team, handleFetchTeam, standing }: TeamProps) => {
           />
           <Route path="fixtures" element={<p>Team Fixtures Content</p>} />
           <Route path="squad" element={<Squad />} />
+          <Route path="stats" element={<TeamStats />} />
         </Routes>
       </div>
     </div>
