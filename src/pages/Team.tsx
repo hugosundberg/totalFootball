@@ -6,7 +6,7 @@ import Table from "../components/Table";
 interface TeamProps {
   team?: Team;
   handleFetchTeam: (id: number) => void;
-  standing: TeamStanding[];
+  standing?: TeamStanding[];
 }
 
 const Team = ({ team, handleFetchTeam, standing }: TeamProps) => {

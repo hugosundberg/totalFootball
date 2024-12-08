@@ -1,7 +1,7 @@
 const apiKey = import.meta.env.VITE_FOOTBALL_API_KEY;
 
 const leagueID = 39;
-const season = 2022;
+const season = 2024;
 
 const fetchTeams = async () => {
   try {

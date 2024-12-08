@@ -1,7 +1,7 @@
 import { useNavigate } from "react-router-dom";
 
 interface TableProps {
-  standing: TeamStanding[];
+  standing?: TeamStanding[];
   handleFetchTeam: (id: number) => void;
   currentTeam?: Team;
 }
