@@ -22,10 +22,6 @@ export default function App() {
     }
   };
 
-  useEffect(() => {
-    console.log(currentTeam);
-  }, [currentTeam]);
-
   const handleFetchStandings = async () => {
     try {
       const fetchedStandings = await footballApi.fetchStandings();

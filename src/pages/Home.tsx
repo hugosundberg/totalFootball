@@ -1,5 +1,5 @@
 import "../index.css";
-import Table from "./Table";
+import Table from "../components/Table";
 
 const Home = ({ standing, currentLeague, handleFetchTeam }: any) => {
   return (

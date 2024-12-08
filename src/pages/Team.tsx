@@ -1,5 +1,6 @@
 import { useEffect } from "react";
 import { useParams } from "react-router-dom";
+import Squad from "../components/Squad";
 
 interface TeamProps {
   team?: Team;
@@ -17,7 +18,7 @@ const Team = ({ team, handleFetchTeam }: TeamProps) => {
     if (id) {
       handleFetchTeam(Number(id));
     }
-  });
+  }, [id]);
 
   return (
     <>
@@ -49,6 +50,7 @@ const Team = ({ team, handleFetchTeam }: TeamProps) => {
               <button>Stats</button>
             </div>
           </div>
+          <Squad />
         </div>
       </div>
     </>
