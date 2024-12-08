@@ -1,9 +1,12 @@
 import { useState } from "react";
 import football from "../assets/football.webp";
 import football2 from "../assets/football2.webp";
+import { useNavigate } from "react-router-dom";
 
 const Navigation = () => {
   const [isDropdownVisible, setDropdownVisible] = useState(false);
+
+  const navigate = useNavigate();
 
   const toggleDropdown = () => {
     setDropdownVisible(!isDropdownVisible);
@@ -12,7 +15,7 @@ const Navigation = () => {
   return (
     <nav className="h-15 bg-white dark:bg-green-900 fixed w-full z-50 shadow-lg">
       <div className="max-w-screen-xl flex flex-wrap items-center justify-between mx-auto p-4 md:p-4 lg:py-1.5">
-        <a href="#" className="flex items-center space-x-3 rtl:space-x-reverse">
+        <a href="/" className="flex items-center space-x-3 rtl:space-x-reverse">
           <span className="self-center flex text-2xl font-semibold whitespace-nowrap dark:text-white">
             <img
               src={football}
@@ -218,10 +221,10 @@ const Navigation = () => {
             </li>
             <li>
               <a
-                href="#"
+                href="/about"
                 className="block py-2 px-3 text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:p-0 dark:text-white  dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent"
               >
-                Pricing
+                About
               </a>
             </li>
           </ul>

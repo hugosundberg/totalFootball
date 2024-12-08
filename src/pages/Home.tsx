@@ -1,7 +1,7 @@
 import "../index.css";
 import Table from "./Table";
 
-const Home = ({ standing, currentLeague }: any) => {
+const Home = ({ standing, currentLeague, handleFetchTeam }: any) => {
   return (
     <div className="body flex relative pt-10 px-4 top-10 z-0 h-screen bg-slate-100 dark:bg-black w-full justify-center">
       <div className="content flex w-screen bg-slate-100 dark:bg-black max-w-screen-xl">
@@ -19,7 +19,7 @@ const Home = ({ standing, currentLeague }: any) => {
         </div>
         <div className="flex justify-center md:md:ml-4 text-white bg-zinc-900 h-fit w-full rounded-2xl shadow-lg">
           <h2>{currentLeague}</h2>
-          <Table standing={standing} />
+          <Table standing={standing} handleFetchTeam={handleFetchTeam} />
         </div>
         <div className="hidden md:lg:flex gap-4 h-fit ml-4 bg-white dark:text-white dark:bg-zinc-900 w-1/4 rounded-2xl flex-col overflow-hidden shadow-lg">
           <h2 className="dark:bg-zinc-800 p-4 font-semibold">Premier League</h2>

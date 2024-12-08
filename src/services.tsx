@@ -31,10 +31,45 @@ const fetchTeams = async () => {
       venue: team.venue.name,
     }));
 
-    console.log(teams);
     return teams;
   } catch (error) {
     console.error("Error fetching teams:", error);
+  }
+};
+
+const fetchTeam = async (teamID: number) => {
+  try {
+    const response = await fetch(
+      `https://v3.football.api-sports.io/teams?id=${teamID}`,
+      {
+        method: "GET",
+        headers: {
+          "x-rapidapi-host": "v3.football.api-sports.io",
+          "x-rapidapi-key": apiKey,
+        },
+      }
+    );
+
+    if (!response.ok) {
+      throw new Error(`HTTP error! status: ${response.status}`);
+    }
+
+    const data = await response.json();
+
+    const team = data.response[0];
+
+    const processedTeam: Team = {
+      id: team.team.id,
+      name: team.team.name,
+      country: team.team.country,
+      logo: team.team.logo,
+      code: team.team.code,
+      venue: team.venue.name,
+    };
+
+    return processedTeam;
+  } catch (error) {
+    console.error("Error fetching team: ", error);
   }
 };
 
@@ -58,11 +93,10 @@ const fetchStandings = async () => {
     const data = await response.json();
 
     const standings = data.response[0].league.standings[0];
-    console.log(standings);
     return standings;
   } catch (error) {
     console.error("Error fetching standings: ", error);
   }
 };
 
-export default { fetchTeams, fetchStandings };
+export default { fetchTeams, fetchStandings, fetchTeam };

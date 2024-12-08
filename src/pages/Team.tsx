@@ -1,8 +1,24 @@
+import { useEffect } from "react";
+import { useParams } from "react-router-dom";
+
 interface TeamProps {
-  team: Team;
+  team?: Team;
+  handleFetchTeam: (id: number) => void;
 }
 
-const Team = ({ team }: TeamProps) => {
+const Team = ({ team, handleFetchTeam }: TeamProps) => {
+  if (!team) {
+    return <p className="w-full h-screen dark:bg-black">Loading</p>;
+  }
+
+  const { id } = useParams<{ id: string }>();
+
+  useEffect(() => {
+    if (id) {
+      handleFetchTeam(Number(id));
+    }
+  });
+
   return (
     <>
       <div className="flex bg-black h-screen justify-center ">

@@ -1,3 +1,5 @@
+import { useNavigate } from "react-router-dom";
+
 interface TeamStats {
   played: number;
 }
@@ -17,9 +19,12 @@ interface TeamStanding {
 
 interface TableProps {
   standing: TeamStanding[];
+  handleFetchTeam: (id: number) => void;
 }
 
-const Table = ({ standing }: TableProps) => {
+const Table = ({ standing, handleFetchTeam }: TableProps) => {
+  const navigate = useNavigate();
+
   return (
     <div className="bg-white text-black dark:text-white dark:bg-slate-800 h-fit w-full pt-3 rounded-2xl overflow-hidden">
       <div className="flex flex-col">
@@ -47,6 +52,7 @@ const Table = ({ standing }: TableProps) => {
               <div
                 key={team.team.id}
                 className="flex flex-row p-3 hover:cursor-pointer hover:bg-slate-100  dark:hover:bg-slate-700 justify-between"
+                onClick={() => handleFetchTeam(team.team.id)}
               >
                 <div className="flex flex-row gap-4">
                   <p className="w-5 text-center">{team.rank}</p>

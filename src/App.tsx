@@ -1,38 +1,64 @@
 import { useEffect, useState } from "react";
 import Navigation from "./Navigation";
-import League from "./pages/League";
 import footballApi from "./services";
 import Team from "./pages/Team";
 import Home from "./pages/Home";
+import SideBar from "./SideBar";
+import { Route, Routes, useNavigate } from "react-router-dom";
+import About from "./pages/About";
 
 export default function App() {
-  const [teams, setTeams] = useState<Team[]>([]);
-  const [currentLeague, setCurrentLeague] = useState("");
+  const [currentTeam, setCurrentTeam] = useState<Team | undefined>(undefined);
   const [standing, setStanding] = useState();
+  const navigate = useNavigate();
 
-  const handleFetchTeams = async () => {
+  const handleFetchTeam = async (id: number) => {
     try {
-      const fetchedTeams = await footballApi.fetchTeams();
-      setTeams(fetchedTeams || []);
+      const fetchedTeam = await footballApi.fetchTeam(id);
+      setCurrentTeam(fetchedTeam);
+
+      navigate(`/team/${id}`);
     } catch (error) {
-      console.error("Error fetching teams:", error);
+      console.error("Error fetching team: ", error);
     }
   };
+
+  useEffect(() => {
+    console.log(currentTeam);
+  }, [currentTeam]);
 
   const handleFetchStandings = async () => {
     try {
       const fetchedStandings = await footballApi.fetchStandings();
       setStanding(fetchedStandings || []);
     } catch (error) {
-      console.error("Error fetching teams:", error);
+      console.error("Error fetching table:", error);
     }
   };
 
+  useEffect(() => {
+    handleFetchStandings();
+  }, []);
+
   return (
     <>
-      <button onClick={handleFetchStandings}>FETCH</button>
+      <button onClick={() => handleFetchTeam(40)}>CLICK ME</button>
       <Navigation />
-      <Home standing={standing} />
+      <Routes>
+        <Route
+          path="/"
+          element={
+            <Home standing={standing} handleFetchTeam={handleFetchTeam} />
+          }
+        />
+        <Route
+          path="/team/:id"
+          element={
+            <Team team={currentTeam} handleFetchTeam={handleFetchTeam} />
+          }
+        />
+        <Route path="/about" element={<About />} />
+      </Routes>
     </>
   );
 }
