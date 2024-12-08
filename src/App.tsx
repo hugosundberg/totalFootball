@@ -1,5 +1,5 @@
 import { useCallback, useEffect, useState } from "react";
-import Navigation from "./Navigation";
+import Navigation from "./components/Navigation";
 import footballApi from "./services";
 import Team from "./pages/Team";
 import Home from "./pages/Home";

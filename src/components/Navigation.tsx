@@ -1,6 +1,6 @@
 import { useState } from "react";
-import football from "../assets/football.webp";
-import football2 from "../assets/football2.webp";
+import football from "../../assets/football.webp";
+import football2 from "../../assets/football2.webp";
 
 const Navigation = () => {
   const [isDropdownVisible, setDropdownVisible] = useState(false);
