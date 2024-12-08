@@ -8,6 +8,7 @@ import About from "./pages/About";
 
 export default function App() {
   const [currentTeam, setCurrentTeam] = useState<Team | undefined>(undefined);
+  const [currentSquad, setCurrentSquad] = useState<Team | undefined>(undefined);
   const [standing, setStanding] = useState();
   const navigate = useNavigate();
 
@@ -16,6 +17,9 @@ export default function App() {
       try {
         const fetchedTeam = await footballApi.fetchTeam(id);
         setCurrentTeam(fetchedTeam);
+
+        const fetchedSquad = await footballApi.fetchSquad(id);
+        setCurrentSquad(fetchedSquad);
       } catch (error) {
         console.error("Error fetching team: ", error);
       }

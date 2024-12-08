@@ -99,4 +99,38 @@ const fetchStandings = async () => {
   }
 };
 
-export default { fetchTeams, fetchStandings, fetchTeam };
+const fetchSquad = async (teamID: number) => {
+  try {
+    const response = await fetch(
+      `https://v3.football.api-sports.io/players/squads?team=${teamID}`,
+      {
+        method: "GET",
+        headers: {
+          "x-rapidapi-host": "v3.football.api-sports.io",
+          "x-rapidapi-key": apiKey,
+        },
+      }
+    );
+
+    if (!response.ok) {
+      throw new Error(`HTTP error! status: ${response.status}`);
+    }
+
+    const data = await response.json();
+
+    const players: Player[] = data.response[0].players.map((player: any) => ({
+      id: player.id,
+      age: player.age,
+      name: player.name,
+      squadNumber: player.number,
+      position: player.position,
+      photo: player.photo,
+    }));
+
+    console.log(players);
+  } catch (error) {
+    console.error("Error fetching squad: ", error);
+  }
+};
+
+export default { fetchTeams, fetchStandings, fetchTeam, fetchSquad };

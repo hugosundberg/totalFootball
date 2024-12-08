@@ -1,5 +1,11 @@
-import { useEffect } from "react";
-import { NavLink, useParams, Route, Routes } from "react-router-dom";
+import { useEffect, useRef, useState } from "react";
+import {
+  NavLink,
+  useLocation,
+  useParams,
+  Route,
+  Routes,
+} from "react-router-dom";
 import Squad from "../components/Squad";
 import Table from "../components/Table";
 import TeamStats from "../components/TeamStats";
@@ -12,12 +18,23 @@ interface TeamProps {
 
 const Team = ({ team, handleFetchTeam, standing }: TeamProps) => {
   const { id } = useParams<{ id: string }>();
+  const location = useLocation();
+  const [barStyle, setBarStyle] = useState({ left: 0, width: 0 });
+  const navLinksRef = useRef<HTMLDivElement | null>(null);
 
   useEffect(() => {
     if (id) {
       handleFetchTeam(Number(id));
     }
   }, [id, handleFetchTeam]);
+
+  useEffect(() => {
+    const activeLink = navLinksRef.current?.querySelector(".active");
+    if (activeLink) {
+      const { offsetLeft, offsetWidth } = activeLink as HTMLElement;
+      setBarStyle({ left: offsetLeft, width: offsetWidth });
+    }
+  }, [location]);
 
   if (!team) {
     return (
@@ -31,8 +48,8 @@ const Team = ({ team, handleFetchTeam, standing }: TeamProps) => {
     <div className="flex bg-black h-screen justify-center">
       <div className="relative pt-16 bg-black h-full w-full md:lg:max-w-screen-xl">
         {/* Team Header */}
-        <div className="bg-zinc-800 mt-4 h-48 p-10 flex flex-row rounded-lg">
-          <div className="text-white flex flex-col">
+        <div className="bg-zinc-900 mt-4 p-8 flex flex-col rounded-lg relative">
+          <div className="text-white">
             <div className="flex">
               <img src={team.logo} alt={`${team.name} logo`} className="h-14" />
               <div className="ml-4">
@@ -40,13 +57,15 @@ const Team = ({ team, handleFetchTeam, standing }: TeamProps) => {
                 <p>{team.country}</p>
               </div>
             </div>
-            <div className="text-white top-0 flex gap-10 pt-10 pb">
+          </div>
+          <div className="relative mt-6">
+            <div ref={navLinksRef} className="text-white flex gap-10 relative">
               <NavLink
                 to={`/team/${id}`}
                 className={({ isActive }) =>
                   isActive
-                    ? "font-bold border-b-4 border-green-700 "
-                    : "text-gray-500"
+                    ? "text-green-700 active"
+                    : "text-gray-400 hover:text-gray-500"
                 }
                 end
               >
@@ -56,8 +75,8 @@ const Team = ({ team, handleFetchTeam, standing }: TeamProps) => {
                 to={`/team/${id}/table`}
                 className={({ isActive }) =>
                   isActive
-                    ? "font-bold border-b-4 border-green-700"
-                    : "text-gray-500"
+                    ? "text-green-700 active"
+                    : "text-gray-400 hover:text-gray-500"
                 }
               >
                 <div className="pb-2 px-2">Table</div>
@@ -66,8 +85,8 @@ const Team = ({ team, handleFetchTeam, standing }: TeamProps) => {
                 to={`/team/${id}/fixtures`}
                 className={({ isActive }) =>
                   isActive
-                    ? "font-bold border-b-4 border-green-700"
-                    : "text-gray-500"
+                    ? "text-green-700 active"
+                    : "text-gray-400 hover:text-gray-500"
                 }
               >
                 <div className="pb-2 px-2">Matches</div>
@@ -76,8 +95,8 @@ const Team = ({ team, handleFetchTeam, standing }: TeamProps) => {
                 to={`/team/${id}/squad`}
                 className={({ isActive }) =>
                   isActive
-                    ? "font-bold border-b-4 border-green-700"
-                    : "text-gray-500"
+                    ? "text-green-700 active"
+                    : "text-gray-400 hover:text-gray-500"
                 }
               >
                 <div className="pb-2 px-2">Squad</div>
@@ -86,20 +105,26 @@ const Team = ({ team, handleFetchTeam, standing }: TeamProps) => {
                 to={`/team/${id}/stats`}
                 className={({ isActive }) =>
                   isActive
-                    ? "font-bold border-b-4 border-green-700"
-                    : "text-gray-500"
+                    ? "text-green-700 active"
+                    : "text-gray-400 hover:text-gray-500"
                 }
               >
                 <div className="pb-2 px-2">Stats</div>
               </NavLink>
             </div>
+            <div
+              className="absolute h-1 rounded-md bg-green-700 transition-all duration-300"
+              style={{
+                left: `${barStyle.left}px`,
+                width: `${barStyle.width}px`,
+              }}
+            />
           </div>
         </div>
 
         {/* Dynamic Routes */}
-
         <Routes>
-          <Route path="/" element={<p>Team Table Content</p>} />
+          <Route path="/" element={<p>Team Overview Content</p>} />
           <Route
             path="table"
             element={

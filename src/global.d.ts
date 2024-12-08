@@ -9,7 +9,16 @@ interface Team {
 
 interface TeamStats {
     played: number;
-  }
+}
+
+interface Player {
+  id: number
+  age: number
+  name: string
+  squadNumber: number
+  position: string
+  photo: string
+}
   
 
 interface TeamStanding {
