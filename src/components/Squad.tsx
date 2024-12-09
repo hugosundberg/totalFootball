@@ -1,11 +1,5 @@
 import { useEffect, useState } from "react";
 
-interface Player {
-  id: number;
-  name: string;
-  position: string;
-}
-
 interface SquadProps {
   squad?: Player[];
 }
@@ -56,39 +50,95 @@ const Squad = ({ squad }: SquadProps) => {
       <p className="font-bold text-xl">Squad</p>
 
       <div>
-        <h2 className="font-semibold text-lg mb-2">Goalkeepers</h2>
-        {goalKeepers.length > 0 ? (
-          goalKeepers.map((player) => <p key={player.id}>{player.name}</p>)
-        ) : (
-          <p>No goalkeepers available</p>
-        )}
+        <h2 className="font-semibold text-lg mb-2 ">Goalkeepers</h2>
+        <div className="flex gap-2 flex-wrap">
+          {goalKeepers.length > 0 ? (
+            goalKeepers.map((player) => (
+              <div className="flex w-60 h-20 bg-zinc-700 rounded-md gap-2 p-2 items-center">
+                <img
+                  src={player.photo}
+                  alt="player-photo"
+                  className="rounded-full h-12 p-1 bg-green-900"
+                />
+                <div className="">
+                  <p>{player.name}</p>
+                  <p># {player.squadNumber}</p>
+                </div>
+              </div>
+            ))
+          ) : (
+            <p>No goalkeepers available</p>
+          )}
+        </div>
       </div>
 
       <div>
         <h2 className="font-semibold text-lg mb-2">Defenders</h2>
-        {defenders.length > 0 ? (
-          defenders.map((player) => <p key={player.id}>{player.name}</p>)
-        ) : (
-          <p>No defenders available</p>
-        )}
+        <div className="flex gap-2 flex-wrap">
+          {defenders.length > 0 ? (
+            defenders.map((player) => (
+              <div className="flex w-60 h-20 bg-zinc-700 rounded-md gap-2 p-2 items-center">
+                <img
+                  src={player.photo}
+                  alt="player-photo"
+                  className="rounded-full h-12 p-1 bg-green-900"
+                />
+                <div className="">
+                  <p>{player.name}</p>
+                  <p># {player.squadNumber}</p>
+                </div>
+              </div>
+            ))
+          ) : (
+            <p>No defenders available</p>
+          )}
+        </div>
       </div>
 
       <div>
         <h2 className="font-semibold text-lg mb-2">Midfielders</h2>
-        {midfielders.length > 0 ? (
-          midfielders.map((player) => <p key={player.id}>{player.name}</p>)
-        ) : (
-          <p>No midfielders available</p>
-        )}
+        <div className="flex gap-2 flex-wrap">
+          {midfielders.length > 0 ? (
+            midfielders.map((player) => (
+              <div className="flex w-60 h-20 bg-zinc-700 rounded-md gap-2 p-2 items-center">
+                <img
+                  src={player.photo}
+                  alt="player-photo"
+                  className="rounded-full h-12 p-1 bg-green-900"
+                />
+                <div className="">
+                  <p>{player.name}</p>
+                  <p># {player.squadNumber}</p>
+                </div>
+              </div>
+            ))
+          ) : (
+            <p>No midfielders available</p>
+          )}
+        </div>
       </div>
 
       <div>
         <h2 className="font-semibold text-lg mb-2">Forwards</h2>
-        {forwards.length > 0 ? (
-          forwards.map((player) => <p key={player.id}>{player.name}</p>)
-        ) : (
-          <p>No forwards available</p>
-        )}
+        <div className="flex gap-2 flex-wrap">
+          {forwards.length > 0 ? (
+            forwards.map((player) => (
+              <div className="flex w-60 h-20 bg-zinc-700 rounded-md gap-2 p-2 items-center">
+                <img
+                  src={player.photo}
+                  alt="player-photo"
+                  className="rounded-full h-12 p-1 bg-green-900"
+                />
+                <div className="">
+                  <p>{player.name}</p>
+                  <p># {player.squadNumber}</p>
+                </div>
+              </div>
+            ))
+          ) : (
+            <p>No forwards available</p>
+          )}
+        </div>
       </div>
     </div>
   );
