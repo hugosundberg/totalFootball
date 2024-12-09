@@ -11,13 +11,30 @@ interface TeamStats {
     played: number;
 }
 
-interface Player {
+interface SquadPlayer {
   id: number
   age: number
   name: string
   squadNumber: number
   position: string
   photo: string
+}
+
+interface Player {
+  id: number
+  age: number
+  birth: {
+    date: Date
+    country: string
+  }
+  firstname: string
+  lastname: string
+  squadNumber: number
+  position: string
+  photo: string
+  height: number
+  weight: number
+
 }
   
 

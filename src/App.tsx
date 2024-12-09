@@ -5,14 +5,25 @@ import Team from "./pages/Team";
 import Home from "./pages/Home";
 import { Route, Routes, useNavigate } from "react-router-dom";
 import About from "./pages/About";
+import Player from "./pages/Player";
 
 export default function App() {
   const [currentTeam, setCurrentTeam] = useState<Team | undefined>(undefined);
-  const [currentSquad, setCurrentSquad] = useState<Player[] | undefined>(
+  const [currentPlayer, setCurrentPlayer] = useState<Player | undefined>(
+    undefined
+  );
+  const [currentSquad, setCurrentSquad] = useState<SquadPlayer[] | undefined>(
     undefined
   );
   const [standing, setStanding] = useState();
   const navigate = useNavigate();
+
+  const handleFetchPlayer = (playerID: number) => {
+    try {
+      const fetchedPlayer = footballApi.fetchPlayer(playerID);
+      setCurrentPlayer(fetchedPlayer);
+    } catch (error) {}
+  };
 
   const handleFetchTeam = useCallback(
     async (id: number) => {
@@ -60,9 +71,11 @@ export default function App() {
               standing={standing}
               handleFetchTeam={handleFetchTeam}
               squad={currentSquad}
+              handleFetchPlayer={handleFetchPlayer}
             />
           }
         />
+        <Route path="/player/:id" element={<Player />} />
         <Route path="/about" element={<About />} />
       </Routes>
     </>

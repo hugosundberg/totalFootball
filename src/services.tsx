@@ -118,20 +118,65 @@ const fetchSquad = async (teamID: number) => {
 
     const data = await response.json();
 
-    const players: Player[] = data.response[0].players.map((player: any) => ({
-      id: player.id,
-      age: player.age,
-      name: player.name,
-      squadNumber: player.number,
-      position: player.position,
-      photo: player.photo,
-    }));
+    const players: SquadPlayer[] = data.response[0].players.map(
+      (player: any) => ({
+        id: player.id,
+        age: player.age,
+        name: player.name,
+        squadNumber: player.number,
+        position: player.position,
+        photo: player.photo,
+      })
+    );
 
-    console.log(players);
     return players;
   } catch (error) {
     console.error("Error fetching squad: ", error);
   }
 };
 
-export default { fetchTeams, fetchStandings, fetchTeam, fetchSquad };
+const fetchPlayer = async (playerID: number) => {
+  try {
+    const response = await fetch(
+      `https://v3.football.api-sports.io/players/profiles?player=${playerID}`,
+      {
+        method: "GET",
+        headers: {
+          "x-rapidapi-host": "v3.football.api-sports.io",
+          "x-rapidapi-key": apiKey,
+        },
+      }
+    );
+
+    if (!response.ok) {
+      throw new Error(`HTTP error! status: ${response.status}`);
+    }
+
+    const data = await response.json();
+
+    const formattedPlayer: Player = data.response[0].player.map(
+      (player: Player) => ({
+        id: player.id,
+        age: player.age,
+        firstname: player.firstname,
+        lastname: player.lastname,
+        squadNumber: player.squadNumber,
+        position: player.position,
+        photo: player.photo,
+      })
+    );
+
+    console.log(formattedPlayer);
+    return data;
+  } catch (error) {
+    console.error("Error fetching player: ", error);
+  }
+};
+
+export default {
+  fetchTeams,
+  fetchStandings,
+  fetchTeam,
+  fetchSquad,
+  fetchPlayer,
+};

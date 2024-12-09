@@ -1,32 +1,33 @@
 import { useEffect, useState } from "react";
 
 interface SquadProps {
-  squad?: Player[];
+  squad?: SquadPlayer[];
+  handlePlayerClick: (playerID: number) => void;
 }
 
-const Squad = ({ squad }: SquadProps) => {
-  const [goalKeepers, setGoalKeepers] = useState<Player[]>([]);
-  const [defenders, setDefenders] = useState<Player[]>([]);
-  const [midfielders, setMidfielders] = useState<Player[]>([]);
-  const [forwards, setForwards] = useState<Player[]>([]);
+const Squad = ({ squad, handlePlayerClick }: SquadProps) => {
+  const [goalKeepers, setGoalKeepers] = useState<SquadPlayer[]>([]);
+  const [defenders, setDefenders] = useState<SquadPlayer[]>([]);
+  const [midfielders, setMidfielders] = useState<SquadPlayer[]>([]);
+  const [forwards, setForwards] = useState<SquadPlayer[]>([]);
 
   useEffect(() => {
     if (squad) {
       // Categorize players by position
-      const gk: Player[] = [];
-      const def: Player[] = [];
-      const mid: Player[] = [];
-      const fwd: Player[] = [];
+      const gk: SquadPlayer[] = [];
+      const def: SquadPlayer[] = [];
+      const mid: SquadPlayer[] = [];
+      const fwd: SquadPlayer[] = [];
 
-      squad.forEach((player) => {
-        if (player.position === "Goalkeeper") {
-          gk.push(player);
-        } else if (player.position === "Defender") {
-          def.push(player);
-        } else if (player.position === "Midfielder") {
-          mid.push(player);
-        } else if (player.position === "Attacker") {
-          fwd.push(player);
+      squad.forEach((squadPlayer) => {
+        if (squadPlayer.position === "Goalkeeper") {
+          gk.push(squadPlayer);
+        } else if (squadPlayer.position === "Defender") {
+          def.push(squadPlayer);
+        } else if (squadPlayer.position === "Midfielder") {
+          mid.push(squadPlayer);
+        } else if (squadPlayer.position === "Attacker") {
+          fwd.push(squadPlayer);
         }
       });
 
@@ -54,7 +55,10 @@ const Squad = ({ squad }: SquadProps) => {
         <div className="flex gap-2 flex-wrap">
           {goalKeepers.length > 0 ? (
             goalKeepers.map((player) => (
-              <div className="flex w-60 h-20 bg-zinc-700 rounded-md gap-2 p-2 items-center">
+              <div
+                className="flex w-60 h-20 bg-zinc-700 rounded-md gap-2 p-2 items-center"
+                onClick={() => handlePlayerClick(player.id)}
+              >
                 <img
                   src={player.photo}
                   alt="player-photo"
