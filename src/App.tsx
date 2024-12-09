@@ -18,9 +18,9 @@ export default function App() {
   const [standing, setStanding] = useState();
   const navigate = useNavigate();
 
-  const handleFetchPlayer = (playerID: number) => {
+  const handleFetchPlayer = async (playerID: number) => {
     try {
-      const fetchedPlayer = footballApi.fetchPlayer(playerID);
+      const fetchedPlayer = await footballApi.fetchPlayer(playerID);
       setCurrentPlayer(fetchedPlayer);
     } catch (error) {}
   };
