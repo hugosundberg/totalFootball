@@ -1,5 +1,6 @@
 const apiKey = import.meta.env.VITE_FOOTBALL_API_KEY;
 
+// REPLACE WITH INPUT VALUES
 const leagueID = 39;
 const season = 2024;
 
@@ -138,7 +139,7 @@ const fetchSquad = async (teamID: number) => {
 const fetchPlayer = async (playerID: number) => {
   try {
     const response = await fetch(
-      `https://v3.football.api-sports.io/players/profiles?player=${playerID}`,
+      `https://v3.football.api-sports.io/players?id=${playerID}&season=${season}`,
       {
         method: "GET",
         headers: {
@@ -155,8 +156,10 @@ const fetchPlayer = async (playerID: number) => {
     const data = await response.json();
 
     const player = data.response[0].player;
+    const playerStats = data.response[0].statistics;
 
     console.log(player);
+    console.log(playerStats);
 
     const formattedPlayer: Player = {
       id: player.id,
