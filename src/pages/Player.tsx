@@ -1,7 +1,7 @@
 import { useEffect } from "react";
 import { useParams } from "react-router-dom";
 
-const Player = ({ player, handleFetchPlayer }: PlayerProps) => {
+const Player = ({ player, handleFetchPlayer, currentTeam }: PlayerProps) => {
   const { id } = useParams<{ id: string }>();
 
   useEffect(() => {
@@ -25,7 +25,20 @@ const Player = ({ player, handleFetchPlayer }: PlayerProps) => {
             <h2 className="dark:text-white text-3xl">
               {player.firstname} {player.lastname}
             </h2>
-            <p className="dark:text-white text-xl mt-2">"Team name"</p>
+            <div
+              className="flex gap-2 mt-2 items-center
+            "
+            >
+              <img
+                src={currentTeam?.currentTeamLogo}
+                alt="team-logo"
+                className="h-8 w-8"
+              />
+              <p className="dark:text-white text-xl mt-2">
+                {currentTeam?.currentTeamName}
+              </p>
+            </div>
+            <p></p>
           </div>
         </div>
       </div>

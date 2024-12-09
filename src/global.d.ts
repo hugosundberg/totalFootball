@@ -37,9 +37,20 @@ interface Player {
   nationality: string
 }
 
+interface PlayerCurrentTeam {
+  currentTeamId: number
+  currentTeamName: string
+  currentTeamLogo: string
+  formerTeamId: number
+  formerTeamName: string
+  formerTeamLogo: string
+  type: string
+}
+
 interface PlayerProps {
   player?: Player
   handleFetchPlayer: (playerID: number) => void
+  currentTeam?: PlayerCurrentTeam
 }
   
 

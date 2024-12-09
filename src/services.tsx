@@ -185,10 +185,56 @@ const fetchPlayer = async (playerID: number) => {
   }
 };
 
+const fetchPlayerCurrentTeam = async (playerID: number) => {
+  try {
+    const response = await fetch(
+      `https://v3.football.api-sports.io/transfers?player=${playerID}`,
+      {
+        method: "GET",
+        headers: {
+          "x-rapidapi-host": "v3.football.api-sports.io",
+          "x-rapidapi-key": apiKey,
+        },
+      }
+    );
+
+    const data = await response.json();
+
+    const transfers = data.response[0].transfers;
+
+    let latestTransfer = transfers[0];
+
+    for (let index = 0; index < transfers.length; index++) {
+      if (transfers[index].date > latestTransfer.date) {
+        latestTransfer = transfers[index];
+      }
+    }
+
+    console.log(latestTransfer);
+
+    let currentTeam: PlayerCurrentTeam = {
+      currentTeamId: latestTransfer.teams.in.id,
+      currentTeamName: latestTransfer.teams.in.name,
+      currentTeamLogo: latestTransfer.teams.in.logo,
+      formerTeamId: latestTransfer.teams.out.id,
+      formerTeamName: latestTransfer.teams.out.name,
+      formerTeamLogo: latestTransfer.teams.out.logo,
+      type: latestTransfer.teams.type,
+    };
+
+    console.log(transfers);
+    console.log(currentTeam);
+    return currentTeam;
+  } catch (error) {
+    console.error("Error fetching transfers: ", error);
+  }
+};
+
 export default {
   fetchTeams,
   fetchStandings,
   fetchTeam,
   fetchSquad,
   fetchPlayer,
+  fetchPlayerCurrentTeam,
 };

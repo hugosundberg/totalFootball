@@ -12,6 +12,8 @@ export default function App() {
   const [currentPlayer, setCurrentPlayer] = useState<Player | undefined>(
     undefined
   );
+  const [currentPlayerTeam, setCurrentPlayerTeam] =
+    useState<PlayerCurrentTeam>();
   const [currentSquad, setCurrentSquad] = useState<SquadPlayer[] | undefined>(
     undefined
   );
@@ -22,7 +24,11 @@ export default function App() {
     async (playerID: number) => {
       try {
         const fetchedPlayer = await footballApi.fetchPlayer(playerID);
+        const fetchedPlayerTeam = await footballApi.fetchPlayerCurrentTeam(
+          playerID
+        );
         setCurrentPlayer(fetchedPlayer);
+        setCurrentPlayerTeam(fetchedPlayerTeam);
         navigate(`/player/${playerID}`);
       } catch (error) {
         console.error("Error fetching player: ", error);
@@ -87,6 +93,7 @@ export default function App() {
             <Player
               player={currentPlayer}
               handleFetchPlayer={handleFetchPlayer}
+              currentTeam={currentPlayerTeam}
             />
           }
         />
