@@ -52,11 +52,11 @@ const Squad = ({ squad, handlePlayerClick }: SquadProps) => {
 
       <div>
         <h2 className="font-semibold text-lg mb-2 ">Goalkeepers</h2>
-        <div className="flex gap-2 flex-wrap">
+        <div className="flex gap-2 flex-wrap ho">
           {goalKeepers.length > 0 ? (
             goalKeepers.map((player) => (
               <div
-                className="flex w-60 h-20 bg-zinc-700 rounded-md gap-2 p-2 items-center"
+                className="flex w-60 h-20 bg-zinc-700 rounded-md gap-2 p-2 items-center hover:cursor-pointer"
                 onClick={() => handlePlayerClick(player.id)}
               >
                 <img
@@ -81,7 +81,10 @@ const Squad = ({ squad, handlePlayerClick }: SquadProps) => {
         <div className="flex gap-2 flex-wrap">
           {defenders.length > 0 ? (
             defenders.map((player) => (
-              <div className="flex w-60 h-20 bg-zinc-700 rounded-md gap-2 p-2 items-center">
+              <div
+                className="flex w-60 h-20 bg-zinc-700 rounded-md gap-2 p-2 items-center hover:cursor-pointer"
+                onClick={() => handlePlayerClick(player.id)}
+              >
                 <img
                   src={player.photo}
                   alt="player-photo"
@@ -104,7 +107,10 @@ const Squad = ({ squad, handlePlayerClick }: SquadProps) => {
         <div className="flex gap-2 flex-wrap">
           {midfielders.length > 0 ? (
             midfielders.map((player) => (
-              <div className="flex w-60 h-20 bg-zinc-700 rounded-md gap-2 p-2 items-center">
+              <div
+                className="flex w-60 h-20 bg-zinc-700 rounded-md gap-2 p-2 items-center hover:cursor-pointer"
+                onClick={() => handlePlayerClick(player.id)}
+              >
                 <img
                   src={player.photo}
                   alt="player-photo"
@@ -127,7 +133,10 @@ const Squad = ({ squad, handlePlayerClick }: SquadProps) => {
         <div className="flex gap-2 flex-wrap">
           {forwards.length > 0 ? (
             forwards.map((player) => (
-              <div className="flex w-60 h-20 bg-zinc-700 rounded-md gap-2 p-2 items-center">
+              <div
+                className="flex w-60 h-20 bg-zinc-700 rounded-md gap-2 p-2 items-center hover:cursor-pointer"
+                onClick={() => handlePlayerClick(player.id)}
+              >
                 <img
                   src={player.photo}
                   alt="player-photo"
