@@ -12,17 +12,22 @@ const Player = ({ player, handleFetchPlayer }: PlayerProps) => {
 
   if (!player) return;
 
-  console.log(player);
-
-  console.log(player.photo);
-
   return (
     <div className="flex bg-black h-screen justify-center">
-      <div className="bg-zinc-700 h-40 w-1/2 rounded-lg mt-20">
-        <img src={player.photo} alt="" />
-        <h2>
-          {player.firstname} {player.lastname}
-        </h2>
+      <div className="bg-zinc-800 h-fit w-4/5 p-8 rounded-lg mt-20">
+        <div className="flex gap-10">
+          <img
+            src={player.photo}
+            alt="player-photo"
+            className="h-28 rounded-full"
+          />
+          <div className="flex flex-col">
+            <h2 className="dark:text-white text-3xl">
+              {player.firstname} {player.lastname}
+            </h2>
+            <p className="dark:text-white text-xl mt-2">"Team name"</p>
+          </div>
+        </div>
       </div>
     </div>
   );
