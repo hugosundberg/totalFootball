@@ -18,12 +18,18 @@ export default function App() {
   const [standing, setStanding] = useState();
   const navigate = useNavigate();
 
-  const handleFetchPlayer = async (playerID: number) => {
-    try {
-      const fetchedPlayer = await footballApi.fetchPlayer(playerID);
-      setCurrentPlayer(fetchedPlayer);
-    } catch (error) {}
-  };
+  const handleFetchPlayer = useCallback(
+    async (playerID: number) => {
+      try {
+        const fetchedPlayer = await footballApi.fetchPlayer(playerID);
+        setCurrentPlayer(fetchedPlayer);
+        navigate(`/player/${playerID}`);
+      } catch (error) {
+        console.error("Error fetching player: ", error);
+      }
+    },
+    [navigate]
+  );
 
   const handleFetchTeam = useCallback(
     async (id: number) => {
@@ -75,7 +81,15 @@ export default function App() {
             />
           }
         />
-        <Route path="/player/:id" element={<Player />} />
+        <Route
+          path="/player/:id"
+          element={
+            <Player
+              player={currentPlayer}
+              handleFetchPlayer={handleFetchPlayer}
+            />
+          }
+        />
         <Route path="/about" element={<About />} />
       </Routes>
     </>

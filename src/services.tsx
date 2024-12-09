@@ -154,20 +154,29 @@ const fetchPlayer = async (playerID: number) => {
 
     const data = await response.json();
 
-    const formattedPlayer: Player = data.response[0].player.map(
-      (player: Player) => ({
-        id: player.id,
-        age: player.age,
-        firstname: player.firstname,
-        lastname: player.lastname,
-        squadNumber: player.squadNumber,
-        position: player.position,
-        photo: player.photo,
-      })
-    );
+    const player = data.response[0].player;
 
-    console.log(formattedPlayer);
-    return data;
+    console.log(player);
+
+    const formattedPlayer: Player = {
+      id: player.id,
+      age: player.age,
+      firstname: player.firstname,
+      lastname: player.lastname,
+      squadNumber: player.number,
+      position: player.position,
+      photo: player.photo,
+      birth: {
+        date: player.birth.date,
+        country: player.birth.country,
+      },
+      height: player.height,
+      weight: player.weight,
+      nationality: player.nationality,
+    };
+
+    console.log("Formatted player: ", formattedPlayer);
+    return formattedPlayer;
   } catch (error) {
     console.error("Error fetching player: ", error);
   }

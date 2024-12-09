@@ -24,7 +24,7 @@ interface Player {
   id: number
   age: number
   birth: {
-    date: Date
+    date: string
     country: string
   }
   firstname: string
@@ -34,7 +34,12 @@ interface Player {
   photo: string
   height: number
   weight: number
+  nationality: string
+}
 
+interface PlayerProps {
+  player?: Player
+  handleFetchPlayer: (playerID: number) => void
 }
   
 
