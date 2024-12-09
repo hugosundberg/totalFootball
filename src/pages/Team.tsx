@@ -14,9 +14,10 @@ interface TeamProps {
   team?: Team;
   handleFetchTeam: (id: number) => void;
   standing?: TeamStanding[];
+  squad?: Player[];
 }
 
-const Team = ({ team, handleFetchTeam, standing }: TeamProps) => {
+const Team = ({ team, handleFetchTeam, standing, squad }: TeamProps) => {
   const { id } = useParams<{ id: string }>();
   const location = useLocation();
   const [barStyle, setBarStyle] = useState({ left: 0, width: 0 });
@@ -136,7 +137,7 @@ const Team = ({ team, handleFetchTeam, standing }: TeamProps) => {
             }
           />
           <Route path="fixtures" element={<p>Team Fixtures Content</p>} />
-          <Route path="squad" element={<Squad />} />
+          <Route path="squad" element={<Squad squad={squad} />} />
           <Route path="stats" element={<TeamStats />} />
         </Routes>
       </div>

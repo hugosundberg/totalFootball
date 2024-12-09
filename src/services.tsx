@@ -128,6 +128,7 @@ const fetchSquad = async (teamID: number) => {
     }));
 
     console.log(players);
+    return players;
   } catch (error) {
     console.error("Error fetching squad: ", error);
   }

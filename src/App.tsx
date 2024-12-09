@@ -8,7 +8,9 @@ import About from "./pages/About";
 
 export default function App() {
   const [currentTeam, setCurrentTeam] = useState<Team | undefined>(undefined);
-  const [currentSquad, setCurrentSquad] = useState<Team | undefined>(undefined);
+  const [currentSquad, setCurrentSquad] = useState<Player[] | undefined>(
+    undefined
+  );
   const [standing, setStanding] = useState();
   const navigate = useNavigate();
 
@@ -24,7 +26,7 @@ export default function App() {
         console.error("Error fetching team: ", error);
       }
     },
-    [navigate] // Dependencies that do not change
+    [navigate]
   );
 
   const handleFetchStandings = async () => {
@@ -57,6 +59,7 @@ export default function App() {
               team={currentTeam}
               standing={standing}
               handleFetchTeam={handleFetchTeam}
+              squad={currentSquad}
             />
           }
         />

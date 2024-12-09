@@ -33,4 +33,3 @@ interface TeamStanding {
   points: number;
   form: string;
 }
-
