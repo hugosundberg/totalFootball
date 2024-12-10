@@ -2,7 +2,12 @@ import moment from "moment";
 import { useEffect } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 
-const Player = ({ player, handleFetchPlayer, currentTeam }: PlayerProps) => {
+const Player = ({
+  player,
+  currentStats,
+  handleFetchPlayer,
+  currentTeam,
+}: PlayerProps) => {
   const { id } = useParams<{ id: string }>();
   const navigate = useNavigate();
 
@@ -24,8 +29,8 @@ const Player = ({ player, handleFetchPlayer, currentTeam }: PlayerProps) => {
   if (!player) return;
 
   return (
-    <div className="flex flex-col dark:bg-black min-h-screen dark:text-white">
-      <div className="player-header bg-zinc-800 h-fit w-full px-4 py-6 mt-16">
+    <div className="flex flex-col dark:bg-black min-h-screen dark:text-white sm:items-center">
+      <div className="player-header bg-zinc-800 h-fit w-full px-4 py-6 mt-16 sm:rounded-t-2xl sm:mt-20 sm:w-11/12">
         <div className="flex gap-4">
           <img
             src={player.photo}
@@ -66,7 +71,7 @@ const Player = ({ player, handleFetchPlayer, currentTeam }: PlayerProps) => {
           </div>
         </div>
       </div>
-      <div className="player-info grid grid-cols-2 h-fit gap-y-4 p-4 bg-zinc-900 w-full text-xs">
+      <div className="player-info grid grid-cols-2 h-fit gap-y-4 p-4 bg-zinc-900 w-full text-xs sm:w-11/12 sm:rounded-b-2xl">
         <div className="h-fit">
           <p>{player.height}</p>
           <p className="text-slate-400 text-xs mt-1">Height</p>
@@ -89,6 +94,14 @@ const Player = ({ player, handleFetchPlayer, currentTeam }: PlayerProps) => {
           <p className="text-slate-400 text-xs mt-1">Nationality</p>
           <span className="block h-1 w-5/6 bg-slate-800 rounded-full mt-2" />
         </div>
+        <div className="h-fit">
+          <p>{player.position}</p>
+          <p className="text-slate-400 text-xs mt-1">Position</p>
+          <span className="block h-1 w-5/6 bg-slate-800 rounded-full mt-2" />
+        </div>
+      </div>
+      <div className="h-20 w-full bg-zinc-800 items-center p-4">
+        <p>Season stats</p>
       </div>
     </div>
   );

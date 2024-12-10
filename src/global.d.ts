@@ -55,6 +55,26 @@ interface Player {
   nationality: string
 }
 
+interface PlayerCurrentStats {
+  stats: PlayerCompetitionStats
+}
+
+interface PlayerCompetitionStats {
+  cards: Array
+  dribbles: Array
+  duels: Array
+  fouls: Array
+  games: Array
+  goals: Array
+  league: Array
+  passes: Array
+  penalty: Array
+  shots: Array
+  substitutes: Array
+  tackles: Array
+  team: Array
+}
+
 interface PlayerCurrentTeam {
   currentTeamId: number
   currentTeamName: string
@@ -69,6 +89,7 @@ interface PlayerProps {
   player?: Player
   handleFetchPlayer: (playerID: number) => void
   currentTeam?: PlayerCurrentTeam
+  currentStats?: PlayerCurrentStats
 }
   
 

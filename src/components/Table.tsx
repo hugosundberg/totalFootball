@@ -70,10 +70,10 @@ const Table = ({ standing, handleFetchTeam, currentTeam }: TableProps) => {
                           char === "L"
                             ? "bg-red-600 text-white"
                             : char === "W"
-                            ? "bg-green-600 text-white"
-                            : char === "D"
-                            ? "bg-gray-500 text-white"
-                            : ""
+                              ? "bg-green-600 text-white"
+                              : char === "D"
+                                ? "bg-gray-500 text-white"
+                                : ""
                         }`}
                       >
                         {char}

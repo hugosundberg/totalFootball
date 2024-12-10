@@ -181,11 +181,14 @@ const fetchPlayer = async (playerID: number) => {
     const playerStatsData = await response.json();
     const playerProfileData = await response2.json();
 
-    const playerStats = playerStatsData.response[0].player;
+    const playerStats = playerStatsData.response[0];
     const playerProfile = playerProfileData.response[0].player;
 
     console.log("Player stats: ", playerStats);
-    console.log("Player profile: ", playerProfile);
+
+    const formattedPlayerStats: PlayerCurrentStats = {
+      stats: playerStats.statistics,
+    };
 
     const formattedPlayer: Player = {
       id: playerProfile.id,
@@ -196,17 +199,17 @@ const fetchPlayer = async (playerID: number) => {
       position: playerProfile.position,
       photo: playerProfile.photo,
       birth: {
-        date: playerStats.birth.date,
-        country: playerStats.birth.country,
+        date: playerStats.player.birth.date,
+        country: playerStats.player.birth.country,
       },
       height: playerProfile.height,
       weight: playerProfile.weight,
       nationality: playerProfile.nationality,
     };
 
-    console.log("Formatted player: ", formattedPlayer);
+    console.log(formattedPlayerStats);
 
-    return formattedPlayer;
+    return { formattedPlayer, formattedPlayerStats };
   } catch (error) {
     console.error("Error fetching player: ", error);
   }
