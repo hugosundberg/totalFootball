@@ -4,6 +4,22 @@ const apiKey = import.meta.env.VITE_FOOTBALL_API_KEY;
 const leagueID = 39;
 const season = 2024;
 
+function getLatestValidTransfer(transfers: Transfer[]): Transfer {
+  const today = new Date();
+
+  const validTransfers = transfers.filter(
+    (transfer) => new Date(transfer.date) <= today
+  );
+
+  validTransfers.sort(
+    (a, b) => new Date(b.date).getTime() - new Date(a.date).getTime()
+  );
+
+  console.log("Valid transfers", validTransfers);
+
+  return validTransfers[0];
+}
+
 const fetchTeams = async () => {
   try {
     const response = await fetch(
@@ -202,15 +218,9 @@ const fetchPlayerCurrentTeam = async (playerID: number) => {
 
     const transfers = data.response[0].transfers;
 
-    let latestTransfer = transfers[0];
+    const latestTransfer = getLatestValidTransfer(transfers);
 
-    for (let index = 0; index < transfers.length; index++) {
-      if (transfers[index].date > latestTransfer.date) {
-        latestTransfer = transfers[index];
-      }
-    }
-
-    console.log(latestTransfer);
+    console.log("Latest transfer: ", latestTransfer);
 
     let currentTeam: PlayerCurrentTeam = {
       currentTeamId: latestTransfer.teams.in.id,
@@ -219,7 +229,7 @@ const fetchPlayerCurrentTeam = async (playerID: number) => {
       formerTeamId: latestTransfer.teams.out.id,
       formerTeamName: latestTransfer.teams.out.name,
       formerTeamLogo: latestTransfer.teams.out.logo,
-      type: latestTransfer.teams.type,
+      type: latestTransfer.type,
     };
 
     console.log(transfers);

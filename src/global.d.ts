@@ -20,6 +20,24 @@ interface SquadPlayer {
   photo: string
 }
 
+interface Transfer {
+  date: string;
+  type: string;
+  teams: {
+      in: {
+          id: number;
+          name: string;
+          logo: string;
+      };
+      out: {
+          id: number;
+          name: string;
+          logo: string;
+      };
+  };
+};
+
+
 interface Player {
   id: number
   age: number
