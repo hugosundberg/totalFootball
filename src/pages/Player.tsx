@@ -30,10 +30,10 @@ const Player = ({ player, handleFetchPlayer, currentTeam }: PlayerProps) => {
           <img
             src={player.photo}
             alt="player-photo"
-            className="h-12 rounded-full"
+            className="h-14 rounded-full sm:h-20"
           />
           <div className="flex flex-col">
-            <h2 className="text-md">
+            <h2 className="text-md sm:text-3xl">
               {player.firstname} {player.lastname}
             </h2>
             <div
@@ -45,9 +45,11 @@ const Player = ({ player, handleFetchPlayer, currentTeam }: PlayerProps) => {
               <img
                 src={currentTeam?.currentTeamLogo}
                 alt="team-logo"
-                className="h-4"
+                className="h-4 sm:h-8"
               />
-              <p className="text-sm">{currentTeam?.currentTeamName}</p>
+              <p className="text-sm sm:text-lg">
+                {currentTeam?.currentTeamName}
+              </p>
             </div>
             {currentTeam?.type === "Loan" && (
               <div className="flex mt-2 gap-2">
