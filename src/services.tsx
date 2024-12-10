@@ -15,8 +15,6 @@ function getLatestValidTransfer(transfers: Transfer[]): Transfer {
     (a, b) => new Date(b.date).getTime() - new Date(a.date).getTime()
   );
 
-  console.log("Valid transfers", validTransfers);
-
   return validTransfers[0];
 }
 
@@ -165,36 +163,49 @@ const fetchPlayer = async (playerID: number) => {
       }
     );
 
+    const response2 = await fetch(
+      `https://v3.football.api-sports.io/players/profiles?player=${playerID}`,
+      {
+        method: "GET",
+        headers: {
+          "x-rapidapi-host": "v3.football.api-sports.io",
+          "x-rapidapi-key": apiKey,
+        },
+      }
+    );
+
     if (!response.ok) {
       throw new Error(`HTTP error! status: ${response.status}`);
     }
 
-    const data = await response.json();
+    const playerStatsData = await response.json();
+    const playerProfileData = await response2.json();
 
-    const player = data.response[0].player;
-    const playerStats = data.response[0].statistics;
+    const playerStats = playerStatsData.response[0].player;
+    const playerProfile = playerProfileData.response[0].player;
 
-    console.log(player);
-    console.log(playerStats);
+    console.log("Player stats: ", playerStats);
+    console.log("Player profile: ", playerProfile);
 
     const formattedPlayer: Player = {
-      id: player.id,
-      age: player.age,
-      firstname: player.firstname,
-      lastname: player.lastname,
-      squadNumber: player.number,
-      position: player.position,
-      photo: player.photo,
+      id: playerProfile.id,
+      age: playerProfile.age,
+      firstname: playerProfile.firstname,
+      lastname: playerProfile.lastname,
+      squadNumber: playerProfile.number,
+      position: playerProfile.position,
+      photo: playerProfile.photo,
       birth: {
-        date: player.birth.date,
-        country: player.birth.country,
+        date: playerStats.birth.date,
+        country: playerStats.birth.country,
       },
-      height: player.height,
-      weight: player.weight,
-      nationality: player.nationality,
+      height: playerProfile.height,
+      weight: playerProfile.weight,
+      nationality: playerProfile.nationality,
     };
 
     console.log("Formatted player: ", formattedPlayer);
+
     return formattedPlayer;
   } catch (error) {
     console.error("Error fetching player: ", error);
@@ -220,8 +231,6 @@ const fetchPlayerCurrentTeam = async (playerID: number) => {
 
     const latestTransfer = getLatestValidTransfer(transfers);
 
-    console.log("Latest transfer: ", latestTransfer);
-
     let currentTeam: PlayerCurrentTeam = {
       currentTeamId: latestTransfer.teams.in.id,
       currentTeamName: latestTransfer.teams.in.name,
@@ -232,8 +241,6 @@ const fetchPlayerCurrentTeam = async (playerID: number) => {
       type: latestTransfer.type,
     };
 
-    console.log(transfers);
-    console.log(currentTeam);
     return currentTeam;
   } catch (error) {
     console.error("Error fetching transfers: ", error);
