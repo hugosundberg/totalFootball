@@ -26,7 +26,7 @@ const fetchCountryCode = async (
       return undefined;
     }
 
-    return result[0].toUpperCase();
+    return result[0];
   } catch (error) {
     console.error("Error fetching country code: ", error);
     return undefined; // Handle the case where something goes wrong
@@ -215,8 +215,6 @@ const fetchPlayer = async (playerID: number) => {
     const playerStats = playerStatsData.response[0];
     const playerProfile = playerProfileData.response[0].player;
 
-    console.log("Player stats: ", playerStats);
-
     const formattedPlayerStats: PlayerCurrentStats = {
       stats: playerStats.statistics,
     };
@@ -241,8 +239,6 @@ const fetchPlayer = async (playerID: number) => {
       countryCode: countryCode,
     };
 
-    console.log(formattedPlayer);
-
     return { formattedPlayer, formattedPlayerStats };
   } catch (error) {
     console.error("Error fetching player: ", error);
@@ -266,7 +262,9 @@ const fetchPlayerCurrentTeam = async (playerID: number) => {
 
     console.log(data);
 
-    console.log(data.response.length < 1);
+    if (data.response.length < 1) {
+      return;
+    }
 
     const transfers = data.response[0].transfers;
 

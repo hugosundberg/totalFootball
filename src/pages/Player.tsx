@@ -1,6 +1,7 @@
 import moment from "moment";
 import { useEffect } from "react";
 import { useNavigate, useParams } from "react-router-dom";
+import PlayerStats from "../components/PlayerStats";
 
 const Player = ({
   player,
@@ -93,7 +94,7 @@ const Player = ({
           <div className="flex gap-2 items-center">
             <p>{player.nationality}</p>
             <img
-              src={`https://flagsapi.com/${player.countryCode}/flat/64.png`}
+              src={`https://flagcdn.com/h60/${player.countryCode}.png`}
               alt=""
               className="h-4"
             />
@@ -107,46 +108,8 @@ const Player = ({
           <span className="block h-1 w-5/6 bg-slate-800 rounded-full mt-2" />
         </div>
       </div>
-      <div className="h-fit w-full bg-zinc-800 items-center p-4">
-        <div className="flex gap-1 justify-self-center">
-          <p className="justify-self-center text-xl">
-            {currentStats?.stats[0].league.name}
-          </p>
-          <img
-            src={currentStats?.stats[0].league.logo}
-            alt=""
-            className="h-10 bg-white"
-          />
-        </div>
 
-        {/* GOALKEEPER STATS  ----- Should perhaps be its own component   */}
-        <div className="flex flex-wrap gap-4 mt-2 justify-self-center justify-center">
-          <div className="flex flex-col items-center w-24">
-            <p>{currentStats?.stats[0].games.appearences}</p>
-            <p className="text-xs text-slate-400">Appearences</p>
-          </div>
-          <div className="flex flex-col items-center w-24">
-            <p>{currentStats?.stats[0].games.appearences}</p>
-            <p className="text-xs text-slate-400">Starts</p>
-          </div>
-          <div className="flex flex-col items-center w-24">
-            <p>{currentStats?.stats[0].goals.conceded}</p>
-            <p className="text-xs text-slate-400">Goals conceded</p>
-          </div>
-          <div className="flex flex-col items-center w-24">
-            <p>{currentStats?.stats[0].games.minutes}</p>
-            <p className="text-xs text-slate-400">Minutes</p>
-          </div>
-          <div className="flex flex-col items-center w-24">
-            <p>{currentStats?.stats[0].cards.yellow}</p>
-            <p className="text-xs text-slate-400">Yellow cards</p>
-          </div>
-          <div className="flex flex-col items-center w-24">
-            <p>{currentStats?.stats[0].cards.red}</p>
-            <p className="text-xs text-slate-400">Red Cards</p>
-          </div>
-        </div>
-      </div>
+      <PlayerStats currentStats={currentStats} />
     </div>
   );
 };

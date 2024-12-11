@@ -60,6 +60,10 @@ interface PlayerCurrentStats {
   stats: PlayerCompetitionStats[]
 }
 
+interface PlayerStatsProps {
+  currentStats: PlayerCurrentStats | undefined
+}
+
 interface PlayerCompetitionStats {
   cards: Array
   dribbles: Array
