@@ -48,14 +48,29 @@ const Player = ({
                 if (currentTeam) handleTeamClick(currentTeam.currentTeamId);
               }}
             >
-              <img
-                src={currentTeam?.currentTeamLogo}
-                alt="team-logo"
-                className="h-4 sm:h-8"
-              />
-              <p className="text-sm sm:text-lg">
-                {currentTeam?.currentTeamName}
-              </p>
+              {currentTeam === null ? (
+                <>
+                  <img
+                    src={currentStats?.stats[0].team.logo}
+                    alt="team-logo"
+                    className="h-4 sm:h-8"
+                  />
+                  <p className="text-sm sm:text-lg">
+                    {currentStats?.stats[0].team.name}
+                  </p>
+                </>
+              ) : (
+                <>
+                  <img
+                    src={currentTeam?.currentTeamLogo}
+                    alt="team-logo"
+                    className="h-4 sm:h-8"
+                  />
+                  <p className="text-sm sm:text-lg">
+                    {currentTeam?.currentTeamName}
+                  </p>
+                </>
+              )}
             </div>
             {currentTeam?.type === "Loan" && (
               <div className="flex mt-2 gap-2">
@@ -109,7 +124,7 @@ const Player = ({
         </div>
       </div>
 
-      <PlayerStats currentStats={currentStats} />
+      <PlayerStats currentStats={currentStats} player={player} />
     </div>
   );
 };

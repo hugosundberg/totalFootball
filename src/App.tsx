@@ -13,7 +13,7 @@ export default function App() {
     undefined
   );
   const [currentPlayerTeam, setCurrentPlayerTeam] =
-    useState<PlayerCurrentTeam>();
+    useState<PlayerCurrentTeam | null>();
   const [currentSquad, setCurrentSquad] = useState<SquadPlayer[] | undefined>(
     undefined
   );

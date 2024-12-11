@@ -44,8 +44,6 @@ function getLatestValidTransfer(transfers: Transfer[]): Transfer {
     (a, b) => new Date(b.date).getTime() - new Date(a.date).getTime()
   );
 
-  console.log("Valid transfers", validTransfers);
-
   return validTransfers[0];
 }
 
@@ -260,10 +258,8 @@ const fetchPlayerCurrentTeam = async (playerID: number) => {
 
     const data = await response.json();
 
-    console.log(data);
-
     if (data.response.length < 1) {
-      return;
+      return null;
     }
 
     const transfers = data.response[0].transfers;

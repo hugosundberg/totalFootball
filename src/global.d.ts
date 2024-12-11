@@ -62,6 +62,7 @@ interface PlayerCurrentStats {
 
 interface PlayerStatsProps {
   currentStats: PlayerCurrentStats | undefined
+  player: Player
 }
 
 interface PlayerCompetitionStats {
@@ -93,7 +94,7 @@ interface PlayerCurrentTeam {
 interface PlayerProps {
   player?: Player
   handleFetchPlayer: (playerID: number) => void
-  currentTeam?: PlayerCurrentTeam
+  currentTeam?: PlayerCurrentTeam | null
   currentStats?: PlayerCurrentStats
 }
   

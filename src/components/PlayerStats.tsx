@@ -1,4 +1,4 @@
-const PlayerStats = ({ currentStats }: PlayerStatsProps) => {
+const PlayerStats = ({ currentStats, player }: PlayerStatsProps) => {
   console.log(currentStats);
 
   return (
@@ -15,33 +15,66 @@ const PlayerStats = ({ currentStats }: PlayerStatsProps) => {
       </div>
       <span className="block h-0.5 w-full mt-2 bg-slate-700 rounded-full" />
 
-      {/* GOALKEEPER STATS  ----- Should perhaps be its own component   */}
-      <div className="flex flex-wrap gap-4 mt-4 justify-self-center justify-center">
-        <div className="flex flex-col items-center w-24">
-          <p>{currentStats?.stats[0].games.appearences}</p>
-          <p className="text-xs text-slate-400">Appearences</p>
+      {player.position === "Goalkeeper" && (
+        <div className="flex flex-wrap gap-4 mt-4 justify-self-center justify-center">
+          <div className="flex flex-col items-center w-24">
+            <p>{currentStats?.stats[0].games.appearences}</p>
+            <p className="text-xs text-slate-400">Appearences</p>
+          </div>
+          <div className="flex flex-col items-center w-24">
+            <p>{currentStats?.stats[0].games.lineups}</p>
+            <p className="text-xs text-slate-400">Starts</p>
+          </div>
+          <div className="flex flex-col items-center w-24">
+            <p>{currentStats?.stats[0].games.minutes}</p>
+            <p className="text-xs text-slate-400">Minutes</p>
+          </div>
+          <div className="flex flex-col items-center w-24">
+            <p>{currentStats?.stats[0].goals.conceded}</p>
+            <p className="text-xs text-slate-400">Goals conceded</p>
+          </div>
+          <div className="flex flex-col items-center w-24">
+            <p>{currentStats?.stats[0].cards.yellow}</p>
+            <p className="text-xs text-slate-400">Yellow cards</p>
+          </div>
+          <div className="flex flex-col items-center w-24">
+            <p>{currentStats?.stats[0].cards.red}</p>
+            <p className="text-xs text-slate-400">Red Cards</p>
+          </div>
         </div>
-        <div className="flex flex-col items-center w-24">
-          <p>{currentStats?.stats[0].games.appearences}</p>
-          <p className="text-xs text-slate-400">Starts</p>
+      )}
+
+      {player.position === "Defender" && (
+        <div className="flex flex-wrap gap-4 mt-4 justify-self-center justify-center">
+          <div className="flex flex-col items-center w-24">
+            <p>{currentStats?.stats[0].games.appearences}</p>
+            <p className="text-xs text-slate-400">Appearences</p>
+          </div>
+          <div className="flex flex-col items-center w-24">
+            <p>{currentStats?.stats[0].games.lineups}</p>
+            <p className="text-xs text-slate-400">Starts</p>
+          </div>
+          <div className="flex flex-col items-center w-24">
+            <p>{currentStats?.stats[0].games.minutes}</p>
+            <p className="text-xs text-slate-400">Minutes</p>
+          </div>
+          <div className="flex flex-col items-center w-24">
+            <p>
+              {currentStats?.stats[0].duels.won}/
+              {currentStats?.stats[0].duels.total}
+            </p>
+            <p className="text-xs text-slate-400">Duels won</p>
+          </div>
+          <div className="flex flex-col items-center w-24">
+            <p>{currentStats?.stats[0].cards.yellow}</p>
+            <p className="text-xs text-slate-400">Yellow cards</p>
+          </div>
+          <div className="flex flex-col items-center w-24">
+            <p>{currentStats?.stats[0].cards.red}</p>
+            <p className="text-xs text-slate-400">Red Cards</p>
+          </div>
         </div>
-        <div className="flex flex-col items-center w-24">
-          <p>{currentStats?.stats[0].goals.conceded}</p>
-          <p className="text-xs text-slate-400">Goals conceded</p>
-        </div>
-        <div className="flex flex-col items-center w-24">
-          <p>{currentStats?.stats[0].games.minutes}</p>
-          <p className="text-xs text-slate-400">Minutes</p>
-        </div>
-        <div className="flex flex-col items-center w-24">
-          <p>{currentStats?.stats[0].cards.yellow}</p>
-          <p className="text-xs text-slate-400">Yellow cards</p>
-        </div>
-        <div className="flex flex-col items-center w-24">
-          <p>{currentStats?.stats[0].cards.red}</p>
-          <p className="text-xs text-slate-400">Red Cards</p>
-        </div>
-      </div>
+      )}
     </div>
   );
 };
