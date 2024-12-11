@@ -53,10 +53,11 @@ interface Player {
   height: number
   weight: number
   nationality: string
+  countryCode: string | undefined
 }
 
 interface PlayerCurrentStats {
-  stats: PlayerCompetitionStats
+  stats: PlayerCompetitionStats[]
 }
 
 interface PlayerCompetitionStats {

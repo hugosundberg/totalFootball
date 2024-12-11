@@ -4,6 +4,35 @@ const apiKey = import.meta.env.VITE_FOOTBALL_API_KEY;
 const leagueID = 39;
 const season = 2024;
 
+const fetchCountryCode = async (
+  countryName: string
+): Promise<string | undefined> => {
+  try {
+    const response = await fetch("https://flagcdn.com/en/codes.json");
+
+    if (!response.ok) {
+      throw new Error(`HTTP error! status: ${response.status}`);
+    }
+
+    const countries = await response.json();
+    const entries = Object.entries(countries) as [string, string][];
+
+    const result = entries.find(
+      ([, name]) => name.toLowerCase() === countryName.toLowerCase()
+    );
+
+    if (!result) {
+      console.log(`Country not found: ${countryName}`);
+      return undefined;
+    }
+
+    return result[0].toUpperCase();
+  } catch (error) {
+    console.error("Error fetching country code: ", error);
+    return undefined; // Handle the case where something goes wrong
+  }
+};
+
 function getLatestValidTransfer(transfers: Transfer[]): Transfer {
   const today = new Date();
 
@@ -190,6 +219,8 @@ const fetchPlayer = async (playerID: number) => {
       stats: playerStats.statistics,
     };
 
+    const countryCode = await fetchCountryCode(playerProfile.nationality);
+
     const formattedPlayer: Player = {
       id: playerProfile.id,
       age: playerProfile.age,
@@ -205,9 +236,10 @@ const fetchPlayer = async (playerID: number) => {
       height: playerProfile.height,
       weight: playerProfile.weight,
       nationality: playerProfile.nationality,
+      countryCode: countryCode,
     };
 
-    console.log(formattedPlayerStats);
+    console.log(formattedPlayer);
 
     return { formattedPlayer, formattedPlayerStats };
   } catch (error) {

@@ -90,7 +90,14 @@ const Player = ({
           <span className="block h-1 w-5/6 bg-slate-800 rounded-full mt-2" />
         </div>
         <div className="h-fit">
-          <p>{player.nationality}</p>
+          <div className="flex gap-2 items-center">
+            <p>{player.nationality}</p>
+            <img
+              src={`https://flagsapi.com/${player.countryCode}/flat/64.png`}
+              alt=""
+              className="h-4"
+            />
+          </div>
           <p className="text-slate-400 text-xs mt-1">Nationality</p>
           <span className="block h-1 w-5/6 bg-slate-800 rounded-full mt-2" />
         </div>
@@ -102,6 +109,7 @@ const Player = ({
       </div>
       <div className="h-20 w-full bg-zinc-800 items-center p-4">
         <p>Season stats</p>
+        <p></p>
       </div>
     </div>
   );
