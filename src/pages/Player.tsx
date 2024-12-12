@@ -30,8 +30,8 @@ const Player = ({
   if (!player) return;
 
   return (
-    <div className="flex flex-col dark:bg-black min-h-screen dark:text-white sm:items-center">
-      <div className="player-header bg-zinc-800 h-fit w-full px-4 py-6 mt-16 sm:rounded-t-2xl sm:mt-20 sm:w-11/12">
+    <div className="flex flex-col bg-slate-200 dark:bg-black min-h-screen dark:text-white sm:items-center">
+      <div className="player-header bg-white dark:bg-zinc-800 h-fit w-full px-4 py-6 mt-16 sm:rounded-t-2xl sm:mt-20 sm:w-11/12 shadow-xl">
         <div className="flex gap-4">
           <img
             src={player.photo}
@@ -87,7 +87,7 @@ const Player = ({
           </div>
         </div>
       </div>
-      <div className="player-info grid grid-cols-2 h-fit gap-y-4 p-4 bg-zinc-900 w-full text-xs sm:w-11/12 sm:rounded-b-2xl">
+      <div className="player-info grid grid-cols-2 h-fit gap-y-4 p-4 bg-white dark:bg-zinc-900 w-full text-xs sm:w-11/12 sm:rounded-b-2xl shadow-2xl">
         <div className="h-fit">
           <p>{player.height}</p>
           <p className="text-slate-400 text-xs mt-1">Height</p>
