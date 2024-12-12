@@ -53,10 +53,10 @@ const Team = ({
   }
 
   return (
-    <div className="flex bg-black h-screen justify-center">
+    <div className="flex w-full bg-black h-screen justify-center">
       <div className="relative pt-16 bg-black h-full w-full md:lg:max-w-screen-xl">
         {/* Team Header */}
-        <div className="bg-zinc-900 mt-4 p-8 flex flex-col rounded-lg relative">
+        <div className="bg-zinc-800 p-4 sm:p-8 flex flex-col relative sm:rounded-2xl sm:mt-4 sm:w-11/12 sm:justify-self-center">
           <div className="text-white">
             <div className="flex">
               <img src={team.logo} alt={`${team.name} logo`} className="h-14" />
@@ -67,7 +67,7 @@ const Team = ({
             </div>
           </div>
           <div className="relative mt-6">
-            <div ref={navLinksRef} className="text-white flex gap-10 relative">
+            <div ref={navLinksRef} className="text-white flex gap-2 relative">
               <NavLink
                 to={`/team/${id}`}
                 className={({ isActive }) =>
@@ -93,8 +93,8 @@ const Team = ({
                 to={`/team/${id}/fixtures`}
                 className={({ isActive }) =>
                   isActive
-                    ? "text-green-700 active"
-                    : "text-gray-400 hover:text-gray-500"
+                    ? "text-green-700 active hidden sm:flex"
+                    : "text-gray-400 hover:text-gray-500 hidden sm:flex"
                 }
               >
                 <div className="pb-2 px-2">Matches</div>
@@ -131,27 +131,29 @@ const Team = ({
         </div>
 
         {/* Dynamic Routes */}
-        <Routes>
-          <Route path="/" element={<p>Team Overview Content</p>} />
-          <Route
-            path="table"
-            element={
-              <Table
-                standing={standing}
-                handleFetchTeam={handleFetchTeam}
-                currentTeam={team}
-              />
-            }
-          />
-          <Route path="fixtures" element={<p>Team Fixtures Content</p>} />
-          <Route
-            path="squad"
-            element={
-              <Squad squad={squad} handlePlayerClick={handleFetchPlayer} />
-            }
-          />
-          <Route path="stats" element={<TeamStats />} />
-        </Routes>
+        <div className="flex w-full sm:w-11/12 sm:mt-4 justify-self-center">
+          <Routes>
+            <Route path="/" element={<p>Team Overview Content</p>} />
+            <Route
+              path="table"
+              element={
+                <Table
+                  standing={standing}
+                  handleFetchTeam={handleFetchTeam}
+                  currentTeam={team}
+                />
+              }
+            />
+            <Route path="fixtures" element={<p>Team Fixtures Content</p>} />
+            <Route
+              path="squad"
+              element={
+                <Squad squad={squad} handlePlayerClick={handleFetchPlayer} />
+              }
+            />
+            <Route path="stats" element={<TeamStats />} />
+          </Routes>
+        </div>
       </div>
     </div>
   );
