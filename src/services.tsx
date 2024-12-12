@@ -282,6 +282,86 @@ const fetchPlayerCurrentTeam = async (playerID: number) => {
   }
 };
 
+const fetchCurrentRound = async (leagueID: number) => {
+  try {
+    const response = await fetch(
+      `https://v3.football.api-sports.io/fixtures/rounds?league=${leagueID}&season=${season}&current=true`,
+      {
+        method: "GET",
+        headers: {
+          "x-rapidapi-host": "v3.football.api-sports.io",
+          "x-rapidapi-key": apiKey,
+        },
+      }
+    );
+
+    const data = await response.json();
+
+    const currentRound = data.response[0];
+    return currentRound;
+  } catch (error) {
+    console.error("Error fetching round: ", error);
+  }
+};
+
+const fetchTeamFixtures = async (teamID: number) => {
+  if (leagueID) {
+    const currentRound = fetchCurrentRound(leagueID);
+  }
+
+  try {
+    const response = await fetch(
+      `https://v3.football.api-sports.io/fixtures?team=${teamID}&season=${season}`,
+      {
+        method: "GET",
+        headers: {
+          "x-rapidapi-host": "v3.football.api-sports.io",
+          "x-rapidapi-key": apiKey,
+        },
+      }
+    );
+
+    const data = await response.json();
+    console.log(data.response);
+
+    const fixtures: Fixture[] = data.response.map((fixture: any) => ({
+      fixtureInfo: {
+        id: fixture.fixture.id,
+        referee: fixture.fixture.referee,
+        date: fixture.fixture.date,
+        venue: fixture.fixture.venue.name,
+      },
+      goals: {
+        home: fixture.goals.home,
+        away: fixture.goals.away,
+      },
+      teams: {
+        home: {
+          teamID: fixture.teams.home.id,
+          name: fixture.teams.home.name,
+          logo: fixture.teams.home.logo,
+        },
+        away: {
+          teamID: fixture.teams.away.id,
+          name: fixture.teams.away.name,
+          logo: fixture.teams.away.logo,
+        },
+        league: {
+          id: fixture.league.id,
+          name: fixture.league.name,
+          logo: fixture.league.logo,
+        },
+      },
+    }));
+
+    return fixtures;
+  } catch (error) {
+    console.error("Error fetching team fixtures: ", error);
+  }
+};
+
+fetchTeamFixtures(42);
+
 export default {
   fetchTeams,
   fetchStandings,
@@ -289,4 +369,5 @@ export default {
   fetchSquad,
   fetchPlayer,
   fetchPlayerCurrentTeam,
+  fetchTeamFixtures,
 };

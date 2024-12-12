@@ -20,6 +20,10 @@ export default function App() {
   const [playerCurrentStats, setPlayerCurrentStats] = useState<
     PlayerCurrentStats | undefined
   >(undefined);
+  const [currentFixtureList, setCurrentFixtureList] = useState<
+    Fixture[] | undefined
+  >();
+
   const [standing, setStanding] = useState();
   const navigate = useNavigate();
 
@@ -41,12 +45,15 @@ export default function App() {
   );
 
   const handleFetchTeam = useCallback(
-    async (id: number) => {
+    async (teamID: number) => {
       try {
-        const fetchedTeam = await footballApi.fetchTeam(id);
+        const fetchedTeam = await footballApi.fetchTeam(teamID);
         setCurrentTeam(fetchedTeam);
 
-        const fetchedSquad = await footballApi.fetchSquad(id);
+        const fetchedFixtureList = await footballApi.fetchTeamFixtures(teamID);
+        setCurrentFixtureList(fetchedFixtureList);
+
+        const fetchedSquad = await footballApi.fetchSquad(teamID);
         setCurrentSquad(fetchedSquad);
       } catch (error) {
         console.error("Error fetching team: ", error);
@@ -87,6 +94,7 @@ export default function App() {
               handleFetchTeam={handleFetchTeam}
               squad={currentSquad}
               handleFetchPlayer={handleFetchPlayer}
+              fixtures={currentFixtureList}
             />
           }
         />

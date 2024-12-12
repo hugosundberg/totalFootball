@@ -9,14 +9,7 @@ import {
 import Squad from "../components/Squad";
 import Table from "../components/Table";
 import TeamStats from "../components/TeamStats";
-
-interface TeamProps {
-  team?: Team;
-  handleFetchTeam: (id: number) => void;
-  standing?: TeamStanding[];
-  squad?: SquadPlayer[];
-  handleFetchPlayer: (playerID: number) => void;
-}
+import FixtureList from "../components/FixtureList";
 
 const Team = ({
   team,
@@ -24,11 +17,14 @@ const Team = ({
   standing,
   squad,
   handleFetchPlayer,
+  fixtures,
 }: TeamProps) => {
   const { id } = useParams<{ id: string }>();
   const location = useLocation();
   const [barStyle, setBarStyle] = useState({ left: 0, width: 0 });
   const navLinksRef = useRef<HTMLDivElement | null>(null);
+
+  console.log(fixtures);
 
   useEffect(() => {
     if (id) {
@@ -151,7 +147,10 @@ const Team = ({
                 />
               }
             />
-            <Route path="fixtures" element={<p>Team Fixtures Content</p>} />
+            <Route
+              path="fixtures"
+              element={<FixtureList fixtures={fixtures} />}
+            />
             <Route
               path="squad"
               element={

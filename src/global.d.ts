@@ -7,6 +7,45 @@ interface Team {
     venue: string
 }
 
+interface TeamProps {
+  team?: Team;
+  handleFetchTeam: (id: number) => void;
+  standing?: TeamStanding[];
+  squad?: SquadPlayer[];
+  handleFetchPlayer: (playerID: number) => void;
+  fixtures?: Fixture[];
+}
+
+interface Fixture {
+  fixtureInfo: {
+    id: number
+    referee: string
+    date: string
+    venue: string
+  }
+  goals: {
+    home: number
+    away: number
+  }
+  teams: {
+    home: {
+      teamID: number
+      name: string
+      logo: string
+    }
+    away: {
+      teamID: number
+      name: string
+      logo: string
+    }
+  }
+  league: {
+    id: number
+    name: string
+    logo: string
+  }
+}
+
 interface TeamStats {
     played: number;
 }
@@ -36,7 +75,6 @@ interface Transfer {
       };
   };
 };
-
 
 interface Player {
   id: number
