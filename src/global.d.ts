@@ -46,6 +46,10 @@ interface Fixture {
   }
 }
 
+interface FixtureListProps {
+  fixtures: Fixture[] | undefined
+}
+
 interface TeamStats {
     played: number;
 }

@@ -24,8 +24,6 @@ const Team = ({
   const [barStyle, setBarStyle] = useState({ left: 0, width: 0 });
   const navLinksRef = useRef<HTMLDivElement | null>(null);
 
-  console.log(fixtures);
-
   useEffect(() => {
     if (id) {
       handleFetchTeam(Number(id));

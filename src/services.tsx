@@ -322,7 +322,6 @@ const fetchTeamFixtures = async (teamID: number) => {
     );
 
     const data = await response.json();
-    console.log(data.response);
 
     const fixtures: Fixture[] = data.response.map((fixture: any) => ({
       fixtureInfo: {
