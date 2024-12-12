@@ -53,21 +53,27 @@ const Team = ({
   }
 
   return (
-    <div className="flex w-full bg-black h-screen justify-center">
-      <div className="relative pt-16 bg-black h-full w-full md:lg:max-w-screen-xl">
+    <div className="flex w-full dark:text-white dark:bg-black h-screen justify-center">
+      <div className="relative pt-16 dark:bg-black h-full w-full md:lg:max-w-screen-xl">
         {/* Team Header */}
-        <div className="bg-zinc-800 p-4 sm:p-8 flex flex-col relative sm:rounded-2xl sm:mt-4 sm:w-11/12 sm:justify-self-center">
-          <div className="text-white">
-            <div className="flex">
-              <img src={team.logo} alt={`${team.name} logo`} className="h-14" />
-              <div className="ml-4">
-                <h2 className="text-white text-2xl">{team.name}</h2>
-                <p>{team.country}</p>
-              </div>
+        <div className="dark:bg-zinc-900 p-4 sm:p-8 flex flex-col w-full relative sm:rounded-2xl sm:mt-4 sm:w-11/12 sm:justify-self-center">
+          <div className="flex">
+            <img
+              src={team.logo}
+              alt={`${team.name} logo`}
+              className="h-10 sm:h-14"
+            />
+            <div className="ml-4">
+              <h2 className="text-lg sm:text-2xl">{team.name}</h2>
+              <p className="text-xs sm:text-lg">{team.country}</p>
             </div>
           </div>
+
           <div className="relative mt-6">
-            <div ref={navLinksRef} className="text-white flex gap-2 relative">
+            <div
+              ref={navLinksRef}
+              className="flex gap-2 relative text-sm sm:text-lg"
+            >
               <NavLink
                 to={`/team/${id}`}
                 className={({ isActive }) =>
@@ -120,8 +126,9 @@ const Team = ({
                 <div className="pb-2 px-2">Stats</div>
               </NavLink>
             </div>
+            {/* DISPLAY IF SCREEN SIZE >= small */}
             <div
-              className="absolute h-1 rounded-md bg-green-700 transition-all duration-300"
+              className="absolute h-1 rounded-md bg-green-700 transition-all duration-300 hidden sm:block"
               style={{
                 left: `${barStyle.left}px`,
                 width: `${barStyle.width}px`,

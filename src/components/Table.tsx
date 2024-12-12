@@ -15,7 +15,7 @@ const Table = ({ standing, handleFetchTeam, currentTeam }: TableProps) => {
   };
 
   return (
-    <div className="bg-white text-black dark:text-white dark:bg-slate-800 h-fit w-full pt-3 rounded-2xl overflow-hidden">
+    <div className="bg-white text-black dark:text-white dark:bg-zinc-900 h-fit w-full pt-3 rounded-2xl overflow-hidden border-slate-800 border-2">
       <div className="flex flex-col">
         {standing && (
           <>
@@ -36,7 +36,7 @@ const Table = ({ standing, handleFetchTeam, currentTeam }: TableProps) => {
           standing.map((team, index) => (
             <>
               {index !== standing.length && (
-                <span className="w-full bg-slate-200 dark:bg-slate-700 h-0.5" />
+                <span className="w-full bg-slate-200 dark:bg-slate-800 h-0.5" />
               )}
               <div
                 key={team.team.id}

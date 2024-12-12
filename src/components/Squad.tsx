@@ -40,14 +40,14 @@ const Squad = ({ squad, handlePlayerClick }: SquadProps) => {
 
   if (!squad) {
     return (
-      <div className="bg-zinc-800 mt-4 h-fit p-10 flex flex-col rounded-lg text-white gap-10">
+      <div className="bg-zinc-900 mt-4 h-fit p-10 flex flex-col rounded-lg dark:text-white gap-10">
         <p className="font-bold">No squad data available</p>
       </div>
     );
   }
 
   return (
-    <div className="bg-zinc-800 mt-4 h-fit p-10 flex flex-col rounded-lg text-white gap-10">
+    <div className="dark:bg-zinc-900 mt-4 h-fit p-10 flex flex-col rounded-lg dark:text-white gap-10">
       <p className="font-bold text-xl">Squad</p>
 
       <div>
