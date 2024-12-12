@@ -2,7 +2,7 @@ const PlayerStats = ({ currentStats, player }: PlayerStatsProps) => {
   console.log(currentStats);
 
   return (
-    <div className="h-fit w-full sm:w-11/12 sm:rounded-xl sm:mt-4 bg-zinc-900 items-center p-4">
+    <div className="h-fit w-full sm:w-11/12 sm:rounded-xl sm:mt-4 bg-white dark:bg-zinc-900 items-center p-4 shadow-xl">
       <div className="flex gap-2 justify-self-center items-center">
         <img
           src={currentStats?.stats[0].league.logo}
@@ -13,7 +13,7 @@ const PlayerStats = ({ currentStats, player }: PlayerStatsProps) => {
           {currentStats?.stats[0].league.name}
         </p>
       </div>
-      <span className="block h-0.5 w-full mt-2 bg-slate-700 rounded-full" />
+      <span className="block h-0.5 w-full mt-2 bg-gray-300 dark:bg-slate-800 rounded-full" />
 
       {player.position === "Goalkeeper" && (
         <div className="flex flex-wrap gap-4 mt-4 justify-self-center justify-center">

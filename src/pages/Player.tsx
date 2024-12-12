@@ -91,19 +91,19 @@ const Player = ({
         <div className="h-fit">
           <p>{player.height}</p>
           <p className="text-slate-400 text-xs mt-1">Height</p>
-          <span className="block h-1 w-5/6 bg-slate-800 rounded-full mt-2" />
+          <span className="block h-0.5 w-5/6 bg-gray-300 dark:bg-slate-800 rounded-full mt-2" />
         </div>
         <div className="h-fit">
           <p>{player.squadNumber}</p>
           <p className="text-slate-400 text-xs mt-1">Shirt</p>
-          <span className="block h-1 w-5/6 bg-slate-800 rounded-full mt-2" />
+          <span className="block h-0.5 w-5/6 bg-gray-300 dark:bg-slate-800 rounded-full mt-2" />
         </div>
         <div className="h-fit">
           <p>{player.age} years</p>
           <p className="text-slate-400 text-xs mt-1">
             {dateConverter(player.birth.date)}
           </p>
-          <span className="block h-1 w-5/6 bg-slate-800 rounded-full mt-2" />
+          <span className="block h-0.5 w-5/6 bg-gray-300 dark:bg-slate-800 rounded-full mt-2" />
         </div>
         <div className="h-fit">
           <div className="flex gap-2 items-center">
@@ -115,12 +115,12 @@ const Player = ({
             />
           </div>
           <p className="text-slate-400 text-xs mt-1">Nationality</p>
-          <span className="block h-1 w-5/6 bg-slate-800 rounded-full mt-2" />
+          <span className="block h-0.5 w-5/6 bg-gray-300 dark:bg-slate-800 rounded-full mt-2" />
         </div>
         <div className="h-fit">
           <p>{player.position}</p>
           <p className="text-slate-400 text-xs mt-1">Position</p>
-          <span className="block h-1 w-5/6 bg-slate-800 rounded-full mt-2" />
+          <span className="block h-0.5 w-5/6 bg-gray-300 dark:bg-slate-800 rounded-full mt-2" />
         </div>
       </div>
 
