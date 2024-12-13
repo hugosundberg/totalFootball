@@ -388,10 +388,10 @@ const fetchMatch = async (matchID: number) => {
 
     const fixture = data.response[0];
 
+    console.log("Preformat fixture: ", fixture);
+
     const homeTeamStats = fixture.statistics[0].statistics;
     const awayTeamStats = fixture.statistics[1].statistics;
-
-    console.log(fixture);
 
     const formattedFixture: MatchFacts = {
       fixture: fixture,
@@ -406,6 +406,7 @@ const fetchMatch = async (matchID: number) => {
         logo: fixture.league.logo,
         flag: fixture.league.flag,
       },
+
       statistics: {
         home: {
           shotsOn: homeTeamStats[0].value,
@@ -440,9 +441,19 @@ const fetchMatch = async (matchID: number) => {
           expectedGoals: awayTeamStats[16].value,
         },
       },
+      fixtureInfo: {
+        id: 0,
+        referee: "",
+        date: "",
+        status: {
+          short: "",
+          elapsed: 0,
+          extra: 0,
+        },
+      },
     };
 
-    console.log(formattedFixture);
+    console.log("Formatted fixture: ", formattedFixture);
 
     return formattedFixture;
   } catch (error) {

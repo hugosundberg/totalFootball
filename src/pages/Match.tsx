@@ -10,40 +10,38 @@ const Match = ({ fixture, handleFetchMatch }: MatchProps) => {
     }
   }, [id, handleFetchMatch]);
 
+  if (!fixture) return;
+
   return (
     <div className="bg-black h-screen pt-16 text-white">
       <div className="bg-zinc-900 h-fit mt-6">
         <div className="flex gap-2 justify-center p-5">
-          <img
-            src={fixture?.fixture.league.logo}
-            alt="league-logo"
-            className="h-6"
-          />
-          <p className="">{fixture?.fixture.league.name}</p>
+          <img src={fixture.league.logo} alt="league-logo" className="h-6" />
+          <p className="">{fixture.league.name}</p>
         </div>
 
         <div className="grid grid-cols-3 gap-2 justify-self-center p-10 items-center">
           <div className="flex items-center gap-4">
-            <p className="text-xl">{fixture?.fixture.teams.home.name}</p>
+            <p className="text-xl">{fixture.fixture.teams.home.name}</p>
             <img
-              src={fixture?.fixture.teams.home.logo}
+              src={fixture.fixture.teams.home.logo}
               alt="home-team-logo"
               className="h-10"
             />
           </div>
           <div>
             <p className="text-3xl text-center">
-              {fixture?.fixture.goals.home} - {fixture?.fixture.goals.away}
+              {fixture.goals.home} - {fixture.goals.away}
             </p>
           </div>
 
           <div className="flex items-center gap-4">
             <img
-              src={fixture?.fixture.teams.away.logo}
+              src={fixture.fixture.teams.away.logo}
               alt="away-team-logo"
               className="h-10"
             />
-            <p className="text-xl">{fixture?.fixture.teams.away.name}</p>
+            <p className="text-xl">{fixture.fixture.teams.away.name}</p>
           </div>
         </div>
       </div>

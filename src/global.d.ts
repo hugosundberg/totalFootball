@@ -56,12 +56,23 @@ interface Fixture {
 
 interface MatchFacts {
   fixture: Fixture
-  goals?: {
+
+  fixtureInfo: {
+    id: number
+    referee: string
+    date: string
+    status: {
+      short: string
+      elapsed: number
+      extra: number
+    }
+  }
+  goals: {
     home: number
     away: number
   }
 
-  league?: {
+  league: {
     id: number
     name: string
     country: string
@@ -73,6 +84,7 @@ interface MatchFacts {
     home: TeamMatchStatistics
     away: TeamMatchStatistics
   }
+
   
 }
 
