@@ -308,7 +308,8 @@ const fetchTeamFixtures = async (teamID: number) => {
   const timeZone = Intl.DateTimeFormat().resolvedOptions().timeZone;
 
   if (leagueID) {
-    const currentRound = fetchCurrentRound(leagueID);
+    const currentRound = await fetchCurrentRound(leagueID);
+    console.log(currentRound);
   }
 
   try {
@@ -325,12 +326,19 @@ const fetchTeamFixtures = async (teamID: number) => {
 
     const data = await response.json();
 
+    console.log(data);
+
     const fixtures: Fixture[] = data.response.map((fixture: any) => ({
       fixtureInfo: {
         id: fixture.fixture.id,
         referee: fixture.fixture.referee,
         date: fixture.fixture.date,
         venue: fixture.fixture.venue.name,
+        status: {
+          short: fixture.fixture.status.short,
+          elapsed: fixture.fixture.status.elapsed,
+          extra: fixture.fixture.status.extra,
+        },
       },
       goals: {
         home: fixture.goals.home,
@@ -341,11 +349,13 @@ const fetchTeamFixtures = async (teamID: number) => {
           teamID: fixture.teams.home.id,
           name: fixture.teams.home.name,
           logo: fixture.teams.home.logo,
+          winner: fixture.teams.home.winner,
         },
         away: {
           teamID: fixture.teams.away.id,
           name: fixture.teams.away.name,
           logo: fixture.teams.away.logo,
+          winner: fixture.teams.away.winner,
         },
       },
       league: {

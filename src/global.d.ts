@@ -22,6 +22,11 @@ interface Fixture {
     referee: string
     date: string
     venue: string
+    status: {
+      short: string
+      elapsed: number
+      extra: number
+    }
   }
   goals: {
     home: number
@@ -32,11 +37,13 @@ interface Fixture {
       teamID: number
       name: string
       logo: string
+      winner: boolean
     }
     away: {
       teamID: number
       name: string
       logo: string
+      winner: boolean
     }
   }
   league: {

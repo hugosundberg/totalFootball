@@ -60,6 +60,7 @@ const FixtureList = ({ fixtures }: FixtureListProps) => {
               className="justify-self-end h-5"
               alt="home-team-logo"
             />
+            {fixture.fixtureInfo.status.short === ""}
             <div className="text-center">
               {fixture.goals.home} - {fixture.goals.away}
             </div>
