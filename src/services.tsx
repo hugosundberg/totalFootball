@@ -388,74 +388,14 @@ const fetchMatch = async (matchID: number) => {
 
     const fixture = data.response[0];
 
-    console.log("Preformat fixture: ", fixture);
-
-    const homeTeamStats = fixture.statistics[0].statistics;
-    const awayTeamStats = fixture.statistics[1].statistics;
-
     const formattedFixture: MatchFacts = {
       fixture: fixture,
-      goals: {
-        home: fixture.goals.home,
-        away: fixture.goals.away,
-      },
-      league: {
-        id: fixture.league.id,
-        name: fixture.league.name,
-        country: fixture.league.country,
-        logo: fixture.league.logo,
-        flag: fixture.league.flag,
-      },
-
-      statistics: {
-        home: {
-          shotsOn: homeTeamStats[0].value,
-          shotsOff: homeTeamStats[1].value,
-          shotsTotal: homeTeamStats[2].value,
-          blockedShots: homeTeamStats[3].value,
-          fouls: homeTeamStats[6].value,
-          corners: homeTeamStats[7].value,
-          offsides: homeTeamStats[8].value,
-          possesion: homeTeamStats[9].value,
-          yellowCards: homeTeamStats[10].value,
-          redCards: homeTeamStats[11].value,
-          saves: homeTeamStats[12].value,
-          passesTotal: homeTeamStats[13].value,
-          passesAccurate: homeTeamStats[14].value,
-          expectedGoals: homeTeamStats[16].value,
-        },
-        away: {
-          shotsOn: awayTeamStats[0].value,
-          shotsOff: awayTeamStats[1].value,
-          shotsTotal: awayTeamStats[2].value,
-          blockedShots: awayTeamStats[3].value,
-          fouls: awayTeamStats[6].value,
-          corners: awayTeamStats[7].value,
-          offsides: awayTeamStats[8].value,
-          possesion: awayTeamStats[9].value,
-          yellowCards: awayTeamStats[10].value,
-          redCards: awayTeamStats[11].value,
-          saves: awayTeamStats[12].value,
-          passesTotal: awayTeamStats[13].value,
-          passesAccurate: awayTeamStats[14].value,
-          expectedGoals: awayTeamStats[16].value,
-        },
-      },
-      fixtureInfo: {
-        id: 0,
-        referee: "",
-        date: "",
-        status: {
-          short: "",
-          elapsed: 0,
-          extra: 0,
-        },
-      },
+      statistics,
     };
 
-    console.log("Formatted fixture: ", formattedFixture);
+    console.log("Preformat fixture: ", fixture);
 
-    return formattedFixture;
+    return fixture;
   } catch (error) {
     console.error("Error fetching match: ", error);
   }

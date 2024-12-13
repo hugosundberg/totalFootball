@@ -50,7 +50,7 @@ const Match = ({ fixture, handleFetchMatch }: MatchProps) => {
         <h2 className="text-2xl mb-4">Statistics</h2>
         <div className="flex flex-col items-center w-1/2 gap-8">
           <div className="flex justify-between w-full">
-            <p className="">{fixture.statistics.home.possesion}</p>
+            {fixture.statistics.home.possesion}
             <p>Possesion</p>
             {fixture.statistics.away.possesion}
           </div>
