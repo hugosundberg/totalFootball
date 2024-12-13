@@ -4,35 +4,6 @@ const apiKey = import.meta.env.VITE_FOOTBALL_API_KEY;
 const leagueID = 39;
 const season = 2024;
 
-const exampleDate = "2025-03-15T16:00:00+01:00";
-
-const dateFormatter = (date: string) => {
-  try {
-    const extractedDate = date.slice(0, 10);
-    const extractedTime = date.slice(11, 16);
-
-    const formattedDate = new Intl.DateTimeFormat("en-US", {
-      month: "short",
-      day: "numeric",
-      year: "numeric",
-    }).format(new Date(extractedDate));
-
-    const [hour, minute] = extractedTime.split(":");
-    const formattedTime = new Intl.DateTimeFormat("en-US", {
-      hour: "numeric",
-      minute: "numeric",
-      hour12: true,
-    }).format(new Date().setHours(Number(hour), Number(minute)));
-
-    return { formattedDate, formattedTime };
-  } catch (error) {
-    console.error("Invalid date format:", error);
-    return null;
-  }
-};
-
-dateFormatter(exampleDate);
-
 const fetchCountryCode = async (
   countryName: string
 ): Promise<string | undefined> => {
