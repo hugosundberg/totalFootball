@@ -24,7 +24,9 @@ export default function App() {
   const [currentFixtureList, setCurrentFixtureList] = useState<
     Fixture[] | undefined
   >();
-  const [currentFixture, setCurrentFixture] = useState<Fixture>();
+  const [currentFixture, setCurrentFixture] = useState<MatchFacts | undefined>(
+    undefined
+  );
 
   const [standing, setStanding] = useState();
   const navigate = useNavigate();
@@ -33,6 +35,8 @@ export default function App() {
     async (matchID: number) => {
       try {
         const fetchedMatch = await footballApi.fetchMatch(matchID);
+
+        setCurrentFixture(fetchedMatch);
 
         navigate(`/match/${matchID}`);
       } catch (error) {

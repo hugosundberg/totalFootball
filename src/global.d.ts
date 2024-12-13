@@ -54,6 +54,24 @@ interface Fixture {
   }
 }
 
+interface MatchFacts {
+  fixture: Fixture
+  goals?: {
+    home: number
+    away: number
+  }
+
+  league?: {
+    id: number
+    name: string
+    country: string
+    logo: string
+    flag: string
+  }
+  
+
+}
+
 interface FixtureListProps {
   fixtures: Fixture[] | undefined
   teamID: number
@@ -61,7 +79,7 @@ interface FixtureListProps {
 }
 
 interface MatchProps {
-  fixture: Fixture
+  fixture?: MatchFacts
   handleFetchMatch: (matchID: number) => void;
 }
 

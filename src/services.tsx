@@ -384,7 +384,17 @@ const fetchMatch = async (matchID: number) => {
 
     const data = await response.json();
 
-    console.log(data);
+    const fixture = data.response[0];
+
+    console.log(fixture);
+
+    const formattedFixture: MatchFacts = {
+      fixture: fixture,
+    };
+
+    console.log(formattedFixture);
+
+    return formattedFixture;
   } catch (error) {
     console.error("Error fetching match: ", error);
   }
