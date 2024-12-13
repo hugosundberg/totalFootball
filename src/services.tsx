@@ -371,8 +371,6 @@ const fetchTeamFixtures = async (teamID: number) => {
   }
 };
 
-fetchTeamFixtures(42);
-
 export default {
   fetchTeams,
   fetchStandings,

@@ -6,6 +6,7 @@ import Home from "./pages/Home";
 import { Route, Routes, useNavigate } from "react-router-dom";
 import About from "./pages/About";
 import Player from "./pages/Player";
+import Match from "./pages/Match";
 
 export default function App() {
   const [currentTeam, setCurrentTeam] = useState<Team | undefined>(undefined);
@@ -26,6 +27,10 @@ export default function App() {
 
   const [standing, setStanding] = useState();
   const navigate = useNavigate();
+
+  const handleMatchClick = (matchID: number) => {
+    navigate(`/match/${matchID}`);
+  };
 
   const handleFetchPlayer = useCallback(
     async (playerID: number) => {
@@ -95,6 +100,7 @@ export default function App() {
               squad={currentSquad}
               handleFetchPlayer={handleFetchPlayer}
               fixtures={currentFixtureList}
+              handleMatchClick={handleMatchClick}
             />
           }
         />
@@ -109,6 +115,7 @@ export default function App() {
             />
           }
         />
+        <Route path="/match/:id" element={<Match />} />
         <Route path="/about" element={<About />} />
       </Routes>
     </>

@@ -14,6 +14,7 @@ interface TeamProps {
   squad?: SquadPlayer[];
   handleFetchPlayer: (playerID: number) => void;
   fixtures?: Fixture[];
+  handleMatchClick: (matchID: number) => void;
 }
 
 interface Fixture {
@@ -55,6 +56,8 @@ interface Fixture {
 
 interface FixtureListProps {
   fixtures: Fixture[] | undefined
+  teamID: number
+  handleMatchClick: (matchID: number) => void;
 }
 
 interface TeamStats {
