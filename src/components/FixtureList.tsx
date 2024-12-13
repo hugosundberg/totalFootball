@@ -5,7 +5,17 @@ const FixtureList = ({ fixtures }: FixtureListProps) => {
     <div className="flex flex-col bg-slate-800 w-full h-fit gap-2">
       {fixtures.map((fixture, index) => (
         <div key={index} className="h-20 bg-slate-400">
-          <div>{fixture.fixtureInfo?.date}</div>
+          <div className="flex justify-between px-2 pt-2">
+            <p>{fixture.fixtureInfo?.date}</p>
+            <div className="flex gap-2">
+              <img
+                src={fixture.league.logo}
+                className="h-6"
+                alt="league-logo"
+              />
+              {fixture.league.name}
+            </div>
+          </div>
           <div className="grid grid-cols-custom-fixture gap-2 items-center">
             <span className="justify-self-end text-center ">
               {fixture.teams.home.name}

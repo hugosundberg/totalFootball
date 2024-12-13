@@ -4,6 +4,35 @@ const apiKey = import.meta.env.VITE_FOOTBALL_API_KEY;
 const leagueID = 39;
 const season = 2024;
 
+const exampleDate = "2025-03-15T16:00:00+01:00";
+
+const dateFormatter = (date: string) => {
+  try {
+    const extractedDate = date.slice(0, 10);
+    const extractedTime = date.slice(11, 16);
+
+    const formattedDate = new Intl.DateTimeFormat("en-US", {
+      month: "short",
+      day: "numeric",
+      year: "numeric",
+    }).format(new Date(extractedDate));
+
+    const [hour, minute] = extractedTime.split(":");
+    const formattedTime = new Intl.DateTimeFormat("en-US", {
+      hour: "numeric",
+      minute: "numeric",
+      hour12: true,
+    }).format(new Date().setHours(Number(hour), Number(minute)));
+
+    return { formattedDate, formattedTime };
+  } catch (error) {
+    console.error("Invalid date format:", error);
+    return null;
+  }
+};
+
+dateFormatter(exampleDate);
+
 const fetchCountryCode = async (
   countryName: string
 ): Promise<string | undefined> => {
@@ -305,13 +334,15 @@ const fetchCurrentRound = async (leagueID: number) => {
 };
 
 const fetchTeamFixtures = async (teamID: number) => {
+  const timeZone = Intl.DateTimeFormat().resolvedOptions().timeZone;
+
   if (leagueID) {
     const currentRound = fetchCurrentRound(leagueID);
   }
 
   try {
     const response = await fetch(
-      `https://v3.football.api-sports.io/fixtures?team=${teamID}&season=${season}`,
+      `https://v3.football.api-sports.io/fixtures?team=${teamID}&season=${season}&timezone=${timeZone}`,
       {
         method: "GET",
         headers: {
@@ -345,11 +376,11 @@ const fetchTeamFixtures = async (teamID: number) => {
           name: fixture.teams.away.name,
           logo: fixture.teams.away.logo,
         },
-        league: {
-          id: fixture.league.id,
-          name: fixture.league.name,
-          logo: fixture.league.logo,
-        },
+      },
+      league: {
+        id: fixture.league.id,
+        name: fixture.league.name,
+        logo: fixture.league.logo,
       },
     }));
 
