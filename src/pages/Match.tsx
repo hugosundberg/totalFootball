@@ -49,32 +49,32 @@ const Match = ({ fixture, handleFetchMatch }: MatchProps) => {
       </div>
       <div className="flex flex-col bg-zinc-900 h-fit mt-4 rounded-2xl items-center">
         <h2 className="text-2xl mb-4">Statistics</h2>
-        <div className="flex flex-col items-center">
-          <div className="grid grid-cols-custom-stats">
+        <div className="flex flex-col items-center w-1/2 gap-8">
+          <div className="flex justify-between w-full">
             <p className="">{fixture?.statistics.home.possesion}</p>
             <p>Possesion</p>
             {fixture?.statistics.away.possesion}
           </div>
 
-          <div className="grid grid-cols-custom-stats">
+          <div className="flex justify-between w-full">
             {fixture?.statistics.home.expectedGoals}
             <p>Expected goals</p>
             {fixture?.statistics.away.expectedGoals}
           </div>
 
-          <div className="grid grid-cols-custom-stats">
+          <div className="flex justify-between w-full">
             {fixture?.statistics.home.shotsTotal}
             <p>Total Shots</p>
             {fixture?.statistics.away.shotsTotal}
           </div>
 
-          <div className="grid grid-cols-custom-stats">
+          <div className="flex justify-between w-full">
             {fixture?.statistics.home.shotsOn}
             <p>Shots on target</p>
             {fixture?.statistics.away.shotsOn}
           </div>
 
-          <div className="grid grid-cols-custom-stats">
+          <div className="flex justify-between w-full">
             {fixture?.statistics.home.passesAccurate} /{" "}
             {fixture?.statistics.home.passesTotal}
             <p>Accurate passes</p>
@@ -82,19 +82,19 @@ const Match = ({ fixture, handleFetchMatch }: MatchProps) => {
             {fixture?.statistics.away.passesTotal}
           </div>
 
-          <div className="grid grid-cols-custom-stats">
+          <div className="flex justify-between w-full">
             {fixture?.statistics.home.fouls}
             <p>Fouls committed</p>
             {fixture?.statistics.away.fouls}
           </div>
 
-          <div className="grid grid-cols-custom-stats">
+          <div className="flex justify-between w-full">
             {fixture?.statistics.home.yellowCards}
             <p>Yellow cards</p>
             {fixture?.statistics.away.yellowCards}
           </div>
 
-          <div className="grid grid-cols-custom-stats">
+          <div className="flex justify-between w-full">
             {fixture?.statistics.home.redCards === null && 0}
             <p>Red cards</p>
             {fixture?.statistics.away.redCards === null && 0}
