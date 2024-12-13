@@ -68,9 +68,31 @@ interface MatchFacts {
     logo: string
     flag: string
   }
-  
 
+  statistics: {
+    home: TeamMatchStatistics
+    away: TeamMatchStatistics
+  }
+  
 }
+
+interface TeamMatchStatistics {
+  shotsOn: number
+  shotsOff: number
+  shotsTotal: number
+  blockedShots: number
+  fouls: number
+  corners: number
+  offsides: number
+  possesion: number
+  yellowCards: number
+  redCards: number
+  saves: number
+  passesTotal: number
+  passesAccurate: number
+  expectedGoals: number
+}
+
 
 interface FixtureListProps {
   fixtures: Fixture[] | undefined
