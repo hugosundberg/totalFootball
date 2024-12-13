@@ -84,8 +84,6 @@ interface MatchFacts {
     home: TeamMatchStatistics
     away: TeamMatchStatistics
   }
-
-  
 }
 
 interface TeamMatchStatistics {
