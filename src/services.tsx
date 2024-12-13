@@ -326,8 +326,6 @@ const fetchTeamFixtures = async (teamID: number) => {
 
     const data = await response.json();
 
-    console.log(data);
-
     const fixtures: Fixture[] = data.response.map((fixture: any) => ({
       fixtureInfo: {
         id: fixture.fixture.id,
@@ -371,6 +369,27 @@ const fetchTeamFixtures = async (teamID: number) => {
   }
 };
 
+const fetchMatch = async (matchID: number) => {
+  try {
+    const response = await fetch(
+      `https://v3.football.api-sports.io/fixtures?id=${matchID}`,
+      {
+        method: "GET",
+        headers: {
+          "x-rapidapi-host": "v3.football.api-sports.io",
+          "x-rapidapi-key": apiKey,
+        },
+      }
+    );
+
+    const data = await response.json();
+
+    console.log(data);
+  } catch (error) {
+    console.error("Error fetching match: ", error);
+  }
+};
+
 export default {
   fetchTeams,
   fetchStandings,
@@ -379,4 +398,5 @@ export default {
   fetchPlayer,
   fetchPlayerCurrentTeam,
   fetchTeamFixtures,
+  fetchMatch,
 };

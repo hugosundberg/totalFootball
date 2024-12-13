@@ -24,13 +24,23 @@ export default function App() {
   const [currentFixtureList, setCurrentFixtureList] = useState<
     Fixture[] | undefined
   >();
+  const [currentFixture, setCurrentFixture] = useState<Fixture>();
 
   const [standing, setStanding] = useState();
   const navigate = useNavigate();
 
-  const handleMatchClick = (matchID: number) => {
-    navigate(`/match/${matchID}`);
-  };
+  const handleMatchClick = useCallback(
+    async (matchID: number) => {
+      try {
+        const fetchedMatch = await footballApi.fetchMatch(matchID);
+
+        navigate(`/match/${matchID}`);
+      } catch (error) {
+        console.error("Error fetching player: ", error);
+      }
+    },
+    [navigate]
+  );
 
   const handleFetchPlayer = useCallback(
     async (playerID: number) => {
@@ -115,7 +125,15 @@ export default function App() {
             />
           }
         />
-        <Route path="/match/:id" element={<Match />} />
+        <Route
+          path="/match/:id"
+          element={
+            <Match
+              fixture={currentFixture}
+              handleFetchMatch={handleMatchClick}
+            />
+          }
+        />
         <Route path="/about" element={<About />} />
       </Routes>
     </>

@@ -60,6 +60,11 @@ interface FixtureListProps {
   handleMatchClick: (matchID: number) => void;
 }
 
+interface MatchProps {
+  fixture: Fixture
+  handleFetchMatch: (matchID: number) => void;
+}
+
 interface TeamStats {
     played: number;
 }
