@@ -74,10 +74,15 @@ const Match = ({ fixture, handleFetchMatch }: MatchProps) => {
       <div className="flex flex-col bg-zinc-900 h-fit mt-4 rounded-2xl items-center py-10">
         <h2 className="text-2xl mb-4">Statistics</h2>
         <div className="flex flex-col items-center w-1/2 gap-8">
-          <div className="flex justify-between w-full">
-            <p className="">{fixture.statistics.home.possesion}</p>
-            <p>Possesion</p>
-            {fixture.statistics.away.possesion}
+          <p>Ball possesion</p>
+          <div className="flex justify-between w-full bg-gray-500 h-10 rounded-full">
+            <div
+              className="bg-slate-700 h-full rounded-l-full border-r-2"
+              style={{ width: `${fixture.statistics.home.possesion}` }}
+            >
+              <p className="p-2 px-4">{fixture.statistics.home.possesion}</p>
+            </div>
+            <p className="p-2 px-4">{fixture.statistics.away.possesion}</p>
           </div>
 
           <div className="flex justify-between w-full">
