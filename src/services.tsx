@@ -360,6 +360,7 @@ const fetchTeamFixtures = async (teamID: number) => {
         id: fixture.league.id,
         name: fixture.league.name,
         logo: fixture.league.logo,
+        round: fixture.league.round,
       },
     }));
 
@@ -386,7 +387,7 @@ const fetchMatch = async (matchID: number) => {
 
     const fixture = data.response[0];
 
-    console.log(fixture);
+    console.log(fixture.league.round);
 
     const homeTeamStats = fixture.statistics[0].statistics;
     const awayTeamStats = fixture.statistics[1].statistics;
@@ -403,6 +404,7 @@ const fetchMatch = async (matchID: number) => {
         country: fixture.league.country,
         logo: fixture.league.logo,
         flag: fixture.league.flag,
+        round: fixture.league.round,
       },
 
       statistics: {

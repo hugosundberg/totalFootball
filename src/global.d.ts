@@ -51,6 +51,7 @@ interface Fixture {
     id: number
     name: string
     logo: string
+    round: string
   }
 }
 
@@ -78,6 +79,7 @@ interface MatchFacts {
     country: string
     logo: string
     flag: string
+    round: string
   }
 
   statistics: {

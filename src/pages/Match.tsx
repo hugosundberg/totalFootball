@@ -17,9 +17,15 @@ const Match = ({ fixture, handleFetchMatch }: MatchProps) => {
   return (
     <div className="bg-black h-screen pt-16 text-white">
       <div className="bg-zinc-900 h-fit mt-6">
-        <div className="flex gap-2 justify-center p-5">
-          <img src={fixture.league.logo} alt="league-logo" className="h-6" />
-          <p className="">{fixture.league.name}</p>
+        <div className="flex gap-4 justify-center p-5 items-center">
+          <img
+            src={fixture.league.logo}
+            alt="league-logo"
+            className="h-8 bg-white p-1 rounded-full"
+          />
+          <p>
+            {fixture.league.name} {fixture.league.round}
+          </p>
         </div>
 
         <div className="grid grid-cols-3 gap-2 justify-self-center p-10 items-center">
@@ -55,6 +61,12 @@ const Match = ({ fixture, handleFetchMatch }: MatchProps) => {
             <p>{fixture.fixtureInfo.status.elapsed}</p>
           ) : fixture.fixtureInfo.status.short === "2H" ? (
             <p>{fixture.fixtureInfo.status.elapsed}</p>
+          ) : fixture.fixtureInfo.status.extra !== null ? (
+            <p>
+              {fixture.fixtureInfo.status.elapsed +
+                " + " +
+                fixture.fixtureInfo.status.extra}
+            </p>
           ) : null}
         </div>
       </div>
