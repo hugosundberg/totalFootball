@@ -5,6 +5,11 @@ const FixtureList = ({
 }: FixtureListProps) => {
   if (!fixtures) return null;
 
+  console.log(fixtures[15]);
+
+  console.log(fixtures[15].fixtureInfo.status.short);
+  console.log(fixtures[15].fixtureInfo.status.elapsed);
+
   const dateFormatter = (date: string) => {
     try {
       const extractedDate = date.slice(0, 10);
@@ -68,6 +73,15 @@ const FixtureList = ({
               className="justify-self-center h-5"
               alt="home-team-logo"
             />
+
+            {fixture.fixtureInfo.status.short === "1H" ||
+              fixture.fixtureInfo.status.short === "HT" ||
+              fixture.fixtureInfo.status.short === "2H" ||
+              (fixture.fixtureInfo.status.short === "ET" && (
+                <div>
+                  {fixture.goals.home} - {fixture.goals.away}
+                </div>
+              ))}
 
             {fixture.fixtureInfo.status.short === "FT" && (
               <div

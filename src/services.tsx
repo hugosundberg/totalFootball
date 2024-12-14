@@ -1,5 +1,3 @@
-import Home from "./pages/Home";
-
 const apiKey = import.meta.env.VITE_FOOTBALL_API_KEY;
 
 // REPLACE WITH INPUT VALUES
@@ -388,7 +386,7 @@ const fetchMatch = async (matchID: number) => {
 
     const fixture = data.response[0];
 
-    console.log("Preformat fixture: ", fixture);
+    console.log(fixture);
 
     const homeTeamStats = fixture.statistics[0].statistics;
     const awayTeamStats = fixture.statistics[1].statistics;
@@ -442,13 +440,13 @@ const fetchMatch = async (matchID: number) => {
         },
       },
       fixtureInfo: {
-        id: 0,
-        referee: "",
-        date: "",
+        id: fixture.fixture.id,
+        referee: fixture.fixture.referee,
+        date: fixture.fixture.date,
         status: {
-          short: "",
-          elapsed: 0,
-          extra: 0,
+          short: fixture.fixture.status.short,
+          elapsed: fixture.fixture.status.elapsed,
+          extra: fixture.fixture.status.extra,
         },
       },
     };

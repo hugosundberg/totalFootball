@@ -12,6 +12,8 @@ const Match = ({ fixture, handleFetchMatch }: MatchProps) => {
 
   if (!fixture) return;
 
+  console.log(fixture.fixtureInfo.status.short);
+
   return (
     <div className="bg-black h-screen pt-16 text-white">
       <div className="bg-zinc-900 h-fit mt-6">
@@ -43,6 +45,17 @@ const Match = ({ fixture, handleFetchMatch }: MatchProps) => {
             />
             <p className="text-xl">{fixture.fixture.teams.away.name}</p>
           </div>
+        </div>
+        <div className="h-10 justify-self-center">
+          {fixture.fixtureInfo.status.short === "HT" ? (
+            <p>Half Time</p>
+          ) : fixture.fixtureInfo.status.short === "FT" ? (
+            <p>Full Time</p>
+          ) : fixture.fixtureInfo.status.short === "1H" ? (
+            <p>{fixture.fixtureInfo.status.elapsed}</p>
+          ) : fixture.fixtureInfo.status.short === "2H" ? (
+            <p>{fixture.fixtureInfo.status.elapsed}</p>
+          ) : null}
         </div>
       </div>
 
