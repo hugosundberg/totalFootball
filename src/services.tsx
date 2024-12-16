@@ -387,8 +387,6 @@ const fetchMatch = async (matchID: number) => {
 
     const fixture = data.response[0];
 
-    console.log(fixture);
-
     const homeTeamStats = fixture.statistics[0].statistics;
     const awayTeamStats = fixture.statistics[1].statistics;
 
@@ -464,6 +462,47 @@ const fetchMatch = async (matchID: number) => {
   }
 };
 
+const fetchCoach = async (teamID: number) => {
+  try {
+    const response = await fetch(
+      `https://v3.football.api-sports.io/coachs?team=${teamID}`,
+      {
+        method: "GET",
+        headers: {
+          "x-rapidapi-host": "v3.football.api-sports.io",
+          "x-rapidapi-key": apiKey,
+        },
+      }
+    );
+    const data = await response.json();
+
+    console.log(data);
+  } catch (error) {
+    console.error("Error fetching coach: ", error);
+  }
+};
+
+const fetchTeamSeasonStats = async (teamID: number) => {
+  try {
+    const response = await fetch(
+      `https://v3.football.api-sports.io/teams/statistics/?team=${teamID}&season=${season}&league=${leagueID}`,
+      {
+        method: "GET",
+        headers: {
+          "x-rapidapi-host": "v3.football.api-sports.io",
+          "x-rapidapi-key": apiKey,
+        },
+      }
+    );
+
+    const data = await response.json();
+  } catch (error) {
+    console.error("Error fetching team stats: ", error);
+  }
+};
+fetchCoach(40);
+fetchTeamSeasonStats(42);
+
 export default {
   fetchTeams,
   fetchStandings,
@@ -473,4 +512,5 @@ export default {
   fetchPlayerCurrentTeam,
   fetchTeamFixtures,
   fetchMatch,
+  fetchTeamSeasonStats,
 };

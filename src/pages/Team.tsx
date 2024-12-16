@@ -10,6 +10,7 @@ import Squad from "../components/Squad";
 import Table from "../components/Table";
 import TeamStats from "../components/TeamStats";
 import FixtureList from "../components/FixtureList";
+import TeamOverview from "../components/TeamOverview";
 
 const Team = ({
   team,
@@ -48,7 +49,7 @@ const Team = ({
   }
 
   return (
-    <div className="flex w-full  dark:text-white dark:bg-black h-full justify-center">
+    <div className="flex w-full dark:text-white dark:bg-black h-screen justify-center">
       <div className="relative pt-16 dark:bg-black h-full w-full md:lg:max-w-screen-xl">
         {/* Team Header */}
         <div className="dark:bg-zinc-900 p-4 sm:p-8 flex flex-col w-full relative sm:rounded-2xl sm:mt-4 sm:w-11/12 sm:justify-self-center">
@@ -135,7 +136,7 @@ const Team = ({
         {/* Dynamic Routes */}
         <div className="flex w-full sm:w-11/12 sm:mt-4 justify-self-center">
           <Routes>
-            <Route path="/" element={<p>Team Overview Content</p>} />
+            <Route path="/" element={<TeamOverview team={team} />} />
             <Route
               path="table"
               element={

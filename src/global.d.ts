@@ -17,6 +17,10 @@ interface TeamProps {
   handleMatchClick: (matchID: number) => void;
 }
 
+interface TeamOverviewProps {
+  team: Team
+} 
+
 interface Fixture {
   fixtureInfo: {
     id: number
@@ -106,7 +110,6 @@ interface TeamMatchStatistics {
   passesPercentage: number
   expectedGoals: number
 }
-
 
 interface FixtureListProps {
   fixtures: Fixture[] | undefined
