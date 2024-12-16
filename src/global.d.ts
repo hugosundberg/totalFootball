@@ -67,6 +67,7 @@ interface MatchFacts {
       elapsed: number
       extra: number
     }
+    venue: string
   }
   goals: {
     home: number

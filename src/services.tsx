@@ -387,7 +387,7 @@ const fetchMatch = async (matchID: number) => {
 
     const fixture = data.response[0];
 
-    console.log(fixture.league.round);
+    console.log(fixture);
 
     const homeTeamStats = fixture.statistics[0].statistics;
     const awayTeamStats = fixture.statistics[1].statistics;
@@ -450,6 +450,7 @@ const fetchMatch = async (matchID: number) => {
           elapsed: fixture.fixture.status.elapsed,
           extra: fixture.fixture.status.extra,
         },
+        venue: fixture.fixture.venue.name,
       },
     };
 
