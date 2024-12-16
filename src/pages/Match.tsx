@@ -191,13 +191,13 @@ const Match = ({ fixture, handleFetchMatch }: MatchProps) => {
                 {fixture.statistics.away.expectedGoals}
               </>
             ) : (
-              <div>
+              <>
                 {fixture.statistics.home.expectedGoals}
                 <p>Expected goals</p>
                 <div className="bg-gray-500 p-2 rounded-full px-4">
                   {fixture.statistics.away.expectedGoals}
                 </div>
-              </div>
+              </>
             )}
           </div>
 
