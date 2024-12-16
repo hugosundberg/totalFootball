@@ -47,7 +47,7 @@ function getLatestValidTransfer(transfers: Transfer[]): Transfer {
   return validTransfers[0];
 }
 
-const fetchTeams = async () => {
+const fetchTeams = async (leagueID: number) => {
   try {
     const response = await fetch(
       `https://v3.football.api-sports.io/teams?league=${leagueID}&season=${season}`,
@@ -117,7 +117,7 @@ const fetchTeam = async (teamID: number) => {
   }
 };
 
-const fetchStandings = async () => {
+const fetchStandings = async (leagueID: number) => {
   try {
     const response = await fetch(
       `https://v3.football.api-sports.io/standings?league=${leagueID}&season=${season}`,

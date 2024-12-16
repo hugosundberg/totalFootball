@@ -27,6 +27,7 @@ export default function App() {
   const [currentFixture, setCurrentFixture] = useState<MatchFacts | undefined>(
     undefined
   );
+  const [currentLeague, setCurrentLeague] = useState(39);
 
   const [standing, setStanding] = useState();
   const navigate = useNavigate();
@@ -83,7 +84,7 @@ export default function App() {
 
   const handleFetchStandings = async () => {
     try {
-      const fetchedStandings = await footballApi.fetchStandings();
+      const fetchedStandings = await footballApi.fetchStandings(currentLeague);
       setStanding(fetchedStandings || []);
     } catch (error) {
       console.error("Error fetching table:", error);
@@ -92,7 +93,7 @@ export default function App() {
 
   useEffect(() => {
     handleFetchStandings();
-  }, []);
+  }, [currentLeague]);
 
   return (
     <>
@@ -101,7 +102,11 @@ export default function App() {
         <Route
           path="/"
           element={
-            <Home standing={standing} handleFetchTeam={handleFetchTeam} />
+            <Home
+              standing={standing}
+              handleFetchTeam={handleFetchTeam}
+              setCurrentLeague={setCurrentLeague}
+            />
           }
         />
         <Route
