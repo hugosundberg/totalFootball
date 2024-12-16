@@ -422,6 +422,7 @@ const fetchMatch = async (matchID: number) => {
           saves: homeTeamStats[12].value,
           passesTotal: homeTeamStats[13].value,
           passesAccurate: homeTeamStats[14].value,
+          passesPercentage: homeTeamStats[15].value,
           expectedGoals: homeTeamStats[16].value,
         },
         away: {
@@ -438,6 +439,7 @@ const fetchMatch = async (matchID: number) => {
           saves: awayTeamStats[12].value,
           passesTotal: awayTeamStats[13].value,
           passesAccurate: awayTeamStats[14].value,
+          passesPercentage: awayTeamStats[15].value,
           expectedGoals: awayTeamStats[16].value,
         },
       },

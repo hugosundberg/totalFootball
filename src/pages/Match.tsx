@@ -180,42 +180,131 @@ const Match = ({ fixture, handleFetchMatch }: MatchProps) => {
             <p className="p-2 px-4">{fixture.statistics.away.possesion}</p>
           </div>
 
-          <div className="flex justify-between w-full">
-            {fixture.statistics.home.expectedGoals}
-            <p>Expected goals</p>
-            {fixture.statistics.away.expectedGoals}
+          <div className="flex justify-between items-center w-full">
+            {fixture.statistics.home.expectedGoals >
+            fixture.statistics.away.expectedGoals ? (
+              <>
+                <div className="bg-slate-700 p-2 rounded-full px-4">
+                  {fixture.statistics.home.expectedGoals}
+                </div>
+                <p>Expected goals</p>
+                {fixture.statistics.away.expectedGoals}
+              </>
+            ) : (
+              <div>
+                {fixture.statistics.home.expectedGoals}
+                <p>Expected goals</p>
+                <div className="bg-gray-500 p-2 rounded-full px-4">
+                  {fixture.statistics.away.expectedGoals}
+                </div>
+              </div>
+            )}
+          </div>
+
+          <div className="flex justify-between w-full items-center">
+            {fixture.statistics.home.shotsTotal >
+            fixture.statistics.away.shotsTotal ? (
+              <>
+                <div className="bg-slate-700 p-2 rounded-full px-4">
+                  {fixture.statistics.home.shotsTotal}
+                </div>
+                <p>Total Shots</p>
+                {fixture.statistics.away.shotsTotal}
+              </>
+            ) : (
+              <>
+                {fixture.statistics.home.shotsTotal}
+                <p>Total Shots</p>
+                <div className="bg-gray-500 p-2 rounded-full px-4">
+                  {fixture.statistics.away.shotsTotal}
+                </div>
+              </>
+            )}
           </div>
 
           <div className="flex justify-between w-full">
-            {fixture.statistics.home.shotsTotal}
-            <p>Total Shots</p>
-            {fixture.statistics.away.shotsTotal}
+            {fixture.statistics.home.shotsOn >
+            fixture.statistics.away.shotsOn ? (
+              <>
+                <div className="bg-slate-700 p-2 rounded-full px-4">
+                  {fixture.statistics.home.shotsOn}
+                </div>
+                <p>Shots on target</p>
+                {fixture.statistics.away.shotsOn}
+              </>
+            ) : (
+              <>
+                {fixture.statistics.home.shotsOn}
+                <p>Shots on target</p>
+                <div className="bg-gray-500 p-2 rounded-full px-4">
+                  {fixture.statistics.away.shotsOn}
+                </div>
+              </>
+            )}
           </div>
 
-          <div className="flex justify-between w-full">
-            {fixture.statistics.home.shotsOn}
-            <p>Shots on target</p>
-            {fixture.statistics.away.shotsOn}
+          <div className="flex justify-between w-full items-center">
+            {fixture.statistics.home.passesPercentage >
+            fixture.statistics.away.passesPercentage ? (
+              <>
+                <div className="bg-slate-700 p-2 rounded-full px-4">
+                  {fixture.statistics.home.passesAccurate + " "} (
+                  {fixture.statistics.home.passesPercentage})
+                </div>
+                <p>Accurate passes</p>
+                {fixture.statistics.away.passesAccurate + " "}(
+                {fixture.statistics.away.passesPercentage})
+              </>
+            ) : (
+              <>
+                {fixture.statistics.home.passesAccurate}
+                <p>Accurate passes</p>
+                <div className="bg-gray-500 p-2 rounded-full px-4">
+                  {fixture.statistics.away.passesAccurate}
+                </div>
+              </>
+            )}
           </div>
 
-          <div className="flex justify-between w-full">
-            {fixture.statistics.home.passesAccurate} /{" "}
-            {fixture.statistics.home.passesTotal}
-            <p>Accurate passes</p>
-            {fixture.statistics.away.passesAccurate} /{" "}
-            {fixture.statistics.away.passesTotal}
+          <div className="flex justify-between w-full items-center">
+            {fixture.statistics.home.fouls < fixture.statistics.away.fouls ? (
+              <>
+                <div className="bg-slate-700 p-2 rounded-full px-4">
+                  {fixture.statistics.home.fouls}
+                </div>
+                <p>Fouls committed</p>
+                {fixture.statistics.away.fouls}
+              </>
+            ) : (
+              <>
+                {fixture.statistics.home.fouls}
+                <p>Fouls committed</p>
+                <div className="bg-gray-500 p-2 rounded-full px-4">
+                  {fixture.statistics.away.fouls}
+                </div>
+              </>
+            )}
           </div>
 
-          <div className="flex justify-between w-full">
-            {fixture.statistics.home.fouls}
-            <p>Fouls committed</p>
-            {fixture.statistics.away.fouls}
-          </div>
-
-          <div className="flex justify-between w-full">
-            {fixture.statistics.home.yellowCards}
-            <p>Yellow cards</p>
-            {fixture.statistics.away.yellowCards}
+          <div className="flex justify-between w-full items-center">
+            {fixture.statistics.home.yellowCards <
+            fixture.statistics.away.yellowCards ? (
+              <>
+                <div className="bg-slate-700 p-2 rounded-full px-4">
+                  {fixture.statistics.home.yellowCards}
+                </div>
+                <p>Yellow cards</p>
+                {fixture.statistics.away.yellowCards}
+              </>
+            ) : (
+              <>
+                {fixture.statistics.home.yellowCards}
+                <p>Yellow cards</p>
+                <div className="bg-gray-500 p-2 rounded-full px-4">
+                  {fixture.statistics.away.yellowCards}
+                </div>
+              </>
+            )}
           </div>
 
           <div className="flex justify-between w-full">

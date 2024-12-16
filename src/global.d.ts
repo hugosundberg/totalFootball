@@ -103,6 +103,7 @@ interface TeamMatchStatistics {
   saves: number
   passesTotal: number
   passesAccurate: number
+  passesPercentage: number
   expectedGoals: number
 }
 
