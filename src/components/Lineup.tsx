@@ -1,223 +1,36 @@
+import field from "../../assets/field.svg";
+
 const Lineup = ({ fixture }: LineupProps) => {
   console.log(fixture);
 
+  const homeStartXI = fixture.lineups.home.startXI;
+  console.log(homeStartXI[0]);
+
   return (
     <>
-      <div></div>
-      <div className="h-1/2 flex justify-center items-center bg-gray-900 ">
-        <svg
-          xmlns="http://www.w3.org/2000/svg"
-          width="5000"
-          height="3000"
-          viewBox="0 0 5000 3000"
-        >
-          {/* BACKGROUND */}
-          <path
-            fill-rule="evenodd"
-            fill="rgb(15.696716%, 67.771912%, 26.708984%)"
-            fill-opacity="0"
-            d="M 5000 7.121094 L 4.261719 0 L 0 2996.304688 L 4995.738281 3003.425781 L 5000 7.121094 "
-          />
-          {/* SIDE LINES */}
-          <path
-            fill="none"
-            stroke-width="350"
-            stroke-linecap="round"
-            stroke-linejoin="round"
-            stroke="rgb(100%, 100%, 100%)"
-            stroke-opacity="1"
-            stroke-miterlimit="10"
-            d="M 47946.09375 27856.796875 L 2005.664062 27922.304688 L 1968.671875 1922.382812 L 47909.101562 1856.875 Z M 47946.09375 27856.796875 "
-            transform="matrix(0.1, 0, 0, -0.1, 0, 3000)"
-          />
-
-          {/* MIDFIELD LINE */}
-          <path
-            fill="none"
-            stroke-width="350"
-            stroke-linecap="round"
-            stroke-linejoin="round"
-            stroke="rgb(100%, 100%, 100%)"
-            stroke-opacity="1"
-            stroke-miterlimit="10"
-            d="M 24967.695312 27897.695312 L 24823.59375 2102.265625 "
-            transform="matrix(0.1, 0, 0, -0.1, 0, 3000)"
-          />
-
-          {/* KICK OFF CIRCLE */}
-          <path
-            fill="none"
-            stroke-width="350"
-            stroke-linecap="round"
-            stroke-linejoin="round"
-            stroke="rgb(100%, 100%, 100%)"
-            stroke-opacity="1"
-            stroke-miterlimit="10"
-            d="M 24898.710938 20982.890625 C 28173.398438 20982.890625 30832.1875 18294.414062 30832.1875 14982.890625 C 30832.1875 11671.40625 28173.398438 8982.851562 24898.710938 8982.851562 C 21623.90625 8982.851562 18965.195312 11671.40625 18965.195312 14982.890625 C 18965.195312 18294.414062 21623.90625 20982.890625 24898.710938 20982.890625 Z M 24898.710938 20982.890625 "
-            transform="matrix(0.1, 0, 0, -0.1, 0, 3000)"
-          />
-
-          {/* PENALTY AREA RIGHT */}
-          <path
-            fill="none"
-            stroke-width="350"
-            stroke-linecap="round"
-            stroke-linejoin="round"
-            stroke="rgb(100%, 100%, 100%)"
-            stroke-opacity="1"
-            stroke-miterlimit="10"
-            d="M 40762.304688 18242.109375 C 39401.015625 18242.109375 38297.5 16798.28125 38297.5 15017.109375 C 38297.5 13236.015625 39401.015625 11792.109375 40762.304688 11792.109375 Z M 40762.304688 18242.109375 "
-            transform="matrix(0.1, 0, 0, -0.1, 0, 3000)"
-          />
-          <path
-            fill="none"
-            stroke-width="350"
-            stroke-linecap="round"
-            stroke-linejoin="round"
-            stroke="rgb(100%, 100%, 100%)"
-            stroke-opacity="1"
-            stroke-miterlimit="10"
-            d="M 40762.304688 7562.070312 L 40762.304688 22217.109375 Z M 40762.304688 7562.070312 "
-            transform="matrix(0.1, 0, 0, -0.1, 0, 3000)"
-          />
-          <path
-            fill="none"
-            stroke-width="350"
-            stroke-linecap="round"
-            stroke-linejoin="round"
-            stroke="rgb(100%, 100%, 100%)"
-            stroke-opacity="1"
-            stroke-miterlimit="10"
-            d="M 40762.304688 7562.070312 L 47831.992188 7562.070312 "
-            transform="matrix(0.1, 0, 0, -0.1, 0, 3000)"
-          />
-          <path
-            fill="none"
-            stroke-width="350"
-            stroke-linecap="round"
-            stroke-linejoin="round"
-            stroke="rgb(100%, 100%, 100%)"
-            stroke-opacity="1"
-            stroke-miterlimit="10"
-            d="M 40762.304688 22217.109375 L 47831.992188 22217.109375 "
-            transform="matrix(0.1, 0, 0, -0.1, 0, 3000)"
-          />
-
-          {/* GOAL AREA RIGHT */}
-          <path
-            fill="none"
-            stroke-width="350"
-            stroke-linecap="round"
-            stroke-linejoin="round"
-            stroke="rgb(100%, 100%, 100%)"
-            stroke-opacity="1"
-            stroke-miterlimit="10"
-            d="M 43301.71875 9946.289062 L 43301.71875 19832.890625 Z M 43301.71875 9946.289062 "
-            transform="matrix(0.1, 0, 0, -0.1, 0, 3000)"
-          />
-          <path
-            fill="none"
-            stroke-width="350"
-            stroke-linecap="round"
-            stroke-linejoin="round"
-            stroke="rgb(100%, 100%, 100%)"
-            stroke-opacity="1"
-            stroke-miterlimit="10"
-            d="M 43301.71875 9946.289062 L 47831.992188 9946.289062 "
-            transform="matrix(0.1, 0, 0, -0.1, 0, 3000)"
-          />
-          <path
-            fill="none"
-            stroke-width="350"
-            stroke-linecap="round"
-            stroke-linejoin="round"
-            stroke="rgb(100%, 100%, 100%)"
-            stroke-opacity="1"
-            stroke-miterlimit="10"
-            d="M 43301.71875 19832.890625 L 47831.992188 19832.890625 "
-            transform="matrix(0.1, 0, 0, -0.1, 0, 3000)"
-          />
-
-          {/* PENALTY AREA LEFT */}
-          <path
-            fill="none"
-            stroke-width="350"
-            stroke-linecap="round"
-            stroke-linejoin="round"
-            stroke="rgb(100%, 100%, 100%)"
-            stroke-opacity="1"
-            stroke-miterlimit="10"
-            d="M 9148.320312 18369.6875 C 10509.609375 18369.6875 11613.203125 16925.78125 11613.203125 15144.6875 C 11613.203125 13363.59375 10509.609375 11919.6875 9148.320312 11919.6875 Z M 9148.320312 18369.6875 "
-            transform="matrix(0.1, 0, 0, -0.1, 0, 3000)"
-          />
-          <path
-            fill="none"
-            stroke-width="350"
-            stroke-linecap="round"
-            stroke-linejoin="round"
-            stroke="rgb(100%, 100%, 100%)"
-            stroke-opacity="1"
-            stroke-miterlimit="10"
-            d="M 9148.320312 7689.609375 L 9148.320312 22344.6875 Z M 9148.320312 7689.609375 "
-            transform="matrix(0.1, 0, 0, -0.1, 0, 3000)"
-          />
-          <path
-            fill="none"
-            stroke-width="350"
-            stroke-linecap="round"
-            stroke-linejoin="round"
-            stroke="rgb(100%, 100%, 100%)"
-            stroke-opacity="1"
-            stroke-miterlimit="10"
-            d="M 9148.320312 7689.609375 L 2078.671875 7689.609375 "
-            transform="matrix(0.1, 0, 0, -0.1, 0, 3000)"
-          />
-          <path
-            fill="none"
-            stroke-width="350"
-            stroke-linecap="round"
-            stroke-linejoin="round"
-            stroke="rgb(100%, 100%, 100%)"
-            stroke-opacity="1"
-            stroke-miterlimit="10"
-            d="M 9148.320312 22344.6875 L 2078.671875 22344.6875 "
-            transform="matrix(0.1, 0, 0, -0.1, 0, 3000)"
-          />
-          {/* GOAL AREA LEFT */}
-          <path
-            fill="none"
-            stroke-width="350"
-            stroke-linecap="round"
-            stroke-linejoin="round"
-            stroke="rgb(100%, 100%, 100%)"
-            stroke-opacity="1"
-            stroke-miterlimit="10"
-            d="M 6609.023438 10073.789062 L 6609.023438 19960.390625 Z M 6609.023438 10073.789062 "
-            transform="matrix(0.1, 0, 0, -0.1, 0, 3000)"
-          />
-          <path
-            fill="none"
-            stroke-width="350"
-            stroke-linecap="round"
-            stroke-linejoin="round"
-            stroke="rgb(100%, 100%, 100%)"
-            stroke-opacity="1"
-            stroke-miterlimit="10"
-            d="M 6609.023438 10073.789062 L 2078.671875 10073.789062 "
-            transform="matrix(0.1, 0, 0, -0.1, 0, 3000)"
-          />
-          <path
-            fill="none"
-            stroke-width="350"
-            stroke-linecap="round"
-            stroke-linejoin="round"
-            stroke="rgb(100%, 100%, 100%)"
-            stroke-opacity="1"
-            stroke-miterlimit="10"
-            d="M 6609.023438 19960.390625 L 2078.671875 19960.390625 "
-            transform="matrix(0.1, 0, 0, -0.1, 0, 3000)"
-          />
-        </svg>
+      <div className="flex flex-col h-fit w-11/12 bg-gray-700 items-center justify-self-center">
+        <div className="flex p-4 justify-between gap-4">
+          <div className="flex items-center gap-4">
+            <img src={fixture.fixture.teams.home.logo} alt="" className="h-8" />
+            <p>{fixture.fixture.teams.home.name}</p>
+            <p>{fixture.lineups.home.formation}</p>
+          </div>
+          <div className="flex items-center gap-4">
+            <p>{fixture.lineups.away.formation}</p>
+            <p>{fixture.fixture.teams.away.name}</p>
+            <img src={fixture.fixture.teams.away.logo} alt="" className="h-8" />
+          </div>
+        </div>
+        <div className="h-fit flex justify-center items-center bg-zinc-900">
+          <div>
+            <p>{homeStartXI[0].name}</p>
+            {homeStartXI[0].name}
+            {homeStartXI[0].name}
+            {homeStartXI[0].name}
+            {homeStartXI[0].name}
+          </div>
+          <img src={field} alt="" className="w-full h-full opacity-10 z-0" />
+        </div>
       </div>
     </>
   );
