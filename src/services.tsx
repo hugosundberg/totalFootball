@@ -407,6 +407,11 @@ const fetchMatch = async (matchID: number) => {
         round: fixture.league.round,
       },
 
+      lineups: {
+        home: fixture.lineups[0],
+        away: fixture.lineups[1],
+      },
+
       statistics: {
         home: {
           shotsOn: homeTeamStats[0].value,
