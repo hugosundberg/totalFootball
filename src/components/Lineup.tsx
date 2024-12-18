@@ -5,7 +5,11 @@ const Lineup = ({ fixture }: LineupProps) => {
   const awayLineup = fixture.lineups.away;
 
   // Group players by column based on their grid position
-  const groupPlayersByColumn = (players: LineupPlayer[]) => {
+  const groupPlayersByColumn = (
+    players: LineupPlayer[],
+    reverse: boolean = false,
+    totalColumns: number = 0
+  ) => {
     const columnMap: Record<number, LineupPlayer[]> = {};
 
     players.forEach(({ player }: any) => {
@@ -15,10 +19,15 @@ const Lineup = ({ fixture }: LineupProps) => {
       }
 
       const [col] = player.grid.split(":").map(Number); // Extract column
-      if (!columnMap[col]) {
-        columnMap[col] = [];
+
+      // Apply reversal logic if needed
+      const effectiveColumn =
+        reverse && totalColumns > 0 ? totalColumns + 1 - col : col;
+
+      if (!columnMap[effectiveColumn]) {
+        columnMap[effectiveColumn] = [];
       }
-      columnMap[col].push(player);
+      columnMap[effectiveColumn].push(player);
     });
 
     return columnMap;
@@ -31,64 +40,64 @@ const Lineup = ({ fixture }: LineupProps) => {
 
   // Render players dynamically based on the grouped columns
   const renderPlayersOnGrid = (
-    groupedPlayers: Record<number, LineupPlayer[]>,
-    reverse: boolean = false,
-    totalColumns: number = 0
+    groupedPlayers: Record<number, LineupPlayer[]>
   ) => {
     const columns = Object.entries(groupedPlayers);
 
-    return columns.map(([col, playersInColumn]) => {
-      // Calculate column position dynamically if reverse is true
-      const gridColumn = reverse
-        ? totalColumns + 1 - Number(col) // Reverse the column position
-        : Number(col);
+    return columns.map(([col, playersInColumn]) => (
+      <div
+        key={`column-${col}`}
+        style={{
+          gridColumn: Number(col), // Now directly use the mapped column
+          display: "grid",
+          gridTemplateRows: `repeat(${playersInColumn.length}, 1fr)`,
+          justifyItems: "center",
+          alignItems: "center",
+        }}
+      >
+        {playersInColumn.map((player) => {
+          if (!player || !player.grid) {
+            console.warn("Skipping invalid player during render:", player);
+            return null;
+          }
 
-      return (
-        <div
-          key={`column-${col}`}
-          style={{
-            gridColumn,
-            display: "grid",
-            gridTemplateRows: `repeat(${playersInColumn.length}, 1fr)`,
-            justifyItems: "center", // Center align players within each column
-            alignItems: "center",
-          }}
-        >
-          {playersInColumn.reverse().map((player) => {
-            if (!player || !player.grid) {
-              console.warn("Skipping invalid player during render:", player);
-              return null;
-            }
+          const [, gridRow] = player.grid.split(":").map(Number); // Extract row position
 
-            return (
-              <div
-                key={player.id}
-                style={{
-                  color: "white",
-                  height: "50px",
-                  width: "50px",
-                  display: "flex",
-                  flexDirection: "column",
-                  alignItems: "center",
-                  justifyContent: "center",
-                }}
-              >
-                <span className="bg-slate-400 p-2 w-10 rounded-full items-center">
-                  <p className="justify-self-center">{player.number}</p>
-                </span>
-                <p className="text-xs mt-2">{lastName(player.name)}</p>
-              </div>
-            );
-          })}
-        </div>
-      );
-    });
+          return (
+            <div
+              key={player.id}
+              style={{
+                gridRow,
+                color: "white",
+                height: "50px",
+                width: "50px",
+                display: "flex",
+                flexDirection: "column",
+                alignItems: "center",
+                justifyContent: "center",
+              }}
+            >
+              <span className="bg-slate-400 p-2 w-10 rounded-full items-center">
+                <p className="justify-self-center">{player.number}</p>
+              </span>
+              <p className="text-xs mt-2">{lastName(player.name)}</p>
+            </div>
+          );
+        })}
+      </div>
+    ));
   };
 
   const groupedPlayersHome = groupPlayersByColumn(homeLineup.startXI);
-  const groupedPlayersAway = groupPlayersByColumn(awayLineup.startXI);
 
-  const totalColumnsAway = Object.keys(groupedPlayersAway).length;
+  const totalColumnsAway = Object.keys(
+    groupPlayersByColumn(awayLineup.startXI)
+  ).length;
+  const groupedPlayersAway = groupPlayersByColumn(
+    awayLineup.startXI,
+    true,
+    totalColumnsAway
+  );
 
   return (
     <>
@@ -128,7 +137,6 @@ const Lineup = ({ fixture }: LineupProps) => {
           <div
             className="relative grid"
             style={{
-              display: "grid",
               gridTemplateColumns: `repeat(${Object.keys(groupedPlayersHome).length}, 1fr)`,
               width: "50%",
               height: "100%",
@@ -141,14 +149,13 @@ const Lineup = ({ fixture }: LineupProps) => {
           <div
             className="relative grid"
             style={{
-              display: "grid",
               gridTemplateColumns: `repeat(${totalColumnsAway}, 1fr)`,
               width: "50%",
               height: "100%",
               padding: "30px",
             }}
           >
-            {renderPlayersOnGrid(groupedPlayersAway, true, totalColumnsAway)}
+            {renderPlayersOnGrid(groupedPlayersAway)}
           </div>
         </div>
       </div>
