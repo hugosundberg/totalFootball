@@ -3,16 +3,35 @@ import field from "../../assets/field.svg";
 const Lineup = ({ fixture }: LineupProps) => {
   console.log(fixture);
 
-  const homeStartXI = fixture.lineups.home.startXI;
-  const awayStartXI = fixture.lineups.away.startXI;
+  const homeLineup = fixture.lineups.home;
+  const awayLineup = fixture.lineups.away;
 
   const renderPlayers = (players: LineupPlayer[]) => {
     return players.map((player) => <p>{player.name}</p>);
   };
 
+  function largestDigitInString(input: string): number {
+    if (!/^\d+$/.test(input)) {
+      throw new Error("Input must be a string of digits.");
+    }
+
+    return Math.max(...input.split("").map(Number));
+  }
+
+  const calculateGrid = (linenup: string) => {
+    const formattedLinup = linenup.replace(/-/g, "");
+    const columns = formattedLinup.length;
+
+    const rows = largestDigitInString(formattedLinup);
+
+    return { columns, rows };
+  };
+
+  calculateGrid(homeLineup.formation);
+  calculateGrid(awayLineup.formation);
+
   return (
     <>
-      <div>{homeStartXI[0].name}</div>
       <div className="flex flex-col h-fit w-11/12 bg-gray-700 items-center justify-self-center">
         <div className="flex p-4 justify-between gap-4">
           <div className="flex items-center gap-4">
@@ -31,6 +50,20 @@ const Lineup = ({ fixture }: LineupProps) => {
         </div>
 
         {renderPlayers(fixture.lineups.home.startXI)}
+      </div>
+
+      <div className="bg-slate-600 w-full h-fit p-5">
+        <div
+          className={`grid grid-cols-${calculateGrid(homeLineup.formation).columns + 1} grid-rows-1 gap-2`}
+        >
+          <span className="h-5 w-5 rounded-full bg-white" />
+          <span className="h-5 w-5 rounded-full bg-white" />
+          <span className="h-5 w-5 rounded-full bg-white" />
+          <span className="h-5 w-5 rounded-full bg-white" />
+          <span className="h-5 w-5 rounded-full bg-white" />
+          <span className="h-5 w-5 rounded-full bg-white" />
+          <span className="h-5 w-5 rounded-full bg-white" />
+        </div>
       </div>
     </>
   );
