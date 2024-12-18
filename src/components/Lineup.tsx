@@ -4,10 +4,15 @@ const Lineup = ({ fixture }: LineupProps) => {
   console.log(fixture);
 
   const homeStartXI = fixture.lineups.home.startXI;
-  console.log(homeStartXI[0]);
+  const awayStartXI = fixture.lineups.away.startXI;
+
+  const renderPlayers = (players: LineupPlayer[]) => {
+    return players.map((player) => <p>{player.name}</p>);
+  };
 
   return (
     <>
+      <div>{homeStartXI[0].name}</div>
       <div className="flex flex-col h-fit w-11/12 bg-gray-700 items-center justify-self-center">
         <div className="flex p-4 justify-between gap-4">
           <div className="flex items-center gap-4">
@@ -22,15 +27,10 @@ const Lineup = ({ fixture }: LineupProps) => {
           </div>
         </div>
         <div className="h-fit flex justify-center items-center bg-zinc-900">
-          <div>
-            <p>{homeStartXI[0].name}</p>
-            {homeStartXI[0].name}
-            {homeStartXI[0].name}
-            {homeStartXI[0].name}
-            {homeStartXI[0].name}
-          </div>
           <img src={field} alt="" className="w-full h-full opacity-10 z-0" />
         </div>
+
+        {renderPlayers(fixture.lineups.home.startXI)}
       </div>
     </>
   );

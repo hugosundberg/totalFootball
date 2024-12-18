@@ -387,8 +387,6 @@ const fetchMatch = async (matchID: number) => {
 
     const fixture = data.response[0];
 
-    console.log(fixture);
-
     const homeTeamStats = fixture.statistics[0].statistics;
     const awayTeamStats = fixture.statistics[1].statistics;
 
@@ -460,8 +458,6 @@ const fetchMatch = async (matchID: number) => {
         venue: fixture.fixture.venue.name,
       },
     };
-
-    console.log("Formatted fixture: ", formattedFixture);
 
     return formattedFixture;
   } catch (error) {
