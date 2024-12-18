@@ -76,42 +76,66 @@ const Lineup = ({ fixture }: LineupProps) => {
   };
 
   const groupedPlayersHome = groupPlayersByColumn(homeLineup.startXI);
+  const groupedPlayersAway = groupPlayersByColumn(awayLineup.startXI);
 
   return (
     <>
-      {/* Header */}
-      <div className="flex flex-col h-fit w-11/12 bg-gray-700 items-center justify-self-center">
-        <div className="flex p-4 justify-between gap-4">
-          <div className="flex items-center gap-4">
-            <img src={fixture.fixture.teams.home.logo} alt="" className="h-8" />
-            <p>{fixture.fixture.teams.home.name}</p>
-            <p>{homeLineup.formation}</p>
-          </div>
-          <div className="flex items-center gap-4">
-            <p>{fixture.lineups.away.formation}</p>
-            <p>{fixture.fixture.teams.away.name}</p>
-            <img src={fixture.fixture.teams.away.logo} alt="" className="h-8" />
+      <div className="max-w-[1200px] h-[700px] justify-self-center w-11/12">
+        {/* Header */}
+        <div className="flex flex-col h-fit w-11/12 bg-gray-700 items-center justify-self-center">
+          <div className="flex justify-between p-4 gap-20">
+            <div className="flex items-center gap-4">
+              <img
+                src={fixture.fixture.teams.home.logo}
+                alt=""
+                className="h-8"
+              />
+              <p>{fixture.fixture.teams.home.name}</p>
+              <p>{homeLineup.formation}</p>
+            </div>
+            <div className="flex items-center gap-4">
+              <p>{fixture.lineups.away.formation}</p>
+              <p>{fixture.fixture.teams.away.name}</p>
+              <img
+                src={fixture.fixture.teams.away.logo}
+                alt=""
+                className="h-8"
+              />
+            </div>
           </div>
         </div>
-      </div>
 
-      {/* Field */}
-      <div className="relative w-full h-[600px] max-w-[1200px] bg-zinc-900 justify-self-center">
-        <img
-          src={field}
-          alt="Field"
-          className="w-full h-full opacity-10 absolute"
-        />
-        <div
-          className="relative grid"
-          style={{
-            display: "grid",
-            gridTemplateColumns: `repeat(${Object.keys(groupedPlayersHome).length}, 1fr)`,
-            width: "50%",
-            height: "80%",
-          }}
-        >
-          {renderPlayersOnGrid(groupedPlayersHome)}
+        {/* Field */}
+        <div className="flex relative w-full h-full bg-zinc-900 justify-self-center">
+          <img
+            src={field}
+            alt="Field"
+            className="w-full h-full opacity-10 absolute"
+          />
+          <div
+            className="relative grid"
+            style={{
+              display: "grid",
+              gridTemplateColumns: `repeat(${Object.keys(groupedPlayersHome).length}, 1fr)`,
+              width: "50%",
+              height: "100%",
+              padding: "30px",
+            }}
+          >
+            {renderPlayersOnGrid(groupedPlayersHome)}
+          </div>
+          <div
+            className="relative grid"
+            style={{
+              display: "grid",
+              gridTemplateColumns: `repeat(${Object.keys(groupedPlayersHome).length}, 1fr)`,
+              width: "50%",
+              height: "100%",
+              padding: "30px",
+            }}
+          >
+            {renderPlayersOnGrid(groupedPlayersAway)}
+          </div>
         </div>
       </div>
     </>
