@@ -1,43 +1,85 @@
 import field from "../../assets/field.svg";
 
 const Lineup = ({ fixture }: LineupProps) => {
-  console.log(fixture);
-
   const homeLineup = fixture.lineups.home;
   const awayLineup = fixture.lineups.away;
 
-  const renderPlayers = (players: LineupPlayer[]) => {
-    return players.map((player) => <p>{player.name}</p>);
+  // Group players by column based on their grid position
+  const groupPlayersByColumn = (players: LineupPlayer[]) => {
+    const columnMap: Record<number, LineupPlayer[]> = {};
+
+    players.forEach(({ player }) => {
+      if (!player || !player.grid) {
+        console.warn("Skipping invalid player:", player);
+        return; // Skip if player or grid is undefined
+      }
+
+      const [col] = player.grid.split(":").map(Number); // Extract column
+      if (!columnMap[col]) {
+        columnMap[col] = [];
+      }
+      columnMap[col].push(player);
+    });
+
+    return columnMap;
   };
 
-  function largestDigitInString(input: string): number {
-    if (!/^\d+$/.test(input)) {
-      throw new Error("Input must be a string of digits.");
-    }
+  // Render players dynamically based on the grouped columns
+  const renderPlayersOnGrid = (
+    groupedPlayers: Record<number, LineupPlayer[]>
+  ) => {
+    return Object.entries(groupedPlayers).map(([col, playersInColumn]) => (
+      <div
+        key={`column-${col}`}
+        style={{
+          gridColumn: Number(col),
+          display: "grid",
+          gridTemplateRows: `repeat(${playersInColumn.length}, 1fr)`,
+          justifyItems: "center", // Center align players within each column
+          alignItems: "center",
+        }}
+      >
+        {playersInColumn.map((player) => {
+          if (!player || !player.grid) {
+            console.warn("Skipping invalid player during render:", player);
+            return null;
+          }
 
-    return Math.max(...input.split("").map(Number));
-  }
-
-  const calculateGrid = (linenup: string) => {
-    const formattedLinup = linenup.replace(/-/g, "");
-    const columns = formattedLinup.length;
-
-    const rows = largestDigitInString(formattedLinup);
-
-    return { columns, rows };
+          return (
+            <div
+              key={player.id}
+              style={{
+                backgroundColor: "blue",
+                color: "white",
+                borderRadius: "100%",
+                height: "50px",
+                width: "50px",
+                display: "flex",
+                flexDirection: "column",
+                alignItems: "center",
+                justifyContent: "center",
+              }}
+            >
+              <span>{player.number}</span>
+              <span>{player.name}</span>
+            </div>
+          );
+        })}
+      </div>
+    ));
   };
 
-  calculateGrid(homeLineup.formation);
-  calculateGrid(awayLineup.formation);
+  const groupedPlayersHome = groupPlayersByColumn(homeLineup.startXI);
 
   return (
     <>
+      {/* Header */}
       <div className="flex flex-col h-fit w-11/12 bg-gray-700 items-center justify-self-center">
         <div className="flex p-4 justify-between gap-4">
           <div className="flex items-center gap-4">
             <img src={fixture.fixture.teams.home.logo} alt="" className="h-8" />
             <p>{fixture.fixture.teams.home.name}</p>
-            <p>{fixture.lineups.home.formation}</p>
+            <p>{homeLineup.formation}</p>
           </div>
           <div className="flex items-center gap-4">
             <p>{fixture.lineups.away.formation}</p>
@@ -45,24 +87,25 @@ const Lineup = ({ fixture }: LineupProps) => {
             <img src={fixture.fixture.teams.away.logo} alt="" className="h-8" />
           </div>
         </div>
-        <div className="h-fit flex justify-center items-center bg-zinc-900">
-          <img src={field} alt="" className="w-full h-full opacity-10 z-0" />
-        </div>
-
-        {renderPlayers(fixture.lineups.home.startXI)}
       </div>
 
-      <div className="bg-slate-600 w-full h-fit p-5">
+      {/* Field */}
+      <div className="relative w-full h-[600px] max-w-[1200px] bg-zinc-900 justify-self-center">
+        <img
+          src={field}
+          alt="Field"
+          className="w-full h-full opacity-10 absolute"
+        />
         <div
-          className={`grid grid-cols-${calculateGrid(homeLineup.formation).columns + 1} grid-rows-1 gap-2`}
+          className="relative grid"
+          style={{
+            display: "grid",
+            gridTemplateColumns: `repeat(${Object.keys(groupedPlayersHome).length}, 1fr)`,
+            width: "50%",
+            height: "100%",
+          }}
         >
-          <span className="h-5 w-5 rounded-full bg-white" />
-          <span className="h-5 w-5 rounded-full bg-white" />
-          <span className="h-5 w-5 rounded-full bg-white" />
-          <span className="h-5 w-5 rounded-full bg-white" />
-          <span className="h-5 w-5 rounded-full bg-white" />
-          <span className="h-5 w-5 rounded-full bg-white" />
-          <span className="h-5 w-5 rounded-full bg-white" />
+          {renderPlayersOnGrid(groupedPlayersHome)}
         </div>
       </div>
     </>
