@@ -5,11 +5,6 @@ const FixtureList = ({
 }: FixtureListProps) => {
   if (!fixtures) return null;
 
-  console.log(fixtures[15]);
-
-  console.log(fixtures[15].fixtureInfo.status.short);
-  console.log(fixtures[15].fixtureInfo.status.elapsed);
-
   const dateFormatter = (date: string) => {
     try {
       const extractedDate = date.slice(0, 10);
