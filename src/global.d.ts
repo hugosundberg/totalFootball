@@ -77,6 +77,10 @@ interface MatchFacts {
     home: number
     away: number
   }
+  lineups: {
+    home: Lineup
+    away: Lineup
+  }
 
   league: {
     id: number
@@ -91,6 +95,28 @@ interface MatchFacts {
     home: TeamMatchStatistics
     away: TeamMatchStatistics
   }
+}
+
+interface LineupProps {
+  fixture: MatchFacts
+}
+
+interface Lineup {
+  coach: {
+    id: number
+    name: string
+    photo: string
+  }
+  formation: string
+  startXI: LineupPlayer[]
+}
+
+interface LineupPlayer {
+  id: number
+  name: string
+  number: number
+  position: string
+  grid: string
 }
 
 interface TeamMatchStatistics {
@@ -211,7 +237,6 @@ interface PlayerProps {
   currentTeam?: PlayerCurrentTeam | null
   currentStats?: PlayerCurrentStats
 }
-  
 
 interface TeamStanding {
   rank: number;

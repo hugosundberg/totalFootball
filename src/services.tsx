@@ -405,6 +405,11 @@ const fetchMatch = async (matchID: number) => {
         round: fixture.league.round,
       },
 
+      lineups: {
+        home: fixture.lineups[0],
+        away: fixture.lineups[1],
+      },
+
       statistics: {
         home: {
           shotsOn: homeTeamStats[0].value,
@@ -453,8 +458,6 @@ const fetchMatch = async (matchID: number) => {
         venue: fixture.fixture.venue.name,
       },
     };
-
-    console.log("Formatted fixture: ", formattedFixture);
 
     return formattedFixture;
   } catch (error) {
