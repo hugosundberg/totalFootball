@@ -36,6 +36,26 @@ const Lineup = ({ fixture }: LineupProps) => {
     return nameParts.slice(1).join(" ") || name;
   };
 
+  const reverseNumber = (number: number, rows: number) => {
+    let reverseNumber = number;
+
+    if (number === rows) {
+      reverseNumber = 1;
+    } else if (number === rows - 1) {
+      reverseNumber = 2;
+    } else if (number === rows - 2) {
+      reverseNumber = 3;
+    } else if (number === rows - 3) {
+      reverseNumber = 4;
+    } else if (number === rows - 4) {
+      reverseNumber = 5;
+    }
+
+    return reverseNumber;
+  };
+
+  reverseNumber(1, 5);
+
   const renderPlayersOnGrid = (
     groupedPlayers: Record<number, LineupPlayer[]>,
     reverse: boolean
@@ -53,13 +73,15 @@ const Lineup = ({ fixture }: LineupProps) => {
           alignItems: "center",
         }}
       >
-        {playersInColumn.map((player) => {
+        {playersInColumn.reverse().map((player) => {
           if (!player || !player.grid) {
             console.warn("Skipping invalid player during render:", player);
             return null;
           }
 
-          const [, gridRow] = player.grid.split(":").map(Number);
+          let [, gridRow] = player.grid.split(":").map(Number);
+
+          if (reverse) gridRow = reverseNumber(gridRow, playersInColumn.length);
 
           return (
             <div
