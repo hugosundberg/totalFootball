@@ -1,5 +1,6 @@
 import { useEffect } from "react";
 import { useParams } from "react-router-dom";
+import Lineup from "../components/Lineup";
 
 const Match = ({ fixture, handleFetchMatch }: MatchProps) => {
   const { id } = useParams<{ id: string }>();
@@ -11,8 +12,6 @@ const Match = ({ fixture, handleFetchMatch }: MatchProps) => {
   }, [id, handleFetchMatch]);
 
   if (!fixture) return;
-
-  console.log(fixture.fixtureInfo.status.short);
 
   const dateFormatter = (date: string) => {
     try {
@@ -103,18 +102,23 @@ const Match = ({ fixture, handleFetchMatch }: MatchProps) => {
             </div>
             <div className="flex gap-2 items-center ">
               <svg
+                version="1.1"
+                id="Icons"
                 xmlns="http://www.w3.org/2000/svg"
+                viewBox="0 0 32 32"
                 fill="none"
-                viewBox="0 0 24 24"
-                strokeWidth={1.5}
+                strokeWidth={2}
                 stroke="currentColor"
                 className="size-6"
               >
                 <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  d="M12 3v17.25m0 0c-1.472 0-2.882.265-4.185.75M12 20.25c1.472 0 2.882.265 4.185.75M18.75 4.97A48.416 48.416 0 0 0 12 4.5c-2.291 0-4.545.16-6.75.47m13.5 0c1.01.143 2.01.317 3 .52m-3-.52 2.62 10.726c.122.499-.106 1.028-.589 1.202a5.988 5.988 0 0 1-2.031.352 5.988 5.988 0 0 1-2.031-.352c-.483-.174-.711-.703-.59-1.202L18.75 4.971Zm-16.5.52c.99-.203 1.99-.377 3-.52m0 0 2.62 10.726c.122.499-.106 1.028-.589 1.202a5.989 5.989 0 0 1-2.031.352 5.989 5.989 0 0 1-2.031-.352c-.483-.174-.711-.703-.59-1.202L5.25 4.971Z"
+                  className="st0"
+                  d="M19.5,12L18,15h-5l1.5-3h-4.2c-4.3,0-8,3.2-8.3,7.5C1.7,24.1,5.4,28,10,28c2.3,0,4.4-1,5.8-2.5c3.8-4.1,8.7-7,14.2-8.5l0,0v-5H19.5z"
                 />
+                <circle className="st0" cx="10" cy="20" r="3" />
+                <line className="st0" x1="17" y1="4" x2="17" y2="7" />
+                <line className="st0" x1="12.1" y1="6.1" x2="14.2" y2="8.2" />
+                <line className="st0" x1="21.9" y1="6.1" x2="19.8" y2="8.2" />
               </svg>
 
               {fixture.fixtureInfo.referee}
@@ -124,7 +128,7 @@ const Match = ({ fixture, handleFetchMatch }: MatchProps) => {
         </div>
 
         <div className="grid grid-cols-3 gap-2 justify-self-center p-10 items-center">
-          <div className="flex items-center gap-4">
+          <div className="flex items-center gap-4 justify-self-end">
             <p className="text-xl">{fixture.fixture.teams.home.name}</p>
             <img
               src={fixture.fixture.teams.home.logo}
@@ -166,6 +170,16 @@ const Match = ({ fixture, handleFetchMatch }: MatchProps) => {
         </div>
       </div>
 
+      <Lineup fixture={fixture} />
+
+      <div className="flex bg-green-800 h-20 w-4/6 justify-self-center p-4 mt-20">
+        <div className="grid grid-cols-3 w-full">
+          <p>{fixture.lineups.home.coach.name}</p>
+          <p className="font-bold justify-self-center">Coach</p>
+          <p className="justify-self-end">{fixture.lineups.away.coach.name}</p>
+        </div>
+      </div>
+
       <div className="flex flex-col bg-zinc-900 h-fit mt-4 rounded-2xl items-center py-10">
         <h2 className="text-2xl mb-4">Statistics</h2>
         <div className="flex flex-col items-center w-1/2 gap-8">
@@ -180,137 +194,151 @@ const Match = ({ fixture, handleFetchMatch }: MatchProps) => {
             <p className="p-2 px-4">{fixture.statistics.away.possesion}</p>
           </div>
 
-          <div className="flex justify-between items-center w-full">
+          <div className="grid grid-cols-3 w-full">
             {fixture.statistics.home.expectedGoals >
             fixture.statistics.away.expectedGoals ? (
               <>
-                <div className="bg-slate-700 p-2 rounded-full px-4">
+                <div className="w-fit bg-slate-700 p-2 rounded-full px-4">
                   {fixture.statistics.home.expectedGoals}
                 </div>
-                <p>Expected goals</p>
-                {fixture.statistics.away.expectedGoals}
+                <p className="justify-self-center">Expected goals</p>
+                <p className="justify-self-end">
+                  {fixture.statistics.away.expectedGoals}
+                </p>
               </>
             ) : (
               <>
                 {fixture.statistics.home.expectedGoals}
-                <p>Expected goals</p>
-                <div className="bg-gray-500 p-2 rounded-full px-4">
+                <p className="justify-self-center">Expected goals</p>
+                <div className="w-fit bg-gray-500 p-2 rounded-full px-4 justify-self-end">
                   {fixture.statistics.away.expectedGoals}
                 </div>
               </>
             )}
           </div>
 
-          <div className="flex justify-between w-full items-center">
+          <div className="grid grid-cols-3 w-full items-center">
             {fixture.statistics.home.shotsTotal >
             fixture.statistics.away.shotsTotal ? (
               <>
-                <div className="bg-slate-700 p-2 rounded-full px-4">
+                <div className="w-fit bg-slate-700 p-2 rounded-full px-4">
                   {fixture.statistics.home.shotsTotal}
                 </div>
-                <p>Total Shots</p>
-                {fixture.statistics.away.shotsTotal}
+                <p className="justify-self-center">Total Shots</p>
+                <p className="justify-self-end">
+                  {fixture.statistics.away.shotsTotal}
+                </p>
               </>
             ) : (
               <>
                 {fixture.statistics.home.shotsTotal}
-                <p>Total Shots</p>
-                <div className="bg-gray-500 p-2 rounded-full px-4">
+                <p className="justify-self-center">Total Shots</p>
+                <div className="w-fit bg-gray-500 p-2 rounded-full px-4 justify-self-end">
                   {fixture.statistics.away.shotsTotal}
                 </div>
               </>
             )}
           </div>
 
-          <div className="flex justify-between w-full">
+          <div className="grid grid-cols-3 w-full">
             {fixture.statistics.home.shotsOn >
             fixture.statistics.away.shotsOn ? (
               <>
-                <div className="bg-slate-700 p-2 rounded-full px-4">
+                <div className="w-fit bg-slate-700 p-2 rounded-full px-4">
                   {fixture.statistics.home.shotsOn}
                 </div>
-                <p>Shots on target</p>
-                {fixture.statistics.away.shotsOn}
+                <p className="justify-self-center">Shots on target</p>
+                <p className="justify-self-end">
+                  {fixture.statistics.away.shotsOn}
+                </p>
               </>
             ) : (
               <>
                 {fixture.statistics.home.shotsOn}
-                <p>Shots on target</p>
-                <div className="bg-gray-500 p-2 rounded-full px-4">
+                <p className="justify-self-center">Shots on target</p>
+                <div className="w-fit bg-gray-500 p-2 rounded-full px-4 justify-self-end">
                   {fixture.statistics.away.shotsOn}
                 </div>
               </>
             )}
           </div>
 
-          <div className="flex justify-between w-full items-center">
+          <div className="grid grid-cols-3 w-full items-center">
             {fixture.statistics.home.passesPercentage >
             fixture.statistics.away.passesPercentage ? (
               <>
-                <div className="bg-slate-700 p-2 rounded-full px-4">
+                <div className="w-fit bg-slate-700 p-2 rounded-full px-4">
                   {fixture.statistics.home.passesAccurate + " "} (
                   {fixture.statistics.home.passesPercentage})
                 </div>
-                <p>Accurate passes</p>
-                {fixture.statistics.away.passesAccurate + " "}(
-                {fixture.statistics.away.passesPercentage})
+                <p className="justify-self-center">Accurate passes</p>
+                <div className="justify-self-end">
+                  {fixture.statistics.away.passesAccurate + " "}(
+                  {fixture.statistics.away.passesPercentage})
+                </div>
               </>
             ) : (
               <>
                 {fixture.statistics.home.passesAccurate}
-                <p>Accurate passes</p>
-                <div className="bg-gray-500 p-2 rounded-full px-4">
+                <p className="justify-self-center">Accurate passes</p>
+                <div className="w-fit bg-gray-500 p-2 rounded-full px-4 justify-self-end">
                   {fixture.statistics.away.passesAccurate}
                 </div>
               </>
             )}
           </div>
 
-          <div className="flex justify-between w-full items-center">
+          <div className="grid grid-cols-3 w-full items-center">
             {fixture.statistics.home.fouls < fixture.statistics.away.fouls ? (
               <>
-                <div className="bg-slate-700 p-2 rounded-full px-4">
+                <div className="w-fit bg-slate-700 p-2 rounded-full px-4">
                   {fixture.statistics.home.fouls}
                 </div>
-                <p>Fouls committed</p>
-                {fixture.statistics.away.fouls}
+                <p className="justify-self-center">Fouls committed</p>
+                <p className="justify-self-end">
+                  {fixture.statistics.away.fouls}
+                </p>
               </>
             ) : (
               <>
                 {fixture.statistics.home.fouls}
-                <p>Fouls committed</p>
-                <div className="bg-gray-500 p-2 rounded-full px-4">
+                <p className="justify-self-center">Fouls committed</p>
+                <div className="w-fit bg-gray-500 p-2 rounded-full px-4 justify-self-end">
                   {fixture.statistics.away.fouls}
                 </div>
               </>
             )}
           </div>
 
-          <div className="flex justify-between w-full items-center">
+          <div className="grid grid-cols-3 w-full items-center">
             {fixture.statistics.home.yellowCards <
             fixture.statistics.away.yellowCards ? (
               <>
-                <div className="bg-slate-700 p-2 rounded-full px-4">
+                <div className="w-fit bg-slate-700 p-2 rounded-full px-4">
                   {fixture.statistics.home.yellowCards}
                 </div>
-                <p>Yellow cards</p>
-                {fixture.statistics.away.yellowCards}
+                <p className="justify-self-center">Yellow cards</p>
+                <p className="justify-self-end">
+                  {fixture.statistics.away.yellowCards}
+                </p>
               </>
             ) : (
               <>
                 {fixture.statistics.home.yellowCards}
-                <p>Yellow cards</p>
-                <div className="bg-gray-500 p-2 rounded-full px-4">
+                <p className="justify-self-center">Yellow cards</p>
+                <div className="w-fit bg-gray-500 p-2 rounded-full px-4 justify-self-end">
                   {fixture.statistics.away.yellowCards}
                 </div>
               </>
             )}
           </div>
 
-          <div className="flex justify-between w-full">
+          <div className="grid grid-cols-3 w-full">
             {fixture.statistics.home.redCards === null && 0}
-            <p>Red cards</p>
-            {fixture.statistics.away.redCards === null && 0}
+            <p className="justify-self-center">Red cards</p>
+            <p className="justify-self-end">
+              {fixture.statistics.away.redCards === null && 0}
+            </p>
           </div>
         </div>
       </div>
