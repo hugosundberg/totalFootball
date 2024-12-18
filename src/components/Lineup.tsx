@@ -4,7 +4,6 @@ const Lineup = ({ fixture }: LineupProps) => {
   const homeLineup = fixture.lineups.home;
   const awayLineup = fixture.lineups.away;
 
-  // Group players by column based on their grid position
   const groupPlayersByColumn = (
     players: LineupPlayer[],
     reverse: boolean = false,
@@ -15,12 +14,11 @@ const Lineup = ({ fixture }: LineupProps) => {
     players.forEach(({ player }: any) => {
       if (!player || !player.grid) {
         console.warn("Skipping invalid player:", player);
-        return; // Skip if player or grid is undefined
+        return;
       }
 
-      const [col] = player.grid.split(":").map(Number); // Extract column
+      const [col] = player.grid.split(":").map(Number);
 
-      // Apply reversal logic if needed
       const effectiveColumn =
         reverse && totalColumns > 0 ? totalColumns + 1 - col : col;
 
@@ -38,9 +36,9 @@ const Lineup = ({ fixture }: LineupProps) => {
     return nameParts.slice(1).join(" ") || name;
   };
 
-  // Render players dynamically based on the grouped columns
   const renderPlayersOnGrid = (
-    groupedPlayers: Record<number, LineupPlayer[]>
+    groupedPlayers: Record<number, LineupPlayer[]>,
+    reverse: boolean
   ) => {
     const columns = Object.entries(groupedPlayers);
 
@@ -48,7 +46,7 @@ const Lineup = ({ fixture }: LineupProps) => {
       <div
         key={`column-${col}`}
         style={{
-          gridColumn: Number(col), // Now directly use the mapped column
+          gridColumn: Number(col),
           display: "grid",
           gridTemplateRows: `repeat(${playersInColumn.length}, 1fr)`,
           justifyItems: "center",
@@ -61,7 +59,7 @@ const Lineup = ({ fixture }: LineupProps) => {
             return null;
           }
 
-          const [, gridRow] = player.grid.split(":").map(Number); // Extract row position
+          const [, gridRow] = player.grid.split(":").map(Number);
 
           return (
             <div
@@ -103,7 +101,7 @@ const Lineup = ({ fixture }: LineupProps) => {
     <>
       <div className="max-w-[1200px] h-[700px] justify-self-center w-11/12">
         {/* Header */}
-        <div className="flex flex-col h-fit w-11/12 bg-gray-700 items-center justify-self-center">
+        <div className="flex flex-col h-fit w-full bg-gray-700 items-center justify-self-center">
           <div className="flex justify-between p-4 gap-20">
             <div className="flex items-center gap-4">
               <img
@@ -143,7 +141,7 @@ const Lineup = ({ fixture }: LineupProps) => {
               padding: "30px",
             }}
           >
-            {renderPlayersOnGrid(groupedPlayersHome)}
+            {renderPlayersOnGrid(groupedPlayersHome, false)}
           </div>
           {/* Away Team */}
           <div
@@ -155,7 +153,7 @@ const Lineup = ({ fixture }: LineupProps) => {
               padding: "30px",
             }}
           >
-            {renderPlayersOnGrid(groupedPlayersAway)}
+            {renderPlayersOnGrid(groupedPlayersAway, true)}
           </div>
         </div>
       </div>

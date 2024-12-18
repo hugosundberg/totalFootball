@@ -170,7 +170,9 @@ const Match = ({ fixture, handleFetchMatch }: MatchProps) => {
         </div>
       </div>
 
-      <Lineup fixture={fixture} />
+      <div className="w-11/12 justify-self-center">
+        <Lineup fixture={fixture} />
+      </div>
 
       <div className="flex bg-green-800 h-20 w-4/6 justify-self-center p-4 mt-20">
         <div className="grid grid-cols-3 w-full">
