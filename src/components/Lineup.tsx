@@ -24,6 +24,12 @@ const Lineup = ({ fixture }: LineupProps) => {
     return columnMap;
   };
 
+  const lastName = (name: string) => {
+    const lastName = name.split(" ");
+
+    return lastName[1];
+  };
+
   // Render players dynamically based on the grouped columns
   const renderPlayersOnGrid = (
     groupedPlayers: Record<number, LineupPlayer[]>
@@ -49,9 +55,7 @@ const Lineup = ({ fixture }: LineupProps) => {
             <div
               key={player.id}
               style={{
-                backgroundColor: "blue",
                 color: "white",
-                borderRadius: "100%",
                 height: "50px",
                 width: "50px",
                 display: "flex",
@@ -60,8 +64,10 @@ const Lineup = ({ fixture }: LineupProps) => {
                 justifyContent: "center",
               }}
             >
-              <span>{player.number}</span>
-              <span>{player.name}</span>
+              <span className="bg-slate-400 p-2 w-10 rounded-full items-center">
+                <p className="justify-self-center">{player.number}</p>
+              </span>
+              <p className="text-xs mt-2">{lastName(player.name)}</p>
             </div>
           );
         })}
@@ -102,7 +108,7 @@ const Lineup = ({ fixture }: LineupProps) => {
             display: "grid",
             gridTemplateColumns: `repeat(${Object.keys(groupedPlayersHome).length}, 1fr)`,
             width: "50%",
-            height: "100%",
+            height: "80%",
           }}
         >
           {renderPlayersOnGrid(groupedPlayersHome)}
