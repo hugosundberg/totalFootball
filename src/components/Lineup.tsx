@@ -4,16 +4,17 @@ const Lineup = ({ fixture }: LineupProps) => {
   const homeLineup = fixture.lineups.home;
   const awayLineup = fixture.lineups.away;
 
+  // Group players by column based on their grid position
   const groupPlayersByColumn = (players: LineupPlayer[]) => {
     const columnMap: Record<number, LineupPlayer[]> = {};
 
     players.forEach(({ player }: any) => {
       if (!player || !player.grid) {
         console.warn("Skipping invalid player:", player);
-        return;
+        return; // Skip if player or grid is undefined
       }
 
-      const [col] = player.grid.split(":").map(Number);
+      const [col] = player.grid.split(":").map(Number); // Extract column
       if (!columnMap[col]) {
         columnMap[col] = [];
       }
@@ -25,16 +26,10 @@ const Lineup = ({ fixture }: LineupProps) => {
 
   const lastName = (name: string) => {
     const nameParts = name.split(" ");
-    let fullLastName = "";
-
-    for (let index = 1; index < nameParts.length; index++) {
-      fullLastName +=
-        nameParts[index] + (index < nameParts.length - 1 ? " " : "");
-    }
-
-    return fullLastName || name;
+    return nameParts.slice(1).join(" ") || name;
   };
 
+  // Render players dynamically based on the grouped columns
   const renderPlayersOnGrid = (
     groupedPlayers: Record<number, LineupPlayer[]>,
     reverse: boolean = false,
@@ -45,7 +40,7 @@ const Lineup = ({ fixture }: LineupProps) => {
     return columns.map(([col, playersInColumn]) => {
       // Calculate column position dynamically if reverse is true
       const gridColumn = reverse
-        ? totalColumns - Number(col) // Reverse the column position
+        ? totalColumns + 1 - Number(col) // Reverse the column position
         : Number(col);
 
       return (
@@ -92,6 +87,8 @@ const Lineup = ({ fixture }: LineupProps) => {
 
   const groupedPlayersHome = groupPlayersByColumn(homeLineup.startXI);
   const groupedPlayersAway = groupPlayersByColumn(awayLineup.startXI);
+
+  const totalColumnsAway = Object.keys(groupedPlayersAway).length;
 
   return (
     <>
@@ -145,13 +142,13 @@ const Lineup = ({ fixture }: LineupProps) => {
             className="relative grid"
             style={{
               display: "grid",
-              gridTemplateColumns: `repeat(${Object.keys(groupedPlayersAway).length}, 1fr)`,
+              gridTemplateColumns: `repeat(${totalColumnsAway}, 1fr)`,
               width: "50%",
               height: "100%",
               padding: "30px",
             }}
           >
-            {renderPlayersOnGrid(groupedPlayersAway, true)}
+            {renderPlayersOnGrid(groupedPlayersAway, true, totalColumnsAway)}
           </div>
         </div>
       </div>
