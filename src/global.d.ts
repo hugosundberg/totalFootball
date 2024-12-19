@@ -149,6 +149,10 @@ interface MatchProps {
   handleFetchMatch: (matchID: number) => void;
 }
 
+interface MatchStatsProps {
+  fixture: MatchFacts
+}
+
 interface TeamStats {
     played: number;
 }
