@@ -97,9 +97,18 @@ const Lineup = ({ fixture }: LineupProps) => {
                 justifyContent: "center",
               }}
             >
-              <span className="bg-slate-400 p-2 w-10 rounded-full items-center">
-                <p className="justify-self-center">{player.number}</p>
-              </span>
+              {reverse && (
+                <span className="bg-slate-400 p-2 w-10 rounded-full items-center">
+                  <p className="justify-self-center">{player.number}</p>
+                </span>
+              )}
+
+              {!reverse && (
+                <span className="bg-slate-700 p-2 w-10 rounded-full items-center">
+                  <p className="justify-self-center">{player.number}</p>
+                </span>
+              )}
+
               <p className="text-xs mt-2">{lastName(player.name)}</p>
             </div>
           );
