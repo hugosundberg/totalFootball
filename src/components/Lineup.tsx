@@ -301,7 +301,7 @@ const Lineup = ({ fixture }: LineupProps) => {
           <p className="justify-self-end">{fixture.lineups.away.coach.name}</p>
         </div>
         <p className="font-bold justify-self-center mt-8">Substitutes</p>
-        <div className="w-full">
+        <div className="flex justify-between w-full">
           <div className="h-fit">
             {fixture.lineups.home.substitutes?.length > 0 ? (
               fixture.lineups.home.substitutes.map((substitute) => (
@@ -309,6 +309,22 @@ const Lineup = ({ fixture }: LineupProps) => {
                   <p>{substitute.player.number}</p>
                   <p>{substitute.player.name}</p>
                   <p>{substitute.player.pos}</p>
+                </div>
+              ))
+            ) : (
+              <p>No substitutes available</p>
+            )}
+          </div>
+          <div className="h-fit">
+            {fixture.lineups.away.substitutes?.length > 0 ? (
+              fixture.lineups.away.substitutes.map((substitute) => (
+                <div
+                  key={substitute.player.id}
+                  className="flex justify-end gap-2"
+                >
+                  <p>{substitute.player.name}</p>
+                  <p>{substitute.player.pos}</p>
+                  <p>{substitute.player.number}</p>
                 </div>
               ))
             ) : (

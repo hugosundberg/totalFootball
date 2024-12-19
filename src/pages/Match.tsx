@@ -52,7 +52,7 @@ const Match = ({ fixture, handleFetchMatch }: MatchProps) => {
   };
 
   return (
-    <div className="bg-black h-screen pt-16 text-white">
+    <div className="bg-black h-full pt-16 text-white">
       <div className="bg-zinc-900 h-fit mt-6 w-11/12 justify-self-center rounded-3xl max-w-[1200px]">
         <div className="flex gap-4 justify-center p-5 items-center">
           <img
