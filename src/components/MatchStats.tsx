@@ -1,8 +1,6 @@
-import React from "react";
-
 const MatchStats = ({ fixture }: MatchStatsProps) => {
   return (
-    <div className="flex flex-col bg-zinc-900 h-fit mt-4 rounded-2xl items-center py-10">
+    <div className="flex flex-col bg-zinc-900 h-fit mt-4 rounded-3xl items-center py-10 w-11/12 max-w-[1200px] justify-self-center">
       <h2 className="text-2xl mb-4">Statistics</h2>
       <div className="flex flex-col items-center w-1/2 gap-8">
         <p>Ball possesion</p>

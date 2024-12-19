@@ -198,7 +198,7 @@ const Lineup = ({ fixture }: LineupProps) => {
 
   return (
     <>
-      <div className="max-w-[1200px] h-[900px] lg:h-[600px] justify-self-center w-full">
+      <div className="max-w-[1200px] lg:h-[600px] justify-self-center w-full mt-8">
         {/* Header */}
         <div className="flex flex-col h-fit w-full bg-gray-700 items-center justify-self-center rounded-t-2xl">
           <div className="flex justify-between p-4 gap-20">
@@ -280,7 +280,7 @@ const Lineup = ({ fixture }: LineupProps) => {
 
         {/* Footer */}
 
-        <div className="flex flex-col h-fit w-full bg-gray-700 items-center justify-self-center rounded-b-2xl">
+        <div className="flex flex-col h-fit w-full bg-gray-700 items-center justify-self-center rounded-b-2xl lg:hidden">
           <div className="flex justify-between p-4 gap-20">
             <div className="flex items-center gap-4">
               <img
@@ -291,6 +291,29 @@ const Lineup = ({ fixture }: LineupProps) => {
               <p>{fixture.fixture.teams.away.name}</p>
               <p>{awayLineup.formation}</p>
             </div>
+          </div>
+        </div>
+      </div>
+      <div className="flex flex-col items-center bg-green-800 h-fit w-4/6 justify-self-center p-4 mt-24 rounded-2xl">
+        <div className="grid grid-cols-3 w-full">
+          <p>{fixture.lineups.home.coach.name}</p>
+          <p className="font-bold justify-self-center">Coach</p>
+          <p className="justify-self-end">{fixture.lineups.away.coach.name}</p>
+        </div>
+        <p className="font-bold justify-self-center mt-8">Substitutes</p>
+        <div className="w-full">
+          <div className="h-fit">
+            {fixture.lineups.home.substitutes?.length > 0 ? (
+              fixture.lineups.home.substitutes.map((substitute) => (
+                <div key={substitute.player.id} className="flex gap-2">
+                  <p>{substitute.player.number}</p>
+                  <p>{substitute.player.name}</p>
+                  <p>{substitute.player.pos}</p>
+                </div>
+              ))
+            ) : (
+              <p>No substitutes available</p>
+            )}
           </div>
         </div>
       </div>

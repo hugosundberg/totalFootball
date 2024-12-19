@@ -110,13 +110,15 @@ interface Lineup {
   formation: string
   startXI: LineupPlayer[]
   substitutes: LineupPlayer[]
+  
 }
 
 interface LineupPlayer {
+  player: any
   id: number
   name: string
   number: number
-  position: string
+  pos: string
   grid: string
 }
 

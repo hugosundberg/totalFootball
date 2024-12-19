@@ -53,7 +53,7 @@ const Match = ({ fixture, handleFetchMatch }: MatchProps) => {
 
   return (
     <div className="bg-black h-screen pt-16 text-white">
-      <div className="bg-zinc-900 h-fit mt-6">
+      <div className="bg-zinc-900 h-fit mt-6 w-11/12 justify-self-center rounded-3xl max-w-[1200px]">
         <div className="flex gap-4 justify-center p-5 items-center">
           <img
             src={fixture.league.logo}
@@ -170,41 +170,6 @@ const Match = ({ fixture, handleFetchMatch }: MatchProps) => {
                 fixture.fixtureInfo.status.extra}
             </p>
           ) : null}
-        </div>
-      </div>
-
-      <div className="flex flex-col items-center bg-green-800 h-fit w-4/6 justify-self-center p-4">
-        <div className="grid grid-cols-3 w-full">
-          <p>{fixture.lineups.home.coach.name}</p>
-          <p className="font-bold justify-self-center">Coach</p>
-          <p className="justify-self-end">{fixture.lineups.away.coach.name}</p>
-        </div>
-        <p className="font-bold justify-self-center mt-8">Substitutes</p>
-        <div className="h-20 w-full">
-          <div className="h-fit">
-            {fixture.lineups.home.substitutes?.length > 0 ? (
-              fixture.lineups.home.substitutes.map((player) => (
-                <div key={player.id} className="flex gap-2">
-                  <p>{player.number}</p>
-                  <p>{player.name}</p>
-                </div>
-              ))
-            ) : (
-              <p>No substitutes available</p>
-            )}
-          </div>
-          <div className="h-fit">
-            {fixture.lineups.home.substitutes?.length > 0 ? (
-              fixture.lineups.home.substitutes.map((player) => (
-                <div key={player.id} className="flex gap-2">
-                  <p>{player.number}</p>
-                  <p>{player.name}</p>
-                </div>
-              ))
-            ) : (
-              <p>No substitutes available</p>
-            )}
-          </div>
         </div>
       </div>
 
