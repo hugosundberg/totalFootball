@@ -151,7 +151,7 @@ const Lineup = ({ fixture }: LineupProps) => {
           <img
             src={field}
             alt="Field"
-            className="w-full h-full opacity-10 absolute"
+            className="w-full h-full object-cover opacity-10 absolute"
           />
           {/* Home Team */}
           <div

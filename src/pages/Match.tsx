@@ -13,6 +13,8 @@ const Match = ({ fixture, handleFetchMatch }: MatchProps) => {
 
   if (!fixture) return;
 
+  console.log(fixture.lineups.home);
+
   const dateFormatter = (date: string) => {
     try {
       const extractedDate = date.slice(0, 10);
@@ -174,11 +176,38 @@ const Match = ({ fixture, handleFetchMatch }: MatchProps) => {
         <Lineup fixture={fixture} />
       </div>
 
-      <div className="flex bg-green-800 h-20 w-4/6 justify-self-center p-4 mt-20">
+      <div className="flex flex-col items-center bg-green-800 h-fit w-4/6 justify-self-center p-4 mt-20">
         <div className="grid grid-cols-3 w-full">
           <p>{fixture.lineups.home.coach.name}</p>
           <p className="font-bold justify-self-center">Coach</p>
           <p className="justify-self-end">{fixture.lineups.away.coach.name}</p>
+        </div>
+        <p className="font-bold justify-self-center mt-8">Substitutes</p>
+        <div className="h-20 w-full">
+          <div className="h-fit">
+            {fixture.lineups.home.substitutes?.length > 0 ? (
+              fixture.lineups.home.substitutes.map((player) => (
+                <div key={player.id} className="flex gap-2">
+                  <p>{player.number}</p>
+                  <p>{player.name}</p>
+                </div>
+              ))
+            ) : (
+              <p>No substitutes available</p>
+            )}
+          </div>
+          <div className="h-fit">
+            {fixture.lineups.home.substitutes?.length > 0 ? (
+              fixture.lineups.home.substitutes.map((player) => (
+                <div key={player.id} className="flex gap-2">
+                  <p>{player.number}</p>
+                  <p>{player.name}</p>
+                </div>
+              ))
+            ) : (
+              <p>No substitutes available</p>
+            )}
+          </div>
         </div>
       </div>
 

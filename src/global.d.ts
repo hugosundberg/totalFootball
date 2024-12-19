@@ -109,6 +109,7 @@ interface Lineup {
   }
   formation: string
   startXI: LineupPlayer[]
+  substitutes: LineupPlayer[]
 }
 
 interface LineupPlayer {
@@ -165,16 +166,16 @@ interface Transfer {
   date: string;
   type: string;
   teams: {
-      in: {
-          id: number;
-          name: string;
-          logo: string;
-      };
-      out: {
-          id: number;
-          name: string;
-          logo: string;
-      };
+    in: {
+        id: number;
+        name: string;
+        logo: string;
+    };
+    out: {
+        id: number;
+        name: string;
+        logo: string;
+    };
   };
 };
 
