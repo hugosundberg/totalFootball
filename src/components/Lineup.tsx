@@ -218,7 +218,7 @@ const Lineup = ({ fixture }: LineupProps) => {
       <div className="max-w-[1200px] lg:h-[600px] justify-self-center w-full mt-8">
         {/* Header */}
         <div className="flex flex-col h-fit w-full bg-gray-700 items-center justify-self-center rounded-t-2xl">
-          <div className="flex justify-between p-4 gap-20">
+          <div className="flex lg:w-11/12 items-center lg:justify-between p-4 text-sm">
             <div className="flex items-center gap-4">
               <img
                 src={fixture.fixture.teams.home.logo}
@@ -297,7 +297,7 @@ const Lineup = ({ fixture }: LineupProps) => {
         {/* Footer */}
 
         <div className="flex flex-col h-fit w-full bg-gray-700 items-center justify-self-center rounded-b-2xl lg:hidden">
-          <div className="flex justify-between p-4 gap-20">
+          <div className="flex justify-between p-4 text-sm sm:text-base">
             <div className="flex items-center gap-4">
               <img
                 src={fixture.fixture.teams.away.logo}

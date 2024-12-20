@@ -1,8 +1,8 @@
 const MatchStats = ({ fixture }: MatchStatsProps) => {
   return (
-    <div className="flex flex-col bg-zinc-900 h-fit mt-4 rounded-3xl items-center py-10 w-11/12 max-w-[1200px] justify-self-center">
-      <h2 className="text-2xl mb-4">Statistics</h2>
-      <div className="flex flex-col items-center w-1/2 gap-8">
+    <div className="flex flex-col bg-zinc-900 h-fit mt-4 rounded-3xl items-center py-3 sm:py-10 w-full sm:w-11/12 max-w-[1200px] justify-self-center">
+      <h2 className="text-lg sm:text-2xl mb-4">Statistics</h2>
+      <div className="flex flex-col items-center w-11/12 gap-8 text-sm sm:text-base">
         <p>Ball possesion</p>
         <div className="flex justify-between w-full bg-gray-500 h-10 rounded-full">
           <div
@@ -14,22 +14,26 @@ const MatchStats = ({ fixture }: MatchStatsProps) => {
           <p className="p-2 px-4">{fixture.statistics.away.possesion}</p>
         </div>
 
-        <div className="grid grid-cols-3 w-full">
+        <div className="grid grid-cols-4 w-full items-center">
           {fixture.statistics.home.expectedGoals >
           fixture.statistics.away.expectedGoals ? (
             <>
               <div className="w-fit bg-slate-700 p-2 rounded-full px-4">
                 {fixture.statistics.home.expectedGoals}
               </div>
-              <p className="justify-self-center">Expected goals</p>
-              <p className="justify-self-end">
+              <p className="justify-self-center col-start-2 col-span-2">
+                Expected goals
+              </p>
+              <p className="justify-self-end px-4">
                 {fixture.statistics.away.expectedGoals}
               </p>
             </>
           ) : (
             <>
-              {fixture.statistics.home.expectedGoals}
-              <p className="justify-self-center">Expected goals</p>
+              <p className="px-4">{fixture.statistics.home.expectedGoals}</p>
+              <p className="justify-self-center col-start-2 col-span-2">
+                Expected goals
+              </p>
               <div className="w-fit bg-gray-500 p-2 rounded-full px-4 justify-self-end">
                 {fixture.statistics.away.expectedGoals}
               </div>
@@ -37,22 +41,26 @@ const MatchStats = ({ fixture }: MatchStatsProps) => {
           )}
         </div>
 
-        <div className="grid grid-cols-3 w-full items-center">
+        <div className="grid grid-cols-4 w-full items-center">
           {fixture.statistics.home.shotsTotal >
           fixture.statistics.away.shotsTotal ? (
             <>
               <div className="w-fit bg-slate-700 p-2 rounded-full px-4">
                 {fixture.statistics.home.shotsTotal}
               </div>
-              <p className="justify-self-center">Total Shots</p>
-              <p className="justify-self-end">
+              <p className="justify-self-center col-start-2 col-span-2">
+                Total Shots
+              </p>
+              <p className="justify-self-end px-4">
                 {fixture.statistics.away.shotsTotal}
               </p>
             </>
           ) : (
             <>
-              {fixture.statistics.home.shotsTotal}
-              <p className="justify-self-center">Total Shots</p>
+              <p className="px-4">{fixture.statistics.home.shotsTotal}</p>
+              <p className="justify-self-center col-start-2 col-span-2">
+                Total Shots
+              </p>
               <div className="w-fit bg-gray-500 p-2 rounded-full px-4 justify-self-end">
                 {fixture.statistics.away.shotsTotal}
               </div>
@@ -60,21 +68,25 @@ const MatchStats = ({ fixture }: MatchStatsProps) => {
           )}
         </div>
 
-        <div className="grid grid-cols-3 w-full">
+        <div className="grid grid-cols-4 w-full items-center">
           {fixture.statistics.home.shotsOn > fixture.statistics.away.shotsOn ? (
             <>
               <div className="w-fit bg-slate-700 p-2 rounded-full px-4">
                 {fixture.statistics.home.shotsOn}
               </div>
-              <p className="justify-self-center">Shots on target</p>
-              <p className="justify-self-end">
+              <p className="justify-self-center col-start-2 col-span-2">
+                Shots on target
+              </p>
+              <p className="justify-self-end px-4">
                 {fixture.statistics.away.shotsOn}
               </p>
             </>
           ) : (
             <>
-              {fixture.statistics.home.shotsOn}
-              <p className="justify-self-center">Shots on target</p>
+              <p className="px-4">{fixture.statistics.home.shotsOn}</p>
+              <p className="justify-self-center col-start-2 col-span-2">
+                Shots on target
+              </p>
               <div className="w-fit bg-gray-500 p-2 rounded-full px-4 justify-self-end">
                 {fixture.statistics.away.shotsOn}
               </div>
@@ -82,7 +94,7 @@ const MatchStats = ({ fixture }: MatchStatsProps) => {
           )}
         </div>
 
-        <div className="grid grid-cols-3 w-full items-center">
+        <div className="grid grid-cols-4 w-full items-center">
           {fixture.statistics.home.passesPercentage >
           fixture.statistics.away.passesPercentage ? (
             <>
@@ -90,16 +102,20 @@ const MatchStats = ({ fixture }: MatchStatsProps) => {
                 {fixture.statistics.home.passesAccurate + " "} (
                 {fixture.statistics.home.passesPercentage})
               </div>
-              <p className="justify-self-center">Accurate passes</p>
-              <div className="justify-self-end">
+              <p className="justify-self-center col-start-2 col-span-2">
+                Accurate passes
+              </p>
+              <div className="justify-self-end px-4">
                 {fixture.statistics.away.passesAccurate + " "}(
                 {fixture.statistics.away.passesPercentage})
               </div>
             </>
           ) : (
             <>
-              {fixture.statistics.home.passesAccurate}
-              <p className="justify-self-center">Accurate passes</p>
+              <p className="px-4">{fixture.statistics.home.passesAccurate}</p>
+              <p className="justify-self-center col-start-2 col-span-2">
+                Accurate passes
+              </p>
               <div className="w-fit bg-gray-500 p-2 rounded-full px-4 justify-self-end">
                 {fixture.statistics.away.passesAccurate}
               </div>
@@ -107,21 +123,25 @@ const MatchStats = ({ fixture }: MatchStatsProps) => {
           )}
         </div>
 
-        <div className="grid grid-cols-3 w-full items-center">
+        <div className="grid grid-cols-4 w-full items-center">
           {fixture.statistics.home.fouls < fixture.statistics.away.fouls ? (
             <>
               <div className="w-fit bg-slate-700 p-2 rounded-full px-4">
                 {fixture.statistics.home.fouls}
               </div>
-              <p className="justify-self-center">Fouls committed</p>
-              <p className="justify-self-end">
+              <p className="justify-self-center col-start-2 col-span-2">
+                Fouls committed
+              </p>
+              <p className="justify-self-end px-4">
                 {fixture.statistics.away.fouls}
               </p>
             </>
           ) : (
             <>
-              {fixture.statistics.home.fouls}
-              <p className="justify-self-center">Fouls committed</p>
+              <p className="px-4">{fixture.statistics.home.fouls}</p>
+              <p className="justify-self-center col-start-2 col-span-2">
+                Fouls committed
+              </p>
               <div className="w-fit bg-gray-500 p-2 rounded-full px-4 justify-self-end">
                 {fixture.statistics.away.fouls}
               </div>
@@ -129,22 +149,26 @@ const MatchStats = ({ fixture }: MatchStatsProps) => {
           )}
         </div>
 
-        <div className="grid grid-cols-3 w-full items-center">
+        <div className="grid grid-cols-4 w-full items-center">
           {fixture.statistics.home.yellowCards <
           fixture.statistics.away.yellowCards ? (
             <>
               <div className="w-fit bg-slate-700 p-2 rounded-full px-4">
                 {fixture.statistics.home.yellowCards}
               </div>
-              <p className="justify-self-center">Yellow cards</p>
-              <p className="justify-self-end">
+              <p className="justify-self-center col-start-2 col-span-2">
+                Yellow cards
+              </p>
+              <p className="justify-self-end px-4">
                 {fixture.statistics.away.yellowCards}
               </p>
             </>
           ) : (
             <>
-              {fixture.statistics.home.yellowCards}
-              <p className="justify-self-center">Yellow cards</p>
+              <p className="px-4">{fixture.statistics.home.yellowCards}</p>
+              <p className="justify-self-center col-start-2 col-span-2">
+                Yellow cards
+              </p>
               <div className="w-fit bg-gray-500 p-2 rounded-full px-4 justify-self-end">
                 {fixture.statistics.away.yellowCards}
               </div>
@@ -152,11 +176,21 @@ const MatchStats = ({ fixture }: MatchStatsProps) => {
           )}
         </div>
 
-        <div className="grid grid-cols-3 w-full">
-          {fixture.statistics.home.redCards === null && 0}
-          <p className="justify-self-center">Red cards</p>
+        <div className="grid grid-cols-4 w-full">
+          {fixture.statistics.home.redCards === null ? (
+            0
+          ) : (
+            <p className="px-4">{fixture.statistics.home.redCards}</p>
+          )}
+          <p className="justify-self-center col-start-2 col-span-2">
+            Red cards
+          </p>
           <p className="justify-self-end">
-            {fixture.statistics.away.redCards === null && 0}
+            {fixture.statistics.away.redCards === null ? (
+              0
+            ) : (
+              <p className="px-4">{fixture.statistics.away.redCards}</p>
+            )}
           </p>
         </div>
       </div>
