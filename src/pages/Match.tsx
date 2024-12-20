@@ -52,9 +52,9 @@ const Match = ({ fixture, handleFetchMatch }: MatchProps) => {
   };
 
   return (
-    <div className="bg-black h-full pt-16 text-white">
-      <div className="bg-zinc-900 h-fit sm:mt-6 w-full sm:w-11/12 justify-self-center rounded-3xl max-w-[1200px]">
-        <div className="hidden sm:flex gap-4 justify-center p-5 items-center ">
+    <div className="bg-slate-200 dark:bg-black h-full pt-14 sm:pt-20  dark:text-white overflow-hidden">
+      <div className="bg-white dark:bg-zinc-900 h-fit w-full sm:w-11/12 justify-self-center sm:rounded-3xl max-w-[1200px] shadow-lg">
+        <div className="hidden sm:flex gap-4 justify-center p-5 items-center">
           <img
             src={fixture.league.logo}
             alt="league-logo"
@@ -66,8 +66,8 @@ const Match = ({ fixture, handleFetchMatch }: MatchProps) => {
         </div>
 
         <div>
-          <span className="block h-0.5 bg-zinc-800 w-full" />
-          <div className=" hidden sm:flex gap-8 p-2 text-zinc-400 text-sm justify-center">
+          <span className="hidden sm:block h-0.5 bg-slate-300 dark:bg-zinc-800 w-full" />
+          <div className="hidden sm:flex gap-8 p-2 dark:text-zinc-400 text-sm justify-center">
             <div className="flex gap-2 items-center">
               <svg
                 xmlns="http://www.w3.org/2000/svg"
@@ -127,10 +127,10 @@ const Match = ({ fixture, handleFetchMatch }: MatchProps) => {
               {fixture.fixtureInfo.referee}
             </div>
           </div>
-          <span className="block h-0.5 bg-zinc-800 w-full" />
+          <span className="hidden sm:block h-0.5 bg-slate-300 dark:bg-zinc-800" />
         </div>
 
-        <div className="grid grid-cols-3 gap-2 justify-self-center p-10 items-center">
+        <div className="grid grid-cols-3 gap-16 sm:gap-4 justify-self-center p-6 items-center">
           <div className="flex flex-col sm:flex-row items-center gap-4 justify-self-end">
             <img
               src={fixture.fixture.teams.home.logo}
@@ -146,7 +146,7 @@ const Match = ({ fixture, handleFetchMatch }: MatchProps) => {
               className="h-10 hidden sm:block"
             />
           </div>
-          <div className="flex flex-col items-center gap-4">
+          <div className="flex flex-col items-center gap-4 w-20 justify-self-center">
             <p className="text-3xl text-center">
               {fixture.goals.home} - {fixture.goals.away}
             </p>

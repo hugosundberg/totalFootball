@@ -215,9 +215,9 @@ const Lineup = ({ fixture }: LineupProps) => {
 
   return (
     <>
-      <div className="max-w-[1200px] lg:h-[600px] justify-self-center w-full mt-8">
+      <div className="max-w-[1200px] lg:h-[600px] justify-self-center w-full mt-8 shadow-lg rounded-2xl">
         {/* Header */}
-        <div className="flex flex-col h-fit w-full bg-gray-700 items-center justify-self-center rounded-t-2xl">
+        <div className="flex flex-col h-fit w-full bg-white dark:bg-gray-700 items-center justify-self-center rounded-t-2xl">
           <div className="flex lg:w-11/12 items-center lg:justify-between p-4 text-sm">
             <div className="flex items-center gap-4">
               <img
@@ -241,7 +241,7 @@ const Lineup = ({ fixture }: LineupProps) => {
         </div>
 
         {/* Field */}
-        <div className="flex flex-col shrink lg:flex-row relative w-full h-full bg-zinc-900 justify-self-center lg:rounded-b-3xl">
+        <div className="flex flex-col shrink lg:flex-row relative w-full h-full bg-green-700 dark:bg-zinc-900 justify-self-center lg:rounded-b-3xl shadow-xl">
           <div
             className="absolute inset-0 bg-center lg:hidden opacity-10 z-0"
             style={{
@@ -296,7 +296,7 @@ const Lineup = ({ fixture }: LineupProps) => {
 
         {/* Footer */}
 
-        <div className="flex flex-col h-fit w-full bg-gray-700 items-center justify-self-center rounded-b-2xl lg:hidden">
+        <div className="flex flex-col h-fit w-full bg-white dark:bg-gray-700 items-center justify-self-center rounded-b-2xl lg:hidden">
           <div className="flex justify-between p-4 text-sm sm:text-base">
             <div className="flex items-center gap-4">
               <img
@@ -312,7 +312,7 @@ const Lineup = ({ fixture }: LineupProps) => {
       </div>
 
       {/* BENCH */}
-      <div className="flex flex-col items-center bg-zinc-800 h-fit w-11/12 justify-self-center p-4 mt-24 rounded-2xl">
+      <div className="flex flex-col items-center bg-white dark:bg-zinc-800 h-fit w-11/12 justify-self-center p-2 sm:p-8 mt-8 lg:mt-24 rounded-2xl max-w-[1200px] shadow-2xl">
         <p className="font-bold justify-self-center">Coach</p>
         <div className="flex w-full justify-between mt-2">
           <p className="text-sm sm:text-base">
@@ -330,7 +330,7 @@ const Lineup = ({ fixture }: LineupProps) => {
               fixture.lineups.home.substitutes.map((substitute) => (
                 <div key={substitute.player.id} className="flex flex-col gap-2">
                   <div className="flex flex-col sm:flex-row gap-3 items-center mt-2">
-                    <p className="w-5 h-5 p-5 bg-slate-700 rounded-full flex items-center justify-center">
+                    <p className="w-5 h-5 p-5 bg-slate-700 rounded-full flex items-center justify-center text-white">
                       {substitute.player.number}
                     </p>
                     <div className="flex flex-col items-center sm:items-start">
