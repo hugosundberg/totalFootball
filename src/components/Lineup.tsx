@@ -136,7 +136,7 @@ const Lineup = ({ fixture }: LineupProps) => {
     reverse: boolean
   ) => {
     return (
-      <div className="flex flex-col w-full h-full gap-16 p-6 z-10">
+      <div className="flex flex-col w-full h-full gap-12 p-6 z-10">
         {Object.entries(groupedPlayers).map(([col, playersInColumn]) => {
           return (
             <div
@@ -184,7 +184,7 @@ const Lineup = ({ fixture }: LineupProps) => {
 
                     {/* AWAY TEAM */}
                     {reverse && (
-                      <div className="flex flex-col items-center">
+                      <div className="flex flex-col w-40 items-center">
                         <span className="bg-slate-400 p-2 w-10 rounded-full items-center">
                           <p className="justify-self-center">{player.number}</p>
                         </span>
@@ -315,8 +315,12 @@ const Lineup = ({ fixture }: LineupProps) => {
       <div className="flex flex-col items-center bg-zinc-800 h-fit w-11/12 justify-self-center p-4 mt-24 rounded-2xl">
         <p className="font-bold justify-self-center">Coach</p>
         <div className="flex w-full justify-between mt-2">
-          <p>{fixture.lineups.home.coach.name}</p>
-          <p>{fixture.lineups.away.coach.name}</p>
+          <p className="text-sm sm:text-base">
+            {fixture.lineups.home.coach.name}
+          </p>
+          <p className="text-sm sm:text-base">
+            {fixture.lineups.away.coach.name}
+          </p>
         </div>
         <p className="font-bold justify-self-center p-6">Substitutes</p>
 

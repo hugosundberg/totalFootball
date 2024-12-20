@@ -146,9 +146,26 @@ const Match = ({ fixture, handleFetchMatch }: MatchProps) => {
               className="h-10 hidden sm:block"
             />
           </div>
-          <div>
+          <div className="flex flex-col items-center gap-4">
             <p className="text-3xl text-center">
               {fixture.goals.home} - {fixture.goals.away}
+            </p>
+            <p className="text-sm text-slate-500">
+              {fixture.fixtureInfo.status.short === "HT" ? (
+                <p>Half Time</p>
+              ) : fixture.fixtureInfo.status.short === "FT" ? (
+                <p>Full Time</p>
+              ) : fixture.fixtureInfo.status.short === "1H" ? (
+                <p>{fixture.fixtureInfo.status.elapsed}</p>
+              ) : fixture.fixtureInfo.status.short === "2H" ? (
+                <p>{fixture.fixtureInfo.status.elapsed}</p>
+              ) : fixture.fixtureInfo.status.extra !== null ? (
+                <p>
+                  {fixture.fixtureInfo.status.elapsed +
+                    " + " +
+                    fixture.fixtureInfo.status.extra}
+                </p>
+              ) : null}
             </p>
           </div>
 
@@ -162,23 +179,6 @@ const Match = ({ fixture, handleFetchMatch }: MatchProps) => {
               {fixture.fixture.teams.away.name}
             </p>
           </div>
-        </div>
-        <div className="h-10 justify-self-center">
-          {fixture.fixtureInfo.status.short === "HT" ? (
-            <p>Half Time</p>
-          ) : fixture.fixtureInfo.status.short === "FT" ? (
-            <p>Full Time</p>
-          ) : fixture.fixtureInfo.status.short === "1H" ? (
-            <p>{fixture.fixtureInfo.status.elapsed}</p>
-          ) : fixture.fixtureInfo.status.short === "2H" ? (
-            <p>{fixture.fixtureInfo.status.elapsed}</p>
-          ) : fixture.fixtureInfo.status.extra !== null ? (
-            <p>
-              {fixture.fixtureInfo.status.elapsed +
-                " + " +
-                fixture.fixtureInfo.status.extra}
-            </p>
-          ) : null}
         </div>
       </div>
 
