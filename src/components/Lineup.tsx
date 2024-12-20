@@ -37,6 +37,21 @@ const Lineup = ({ fixture }: LineupProps) => {
     return nameParts.slice(1).join(" ") || name;
   };
 
+  const playerPosition = (pos: string) => {
+    switch (true) {
+      case pos === "G":
+        return "Goalkeeper";
+      case pos === "D":
+        return "Defender";
+      case pos === "M":
+        return "Midfielder";
+      case pos === "F":
+        return "Forward";
+      default:
+        return "Unknown";
+    }
+  };
+
   const reverseNumber = (number: number, rows: number) => {
     let reverseNumber = number;
 
@@ -121,7 +136,7 @@ const Lineup = ({ fixture }: LineupProps) => {
     reverse: boolean
   ) => {
     return (
-      <div className="flex flex-col w-full h-full gap-16 p-6 z-50">
+      <div className="flex flex-col w-full h-full gap-16 p-6">
         {Object.entries(groupedPlayers).map(([col, playersInColumn]) => {
           return (
             <div
@@ -157,18 +172,20 @@ const Lineup = ({ fixture }: LineupProps) => {
                       justifyContent: "center",
                     }}
                   >
-                    {reverse && (
-                      <div className="flex flex-col items-center">
-                        <span className="bg-slate-400 p-2 w-10 rounded-full items-center">
+                    {/* HOME TEAM */}
+                    {!reverse && (
+                      <div className="flex flex-col w-40 items-center">
+                        <span className="bg-slate-700 p-2 w-10 rounded-full items-center">
                           <p className="justify-self-center">{player.number}</p>
                         </span>
                         <p className="text-xs mt-2">{lastName(player.name)}</p>
                       </div>
                     )}
 
-                    {!reverse && (
-                      <div className="flex flex-col w-40 items-center">
-                        <span className="bg-slate-700 p-2 w-10 rounded-full items-center">
+                    {/* AWAY TEAM */}
+                    {reverse && (
+                      <div className="flex flex-col items-center">
+                        <span className="bg-slate-400 p-2 w-10 rounded-full items-center">
                           <p className="justify-self-center">{player.number}</p>
                         </span>
                         <p className="text-xs mt-2">{lastName(player.name)}</p>
@@ -245,7 +262,6 @@ const Lineup = ({ fixture }: LineupProps) => {
           />
 
           {/* Home Team */}
-
           <div
             className="relative w-1/2 hidden lg:grid"
             style={{
@@ -294,37 +310,54 @@ const Lineup = ({ fixture }: LineupProps) => {
           </div>
         </div>
       </div>
-      <div className="flex flex-col items-center bg-green-800 h-fit w-4/6 justify-self-center p-4 mt-24 rounded-2xl">
+
+      <div className="flex flex-col items-center bg-zinc-800 h-fit w-11/12 justify-self-center p-4 mt-24 rounded-2xl">
         <div className="grid grid-cols-3 w-full">
           <p>{fixture.lineups.home.coach.name}</p>
           <p className="font-bold justify-self-center">Coach</p>
           <p className="justify-self-end">{fixture.lineups.away.coach.name}</p>
         </div>
-        <p className="font-bold justify-self-center mt-8">Substitutes</p>
-        <div className="flex justify-between w-full">
-          <div className="h-fit">
+        <p className="font-bold justify-self-center p-6">Substitutes</p>
+
+        <div className="flex w-full p-4 gap-4">
+          <div className="h-fit w-1/2">
             {fixture.lineups.home.substitutes?.length > 0 ? (
               fixture.lineups.home.substitutes.map((substitute) => (
-                <div key={substitute.player.id} className="flex gap-2">
-                  <p>{substitute.player.number}</p>
-                  <p>{substitute.player.name}</p>
-                  <p>{substitute.player.pos}</p>
+                <div key={substitute.player.id} className="flex flex-col gap-2">
+                  <div className="flex gap-3 items-center mt-2">
+                    <p className="w-5 h-5 p-5 bg-slate-700 rounded-full flex items-center justify-center">
+                      {substitute.player.number}
+                    </p>
+                    <div className="flex flex-col ">
+                      <p>{substitute.player.name}</p>
+                      <p className="text-xs text-slate-400">
+                        {playerPosition(substitute.player.pos)}
+                      </p>
+                    </div>
+                  </div>
+                  <span className="h-0.5 w-full bg-slate-600" />
                 </div>
               ))
             ) : (
               <p>No substitutes available</p>
             )}
           </div>
-          <div className="h-fit">
+          <div className="h-fit w-1/2">
             {fixture.lineups.away.substitutes?.length > 0 ? (
               fixture.lineups.away.substitutes.map((substitute) => (
-                <div
-                  key={substitute.player.id}
-                  className="flex justify-end gap-2"
-                >
-                  <p>{substitute.player.name}</p>
-                  <p>{substitute.player.pos}</p>
-                  <p>{substitute.player.number}</p>
+                <div key={substitute.player.id} className="flex flex-col gap-2">
+                  <div className="flex gap-3 items-center mt-2">
+                    <p className="w-5 h-5 p-5 bg-slate-400 rounded-full flex items-center justify-center">
+                      {substitute.player.number}
+                    </p>
+                    <div className="flex flex-col ">
+                      <p>{substitute.player.name}</p>
+                      <p className="text-xs text-slate-400">
+                        {playerPosition(substitute.player.pos)}
+                      </p>
+                    </div>
+                  </div>
+                  <span className="h-0.5 w-full bg-slate-600" />
                 </div>
               ))
             ) : (
