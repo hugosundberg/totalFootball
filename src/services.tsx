@@ -484,7 +484,6 @@ const fetchCoach = async (teamID: number) => {
       }
     );
     const data = await response.json();
-
     console.log(data);
   } catch (error) {
     console.error("Error fetching coach: ", error);
@@ -505,6 +504,8 @@ const fetchTeamSeasonStats = async (teamID: number) => {
     );
 
     const data = await response.json();
+
+    return data;
   } catch (error) {
     console.error("Error fetching team stats: ", error);
   }

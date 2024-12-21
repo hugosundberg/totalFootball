@@ -20,6 +20,7 @@ const Team = ({
   handleFetchPlayer,
   fixtures,
   handleMatchClick,
+  seasonStats,
 }: TeamProps) => {
   const { id } = useParams<{ id: string }>();
   const location = useLocation();

@@ -10,6 +10,7 @@ import Match from "./pages/Match";
 
 export default function App() {
   const [currentTeam, setCurrentTeam] = useState<Team | undefined>(undefined);
+  const [currentTeamSeasonStats, setCurrentTeamSeasonStats] = useState();
   const [currentPlayer, setCurrentPlayer] = useState<Player | undefined>(
     undefined
   );
@@ -73,6 +74,9 @@ export default function App() {
         const fetchedFixtureList = await footballApi.fetchTeamFixtures(teamID);
         setCurrentFixtureList(fetchedFixtureList);
 
+        const fetchedTeamStats = await footballApi.fetchTeamSeasonStats(teamID);
+        setCurrentTeamSeasonStats(fetchedTeamStats);
+
         const fetchedSquad = await footballApi.fetchSquad(teamID);
         setCurrentSquad(fetchedSquad);
       } catch (error) {
@@ -120,6 +124,7 @@ export default function App() {
               handleFetchPlayer={handleFetchPlayer}
               fixtures={currentFixtureList}
               handleMatchClick={handleMatchClick}
+              seasonStats={currentTeamSeasonStats}
             />
           }
         />
