@@ -123,7 +123,9 @@ const Lineup = ({ fixture }: LineupProps) => {
                 </span>
               )}
 
-              <p className="text-xs mt-2">{lastName(player.name)}</p>
+              <p className="text-xs mt-2 text-center w-20">
+                {lastName(player.name)}
+              </p>
             </div>
           );
         })}
@@ -136,7 +138,7 @@ const Lineup = ({ fixture }: LineupProps) => {
     reverse: boolean
   ) => {
     return (
-      <div className="flex flex-col w-full h-full gap-12 p-6 z-10">
+      <div className="flex flex-col w-full h-full gap-12 p-4 sm:p-10 z-10">
         {Object.entries(groupedPlayers).map(([col, playersInColumn]) => {
           return (
             <div
@@ -174,7 +176,7 @@ const Lineup = ({ fixture }: LineupProps) => {
                   >
                     {/* HOME TEAM */}
                     {!reverse && (
-                      <div className="flex flex-col w-40 items-center">
+                      <div className="flex flex-col w-20 items-center">
                         <span className="bg-slate-700 p-2 w-10 rounded-full items-center">
                           <p className="justify-self-center">{player.number}</p>
                         </span>

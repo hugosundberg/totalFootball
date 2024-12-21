@@ -40,6 +40,8 @@ const FixtureList = ({
     }
   };
 
+  console.log(fixtures);
+
   return (
     <div className="flex flex-col bg-zinc-900 w-full h-fit rounded-2xl overflow-auto mb-10">
       {fixtures.map((fixture, index) => (
@@ -48,15 +50,17 @@ const FixtureList = ({
           className="h-fit hover:bg-zinc-800 hover:cursor-pointer"
           onClick={() => handleMatchClick(fixture.fixtureInfo.id)}
         >
-          <div className="flex justify-between p-4">
-            <p>{dateFormatter(fixture.fixtureInfo?.date)}</p>
-            <div className="flex gap-2">
+          <div className="flex justify-between p-6">
+            <p className="text-sm text-gray-400">
+              {dateFormatter(fixture.fixtureInfo?.date)}
+            </p>
+            <div className="flex gap-2 items-center text-sm text-gray-400">
+              {fixture.league.name}
               <img
                 src={fixture.league.logo}
-                className="h-6"
+                className="h-8 bg-gray-400 p-1 rounded-full"
                 alt="league-logo"
               />
-              {fixture.league.name}
             </div>
           </div>
           <div className="grid grid-cols-custom-fixture gap-2 items-center pb-8">
@@ -99,6 +103,32 @@ const FixtureList = ({
                             : "" // Default
                 }`}
               >
+                {fixture.goals.home} - {fixture.goals.away}
+              </div>
+            )}
+
+            {fixture.fixtureInfo.status.short === "PEN" && (
+              <div
+                className={`text-center rounded-lg ${
+                  fixture.teams.home.teamID === teamID &&
+                  fixture.teams.home.winner
+                    ? "bg-green-700" // Home wins
+                    : fixture.teams.away.teamID === teamID &&
+                        fixture.teams.away.winner
+                      ? "bg-green-700" // Away wins
+                      : fixture.teams.home.teamID === teamID &&
+                          fixture.teams.away.winner
+                        ? "bg-red-700" // Home losses
+                        : fixture.teams.away.teamID === teamID &&
+                            fixture.teams.home.winner
+                          ? "bg-red-700" // Away losses
+                          : fixture.teams.away.winner === null &&
+                              fixture.teams.home.winner === null
+                            ? "bg-gray-500" // Draws
+                            : "" // Default
+                }`}
+              >
+                <p>PEN</p>
                 {fixture.goals.home} - {fixture.goals.away}
               </div>
             )}

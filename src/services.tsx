@@ -364,6 +364,12 @@ const fetchTeamFixtures = async (teamID: number) => {
       },
     }));
 
+    fixtures.sort(
+      (a, b) =>
+        new Date(a.fixtureInfo.date).getTime() -
+        new Date(b.fixtureInfo.date).getTime()
+    );
+
     return fixtures;
   } catch (error) {
     console.error("Error fetching team fixtures: ", error);
