@@ -1,9 +1,30 @@
+import { useState } from "react";
+
 const FixtureList = ({
   fixtures,
   teamID,
   handleMatchClick,
 }: FixtureListProps) => {
   if (!fixtures) return null;
+
+  const [currentPage, setCurrentPage] = useState(1);
+  const fixturesPerPage = 10;
+
+  // Calculate the fixtures to display
+  const indexOfLastFixture = currentPage * fixturesPerPage;
+  const indexOfFirstFixture = indexOfLastFixture - fixturesPerPage;
+  const currentFixtures = fixtures.slice(
+    indexOfFirstFixture,
+    indexOfLastFixture
+  );
+
+  // Calculate total pages
+  const totalPages = Math.ceil(fixtures.length / fixturesPerPage);
+
+  // Handle page change
+  const handlePageChange = (pageNumber: number) => {
+    setCurrentPage(pageNumber);
+  };
 
   const dateFormatter = (date: string) => {
     try {
@@ -40,11 +61,25 @@ const FixtureList = ({
     }
   };
 
-  console.log(fixtures);
-
   return (
     <div className="flex flex-col bg-zinc-900 w-full h-fit rounded-2xl overflow-auto mb-10">
-      {fixtures.map((fixture, index) => (
+      {/* Pagination Controls */}
+      <div className="flex justify-center mt-4">
+        {Array.from({ length: totalPages }, (_, index) => (
+          <button
+            key={index}
+            onClick={() => handlePageChange(index + 1)}
+            className={`mx-1 px-3 py-1 rounded ${
+              currentPage === index + 1
+                ? "bg-blue-500 text-white"
+                : "bg-gray-300"
+            }`}
+          >
+            {index + 1}
+          </button>
+        ))}
+      </div>
+      {currentFixtures.map((fixture, index) => (
         <div
           key={index}
           className="h-fit hover:bg-zinc-800 hover:cursor-pointer"
@@ -155,6 +190,23 @@ const FixtureList = ({
           <span className="block w-full h-0.5 bg-zinc-800" />
         </div>
       ))}
+
+      {/* Pagination Controls */}
+      <div className="flex justify-center mt-4">
+        {Array.from({ length: totalPages }, (_, index) => (
+          <button
+            key={index}
+            onClick={() => handlePageChange(index + 1)}
+            className={`mx-1 px-3 py-1 rounded ${
+              currentPage === index + 1
+                ? "bg-blue-500 text-white"
+                : "bg-gray-300"
+            }`}
+          >
+            {index + 1}
+          </button>
+        ))}
+      </div>
     </div>
   );
 };
