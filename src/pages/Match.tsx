@@ -151,7 +151,7 @@ const Match = ({ fixture, handleFetchMatch }: MatchProps) => {
               fixture.fixtureInfo.status.short === "TBD" ||
               fixture.fixtureInfo.status.short === "PST"
                 ? fixture.fixtureInfo.date.slice(11, 16)
-                : `${fixture.goals.home} - ${fixture.goals.away}`}
+                : `${fixture.goals !== undefined && fixture.goals.home} - ${fixture.goals !== undefined && fixture.goals.away}`}
             </p>
             <div className="text-sm text-slate-500">
               {fixture.fixtureInfo.status.short === "HT" ? (

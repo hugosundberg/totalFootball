@@ -98,14 +98,8 @@ interface MatchFacts {
   }
 
   penalties?: {
-    home: {
-      scored: number
-      missed: number
-    }
-    away: {
-      scored: number
-      missed: number
-    }
+    home: number | null
+    away: number | null
   }
 }
 

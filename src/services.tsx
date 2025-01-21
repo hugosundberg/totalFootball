@@ -493,10 +493,6 @@ const fetchMatch = async (matchID: number) => {
     } else {
       const formattedFixture: MatchFacts = {
         fixture: fixture,
-        goals: {
-          home: fixture.goals.home,
-          away: fixture.goals.away,
-        },
         league: {
           id: fixture.league.id,
           name: fixture.league.name,
