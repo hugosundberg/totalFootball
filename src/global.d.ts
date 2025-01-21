@@ -96,6 +96,17 @@ interface MatchFacts {
     home: TeamMatchStatistics
     away: TeamMatchStatistics
   }
+
+  penalties?: {
+    home: {
+      scored: number
+      missed: number
+    }
+    away: {
+      scored: number
+      missed: number
+    }
+  }
 }
 
 interface LineupProps {
