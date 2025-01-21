@@ -391,7 +391,13 @@ const fetchMatch = async (matchID: number) => {
 
     const data = await response.json();
 
+    console.log("Data:", data);
+
     const fixture = data.response[0];
+
+    const matchHasStarted =
+      fixture.fixture.status.short !== "NS" &&
+      fixture.fixture.status.short !== "TBD";
 
     const homeTeamStats = fixture.statistics[0].statistics;
     const awayTeamStats = fixture.statistics[1].statistics;
@@ -414,6 +420,18 @@ const fetchMatch = async (matchID: number) => {
       lineups: {
         home: fixture.lineups[0],
         away: fixture.lineups[1],
+      },
+
+      fixtureInfo: {
+        id: fixture.fixture.id,
+        referee: fixture.fixture.referee,
+        date: fixture.fixture.date,
+        status: {
+          short: fixture.fixture.status.short,
+          elapsed: fixture.fixture.status.elapsed,
+          extra: fixture.fixture.status.extra,
+        },
+        venue: fixture.fixture.venue.name,
       },
 
       statistics: {
@@ -451,17 +469,6 @@ const fetchMatch = async (matchID: number) => {
           passesPercentage: awayTeamStats[15].value,
           expectedGoals: awayTeamStats[16].value,
         },
-      },
-      fixtureInfo: {
-        id: fixture.fixture.id,
-        referee: fixture.fixture.referee,
-        date: fixture.fixture.date,
-        status: {
-          short: fixture.fixture.status.short,
-          elapsed: fixture.fixture.status.elapsed,
-          extra: fixture.fixture.status.extra,
-        },
-        venue: fixture.fixture.venue.name,
       },
     };
 
