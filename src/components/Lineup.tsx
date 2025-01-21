@@ -2,6 +2,9 @@ import field from "../../assets/field.svg";
 import fieldVertical from "../../assets/fieldVertical.svg";
 
 const Lineup = ({ fixture }: LineupProps) => {
+  if (fixture.lineups === undefined) return null;
+  if (fixture.lineups.home === null) return null;
+
   const homeLineup = fixture.lineups.home;
   const awayLineup = fixture.lineups.away;
 
