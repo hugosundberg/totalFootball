@@ -144,7 +144,7 @@ const Match = ({ fixture, handleFetchMatch }: MatchProps) => {
               className="h-10 hidden sm:block"
             />
           </div>
-          <div className="flex flex-col items-center gap-4 w-20 justify-self-center">
+          <div className="flex flex-col items-center gap-4 w-22 justify-self-center">
             <p className="text-3xl text-center">
               {/* Check if the match has started */}
               {fixture.fixtureInfo.status.short === "NS" ||
@@ -174,7 +174,12 @@ const Match = ({ fixture, handleFetchMatch }: MatchProps) => {
                     " + " +
                     fixture.fixtureInfo.status.extra}
                 </p>
-              ) : null}
+              ) : fixture.fixtureInfo.status.short === "NS" ||
+                fixture.fixtureInfo.status.short === "PST" ? (
+                <p>{dateFormatter(fixture.fixtureInfo.date)}</p>
+              ) : (
+                <p>{fixture.fixtureInfo.status.elapsed + "'"}</p>
+              )}
             </div>
           </div>
 

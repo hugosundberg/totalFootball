@@ -74,7 +74,7 @@ interface MatchFacts {
     }
     venue: string
   }
-  goals: {
+  goals?: {
     home: number
     away: number
   }
