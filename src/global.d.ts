@@ -78,7 +78,7 @@ interface MatchFacts {
     home: number
     away: number
   }
-  lineups: {
+  lineups?: {
     home: Lineup
     away: Lineup
   }
@@ -92,7 +92,7 @@ interface MatchFacts {
     round: string
   }
 
-  statistics: {
+  statistics?: {
     home: TeamMatchStatistics
     away: TeamMatchStatistics
   }

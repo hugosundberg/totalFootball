@@ -1,4 +1,8 @@
 const MatchStats = ({ fixture }: MatchStatsProps) => {
+  if (!fixture.statistics) return null;
+
+  if (fixture.statistics.home.possesion === null) return null;
+
   return (
     <div className="flex flex-col bg-white dark:bg-zinc-900 h-fit mt-4 rounded-3xl items-center py-3 sm:py-10 w-full sm:w-11/12 max-w-[1200px] justify-self-center shadow-lg">
       <h2 className="text-lg sm:text-2xl mb-4">Statistics</h2>

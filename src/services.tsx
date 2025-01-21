@@ -395,12 +395,25 @@ const fetchMatch = async (matchID: number) => {
 
     const fixture = data.response[0];
 
+    // Check if the match has started
     const matchHasStarted =
       fixture.fixture.status.short !== "NS" &&
+      fixture.fixture.status.short !== "PST" &&
       fixture.fixture.status.short !== "TBD";
 
-    const homeTeamStats = fixture.statistics[0].statistics;
-    const awayTeamStats = fixture.statistics[1].statistics;
+    // Initialize statistics as empty arrays
+    let homeTeamStats = [];
+    let awayTeamStats = [];
+
+    // Only assign statistics if the match has started and statistics are available
+    if (
+      matchHasStarted &&
+      fixture.statistics &&
+      fixture.statistics.length > 0
+    ) {
+      homeTeamStats = fixture.statistics[0].statistics;
+      awayTeamStats = fixture.statistics[1].statistics;
+    }
 
     const formattedFixture: MatchFacts = {
       fixture: fixture,
@@ -416,12 +429,15 @@ const fetchMatch = async (matchID: number) => {
         flag: fixture.league.flag,
         round: fixture.league.round,
       },
-
-      lineups: {
-        home: fixture.lineups[0],
-        away: fixture.lineups[1],
-      },
-
+      lineups: matchHasStarted
+        ? {
+            home: fixture.lineups[0],
+            away: fixture.lineups[1],
+          }
+        : {
+            home: null,
+            away: null,
+          },
       fixtureInfo: {
         id: fixture.fixture.id,
         referee: fixture.fixture.referee,
