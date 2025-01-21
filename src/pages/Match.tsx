@@ -146,9 +146,14 @@ const Match = ({ fixture, handleFetchMatch }: MatchProps) => {
           </div>
           <div className="flex flex-col items-center gap-4 w-20 justify-self-center">
             <p className="text-3xl text-center">
-              {fixture.goals.home} - {fixture.goals.away}
+              {/* Check if the match has started */}
+              {fixture.fixtureInfo.status.short === "NS" ||
+              fixture.fixtureInfo.status.short === "TBD" ||
+              fixture.fixtureInfo.status.short === "PST"
+                ? fixture.fixtureInfo.date.slice(11, 16)
+                : `${fixture.goals.home} - ${fixture.goals.away}`}
             </p>
-            <p className="text-sm text-slate-500">
+            <div className="text-sm text-slate-500">
               {fixture.fixtureInfo.status.short === "HT" ? (
                 <p>Half Time</p>
               ) : fixture.fixtureInfo.status.short === "FT" ? (
@@ -157,6 +162,8 @@ const Match = ({ fixture, handleFetchMatch }: MatchProps) => {
                 <p>{fixture.fixtureInfo.status.elapsed}</p>
               ) : fixture.fixtureInfo.status.short === "2H" ? (
                 <p>{fixture.fixtureInfo.status.elapsed}</p>
+              ) : fixture.fixtureInfo.status.short === "PEN" ? (
+                <p>PEN</p>
               ) : fixture.fixtureInfo.status.extra !== null ? (
                 <p>
                   {fixture.fixtureInfo.status.elapsed +
@@ -164,7 +171,7 @@ const Match = ({ fixture, handleFetchMatch }: MatchProps) => {
                     fixture.fixtureInfo.status.extra}
                 </p>
               ) : null}
-            </p>
+            </div>
           </div>
 
           <div className="flex flex-col sm:flex-row items-center gap-4">
