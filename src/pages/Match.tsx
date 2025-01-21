@@ -14,8 +14,6 @@ const Match = ({ fixture, handleFetchMatch }: MatchProps) => {
 
   if (!fixture) return;
 
-  console.log(fixture.lineups.home);
-
   const dateFormatter = (date: string) => {
     try {
       const extractedDate = date.slice(0, 10);

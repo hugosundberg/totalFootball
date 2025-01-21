@@ -393,79 +393,115 @@ const fetchMatch = async (matchID: number) => {
 
     const fixture = data.response[0];
 
+    // Check if the match has started
+    const matchHasStarted =
+      fixture.fixture.status.short !== "NS" &&
+      fixture.fixture.status.short !== "PST" &&
+      fixture.fixture.status.short !== "TBD";
+
     const homeTeamStats = fixture.statistics[0].statistics;
     const awayTeamStats = fixture.statistics[1].statistics;
 
-    const formattedFixture: MatchFacts = {
-      fixture: fixture,
-      goals: {
-        home: fixture.goals.home,
-        away: fixture.goals.away,
-      },
-      league: {
-        id: fixture.league.id,
-        name: fixture.league.name,
-        country: fixture.league.country,
-        logo: fixture.league.logo,
-        flag: fixture.league.flag,
-        round: fixture.league.round,
-      },
-
-      lineups: {
-        home: fixture.lineups[0],
-        away: fixture.lineups[1],
-      },
-
-      statistics: {
-        home: {
-          shotsOn: homeTeamStats[0].value,
-          shotsOff: homeTeamStats[1].value,
-          shotsTotal: homeTeamStats[2].value,
-          blockedShots: homeTeamStats[3].value,
-          fouls: homeTeamStats[6].value,
-          corners: homeTeamStats[7].value,
-          offsides: homeTeamStats[8].value,
-          possesion: homeTeamStats[9].value,
-          yellowCards: homeTeamStats[10].value,
-          redCards: homeTeamStats[11].value,
-          saves: homeTeamStats[12].value,
-          passesTotal: homeTeamStats[13].value,
-          passesAccurate: homeTeamStats[14].value,
-          passesPercentage: homeTeamStats[15].value,
-          expectedGoals: homeTeamStats[16].value,
+    if (!matchHasStarted) {
+      const formattedFixture: MatchFacts = {
+        fixture: fixture,
+        goals: {
+          home: fixture.goals.home,
+          away: fixture.goals.away,
         },
-        away: {
-          shotsOn: awayTeamStats[0].value,
-          shotsOff: awayTeamStats[1].value,
-          shotsTotal: awayTeamStats[2].value,
-          blockedShots: awayTeamStats[3].value,
-          fouls: awayTeamStats[6].value,
-          corners: awayTeamStats[7].value,
-          offsides: awayTeamStats[8].value,
-          possesion: awayTeamStats[9].value,
-          yellowCards: awayTeamStats[10].value,
-          redCards: awayTeamStats[11].value,
-          saves: awayTeamStats[12].value,
-          passesTotal: awayTeamStats[13].value,
-          passesAccurate: awayTeamStats[14].value,
-          passesPercentage: awayTeamStats[15].value,
-          expectedGoals: awayTeamStats[16].value,
+        league: {
+          id: fixture.league.id,
+          name: fixture.league.name,
+          country: fixture.league.country,
+          logo: fixture.league.logo,
+          flag: fixture.league.flag,
+          round: fixture.league.round,
         },
-      },
-      fixtureInfo: {
-        id: fixture.fixture.id,
-        referee: fixture.fixture.referee,
-        date: fixture.fixture.date,
-        status: {
-          short: fixture.fixture.status.short,
-          elapsed: fixture.fixture.status.elapsed,
-          extra: fixture.fixture.status.extra,
+        fixtureInfo: {
+          id: fixture.fixture.id,
+          referee: fixture.fixture.referee,
+          date: fixture.fixture.date,
+          status: {
+            short: fixture.fixture.status.short,
+            elapsed: fixture.fixture.status.elapsed,
+            extra: fixture.fixture.status.extra,
+          },
+          venue: fixture.fixture.venue.name,
         },
-        venue: fixture.fixture.venue.name,
-      },
-    };
+      };
 
-    return formattedFixture;
+      return formattedFixture;
+    } else if (matchHasStarted) {
+      const formattedFixture: MatchFacts = {
+        fixture: fixture,
+        goals: {
+          home: fixture.goals.home,
+          away: fixture.goals.away,
+        },
+        league: {
+          id: fixture.league.id,
+          name: fixture.league.name,
+          country: fixture.league.country,
+          logo: fixture.league.logo,
+          flag: fixture.league.flag,
+          round: fixture.league.round,
+        },
+
+        lineups: {
+          home: fixture.lineups[0],
+          away: fixture.lineups[1],
+        },
+
+        statistics: {
+          home: {
+            shotsOn: homeTeamStats[0].value,
+            shotsOff: homeTeamStats[1].value,
+            shotsTotal: homeTeamStats[2].value,
+            blockedShots: homeTeamStats[3].value,
+            fouls: homeTeamStats[6].value,
+            corners: homeTeamStats[7].value,
+            offsides: homeTeamStats[8].value,
+            possesion: homeTeamStats[9].value,
+            yellowCards: homeTeamStats[10].value,
+            redCards: homeTeamStats[11].value,
+            saves: homeTeamStats[12].value,
+            passesTotal: homeTeamStats[13].value,
+            passesAccurate: homeTeamStats[14].value,
+            passesPercentage: homeTeamStats[15].value,
+            expectedGoals: homeTeamStats[16].value,
+          },
+          away: {
+            shotsOn: awayTeamStats[0].value,
+            shotsOff: awayTeamStats[1].value,
+            shotsTotal: awayTeamStats[2].value,
+            blockedShots: awayTeamStats[3].value,
+            fouls: awayTeamStats[6].value,
+            corners: awayTeamStats[7].value,
+            offsides: awayTeamStats[8].value,
+            possesion: awayTeamStats[9].value,
+            yellowCards: awayTeamStats[10].value,
+            redCards: awayTeamStats[11].value,
+            saves: awayTeamStats[12].value,
+            passesTotal: awayTeamStats[13].value,
+            passesAccurate: awayTeamStats[14].value,
+            passesPercentage: awayTeamStats[15].value,
+            expectedGoals: awayTeamStats[16].value,
+          },
+        },
+        fixtureInfo: {
+          id: fixture.fixture.id,
+          referee: fixture.fixture.referee,
+          date: fixture.fixture.date,
+          status: {
+            short: fixture.fixture.status.short,
+            elapsed: fixture.fixture.status.elapsed,
+            extra: fixture.fixture.status.extra,
+          },
+          venue: fixture.fixture.venue.name,
+        },
+      };
+      return formattedFixture;
+    }
   } catch (error) {
     console.error("Error fetching match: ", error);
   }
