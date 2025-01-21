@@ -487,6 +487,11 @@ const fetchMatch = async (matchID: number) => {
             expectedGoals: awayTeamStats[16].value,
           },
         },
+
+        penalties: {
+          home: fixture.score.penalty.home,
+          away: fixture.score.penalty.away,
+        },
       };
 
       return formattedFixture;

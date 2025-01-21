@@ -163,7 +163,11 @@ const Match = ({ fixture, handleFetchMatch }: MatchProps) => {
               ) : fixture.fixtureInfo.status.short === "2H" ? (
                 <p>{fixture.fixtureInfo.status.elapsed}</p>
               ) : fixture.fixtureInfo.status.short === "PEN" ? (
-                <p>PEN</p>
+                <p>
+                  {fixture.penalties
+                    ? `Pen: ${fixture.penalties.home} - ${fixture.penalties.away}`
+                    : "PEN"}
+                </p>
               ) : fixture.fixtureInfo.status.extra !== null ? (
                 <p>
                   {fixture.fixtureInfo.status.elapsed +
