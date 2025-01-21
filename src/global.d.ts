@@ -157,7 +157,39 @@ interface MatchStatsProps {
 }
 
 interface TeamStats {
-    played: number;
+  seasonStats: TeamSeasonStats
+}
+
+interface TeamSeasonStats {
+  form: string
+  goals: {
+    for: {
+      avarage: {
+        home: number
+        away: number
+        total: number
+      }
+      total: {
+        home: number
+        away: number
+        total: number
+      }
+    }
+    against: {
+      avarage: {
+        home: number
+        away: number
+        total: number
+      }
+      total: {
+        home: number
+        away: number
+        total: number
+      }
+    }
+  }
+  
+ 
 }
 
 interface SquadPlayer {
