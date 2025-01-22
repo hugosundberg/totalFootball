@@ -1,5 +1,5 @@
-import field from "../../assets/field.svg";
-import fieldVertical from "../../assets/fieldVertical.svg";
+import field from "../../../assets/field.svg";
+import fieldVertical from "../../../assets/fieldVertical.svg";
 
 const Lineup = ({ fixture }: LineupProps) => {
   if (fixture.lineups === undefined) return null;
