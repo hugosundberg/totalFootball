@@ -395,6 +395,8 @@ const fetchMatch = async (matchID: number) => {
 
     const fixture = data.response[0];
 
+    fetchHead2Head(fixture.teams.home.id, fixture.teams.away.id);
+
     // Check if the match has started
     const matchHasStarted =
       fixture.fixture.status.short !== "NS" &&
@@ -573,6 +575,30 @@ const fetchTeamSeasonStats = async (teamID: number) => {
     console.error("Error fetching team stats: ", error);
   }
 };
+
+const fetchHead2Head = async (team1ID: number, team2ID: number) => {
+  try {
+    const response = await fetch(
+      `https://v3.football.api-sports.io/fixtures/headtohead?h2h=${team1ID}-${team2ID}`,
+      {
+        method: "GET",
+        headers: {
+          "x-rapidapi-host": "v3.football.api-sports.io",
+          "x-rapidapi-key": apiKey,
+        },
+      }
+    );
+
+    const data = await response.json();
+
+    console.log(data);
+
+    return data;
+  } catch (error) {
+    console.error("Error fetching head-to-head: ", error);
+  }
+};
+
 fetchCoach(40);
 fetchTeamSeasonStats(42);
 

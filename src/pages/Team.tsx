@@ -8,9 +8,9 @@ import {
 } from "react-router-dom";
 import Squad from "../components/Squad";
 import Table from "../components/Table";
-import TeamStats from "../components/TeamStats";
-import FixtureList from "../components/FixtureList";
-import TeamOverview from "../components/TeamOverview";
+import TeamStats from "../components/Team/TeamStats";
+import FixtureList from "../components/Team/FixtureList";
+import TeamOverview from "../components/Team/TeamOverview";
 
 const Team = ({
   team,

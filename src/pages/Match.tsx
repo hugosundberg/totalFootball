@@ -1,7 +1,7 @@
 import { useEffect } from "react";
 import { useParams } from "react-router-dom";
-import Lineup from "../components/Lineup";
-import MatchStats from "../components/MatchStats";
+import Lineup from "../components/Match/Lineup";
+import MatchStats from "../components/Match/MatchStats";
 
 const Match = ({ fixture, handleFetchMatch }: MatchProps) => {
   const { id } = useParams<{ id: string }>();
