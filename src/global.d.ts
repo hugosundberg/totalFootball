@@ -60,6 +60,11 @@ interface Fixture {
   }
 }
 
+interface HeadToHead {
+  teamOne: Team
+  teamTwo: Team
+}
+
 interface MatchFacts {
   fixture: Fixture
 

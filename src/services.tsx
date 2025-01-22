@@ -395,8 +395,6 @@ const fetchMatch = async (matchID: number) => {
 
     const fixture = data.response[0];
 
-    fetchHead2Head(fixture.teams.home.id, fixture.teams.away.id);
-
     // Check if the match has started
     const matchHasStarted =
       fixture.fixture.status.short !== "NS" &&
@@ -576,7 +574,7 @@ const fetchTeamSeasonStats = async (teamID: number) => {
   }
 };
 
-const fetchHead2Head = async (team1ID: number, team2ID: number) => {
+const fetchHeadToHead = async (team1ID: number, team2ID: number) => {
   try {
     const response = await fetch(
       `https://v3.football.api-sports.io/fixtures/headtohead?h2h=${team1ID}-${team2ID}`,
@@ -612,4 +610,5 @@ export default {
   fetchTeamFixtures,
   fetchMatch,
   fetchTeamSeasonStats,
+  fetchHeadToHead,
 };
