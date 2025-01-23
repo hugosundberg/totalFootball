@@ -40,13 +40,13 @@ interface Fixture {
   }
   teams: {
     home: {
-      teamID: number
+      id: number
       name: string
       logo: string
       winner: boolean
     }
     away: {
-      teamID: number
+      id: number
       name: string
       logo: string
       winner: boolean
@@ -58,6 +58,10 @@ interface Fixture {
     logo: string
     round: string
   }
+}
+
+interface HeadToHeadProps {
+  fixture: Fixture;
 }
 
 interface MatchFacts {
@@ -162,6 +166,7 @@ interface MatchStatsProps {
 }
 
 interface TeamStats {
+  played: number
   seasonStats: TeamSeasonStats
 }
 
@@ -193,8 +198,6 @@ interface TeamSeasonStats {
       }
     }
   }
-  
- 
 }
 
 interface SquadPlayer {

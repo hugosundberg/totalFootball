@@ -2,6 +2,7 @@ import { useEffect } from "react";
 import { useParams } from "react-router-dom";
 import Lineup from "../components/Lineup";
 import MatchStats from "../components/MatchStats";
+import HeadToHead from "../components/HeadToHead";
 
 const Match = ({ fixture, handleFetchMatch }: MatchProps) => {
   const { id } = useParams<{ id: string }>();
@@ -195,6 +196,8 @@ const Match = ({ fixture, handleFetchMatch }: MatchProps) => {
           </div>
         </div>
       </div>
+
+      <HeadToHead fixture={fixture.fixture} />
 
       <MatchStats fixture={fixture} />
 

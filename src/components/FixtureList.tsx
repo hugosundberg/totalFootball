@@ -120,16 +120,15 @@ const FixtureList = ({
             {fixture.fixtureInfo.status.short === "FT" && (
               <div
                 className={`text-center rounded-lg ${
-                  fixture.teams.home.teamID === teamID &&
-                  fixture.teams.home.winner
+                  fixture.teams.home.id === teamID && fixture.teams.home.winner
                     ? "bg-green-700" // Home wins
-                    : fixture.teams.away.teamID === teamID &&
+                    : fixture.teams.away.id === teamID &&
                         fixture.teams.away.winner
                       ? "bg-green-700" // Away wins
-                      : fixture.teams.home.teamID === teamID &&
+                      : fixture.teams.home.id === teamID &&
                           fixture.teams.away.winner
                         ? "bg-red-700" // Home losses
-                        : fixture.teams.away.teamID === teamID &&
+                        : fixture.teams.away.id === teamID &&
                             fixture.teams.home.winner
                           ? "bg-red-700" // Away losses
                           : fixture.teams.away.winner === null &&
@@ -145,16 +144,15 @@ const FixtureList = ({
             {fixture.fixtureInfo.status.short === "PEN" && (
               <div
                 className={`text-center rounded-lg ${
-                  fixture.teams.home.teamID === teamID &&
-                  fixture.teams.home.winner
+                  fixture.teams.home.id === teamID && fixture.teams.home.winner
                     ? "bg-green-700" // Home wins
-                    : fixture.teams.away.teamID === teamID &&
+                    : fixture.teams.away.id === teamID &&
                         fixture.teams.away.winner
                       ? "bg-green-700" // Away wins
-                      : fixture.teams.home.teamID === teamID &&
+                      : fixture.teams.home.id === teamID &&
                           fixture.teams.away.winner
                         ? "bg-red-700" // Home losses
-                        : fixture.teams.away.teamID === teamID &&
+                        : fixture.teams.away.id === teamID &&
                             fixture.teams.home.winner
                           ? "bg-red-700" // Away losses
                           : fixture.teams.away.winner === null &&
