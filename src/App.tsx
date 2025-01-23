@@ -29,6 +29,7 @@ export default function App() {
     undefined
   );
   const [currentLeague, setCurrentLeague] = useState(39);
+  const [headToHead, setHeadToHead] = useState();
 
   const [standing, setStanding] = useState();
   const navigate = useNavigate();
@@ -86,70 +87,87 @@ export default function App() {
     [navigate]
   );
 
-  const handleFetchStandings = async () => {
-    try {
-      const fetchedStandings = await footballApi.fetchStandings(currentLeague);
-      setStanding(fetchedStandings || []);
-    } catch (error) {
-      console.error("Error fetching table:", error);
-    }
+  const handleFetchHeadToHead = async (teamID: number, opponentID: number) => {
+    async (teamID: number, opponentID: number) => {
+      try {
+        const fetchedHeadToHead = await footballApi.fetchHeadToHead(
+          teamID,
+          opponentID
+        );
+
+        setHeadToHead(fetchedHeadToHead);
+      } catch (error) {
+        console.error("Error fetching head to head: ", error);
+      }
+    };
+
+    const handleFetchStandings = async () => {
+      try {
+        const fetchedStandings =
+          await footballApi.fetchStandings(currentLeague);
+        setStanding(fetchedStandings || []);
+      } catch (error) {
+        console.error("Error fetching table:", error);
+      }
+    };
+
+    useEffect(() => {
+      handleFetchStandings();
+    }, [currentLeague]);
+
+    return (
+      <>
+        <Navigation />
+        <Routes>
+          <Route
+            path="/"
+            element={
+              <Home
+                standing={standing}
+                handleFetchTeam={handleFetchTeam}
+                setCurrentLeague={setCurrentLeague}
+              />
+            }
+          />
+          <Route
+            path="/team/:id/*"
+            element={
+              <Team
+                team={currentTeam}
+                standing={standing}
+                handleFetchTeam={handleFetchTeam}
+                squad={currentSquad}
+                handleFetchPlayer={handleFetchPlayer}
+                fixtures={currentFixtureList}
+                handleMatchClick={handleMatchClick}
+                seasonStats={currentTeamSeasonStats}
+              />
+            }
+          />
+          <Route
+            path="/player/:id"
+            element={
+              <Player
+                player={currentPlayer}
+                handleFetchPlayer={handleFetchPlayer}
+                currentTeam={currentPlayerTeam}
+                currentStats={playerCurrentStats}
+              />
+            }
+          />
+          <Route
+            path="/match/:id"
+            element={
+              <Match
+                fixture={currentFixture}
+                handleFetchMatch={handleMatchClick}
+                handleFetchHeadToHead={handleFetchHeadToHead}
+              />
+            }
+          />
+          <Route path="/about" element={<About />} />
+        </Routes>
+      </>
+    );
   };
-
-  useEffect(() => {
-    handleFetchStandings();
-  }, [currentLeague]);
-
-  return (
-    <>
-      <Navigation />
-      <Routes>
-        <Route
-          path="/"
-          element={
-            <Home
-              standing={standing}
-              handleFetchTeam={handleFetchTeam}
-              setCurrentLeague={setCurrentLeague}
-            />
-          }
-        />
-        <Route
-          path="/team/:id/*"
-          element={
-            <Team
-              team={currentTeam}
-              standing={standing}
-              handleFetchTeam={handleFetchTeam}
-              squad={currentSquad}
-              handleFetchPlayer={handleFetchPlayer}
-              fixtures={currentFixtureList}
-              handleMatchClick={handleMatchClick}
-              seasonStats={currentTeamSeasonStats}
-            />
-          }
-        />
-        <Route
-          path="/player/:id"
-          element={
-            <Player
-              player={currentPlayer}
-              handleFetchPlayer={handleFetchPlayer}
-              currentTeam={currentPlayerTeam}
-              currentStats={playerCurrentStats}
-            />
-          }
-        />
-        <Route
-          path="/match/:id"
-          element={
-            <Match
-              fixture={currentFixture}
-              handleFetchMatch={handleMatchClick}
-            />
-          }
-        />
-        <Route path="/about" element={<About />} />
-      </Routes>
-    </>
-  );
 }

@@ -589,7 +589,7 @@ const fetchHeadToHead = async (team1ID: number, team2ID: number) => {
 
     const data = await response.json();
 
-    console.log(data);
+    console.log("HEAD TO HEAD", data);
 
     return data;
   } catch (error) {

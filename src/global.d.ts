@@ -160,6 +160,7 @@ interface FixtureListProps {
 interface MatchProps {
   fixture?: MatchFacts
   handleFetchMatch: (matchID: number) => void;
+  handleFetchHeadToHead: (teamOneID: number, teamTwoID: number) => void;
 }
 
 interface MatchStatsProps {

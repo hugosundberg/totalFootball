@@ -4,12 +4,22 @@ import Lineup from "../components/Match/Lineup";
 import MatchStats from "../components/Match/MatchStats";
 import HeadToHead from "../components/Match/HeadToHead";
 
-const Match = ({ fixture, handleFetchMatch }: MatchProps) => {
+const Match = ({
+  fixture,
+  handleFetchMatch,
+  handleFetchHeadToHead,
+}: MatchProps) => {
   const { id } = useParams<{ id: string }>();
 
   useEffect(() => {
     if (id) {
       handleFetchMatch(Number(id));
+      if (fixture?.fixture.teams.home.teamID !== undefined) {
+        handleFetchHeadToHead(
+          fixture.fixture.teams.home.teamID,
+          fixture.fixture.teams.away.teamID
+        );
+      }
     }
   }, [id, handleFetchMatch]);
 
@@ -198,6 +208,7 @@ const Match = ({ fixture, handleFetchMatch }: MatchProps) => {
       </div>
 
       <MatchStats fixture={fixture} />
+      <HeadToHead teamOne={teamOne} teamTwo={teamTwo} />
 
       <div className="w-11/12 justify-self-center mb-32">
         <Lineup fixture={fixture} />
