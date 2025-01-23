@@ -29,6 +29,7 @@ export default function App() {
     undefined
   );
   const [currentLeague, setCurrentLeague] = useState(39);
+  const [headToHead, setHeadToHead] = useState<HeadToHead | undefined>();
 
   const [standing, setStanding] = useState();
   const navigate = useNavigate();
@@ -40,6 +41,13 @@ export default function App() {
 
         setCurrentFixture(fetchedMatch);
 
+        if (fetchedMatch) {
+          handleFetchHeadToHead(
+            fetchedMatch.fixture.teams.home.id,
+            fetchedMatch.fixture.teams.away.id
+          );
+        }
+
         navigate(`/match/${matchID}`);
       } catch (error) {
         console.error("Error fetching player: ", error);
@@ -47,6 +55,20 @@ export default function App() {
     },
     [navigate]
   );
+
+  const handleFetchHeadToHead = async (
+    teamOneID: number,
+    teamTwoID: number
+  ) => {
+    try {
+      const fetchedMatch = await footballApi.fetchHeadToHead(
+        teamOneID,
+        teamTwoID
+      );
+    } catch (error) {
+      console.error("Error fetching head to head: ", error);
+    }
+  };
 
   const handleFetchPlayer = useCallback(
     async (playerID: number) => {

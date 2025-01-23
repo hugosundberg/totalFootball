@@ -535,6 +535,27 @@ const fetchMatch = async (matchID: number) => {
   }
 };
 
+const fetchHeadToHead = async (team1ID: number, team2ID: number) => {
+  try {
+    const response = await fetch(
+      `https://v3.football.api-sports.io/fixtures/headtohead?h2h=${team1ID}-${team2ID}`,
+      {
+        method: "GET",
+        headers: {
+          "x-rapidapi-host": "v3.football.api-sports.io",
+          "x-rapidapi-key": apiKey,
+        },
+      }
+    );
+
+    const data = await response.json();
+
+    console.log("Head to head data:", data);
+  } catch (error) {
+    console.error("Error fetching head to head: ", error);
+  }
+};
+
 const fetchCoach = async (teamID: number) => {
   try {
     const response = await fetch(
@@ -586,4 +607,5 @@ export default {
   fetchTeamFixtures,
   fetchMatch,
   fetchTeamSeasonStats,
+  fetchHeadToHead,
 };

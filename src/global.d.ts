@@ -60,6 +60,10 @@ interface Fixture {
   }
 }
 
+interface HeadToHead {
+  
+}
+
 interface HeadToHeadProps {
   fixture: Fixture;
 }
