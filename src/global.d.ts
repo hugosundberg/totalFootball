@@ -67,6 +67,7 @@ interface HeadToHead {
 interface HeadToHeadProps {
   fixture: Fixture;
   headToHead?: Fixture[];
+  handleMatchClick: (matchID: number) => void;
 }
 
 interface MatchFacts {
@@ -165,6 +166,7 @@ interface MatchProps {
   fixture?: MatchFacts
   handleFetchMatch: (matchID: number) => void;
   headToHead?: Fixture[]
+  handleFetchTeam: (teamID: number) => void
 }
 
 interface MatchStatsProps {

@@ -1,13 +1,22 @@
-const HeadToHead = ({ fixture, headToHead }: HeadToHeadProps) => {
+const HeadToHead = ({
+  fixture,
+  headToHead,
+  handleMatchClick,
+}: HeadToHeadProps) => {
   if (headToHead === undefined) {
     return null;
   }
+  if (headToHead.length === 1) {
+    return;
+  }
+
   return (
-    <div className="flex flex-col bg-zinc-900 w-full h-fit rounded-2xl overflow-auto mb-10">
+    <div className="flex flex-col bg-zinc-900 w-full h-fit sm:rounded-2xl overflow-auto mt-5 mb-5">
       {headToHead.map((match, index) => (
         <div
           key={index}
           className="h-fit hover:bg-zinc-800 hover:cursor-pointer"
+          onClick={() => handleMatchClick(match.fixtureInfo.id)}
         >
           <div className="flex justify-between p-6">
             <p className="text-sm text-gray-400">

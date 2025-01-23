@@ -170,6 +170,7 @@ export default function App() {
               fixture={currentFixture}
               handleFetchMatch={handleMatchClick}
               headToHead={headToHead}
+              handleFetchTeam={handleFetchTeam}
             />
           }
         />

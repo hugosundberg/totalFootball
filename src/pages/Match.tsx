@@ -1,10 +1,15 @@
 import { useEffect } from "react";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import Lineup from "../components/Lineup";
 import MatchStats from "../components/MatchStats";
 import HeadToHead from "../components/HeadToHead";
 
-const Match = ({ fixture, handleFetchMatch, headToHead }: MatchProps) => {
+const Match = ({
+  fixture,
+  handleFetchMatch,
+  headToHead,
+  handleFetchTeam,
+}: MatchProps) => {
   const { id } = useParams<{ id: string }>();
 
   useEffect(() => {
@@ -12,6 +17,13 @@ const Match = ({ fixture, handleFetchMatch, headToHead }: MatchProps) => {
       handleFetchMatch(Number(id));
     }
   }, [id, handleFetchMatch]);
+
+  const navigate = useNavigate();
+
+  const handleTeamClick = (id: number) => {
+    handleFetchTeam(id);
+    navigate(`/team/${id}`);
+  };
 
   if (!fixture) return;
 
@@ -51,7 +63,7 @@ const Match = ({ fixture, handleFetchMatch, headToHead }: MatchProps) => {
   };
 
   return (
-    <div className="bg-slate-200 dark:bg-black h-full pt-14 sm:pt-20  dark:text-white overflow-hidden">
+    <div className="bg-slate-200 dark:bg-black h-screen pt-14 sm:pt-20  dark:text-white overflow-hidden">
       <div className="bg-white dark:bg-zinc-900 h-fit w-full sm:w-11/12 justify-self-center sm:rounded-3xl max-w-[1200px] shadow-lg">
         <div className="hidden sm:flex gap-4 justify-center p-5 items-center">
           <img
@@ -130,7 +142,10 @@ const Match = ({ fixture, handleFetchMatch, headToHead }: MatchProps) => {
         </div>
 
         <div className="grid grid-cols-3 gap-16 sm:gap-4 justify-self-center p-6 items-center">
-          <div className="flex flex-col sm:flex-row items-center gap-4 justify-self-end">
+          <div
+            className="flex flex-col sm:flex-row items-center gap-4 justify-self-end hover:cursor-pointer hover:underline"
+            onClick={() => handleTeamClick(fixture.fixture.teams.home.id)}
+          >
             <img
               src={fixture.fixture.teams.home.logo}
               alt="home-team-logo"
@@ -184,7 +199,10 @@ const Match = ({ fixture, handleFetchMatch, headToHead }: MatchProps) => {
             </div>
           </div>
 
-          <div className="flex flex-col sm:flex-row items-center gap-4">
+          <div
+            className="flex flex-col sm:flex-row items-center gap-4 hover:cursor-pointer hover:underline"
+            onClick={() => handleTeamClick(fixture.fixture.teams.away.id)}
+          >
             <img
               src={fixture.fixture.teams.away.logo}
               alt="away-team-logo"
@@ -197,7 +215,14 @@ const Match = ({ fixture, handleFetchMatch, headToHead }: MatchProps) => {
         </div>
       </div>
 
-      <HeadToHead fixture={fixture.fixture} headToHead={headToHead} />
+      {(fixture.fixtureInfo.status.short === "NS" ||
+        fixture.fixtureInfo.status.short === "PST") && (
+        <HeadToHead
+          fixture={fixture.fixture}
+          headToHead={headToHead}
+          handleMatchClick={handleFetchMatch}
+        />
+      )}
 
       <MatchStats fixture={fixture} />
 
