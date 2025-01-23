@@ -61,11 +61,12 @@ interface Fixture {
 }
 
 interface HeadToHead {
-  
+  fixtures: Fixture[];
 }
 
 interface HeadToHeadProps {
   fixture: Fixture;
+  headToHead?: Fixture[];
 }
 
 interface MatchFacts {
@@ -163,6 +164,7 @@ interface FixtureListProps {
 interface MatchProps {
   fixture?: MatchFacts
   handleFetchMatch: (matchID: number) => void;
+  headToHead?: Fixture[]
 }
 
 interface MatchStatsProps {

@@ -4,7 +4,7 @@ import Lineup from "../components/Lineup";
 import MatchStats from "../components/MatchStats";
 import HeadToHead from "../components/HeadToHead";
 
-const Match = ({ fixture, handleFetchMatch }: MatchProps) => {
+const Match = ({ fixture, handleFetchMatch, headToHead }: MatchProps) => {
   const { id } = useParams<{ id: string }>();
 
   useEffect(() => {
@@ -197,7 +197,7 @@ const Match = ({ fixture, handleFetchMatch }: MatchProps) => {
         </div>
       </div>
 
-      <HeadToHead fixture={fixture.fixture} />
+      <HeadToHead fixture={fixture.fixture} headToHead={headToHead} />
 
       <MatchStats fixture={fixture} />
 

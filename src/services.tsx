@@ -550,7 +550,48 @@ const fetchHeadToHead = async (team1ID: number, team2ID: number) => {
 
     const data = await response.json();
 
+    const fixtures: Fixture[] = data.response.map((fixture: any) => ({
+      fixtureInfo: {
+        id: fixture.fixture.id,
+        referee: fixture.fixture.referee,
+        date: fixture.fixture.date,
+        venue: fixture.fixture.venue.name,
+        status: {
+          short: fixture.fixture.status.short,
+          elapsed: fixture.fixture.status.elapsed,
+          extra: fixture.fixture.status.extra,
+        },
+      },
+      goals: {
+        home: fixture.goals.home,
+        away: fixture.goals.away,
+      },
+      teams: {
+        home: {
+          teamID: fixture.teams.home.id,
+          name: fixture.teams.home.name,
+          logo: fixture.teams.home.logo,
+          winner: fixture.teams.home.winner,
+        },
+        away: {
+          teamID: fixture.teams.away.id,
+          name: fixture.teams.away.name,
+          logo: fixture.teams.away.logo,
+          winner: fixture.teams.away.winner,
+        },
+      },
+      league: {
+        id: fixture.league.id,
+        name: fixture.league.name,
+        logo: fixture.league.logo,
+        round: fixture.league.round,
+      },
+    }));
+
     console.log("Head to head data:", data);
+    console.log("Head to head fixtures:", fixtures);
+
+    return fixtures;
   } catch (error) {
     console.error("Error fetching head to head: ", error);
   }

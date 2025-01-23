@@ -29,7 +29,7 @@ export default function App() {
     undefined
   );
   const [currentLeague, setCurrentLeague] = useState(39);
-  const [headToHead, setHeadToHead] = useState<HeadToHead | undefined>();
+  const [headToHead, setHeadToHead] = useState<Fixture[] | undefined>();
 
   const [standing, setStanding] = useState();
   const navigate = useNavigate();
@@ -61,10 +61,12 @@ export default function App() {
     teamTwoID: number
   ) => {
     try {
-      const fetchedMatch = await footballApi.fetchHeadToHead(
+      const fetchedMatches = await footballApi.fetchHeadToHead(
         teamOneID,
         teamTwoID
       );
+
+      setHeadToHead(fetchedMatches);
     } catch (error) {
       console.error("Error fetching head to head: ", error);
     }
@@ -167,6 +169,7 @@ export default function App() {
             <Match
               fixture={currentFixture}
               handleFetchMatch={handleMatchClick}
+              headToHead={headToHead}
             />
           }
         />
