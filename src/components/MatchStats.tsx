@@ -1,8 +1,6 @@
 const MatchStats = ({ fixture }: MatchStatsProps) => {
   if (!fixture.statistics) return null;
 
-  if (fixture.statistics.home.possesion === null) return null;
-
   return (
     <div className="flex flex-col bg-white dark:bg-zinc-900 h-fit mt-4 rounded-3xl items-center py-3 sm:py-10 w-full sm:w-11/12 max-w-[1200px] justify-self-center shadow-lg">
       <h2 className="text-lg sm:text-2xl mb-4">Statistics</h2>
@@ -19,8 +17,10 @@ const MatchStats = ({ fixture }: MatchStatsProps) => {
         </div>
 
         <div className="grid grid-cols-4 w-full items-center">
-          {fixture.statistics.home.expectedGoals >
-          fixture.statistics.away.expectedGoals ? (
+          {fixture.statistics.home.expectedGoals &&
+          fixture.statistics.away.expectedGoals &&
+          fixture.statistics.home.expectedGoals >
+            fixture.statistics.away.expectedGoals ? (
             <>
               <div className="w-fit bg-slate-400 dark:bg-slate-700 p-2 rounded-full px-4">
                 {fixture.statistics.home.expectedGoals}
@@ -46,8 +46,10 @@ const MatchStats = ({ fixture }: MatchStatsProps) => {
         </div>
 
         <div className="grid grid-cols-4 w-full items-center">
-          {fixture.statistics.home.shotsTotal >
-          fixture.statistics.away.shotsTotal ? (
+          {fixture.statistics.home.shotsTotal &&
+          fixture.statistics.away.shotsTotal &&
+          fixture.statistics.home.shotsTotal >
+            fixture.statistics.away.shotsTotal ? (
             <>
               <div className="w-fit bg-slate-400 dark:bg-slate-700 p-2 rounded-full px-4">
                 {fixture.statistics.home.shotsTotal}
@@ -73,7 +75,9 @@ const MatchStats = ({ fixture }: MatchStatsProps) => {
         </div>
 
         <div className="grid grid-cols-4 w-full items-center">
-          {fixture.statistics.home.shotsOn > fixture.statistics.away.shotsOn ? (
+          {fixture.statistics.home.shotsOn &&
+          fixture.statistics.away.shotsOn &&
+          fixture.statistics.home.shotsOn > fixture.statistics.away.shotsOn ? (
             <>
               <div className="w-fit bg-slate-400 dark:bg-slate-700 p-2 rounded-full px-4">
                 {fixture.statistics.home.shotsOn}
@@ -99,8 +103,10 @@ const MatchStats = ({ fixture }: MatchStatsProps) => {
         </div>
 
         <div className="grid grid-cols-4 w-full items-center">
-          {fixture.statistics.home.passesPercentage >
-          fixture.statistics.away.passesPercentage ? (
+          {fixture.statistics.home.passesPercentage &&
+          fixture.statistics.away.passesPercentage &&
+          fixture.statistics.home.passesPercentage >
+            fixture.statistics.away.passesPercentage ? (
             <>
               <div className="w-fit bg-slate-400 dark:bg-slate-700 p-2 rounded-full px-4">
                 {fixture.statistics.home.passesAccurate + " "} (
@@ -128,7 +134,9 @@ const MatchStats = ({ fixture }: MatchStatsProps) => {
         </div>
 
         <div className="grid grid-cols-4 w-full items-center">
-          {fixture.statistics.home.fouls < fixture.statistics.away.fouls ? (
+          {fixture.statistics.home.fouls &&
+          fixture.statistics.away.fouls &&
+          fixture.statistics.home.fouls < fixture.statistics.away.fouls ? (
             <>
               <div className="w-fit bg-slate-400 dark:bg-slate-700 p-2 rounded-full px-4">
                 {fixture.statistics.home.fouls}
@@ -154,8 +162,10 @@ const MatchStats = ({ fixture }: MatchStatsProps) => {
         </div>
 
         <div className="grid grid-cols-4 w-full items-center">
-          {fixture.statistics.home.yellowCards <
-          fixture.statistics.away.yellowCards ? (
+          {fixture.statistics.home.yellowCards &&
+          fixture.statistics.away.yellowCards &&
+          fixture.statistics.home.yellowCards <
+            fixture.statistics.away.yellowCards ? (
             <>
               <div className="w-fit bg-slate-400 dark:bg-slate-700 p-2 rounded-full px-4">
                 {fixture.statistics.home.yellowCards}

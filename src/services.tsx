@@ -453,38 +453,38 @@ const fetchMatch = async (matchID: number) => {
 
         statistics: {
           home: {
-            shotsOn: homeTeamStats[0].value,
-            shotsOff: homeTeamStats[1].value,
-            shotsTotal: homeTeamStats[2].value,
-            blockedShots: homeTeamStats[3].value,
-            fouls: homeTeamStats[6].value,
-            corners: homeTeamStats[7].value,
-            offsides: homeTeamStats[8].value,
-            possesion: homeTeamStats[9].value,
-            yellowCards: homeTeamStats[10].value,
-            redCards: homeTeamStats[11].value,
-            saves: homeTeamStats[12].value,
-            passesTotal: homeTeamStats[13].value,
-            passesAccurate: homeTeamStats[14].value,
-            passesPercentage: homeTeamStats[15].value,
-            expectedGoals: homeTeamStats[16].value,
+            shotsOn: homeTeamStats[0]?.value,
+            shotsOff: homeTeamStats[1]?.value ?? null,
+            shotsTotal: homeTeamStats[2]?.value ?? null,
+            blockedShots: homeTeamStats[3]?.value ?? null,
+            fouls: homeTeamStats[6]?.value ?? null,
+            corners: homeTeamStats[7]?.value ?? null,
+            offsides: homeTeamStats[8]?.value ?? null,
+            possesion: homeTeamStats[9]?.value ?? null,
+            yellowCards: homeTeamStats[10]?.value ?? null,
+            redCards: homeTeamStats[11]?.value ?? null,
+            saves: homeTeamStats[12]?.value ?? null,
+            passesTotal: homeTeamStats[13]?.value ?? null,
+            passesAccurate: homeTeamStats[14]?.value ?? null,
+            passesPercentage: homeTeamStats[15]?.value ?? null,
+            expectedGoals: homeTeamStats[16]?.value ?? null,
           },
           away: {
-            shotsOn: awayTeamStats[0].value,
-            shotsOff: awayTeamStats[1].value,
-            shotsTotal: awayTeamStats[2].value,
-            blockedShots: awayTeamStats[3].value,
-            fouls: awayTeamStats[6].value,
-            corners: awayTeamStats[7].value,
-            offsides: awayTeamStats[8].value,
-            possesion: awayTeamStats[9].value,
-            yellowCards: awayTeamStats[10].value,
-            redCards: awayTeamStats[11].value,
-            saves: awayTeamStats[12].value,
-            passesTotal: awayTeamStats[13].value,
-            passesAccurate: awayTeamStats[14].value,
-            passesPercentage: awayTeamStats[15].value,
-            expectedGoals: awayTeamStats[16].value,
+            shotsOn: awayTeamStats[0]?.value ?? null,
+            shotsOff: awayTeamStats[1]?.value ?? null,
+            shotsTotal: awayTeamStats[2]?.value ?? null,
+            blockedShots: awayTeamStats[3]?.value ?? null,
+            fouls: awayTeamStats[6]?.value ?? null,
+            corners: awayTeamStats[7]?.value ?? null,
+            offsides: awayTeamStats[8]?.value ?? null,
+            possesion: awayTeamStats[9]?.value ?? null,
+            yellowCards: awayTeamStats[10]?.value ?? null,
+            redCards: awayTeamStats[11]?.value ?? null,
+            saves: awayTeamStats[12]?.value ?? null,
+            passesTotal: awayTeamStats[13]?.value ?? null,
+            passesAccurate: awayTeamStats[14]?.value ?? null,
+            passesPercentage: awayTeamStats[15]?.value ?? null,
+            expectedGoals: awayTeamStats[16]?.value ?? null,
           },
         },
 
@@ -587,6 +587,15 @@ const fetchHeadToHead = async (team1ID: number, team2ID: number) => {
         round: fixture.league.round,
       },
     }));
+
+    {
+      /* Sort fixtures by date */
+    }
+    fixtures.sort(
+      (a, b) =>
+        new Date(b.fixtureInfo.date).getTime() -
+        new Date(a.fixtureInfo.date).getTime()
+    );
 
     console.log("Head to head data:", data);
     console.log("Head to head fixtures:", fixtures);

@@ -139,21 +139,21 @@ interface LineupPlayer {
 }
 
 interface TeamMatchStatistics {
-  shotsOn: number
-  shotsOff: number
-  shotsTotal: number
-  blockedShots: number
-  fouls: number
-  corners: number
-  offsides: number
-  possesion: number
-  yellowCards: number
-  redCards: number
-  saves: number
-  passesTotal: number
-  passesAccurate: number
-  passesPercentage: number
-  expectedGoals: number
+  shotsOn?: number | null
+  shotsOff?: number | null
+  shotsTotal?: number | null
+  blockedShots?: number | null
+  fouls?: number | null
+  corners?: number | null
+  offsides?: number | null
+  possesion?: number | null
+  yellowCards?: number | null
+  redCards?: number | null
+  saves?: number | null
+  passesTotal?: number | null
+  passesAccurate?: number | null
+  passesPercentage?: number | null
+  expectedGoals?: number | null
 }
 
 interface FixtureListProps {

@@ -63,7 +63,7 @@ const Match = ({
   };
 
   return (
-    <div className="bg-slate-200 dark:bg-black h-screen pt-14 sm:pt-20  dark:text-white overflow-hidden">
+    <div className="bg-slate-200 dark:bg-black h-full pt-14 sm:pt-20  dark:text-white overflow-hidden">
       <div className="bg-white dark:bg-zinc-900 h-fit w-full sm:w-11/12 justify-self-center sm:rounded-3xl max-w-[1200px] shadow-lg">
         <div className="hidden sm:flex gap-4 justify-center p-5 items-center">
           <img
