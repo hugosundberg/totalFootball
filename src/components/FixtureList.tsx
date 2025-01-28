@@ -7,8 +7,17 @@ const FixtureList = ({
 }: FixtureListProps) => {
   if (!fixtures) return null;
 
-  const [currentPage, setCurrentPage] = useState(1);
   const fixturesPerPage = 10;
+
+  // Find the index of the first upcoming game
+  const upcomingGameIndex = fixtures.findIndex(
+    (fixture) => fixture.fixtureInfo.status.short === "NS"
+  );
+
+  // Calculate the initial page based on the upcoming game index
+  const initialPage = Math.ceil((upcomingGameIndex + 1) / fixturesPerPage);
+
+  const [currentPage, setCurrentPage] = useState(initialPage);
 
   // Calculate the fixtures to display
   const indexOfLastFixture = currentPage * fixturesPerPage;
