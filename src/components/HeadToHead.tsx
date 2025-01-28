@@ -1,3 +1,5 @@
+import { useState, useEffect } from "react";
+
 const HeadToHead = ({
   fixture,
   headToHead,
@@ -9,9 +11,65 @@ const HeadToHead = ({
   if (headToHead.length === 1) {
     return;
   }
+  useEffect(() => {
+    calculateResults();
+  }, [headToHead]);
+
+  const [teamOneWins, setTeamOneWins] = useState(0);
+  const [teamTwoWins, setTeamTwoWins] = useState(0);
+  const [draws, setDraws] = useState(0);
+
+  const calculateResults = () => {
+    let teamOneWinsCount = 0;
+    let teamTwoWinsCount = 0;
+    let drawsCount = 0;
+
+    for (const match of headToHead) {
+      if (match.fixtureInfo.status.short === "NS") {
+        headToHead.splice(headToHead.indexOf(match), 1);
+      } else {
+        if (match.goals.home > match.goals.away) {
+          teamOneWinsCount++;
+        } else if (match.goals.home < match.goals.away) {
+          teamTwoWinsCount++;
+        } else {
+          drawsCount++;
+        }
+      }
+    }
+
+    setTeamOneWins(teamOneWinsCount);
+    setTeamTwoWins(teamTwoWinsCount);
+    setDraws(drawsCount);
+  };
 
   return (
     <div className="flex flex-col bg-zinc-900 w-full sm:w-11/12 justify-self-center max-w-[1200px] h-fit sm:rounded-2xl overflow-auto mt-5 mb-5">
+      <div className="bg-zinc-800">
+        <div className="flex justify-between p-6 w-1/2 justify-self-center">
+          <img src={fixture.teams.home.logo} alt="" className="h-10" />
+          <div className="flex flex-col items-center gap-3">
+            <div className="flex items-center bg-green-800 px-6 rounded-full p-2">
+              {teamOneWins}
+            </div>
+            <p>Wins</p>
+          </div>
+          <div className="flex flex-col items-center gap-3">
+            <div className="flex items-center bg-gray-800 px-6 rounded-full p-2">
+              {draws}
+            </div>
+            <p>Draws</p>
+          </div>
+          <div className="flex flex-col items-center gap-3">
+            <div className="flex items-center bg-green-800 px-6 rounded-full p-2">
+              {teamTwoWins}
+            </div>
+            <p>Wins</p>
+          </div>
+          <img src={fixture.teams.away.logo} alt="" className="h-10" />
+        </div>
+      </div>
+
       {headToHead.map((match, index) => (
         <div
           key={index}

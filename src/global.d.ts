@@ -66,6 +66,15 @@ interface HeadToHead {
 
 interface HeadToHeadProps {
   fixture: Fixture;
+  headToHeadInfo?: {
+    teamOne: {
+      wins: number
+    }
+    teamTwo: {
+      wins: number
+    }
+    draws: number
+  }
   headToHead?: Fixture[];
   handleMatchClick: (matchID: number) => void;
 }
