@@ -11,7 +11,7 @@ const HeadToHead = ({
   }
 
   return (
-    <div className="flex flex-col bg-zinc-900 w-full h-fit sm:rounded-2xl overflow-auto mt-5 mb-5">
+    <div className="flex flex-col bg-zinc-900 w-full sm:w-11/12 justify-self-center max-w-[1200px] h-fit sm:rounded-2xl overflow-auto mt-5 mb-5">
       {headToHead.map((match, index) => (
         <div
           key={index}
