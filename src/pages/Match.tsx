@@ -27,6 +27,8 @@ const Match = ({
 
   if (!fixture) return;
 
+  console.log(fixture);
+
   const dateFormatter = (date: string) => {
     try {
       const extractedDate = date.slice(0, 10);
@@ -114,29 +116,31 @@ const Match = ({
               </svg>
               {fixture.fixtureInfo.venue}
             </div>
-            <div className="flex gap-2 items-center ">
-              <svg
-                version="1.1"
-                id="Icons"
-                xmlns="http://www.w3.org/2000/svg"
-                viewBox="0 0 32 32"
-                fill="none"
-                strokeWidth={2}
-                stroke="currentColor"
-                className="size-6"
-              >
-                <path
-                  className="st0"
-                  d="M19.5,12L18,15h-5l1.5-3h-4.2c-4.3,0-8,3.2-8.3,7.5C1.7,24.1,5.4,28,10,28c2.3,0,4.4-1,5.8-2.5c3.8-4.1,8.7-7,14.2-8.5l0,0v-5H19.5z"
-                />
-                <circle className="st0" cx="10" cy="20" r="3" />
-                <line className="st0" x1="17" y1="4" x2="17" y2="7" />
-                <line className="st0" x1="12.1" y1="6.1" x2="14.2" y2="8.2" />
-                <line className="st0" x1="21.9" y1="6.1" x2="19.8" y2="8.2" />
-              </svg>
+            {fixture.fixtureInfo.referee && (
+              <div className="flex gap-2 items-center ">
+                <svg
+                  version="1.1"
+                  id="Icons"
+                  xmlns="http://www.w3.org/2000/svg"
+                  viewBox="0 0 32 32"
+                  fill="none"
+                  strokeWidth={2}
+                  stroke="currentColor"
+                  className="size-6"
+                >
+                  <path
+                    className="st0"
+                    d="M19.5,12L18,15h-5l1.5-3h-4.2c-4.3,0-8,3.2-8.3,7.5C1.7,24.1,5.4,28,10,28c2.3,0,4.4-1,5.8-2.5c3.8-4.1,8.7-7,14.2-8.5l0,0v-5H19.5z"
+                  />
+                  <circle className="st0" cx="10" cy="20" r="3" />
+                  <line className="st0" x1="17" y1="4" x2="17" y2="7" />
+                  <line className="st0" x1="12.1" y1="6.1" x2="14.2" y2="8.2" />
+                  <line className="st0" x1="21.9" y1="6.1" x2="19.8" y2="8.2" />
+                </svg>
 
-              {fixture.fixtureInfo.referee}
-            </div>
+                {fixture.fixtureInfo.referee}
+              </div>
+            )}
           </div>
           <span className="hidden sm:block h-0.5 bg-slate-300 dark:bg-zinc-800" />
         </div>

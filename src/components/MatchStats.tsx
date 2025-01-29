@@ -171,30 +171,49 @@ const MatchStats = ({ fixture }: MatchStatsProps) => {
 
         <div className="grid grid-cols-4 w-full items-center">
           {fixture.statistics.home.yellowCards &&
-          fixture.statistics.away.yellowCards &&
-          fixture.statistics.home.yellowCards <
+          fixture.statistics.away.yellowCards ? (
+            fixture.statistics.home.yellowCards <
             fixture.statistics.away.yellowCards ? (
-            <>
-              <div className="w-fit bg-slate-400 dark:bg-slate-700 p-2 rounded-full px-4">
-                {fixture.statistics.home.yellowCards}
-              </div>
-              <p className="justify-self-center col-start-2 col-span-2">
-                Yellow cards
-              </p>
-              <p className="justify-self-end px-4">
-                {fixture.statistics.away.yellowCards}
-              </p>
-            </>
+              <>
+                <div className="w-fit bg-slate-400 dark:bg-slate-700 p-2 rounded-full px-4">
+                  {fixture.statistics.home.yellowCards}
+                </div>
+                <div className="flex items-center justify-self-center gap-3 colstart-2 col-span-2">
+                  <p>Yellow cards</p>
+                  <div className="bg-yellow-400 h-6 w-4 rounded-sm"></div>
+                </div>
+                <p className="justify-self-end px-4">
+                  {fixture.statistics.away.yellowCards}
+                </p>
+              </>
+            ) : fixture.statistics.home.yellowCards >
+              fixture.statistics.away.yellowCards ? (
+              <>
+                <p className="px-4">{fixture.statistics.home.yellowCards}</p>
+                <div className="flex gap-3 justify-self-center col-start-2 col-span-2">
+                  <p>Yellow cards</p>
+                  <div className="bg-yellow-400 h-6 w-4 rounded-sm"></div>
+                </div>
+                <div className="w-fit bg-gray-300 dark:bg-gray-500 p-2 rounded-full px-4 justify-self-end">
+                  {fixture.statistics.away.yellowCards}
+                </div>
+              </>
+            ) : (
+              <>
+                <div className="w-fit bg-slate-400 dark:bg-slate-700 p-2 rounded-full px-4">
+                  {fixture.statistics.home.yellowCards}
+                </div>
+                <div className="flex items-center justify-self-center gap-3 colstart-2 col-span-2">
+                  <p>Yellow cards</p>
+                  <div className="bg-yellow-400 h-6 w-4 rounded-sm"></div>
+                </div>
+                <div className="w-fit bg-gray-300 dark:bg-gray-500 p-2 rounded-full px-4 justify-self-end">
+                  {fixture.statistics.away.yellowCards}
+                </div>
+              </>
+            )
           ) : (
-            <>
-              <p className="px-4">{fixture.statistics.home.yellowCards}</p>
-              <p className="justify-self-center col-start-2 col-span-2">
-                Yellow cards
-              </p>
-              <div className="w-fit bg-gray-300 dark:bg-gray-500 p-2 rounded-full px-4 justify-self-end">
-                {fixture.statistics.away.yellowCards}
-              </div>
-            </>
+            <p>No yellow cards data available</p>
           )}
         </div>
 
@@ -204,9 +223,10 @@ const MatchStats = ({ fixture }: MatchStatsProps) => {
           ) : (
             <p className="px-4">{fixture.statistics.home.redCards}</p>
           )}
-          <p className="justify-self-center col-start-2 col-span-2">
-            Red cards
-          </p>
+          <div className="flex items-center gap-3 justify-self-center col-start-2 col-span-2">
+            <p>Red cards</p>
+            <div className="bg-red-700 h-6 w-4 rounded-sm"></div>
+          </div>
           <p className="justify-self-end">
             {fixture.statistics.away.redCards === null ? (
               <p className="px-4">0</p>
