@@ -9,8 +9,6 @@ const Lineup = ({ fixture }: LineupProps) => {
   const homeLineup = fixture.lineups.home;
   const awayLineup = fixture.lineups.away;
 
-  console.log("Home lineup: ", homeLineup);
-
   const groupPlayersByColumn = (
     players: LineupPlayer[],
     reverse: boolean = false,
@@ -223,7 +221,8 @@ const Lineup = ({ fixture }: LineupProps) => {
   );
 
   const renderPlayersLine = (players: LineupPlayer[], home: boolean) => {
-    return players.map((player) => {
+    return players.map((player, index) => {
+      const isLastPlayer = index === players.length - 1;
       if (home) {
         return (
           <div key={player.player.id} className="flex flex-col gap-2 px-6">
@@ -240,7 +239,7 @@ const Lineup = ({ fixture }: LineupProps) => {
                 )}
               </div>
             </div>
-            <span className="h-0.5 w-full bg-slate-600" />
+            {!isLastPlayer && <span className="h-0.5 w-full bg-slate-600" />}
           </div>
         );
       } else {
@@ -259,7 +258,7 @@ const Lineup = ({ fixture }: LineupProps) => {
                 )}
               </div>
             </div>
-            <span className="h-0.5 w-full bg-slate-600" />
+            {!isLastPlayer && <span className="h-0.5 w-full bg-slate-600" />}
           </div>
         );
       }
@@ -367,26 +366,28 @@ const Lineup = ({ fixture }: LineupProps) => {
         </div>
       ) : (
         <>
-          <div className="bg-zinc-950 rounded-2xl overflow-auto mt-8">
-            <div className="flex justify-between p-6 bg-zinc-900">
-              <img
-                src={fixture.fixture.teams.home.logo}
-                alt=""
-                className="h-10"
-              />
-              <p>Lineups</p>
-              <img
-                src={fixture.fixture.teams.away.logo}
-                alt=""
-                className="h-10"
-              />
-            </div>
-            <div className="flex justify-between">
-              <div className="w-full">
-                {renderPlayersLine(homeLineup.startXI, true)}
+          <div className="max-w-[1200px] justify-self-center w-full mt-8 shadow-lg rounded-2xl">
+            <div className="bg-white dark:bg-zinc-950 rounded-2xl overflow-auto mt-8">
+              <div className="flex justify-between p-6 dark:bg-zinc-900 ">
+                <img
+                  src={fixture.fixture.teams.home.logo}
+                  alt=""
+                  className="h-10"
+                />
+                <p className="font-bold text-lg">Lineups</p>
+                <img
+                  src={fixture.fixture.teams.away.logo}
+                  alt=""
+                  className="h-10"
+                />
               </div>
-              <div className="w-full">
-                {renderPlayersLine(awayLineup.startXI, false)}
+              <div className="flex justify-between pb-4">
+                <div className="w-full">
+                  {renderPlayersLine(homeLineup.startXI, true)}
+                </div>
+                <div className="w-full">
+                  {renderPlayersLine(awayLineup.startXI, false)}
+                </div>
               </div>
             </div>
           </div>
@@ -394,7 +395,7 @@ const Lineup = ({ fixture }: LineupProps) => {
       )}
 
       {/* BENCH */}
-      <div className="flex flex-col items-center bg-white dark:bg-zinc-800 h-fit w-11/12 justify-self-center p-2 sm:p-8 mt-8 lg:mt-24 rounded-2xl max-w-[1200px] shadow-2xl">
+      <div className="flex flex-col items-center bg-white dark:bg-zinc-800 h-fit w-full justify-self-center p-2 sm:p-8 mt-8 lg:mt-24 rounded-2xl max-w-[1200px] shadow-2xl">
         {fixture.lineups.home.coach.name !== null && (
           <>
             <p className="font-bold justify-self-center">Coach</p>
@@ -413,52 +414,72 @@ const Lineup = ({ fixture }: LineupProps) => {
         <div className="flex w-full gap-4">
           <div className="h-fit w-1/2">
             {fixture.lineups.home.substitutes?.length > 0 ? (
-              fixture.lineups.home.substitutes.map((substitute) => (
-                <div key={substitute.player.id} className="flex flex-col gap-2">
-                  <div className="flex flex-col sm:flex-row gap-3 items-center mt-2">
-                    <p className="w-5 h-5 p-5 bg-slate-700 rounded-full flex items-center justify-center text-white">
-                      {substitute.player.number}
-                    </p>
-                    <div className="flex flex-col items-center sm:items-start">
-                      <p className="text-sm sm:text-base">
-                        {substitute.player.name}
+              fixture.lineups.home.substitutes.map((substitute, index) => {
+                if (!fixture.lineups?.home.substitutes) return null;
+                const isLastSubstitute =
+                  index === fixture.lineups.home.substitutes.length - 1;
+                return (
+                  <div
+                    key={substitute.player.id}
+                    className="flex flex-col gap-2"
+                  >
+                    <div className="flex flex-col sm:flex-row gap-3 items-center mt-2">
+                      <p className="w-5 h-5 p-5 bg-slate-700 rounded-full flex items-center justify-center text-white">
+                        {substitute.player.number}
                       </p>
-                      {substitute.player.pos !== null && (
-                        <p className="text-xs text-slate-400">
-                          {playerPosition(substitute.player.pos)}
+                      <div className="flex flex-col items-center sm:items-start">
+                        <p className="text-sm sm:text-base">
+                          {substitute.player.name}
                         </p>
-                      )}
+                        {substitute.player.pos !== null && (
+                          <p className="text-xs text-slate-400">
+                            {playerPosition(substitute.player.pos)}
+                          </p>
+                        )}
+                      </div>
                     </div>
+                    {!isLastSubstitute && (
+                      <span className="h-0.5 w-full bg-slate-600" />
+                    )}
                   </div>
-                  <span className="h-0.5 w-full bg-slate-600" />
-                </div>
-              ))
+                );
+              })
             ) : (
               <p>No substitutes available</p>
             )}
           </div>
           <div className="h-fit w-1/2">
             {fixture.lineups.away.substitutes?.length > 0 ? (
-              fixture.lineups.away.substitutes.map((substitute) => (
-                <div key={substitute.player.id} className="flex flex-col gap-2">
-                  <div className="flex flex-col sm:flex-row gap-3 items-center mt-2">
-                    <p className="w-5 h-5 p-5 bg-slate-400 rounded-full flex items-center justify-center">
-                      {substitute.player.number}
-                    </p>
-                    <div className="flex flex-col items-center sm:items-start">
-                      <p className="text-sm sm:text-base">
-                        {substitute.player.name}
+              fixture.lineups.away.substitutes.map((substitute, index) => {
+                if (!fixture.lineups?.away.substitutes) return null;
+                const isLastSubstitute =
+                  index === fixture.lineups.away.substitutes.length - 1;
+                return (
+                  <div
+                    key={substitute.player.id}
+                    className="flex flex-col gap-2"
+                  >
+                    <div className="flex flex-col sm:flex-row gap-3 items-center mt-2">
+                      <p className="w-5 h-5 p-5 bg-slate-400 rounded-full flex items-center justify-center">
+                        {substitute.player.number}
                       </p>
-                      {substitute.player.pos !== null && (
-                        <p className="text-xs text-slate-400">
-                          {playerPosition(substitute.player.pos)}
+                      <div className="flex flex-col items-center sm:items-start">
+                        <p className="text-sm sm:text-base">
+                          {substitute.player.name}
                         </p>
-                      )}
+                        {substitute.player.pos !== null && (
+                          <p className="text-xs text-slate-400">
+                            {playerPosition(substitute.player.pos)}
+                          </p>
+                        )}
+                      </div>
                     </div>
+                    {!isLastSubstitute && (
+                      <span className="h-0.5 w-full bg-slate-600" />
+                    )}
                   </div>
-                  <span className="h-0.5 w-full bg-slate-600" />
-                </div>
-              ))
+                );
+              })
             ) : (
               <p>No substitutes available</p>
             )}
