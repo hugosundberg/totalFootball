@@ -309,7 +309,6 @@ const fetchTeamFixtures = async (teamID: number) => {
 
   if (leagueID) {
     const currentRound = await fetchCurrentRound(leagueID);
-    console.log(currentRound);
   }
 
   try {
@@ -391,8 +390,6 @@ const fetchMatch = async (matchID: number) => {
 
     const data = await response.json();
 
-    console.log("Data:", data);
-
     const fixture = data.response[0];
 
     // Check if the match has started
@@ -453,7 +450,7 @@ const fetchMatch = async (matchID: number) => {
 
         statistics: {
           home: {
-            shotsOn: homeTeamStats[0]?.value,
+            shotsOn: homeTeamStats[0]?.value ?? null,
             shotsOff: homeTeamStats[1]?.value ?? null,
             shotsTotal: homeTeamStats[2]?.value ?? null,
             blockedShots: homeTeamStats[3]?.value ?? null,
@@ -596,9 +593,6 @@ const fetchHeadToHead = async (team1ID: number, team2ID: number) => {
         new Date(b.fixtureInfo.date).getTime() -
         new Date(a.fixtureInfo.date).getTime()
     );
-
-    console.log("Head to head data:", data);
-    console.log("Head to head fixtures:", fixtures);
 
     return fixtures;
   } catch (error) {

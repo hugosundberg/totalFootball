@@ -4,15 +4,19 @@ import fieldVertical from "../../assets/fieldVertical.svg";
 const Lineup = ({ fixture }: LineupProps) => {
   if (fixture.lineups === undefined) return null;
   if (fixture.lineups.home === null) return null;
+  if (fixture.lineups.away === null) return null;
 
   const homeLineup = fixture.lineups.home;
   const awayLineup = fixture.lineups.away;
+
+  console.log("Home lineup: ", homeLineup);
 
   const groupPlayersByColumn = (
     players: LineupPlayer[],
     reverse: boolean = false,
     totalColumns: number = 0
   ) => {
+    if (players[0].player.grid === null) return {};
     const columnMap: Record<number, LineupPlayer[]> = {};
 
     players.forEach(({ player }: any) => {
@@ -218,103 +222,179 @@ const Lineup = ({ fixture }: LineupProps) => {
     totalColumnsAway
   );
 
+  const renderPlayersLine = (players: LineupPlayer[], home: boolean) => {
+    return players.map((player) => {
+      if (home) {
+        return (
+          <div key={player.player.id} className="flex flex-col gap-2 px-6">
+            <div className="flex flex-col sm:flex-row gap-3 items-center mt-2">
+              <p className="w-5 h-5 p-5 bg-slate-700 rounded-full flex items-center justify-center text-white">
+                {player.player.number}
+              </p>
+              <div className="flex flex-col items-center sm:items-start">
+                <p className="text-sm sm:text-base">{player.player.name}</p>
+                {player.player.pos !== null && (
+                  <p className="text-xs text-slate-400">
+                    {playerPosition(player.player.pos)}
+                  </p>
+                )}
+              </div>
+            </div>
+            <span className="h-0.5 w-full bg-slate-600" />
+          </div>
+        );
+      } else {
+        return (
+          <div
+            key={player.player.id}
+            className="flex flex-col gap-2 items-end px-6"
+          >
+            <div className="flex flex-col sm:flex-row gap-3 items-center mt-2">
+              <div className="flex flex-col items-center sm:items-start">
+                <p className="text-sm sm:text-base">{player.player.name}</p>
+                {player.player.pos !== null && (
+                  <p className="text-xs text-slate-400">
+                    {playerPosition(player.player.pos)}
+                  </p>
+                )}
+              </div>
+              <p className="w-5 h-5 p-5 bg-slate-700 rounded-full flex items-center justify-center text-white">
+                {player.player.number}
+              </p>
+            </div>
+            <span className="h-0.5 w-full bg-slate-600" />
+          </div>
+        );
+      }
+    });
+  };
+
   return (
     <>
-      <div className="max-w-[1200px] lg:h-[600px] justify-self-center w-full mt-8 shadow-lg rounded-2xl">
-        {/* Header */}
-        <div className="flex flex-col h-fit w-full bg-white dark:bg-gray-700 items-center justify-self-center rounded-t-2xl">
-          <div className="flex lg:w-11/12 items-center lg:justify-between p-4 text-sm">
-            <div className="flex items-center gap-4">
+      {homeLineup.startXI[0].player.grid !== null ? (
+        <div className="max-w-[1200px] lg:h-[600px] justify-self-center w-full mt-8 shadow-lg rounded-2xl">
+          {/* Header */}
+          <div className="flex flex-col h-fit w-full bg-white dark:bg-gray-700 items-center justify-self-center rounded-t-2xl">
+            <div className="flex lg:w-11/12 items-center lg:justify-between p-4 text-sm">
+              <div className="flex items-center gap-4">
+                <img
+                  src={fixture.fixture.teams.home.logo}
+                  alt=""
+                  className="h-8"
+                />
+                <p>{fixture.fixture.teams.home.name}</p>
+                <p>{homeLineup.formation}</p>
+              </div>
+              <div className="items-center gap-4 hidden lg:flex">
+                <p>{fixture.lineups.away.formation}</p>
+                <p>{fixture.fixture.teams.away.name}</p>
+                <img
+                  src={fixture.fixture.teams.away.logo}
+                  alt=""
+                  className="h-8"
+                />
+              </div>
+            </div>
+          </div>
+
+          {/* Field */}
+
+          <div className="flex flex-col shrink lg:flex-row relative w-full h-full bg-green-700 dark:bg-zinc-900 justify-self-center lg:rounded-b-3xl shadow-xl">
+            <div
+              className="absolute inset-0 bg-center lg:hidden opacity-10 z-0"
+              style={{
+                backgroundImage: `url(${fieldVertical})`,
+                backgroundSize: "cover",
+                backgroundRepeat: "no-repeat",
+              }}
+            ></div>
+            <img
+              src={field}
+              alt="Field"
+              className="absolute opacity-10 w-full h-full hidden lg:block"
+            />
+            <img
+              src={fieldVertical}
+              alt="Field"
+              className="absolute opacity-10 w-auto h-[800px] mt-20 hidden lg:hidden"
+            />
+
+            {/* Home Team */}
+            <div
+              className="relative w-1/2 hidden lg:grid"
+              style={{
+                gridTemplateColumns: `repeat(${Object.keys(groupedPlayersHome).length}, 1fr)`,
+                height: "100%",
+                padding: "30px",
+              }}
+            >
+              {renderPlayersOnGrid(groupedPlayersHome, false)}
+            </div>
+
+            <div className="flex w-full h-1/2 lg:hidden">
+              {renderPlayersFlex(groupedPlayersHome, false)}
+            </div>
+
+            {/* Away Team */}
+            <div
+              className="relative w-1/2 hidden lg:grid"
+              style={{
+                gridTemplateColumns: `repeat(${totalColumnsAway}, 1fr)`,
+                height: "100%",
+                padding: "30px",
+              }}
+            >
+              {renderPlayersOnGrid(groupedPlayersAway, true)}
+            </div>
+
+            <div className="flex w-full h-1/2 lg:hidden">
+              {renderPlayersFlex(groupedPlayersAway, true)}
+            </div>
+          </div>
+
+          {/* Footer */}
+
+          <div className="flex flex-col h-fit w-full bg-white dark:bg-gray-700 items-center justify-self-center rounded-b-2xl lg:hidden">
+            <div className="flex justify-between p-4 text-sm sm:text-base">
+              <div className="flex items-center gap-4">
+                <img
+                  src={fixture.fixture.teams.away.logo}
+                  alt=""
+                  className="h-8"
+                />
+                <p>{fixture.fixture.teams.away.name}</p>
+                <p>{awayLineup.formation}</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      ) : (
+        <>
+          <div className="bg-zinc-950 rounded-2xl overflow-auto mt-8">
+            <div className="flex justify-between p-6 bg-zinc-900">
               <img
                 src={fixture.fixture.teams.home.logo}
                 alt=""
-                className="h-8"
+                className="h-10"
               />
-              <p>{fixture.fixture.teams.home.name}</p>
-              <p>{homeLineup.formation}</p>
-            </div>
-            <div className="items-center gap-4 hidden lg:flex">
-              <p>{fixture.lineups.away.formation}</p>
-              <p>{fixture.fixture.teams.away.name}</p>
+              <p>Lineups</p>
               <img
                 src={fixture.fixture.teams.away.logo}
                 alt=""
-                className="h-8"
+                className="h-10"
               />
             </div>
-          </div>
-        </div>
-
-        {/* Field */}
-        <div className="flex flex-col shrink lg:flex-row relative w-full h-full bg-green-700 dark:bg-zinc-900 justify-self-center lg:rounded-b-3xl shadow-xl">
-          <div
-            className="absolute inset-0 bg-center lg:hidden opacity-10 z-0"
-            style={{
-              backgroundImage: `url(${fieldVertical})`,
-              backgroundSize: "cover",
-              backgroundRepeat: "no-repeat",
-            }}
-          ></div>
-          <img
-            src={field}
-            alt="Field"
-            className="absolute opacity-10 w-full h-full hidden lg:block"
-          />
-          <img
-            src={fieldVertical}
-            alt="Field"
-            className="absolute opacity-10 w-auto h-[800px] mt-20 hidden lg:hidden"
-          />
-
-          {/* Home Team */}
-          <div
-            className="relative w-1/2 hidden lg:grid"
-            style={{
-              gridTemplateColumns: `repeat(${Object.keys(groupedPlayersHome).length}, 1fr)`,
-              height: "100%",
-              padding: "30px",
-            }}
-          >
-            {renderPlayersOnGrid(groupedPlayersHome, false)}
-          </div>
-
-          <div className="flex w-full h-1/2 lg:hidden">
-            {renderPlayersFlex(groupedPlayersHome, false)}
-          </div>
-
-          {/* Away Team */}
-          <div
-            className="relative w-1/2 hidden lg:grid"
-            style={{
-              gridTemplateColumns: `repeat(${totalColumnsAway}, 1fr)`,
-              height: "100%",
-              padding: "30px",
-            }}
-          >
-            {renderPlayersOnGrid(groupedPlayersAway, true)}
-          </div>
-
-          <div className="flex w-full h-1/2 lg:hidden">
-            {renderPlayersFlex(groupedPlayersAway, true)}
-          </div>
-        </div>
-
-        {/* Footer */}
-
-        <div className="flex flex-col h-fit w-full bg-white dark:bg-gray-700 items-center justify-self-center rounded-b-2xl lg:hidden">
-          <div className="flex justify-between p-4 text-sm sm:text-base">
-            <div className="flex items-center gap-4">
-              <img
-                src={fixture.fixture.teams.away.logo}
-                alt=""
-                className="h-8"
-              />
-              <p>{fixture.fixture.teams.away.name}</p>
-              <p>{awayLineup.formation}</p>
+            <div className="flex justify-between">
+              <div className="w-full">
+                {renderPlayersLine(homeLineup.startXI, true)}
+              </div>
+              <div className="w-full">
+                {renderPlayersLine(awayLineup.startXI, false)}
+              </div>
             </div>
           </div>
-        </div>
-      </div>
+        </>
+      )}
 
       {/* BENCH */}
       <div className="flex flex-col items-center bg-white dark:bg-zinc-800 h-fit w-11/12 justify-self-center p-2 sm:p-8 mt-8 lg:mt-24 rounded-2xl max-w-[1200px] shadow-2xl">
@@ -342,9 +422,11 @@ const Lineup = ({ fixture }: LineupProps) => {
                       <p className="text-sm sm:text-base">
                         {substitute.player.name}
                       </p>
-                      <p className="text-xs text-slate-400">
-                        {playerPosition(substitute.player.pos)}
-                      </p>
+                      {substitute.player.pos !== null && (
+                        <p className="text-xs text-slate-400">
+                          {playerPosition(substitute.player.pos)}
+                        </p>
+                      )}
                     </div>
                   </div>
                   <span className="h-0.5 w-full bg-slate-600" />
@@ -366,9 +448,11 @@ const Lineup = ({ fixture }: LineupProps) => {
                       <p className="text-sm sm:text-base">
                         {substitute.player.name}
                       </p>
-                      <p className="text-xs text-slate-400">
-                        {playerPosition(substitute.player.pos)}
-                      </p>
+                      {substitute.player.pos !== null && (
+                        <p className="text-xs text-slate-400">
+                          {playerPosition(substitute.player.pos)}
+                        </p>
+                      )}
                     </div>
                   </div>
                   <span className="h-0.5 w-full bg-slate-600" />

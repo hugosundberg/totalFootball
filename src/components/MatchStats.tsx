@@ -1,6 +1,12 @@
 const MatchStats = ({ fixture }: MatchStatsProps) => {
   if (!fixture.statistics) return null;
 
+  if (fixture.statistics.home.shotsOn === null) {
+    return null;
+  }
+
+  console.log("Match statistics: ", fixture.statistics);
+
   return (
     <div className="flex flex-col bg-white dark:bg-zinc-900 h-fit mt-4 rounded-3xl items-center py-3 sm:py-10 w-full sm:w-11/12 max-w-[1200px] justify-self-center shadow-lg">
       <h2 className="text-lg sm:text-2xl mb-4">Statistics</h2>
@@ -16,34 +22,36 @@ const MatchStats = ({ fixture }: MatchStatsProps) => {
           <p className="p-2 px-4">{fixture.statistics.away.possesion}</p>
         </div>
 
-        <div className="grid grid-cols-4 w-full items-center">
-          {fixture.statistics.home.expectedGoals &&
-          fixture.statistics.away.expectedGoals &&
-          fixture.statistics.home.expectedGoals >
-            fixture.statistics.away.expectedGoals ? (
-            <>
-              <div className="w-fit bg-slate-400 dark:bg-slate-700 p-2 rounded-full px-4">
-                {fixture.statistics.home.expectedGoals}
-              </div>
-              <p className="justify-self-center col-start-2 col-span-2">
-                Expected goals
-              </p>
-              <p className="justify-self-end px-4">
-                {fixture.statistics.away.expectedGoals}
-              </p>
-            </>
-          ) : (
-            <>
-              <p className="px-4">{fixture.statistics.home.expectedGoals}</p>
-              <p className="justify-self-center col-start-2 col-span-2">
-                Expected goals
-              </p>
-              <div className="w-fit bg-gray-300 dark:bg-gray-500 p-2 rounded-full px-4 justify-self-end">
-                {fixture.statistics.away.expectedGoals}
-              </div>
-            </>
-          )}
-        </div>
+        {fixture.statistics.home.expectedGoals && (
+          <div className="grid grid-cols-4 w-full items-center">
+            {fixture.statistics.home.expectedGoals &&
+            fixture.statistics.away.expectedGoals &&
+            fixture.statistics.home.expectedGoals >
+              fixture.statistics.away.expectedGoals ? (
+              <>
+                <div className="w-fit bg-slate-400 dark:bg-slate-700 p-2 rounded-full px-4">
+                  {fixture.statistics.home.expectedGoals}
+                </div>
+                <p className="justify-self-center col-start-2 col-span-2">
+                  Expected goals
+                </p>
+                <p className="justify-self-end px-4">
+                  {fixture.statistics.away.expectedGoals}
+                </p>
+              </>
+            ) : (
+              <>
+                <p className="px-4">{fixture.statistics.home.expectedGoals}</p>
+                <p className="justify-self-center col-start-2 col-span-2">
+                  Expected goals
+                </p>
+                <div className="w-fit bg-gray-300 dark:bg-gray-500 p-2 rounded-full px-4 justify-self-end">
+                  {fixture.statistics.away.expectedGoals}
+                </div>
+              </>
+            )}
+          </div>
+        )}
 
         <div className="grid grid-cols-4 w-full items-center">
           {fixture.statistics.home.shotsTotal &&
