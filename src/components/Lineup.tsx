@@ -229,7 +229,7 @@ const Lineup = ({ fixture }: LineupProps) => {
           <div key={player.player.id} className="flex flex-col gap-2 px-6">
             <div className="flex flex-col sm:flex-row gap-3 items-center mt-2">
               <p className="w-5 h-5 p-5 bg-slate-700 rounded-full flex items-center justify-center text-white">
-                {player.player.number}
+                {player.player.number || "?"}
               </p>
               <div className="flex flex-col items-center sm:items-start">
                 <p className="text-sm sm:text-base">{player.player.name}</p>
@@ -245,11 +245,11 @@ const Lineup = ({ fixture }: LineupProps) => {
         );
       } else {
         return (
-          <div
-            key={player.player.id}
-            className="flex flex-col gap-2 items-end px-6"
-          >
+          <div key={player.player.id} className="flex flex-col gap-2 px-6">
             <div className="flex flex-col sm:flex-row gap-3 items-center mt-2">
+              <p className="w-5 h-5 p-5 bg-slate-400 rounded-full flex items-center justify-center text-white">
+                {player.player.number || "?"}
+              </p>
               <div className="flex flex-col items-center sm:items-start">
                 <p className="text-sm sm:text-base">{player.player.name}</p>
                 {player.player.pos !== null && (
@@ -258,9 +258,6 @@ const Lineup = ({ fixture }: LineupProps) => {
                   </p>
                 )}
               </div>
-              <p className="w-5 h-5 p-5 bg-slate-700 rounded-full flex items-center justify-center text-white">
-                {player.player.number}
-              </p>
             </div>
             <span className="h-0.5 w-full bg-slate-600" />
           </div>
@@ -398,15 +395,19 @@ const Lineup = ({ fixture }: LineupProps) => {
 
       {/* BENCH */}
       <div className="flex flex-col items-center bg-white dark:bg-zinc-800 h-fit w-11/12 justify-self-center p-2 sm:p-8 mt-8 lg:mt-24 rounded-2xl max-w-[1200px] shadow-2xl">
-        <p className="font-bold justify-self-center">Coach</p>
-        <div className="flex w-full justify-between mt-2">
-          <p className="text-sm sm:text-base">
-            {fixture.lineups.home.coach.name}
-          </p>
-          <p className="text-sm sm:text-base">
-            {fixture.lineups.away.coach.name}
-          </p>
-        </div>
+        {fixture.lineups.home.coach.name !== null && (
+          <>
+            <p className="font-bold justify-self-center">Coach</p>
+            <div className="flex w-full justify-between mt-2">
+              <p className="text-sm sm:text-base">
+                {fixture.lineups.home.coach.name}
+              </p>
+              <p className="text-sm sm:text-base">
+                {fixture.lineups.away.coach.name}
+              </p>
+            </div>
+          </>
+        )}
         <p className="font-bold justify-self-center p-6">Substitutes</p>
 
         <div className="flex w-full gap-4">
