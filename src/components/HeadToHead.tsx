@@ -43,6 +43,8 @@ const HeadToHead = ({
     setDraws(drawsCount);
   };
 
+  console.log("Head to head: ", headToHead);
+
   return (
     <div className="flex flex-col bg-white dark:bg-zinc-900 w-full sm:w-11/12 justify-self-center max-w-[1200px] h-fit sm:rounded-2xl overflow-auto mt-5 mb-5">
       <div className="bg-white dark:bg-zinc-800">

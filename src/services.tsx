@@ -533,6 +533,9 @@ const fetchMatch = async (matchID: number) => {
 };
 
 const fetchHeadToHead = async (team1ID: number, team2ID: number) => {
+  console.log("Team one ID: ", team1ID);
+  console.log("Team two ID: ", team2ID);
+
   try {
     const response = await fetch(
       `https://v3.football.api-sports.io/fixtures/headtohead?h2h=${team1ID}-${team2ID}`,
@@ -546,6 +549,8 @@ const fetchHeadToHead = async (team1ID: number, team2ID: number) => {
     );
 
     const data = await response.json();
+
+    console.log(data);
 
     const fixtures: Fixture[] = data.response.map((fixture: any) => ({
       fixtureInfo: {
@@ -593,6 +598,8 @@ const fetchHeadToHead = async (team1ID: number, team2ID: number) => {
         new Date(b.fixtureInfo.date).getTime() -
         new Date(a.fixtureInfo.date).getTime()
     );
+
+    console.log("Fetched fixtures: ", fixtures);
 
     return fixtures;
   } catch (error) {

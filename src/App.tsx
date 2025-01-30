@@ -22,9 +22,7 @@ export default function App() {
   const [playerCurrentStats, setPlayerCurrentStats] = useState<
     PlayerCurrentStats | undefined
   >(undefined);
-  const [currentFixtureList, setCurrentFixtureList] = useState<
-    Fixture[] | undefined
-  >();
+  const [currentFixtureList, setCurrentFixtureList] = useState<Fixture[]>();
   const [currentFixture, setCurrentFixture] = useState<MatchFacts | undefined>(
     undefined
   );

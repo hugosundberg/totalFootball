@@ -41,12 +41,14 @@ interface Fixture {
   teams: {
     home: {
       id: number
+      teamID: number
       name: string
       logo: string
       winner: boolean
     }
     away: {
       id: number
+      teamID: number
       name: string
       logo: string
       winner: boolean
@@ -166,7 +168,7 @@ interface TeamMatchStatistics {
 }
 
 interface FixtureListProps {
-  fixtures: Fixture[] | undefined
+  fixtures: Fixture[] 
   teamID: number
   handleMatchClick: (matchID: number) => void;
 }

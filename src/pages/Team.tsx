@@ -148,26 +148,27 @@ const Team = ({
                 />
               }
             />
-            <Route
-              path="fixtures"
-              element={
-                <FixtureList
-                  fixtures={fixtures}
-                  teamID={team.id}
-                  handleMatchClick={handleMatchClick}
-                />
-              }
-            />
+
+            {fixtures && (
+              <Route
+                path="fixtures"
+                element={
+                  <FixtureList
+                    fixtures={fixtures}
+                    teamID={team.id}
+                    handleMatchClick={handleMatchClick}
+                  />
+                }
+              />
+            )}
+
             <Route
               path="squad"
               element={
                 <Squad squad={squad} handlePlayerClick={handleFetchPlayer} />
               }
             />
-            <Route
-              path="stats"
-              element={<TeamStats seasonStats={seasonStats} />}
-            />
+            <Route path="stats" element={<TeamStats />} />
           </Routes>
         </div>
       </div>

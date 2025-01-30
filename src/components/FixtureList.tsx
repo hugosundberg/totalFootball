@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 const FixtureList = ({
   fixtures,
@@ -7,9 +7,10 @@ const FixtureList = ({
 }: FixtureListProps) => {
   if (!fixtures) return null;
 
+  const [currentFixtures, setCurrentFixtures] = useState<Fixture[]>([]);
+
   const fixturesPerPage = 10;
 
-  // Find the index of the first upcoming game
   const upcomingGameIndex = fixtures.findIndex(
     (fixture) => fixture.fixtureInfo.status.short === "NS"
   );
@@ -19,18 +20,19 @@ const FixtureList = ({
 
   const [currentPage, setCurrentPage] = useState(initialPage);
 
-  // Calculate the fixtures to display
   const indexOfLastFixture = currentPage * fixturesPerPage;
   const indexOfFirstFixture = indexOfLastFixture - fixturesPerPage;
-  const currentFixtures = fixtures.slice(
-    indexOfFirstFixture,
-    indexOfLastFixture
-  );
 
-  // Calculate total pages
+  useEffect(() => {
+    const currentFixtures = fixtures.slice(
+      indexOfFirstFixture,
+      indexOfLastFixture
+    );
+    setCurrentFixtures(currentFixtures);
+  }, [fixtures, indexOfFirstFixture, indexOfLastFixture]);
+
   const totalPages = Math.ceil(fixtures.length / fixturesPerPage);
 
-  // Handle page change
   const handlePageChange = (pageNumber: number) => {
     setCurrentPage(pageNumber);
   };
@@ -70,6 +72,34 @@ const FixtureList = ({
     }
   };
 
+  useEffect(() => {
+    console.log("Current fixtures: ", currentFixtures);
+  }, [currentFixtures]);
+
+  const getFixtureBackgroundColor = (fixture: Fixture, teamID: number) => {
+    const isHomeTeam = fixture.teams.home.teamID === teamID;
+    const isAwayTeam = fixture.teams.away.teamID === teamID;
+
+    console.log("Home team: ", isHomeTeam);
+    console.log("Away team: ", isAwayTeam);
+
+    if (isHomeTeam) {
+      return fixture.teams.home.winner
+        ? "bg-green-700"
+        : fixture.teams.away.winner
+          ? "bg-red-700"
+          : "bg-gray-500";
+    } else if (isAwayTeam) {
+      return fixture.teams.away.winner
+        ? "bg-green-700"
+        : fixture.teams.home.winner
+          ? "bg-red-700"
+          : "bg-gray-500";
+    } else {
+      return "bg-transparent";
+    }
+  };
+
   return (
     <div className="flex flex-col bg-zinc-900 w-full h-fit rounded-2xl overflow-auto mb-10">
       {/* Pagination Controls */}
@@ -88,6 +118,8 @@ const FixtureList = ({
           </button>
         ))}
       </div>
+
+      {/* Fixture List */}
       {currentFixtures.map((fixture, index) => (
         <div
           key={index}
@@ -109,7 +141,7 @@ const FixtureList = ({
           </div>
           <div className="grid grid-cols-custom-fixture gap-2 items-center pb-8">
             <span className="justify-self-end text-center ">
-              {fixture.teams.home.name}
+              {fixture.teams.home.name}{" "}
             </span>
             <img
               src={fixture.teams.home.logo}
@@ -118,33 +150,17 @@ const FixtureList = ({
             />
 
             {fixture.fixtureInfo.status.short === "1H" ||
-              fixture.fixtureInfo.status.short === "HT" ||
-              fixture.fixtureInfo.status.short === "2H" ||
-              (fixture.fixtureInfo.status.short === "ET" && (
-                <div>
-                  {fixture.goals.home} - {fixture.goals.away}
-                </div>
-              ))}
+            fixture.fixtureInfo.status.short === "HT" ||
+            fixture.fixtureInfo.status.short === "2H" ||
+            fixture.fixtureInfo.status.short === "ET" ? (
+              <div>
+                {fixture.goals.home} - {fixture.goals.away}
+              </div>
+            ) : null}
 
             {fixture.fixtureInfo.status.short === "FT" && (
               <div
-                className={`text-center rounded-lg ${
-                  fixture.teams.home.id === teamID && fixture.teams.home.winner
-                    ? "bg-green-700" // Home wins
-                    : fixture.teams.away.id === teamID &&
-                        fixture.teams.away.winner
-                      ? "bg-green-700" // Away wins
-                      : fixture.teams.home.id === teamID &&
-                          fixture.teams.away.winner
-                        ? "bg-red-700" // Home losses
-                        : fixture.teams.away.id === teamID &&
-                            fixture.teams.home.winner
-                          ? "bg-red-700" // Away losses
-                          : fixture.teams.away.winner === null &&
-                              fixture.teams.home.winner === null
-                            ? "bg-gray-500" // Draws
-                            : "" // Default
-                }`}
+                className={`text-center rounded-lg ${getFixtureBackgroundColor(fixture, teamID)}`}
               >
                 {fixture.goals.home} - {fixture.goals.away}
               </div>
@@ -153,21 +169,25 @@ const FixtureList = ({
             {fixture.fixtureInfo.status.short === "PEN" && (
               <div
                 className={`text-center rounded-lg ${
-                  fixture.teams.home.id === teamID && fixture.teams.home.winner
-                    ? "bg-green-700" // Home wins
-                    : fixture.teams.away.id === teamID &&
-                        fixture.teams.away.winner
-                      ? "bg-green-700" // Away wins
-                      : fixture.teams.home.id === teamID &&
-                          fixture.teams.away.winner
+                  fixture.teams.home.teamID === teamID
+                    ? fixture.teams.home.winner
+                      ? "bg-green-700" // Home wins
+                      : fixture.teams.away.winner
                         ? "bg-red-700" // Home losses
-                        : fixture.teams.away.id === teamID &&
-                            fixture.teams.home.winner
+                        : fixture.teams.away.winner === null &&
+                            fixture.teams.home.winner === null
+                          ? "bg-gray-500" // Draws
+                          : "" // Default
+                    : fixture.teams.away.teamID === teamID
+                      ? fixture.teams.away.winner
+                        ? "bg-green-700" // Away wins
+                        : fixture.teams.home.winner
                           ? "bg-red-700" // Away losses
                           : fixture.teams.away.winner === null &&
                               fixture.teams.home.winner === null
                             ? "bg-gray-500" // Draws
                             : "" // Default
+                      : ""
                 }`}
               >
                 <p>PEN</p>
@@ -190,7 +210,7 @@ const FixtureList = ({
               className="justify-self-center h-5"
               alt="away-team-logo"
             />
-            <span className="justify-self-starttext-center">
+            <span className="justify-self-start text-center">
               {fixture.teams.away.name}
             </span>
           </div>
