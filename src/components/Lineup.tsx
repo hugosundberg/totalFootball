@@ -400,12 +400,26 @@ const Lineup = ({ fixture }: LineupProps) => {
           <>
             <p className="font-bold justify-self-center">Coach</p>
             <div className="flex w-full justify-between mt-2">
-              <p className="text-sm sm:text-base">
-                {fixture.lineups.home.coach.name}
-              </p>
-              <p className="text-sm sm:text-base">
-                {fixture.lineups.away.coach.name}
-              </p>
+              <div className="flex gap-3 items-center">
+                <img
+                  src={fixture.lineups.home.coach.photo}
+                  alt=""
+                  className="h-10 rounded-full"
+                />
+                <p className="text-sm sm:text-base">
+                  {fixture.lineups.home.coach.name}
+                </p>
+              </div>
+              <div className="flex gap-3 items-center">
+                <p className="text-sm sm:text-base">
+                  {fixture.lineups.away.coach.name}
+                </p>
+                <img
+                  src={fixture.lineups.away.coach.photo}
+                  alt=""
+                  className="h-10 rounded-full"
+                />
+              </div>
             </div>
           </>
         )}
