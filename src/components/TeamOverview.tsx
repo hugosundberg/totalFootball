@@ -4,10 +4,15 @@ const TeamOverview = ({ team, fixtures }: TeamOverviewProps) => {
   if (!fixtures) return null;
 
   const [nextFixture, setNextFixture] = useState<Fixture | null>(null);
+  const [currentForm, setCurrentForm] = useState<Fixture[]>();
+  const [index, setIndex] = useState<Number>(0);
 
   useEffect(() => {
-    return setNextFixture(getNextFixture(fixtures));
-  });
+    setNextFixture(getNextFixture(fixtures));
+    getCurrentForm(fixtures);
+  }, [fixtures]);
+
+  console.log(fixtures);
 
   const getNextFixture = (fixtures: Fixture[]) => {
     const today = new Date();
@@ -17,14 +22,16 @@ const TeamOverview = ({ team, fixtures }: TeamOverviewProps) => {
         return fixtures[index];
       }
     }
-    return null; // Return null if no future fixture is found
+    return null;
   };
+
+  const getCurrentForm = (fixtures: Fixture[]) => {};
 
   console.log("Next fixture: ", getNextFixture(fixtures));
 
   return (
     <div className="w-full">
-      <div className="bg-zinc-800 w-full h-full p-8">
+      <div className="bg-zinc-800 w-full h-full p-8 rounded-xl">
         <p>Next match</p>
         <div className="flex justify-between mt-6 px-10">
           <div className="flex flex-col items-center gap-2">
