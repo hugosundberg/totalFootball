@@ -5,8 +5,6 @@ const MatchStats = ({ fixture }: MatchStatsProps) => {
     return null;
   }
 
-  console.log("Match statistics: ", fixture.statistics);
-
   return (
     <div className="flex flex-col bg-white dark:bg-zinc-900 h-fit mt-4 rounded-3xl items-center py-3 sm:py-10 w-full sm:w-11/12 max-w-[1200px] justify-self-center shadow-lg">
       <h2 className="text-lg sm:text-2xl mb-4">Statistics</h2>
@@ -213,7 +211,14 @@ const MatchStats = ({ fixture }: MatchStatsProps) => {
               </>
             )
           ) : (
-            <p>No yellow cards data available</p>
+            <>
+              <div className="w-fit px-4">0</div>
+              <div className="flex items-center justify-self-center gap-3 colstart-2 col-span-2">
+                <p>Yellow cards</p>
+                <div className="bg-yellow-400 h-6 w-4 rounded-sm"></div>
+              </div>
+              <div className="w-fit px-4 justify-self-end">0</div>
+            </>
           )}
         </div>
 

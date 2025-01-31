@@ -27,8 +27,6 @@ const Match = ({
 
   if (!fixture) return;
 
-  console.log(fixture);
-
   const dateFormatter = (date: string) => {
     try {
       const extractedDate = date.slice(0, 10);

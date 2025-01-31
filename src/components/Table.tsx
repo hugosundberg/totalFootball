@@ -14,6 +14,8 @@ const Table = ({ standing, handleFetchTeam, currentTeam }: TableProps) => {
     navigate(`/team/${id}`);
   };
 
+  console.log(standing);
+
   return (
     <div className="bg-white text-black dark:text-white dark:bg-zinc-800 h-fit w-full pt-3 rounded-2xl overflow-hidden">
       <div className="flex flex-col">
