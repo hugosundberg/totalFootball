@@ -15,15 +15,15 @@ const Table = ({ standing, handleFetchTeam, currentTeam }: TableProps) => {
   };
 
   return (
-    <div className="bg-white text-black dark:text-white dark:bg-zinc-900 h-fit w-full pt-3 rounded-2xl overflow-hidden border-slate-800 border-2">
+    <div className="bg-white text-black dark:text-white dark:bg-zinc-800 h-fit w-full pt-3 rounded-2xl overflow-hidden">
       <div className="flex flex-col">
         {standing && (
           <>
-            <div className="flex flex-row justify-between">
+            <div className="flex flex-row justify-between px-3 py-2">
               <div>
                 <p className="pl-4 w-7 text-center">#</p>
               </div>
-              <div className="md:md:w-60 mr-4 md:md:mr-3 flex flex-row gap-3">
+              <div className="md:md:w-72 mr-4 md:md:mr-3 flex flex-row gap-7">
                 <p>PL</p>
                 <p>GD</p>
                 <p>PT</p>
@@ -33,17 +33,14 @@ const Table = ({ standing, handleFetchTeam, currentTeam }: TableProps) => {
           </>
         )}
         {standing && standing.length > 0 ? (
-          standing.map((team, index) => (
+          standing.map((team) => (
             <>
-              {index !== standing.length && (
-                <span className="w-full bg-slate-200 dark:bg-slate-800 h-0.5" />
-              )}
               <div
                 key={team.team.id}
-                className={`flex flex-row p-3 hover:cursor-pointer justify-between ${
+                className={`flex flex-row p-3 px-6 hover:cursor-pointer justify-between ${
                   currentTeam?.id === team.team.id
-                    ? "bg-blue-100 dark:bg-slate-600"
-                    : "dark:hover:bg-slate-700"
+                    ? "bg-blue-100 dark:bg-zinc-900"
+                    : "dark:hover:bg-zinc-700"
                 }`}
                 onClick={() => handleTeamClick(team.team.id)}
               >
@@ -57,7 +54,7 @@ const Table = ({ standing, handleFetchTeam, currentTeam }: TableProps) => {
                   <p>{team.team.name}</p>
                 </div>
 
-                <div className="flex flex-row gap-2 md:md:w-60">
+                <div className="flex flex-row gap-6 md:md:min-w-72">
                   <p className="w-4 mr-2">{team.all.played}</p>
                   <p className="w-4 mr-2 text-center">{team.goalsDiff}</p>
                   <p className="w-4 mr-2 text-center">{team.points}</p>

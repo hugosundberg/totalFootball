@@ -21,6 +21,9 @@ interface TeamProps {
 interface TeamOverviewProps {
   team: Team
   fixtures: Fixture[] | undefined
+  handleMatchClick: (matchID: number) => void
+  standing?: TeamStanding[]
+  handleFetchTeam: (id: number) => void
 } 
 
 interface Fixture {

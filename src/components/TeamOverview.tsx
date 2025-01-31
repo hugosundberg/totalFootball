@@ -1,6 +1,13 @@
 import { useEffect, useState } from "react";
+import Table from "./Table";
 
-const TeamOverview = ({ team, fixtures }: TeamOverviewProps) => {
+const TeamOverview = ({
+  team,
+  fixtures,
+  handleMatchClick,
+  standing,
+  handleFetchTeam,
+}: TeamOverviewProps) => {
   if (!fixtures) return null;
 
   const [nextFixture, setNextFixture] = useState<Fixture | null>(null);
@@ -111,13 +118,16 @@ const TeamOverview = ({ team, fixtures }: TeamOverviewProps) => {
       </div>
 
       {/* Current form */}
-      <div className="bg-zinc-800 w-full p-8 rounded-xl mt-4">
+      <div className="bg-zinc-800 w-full p-6 rounded-xl mt-4">
         <p>Team form</p>
-        <div className="flex justify-between mt-6">
+        <div className="flex justify-between">
           {currentForm?.map((fixture, index) => (
-            <div key={index} className="flex flex-col items-center gap-2">
+            <div key={index} className="flex flex-col items-center gap-2 mt-2">
               {fixture.teams.away.teamID === team.id ? (
-                <div className="flex flex-col items-center gap-2">
+                <div
+                  className="flex flex-col items-center gap-4 hover:cursor-pointer p-2 sm:px-6 hover:bg-zinc-900 rounded-xl"
+                  onClick={() => handleMatchClick(fixture.fixtureInfo.id)}
+                >
                   <p
                     className={`px-2 rounded-lg ${
                       fixture.teams.away.winner
@@ -132,7 +142,10 @@ const TeamOverview = ({ team, fixtures }: TeamOverviewProps) => {
                   <img src={fixture.teams.home.logo} alt="" className="h-10" />
                 </div>
               ) : (
-                <div className="flex flex-col items-center gap-2">
+                <div
+                  className="flex flex-col items-center gap-4 hover:cursor-pointer p-2 sm:px-6 hover:bg-zinc-900 rounded-xl"
+                  onClick={() => handleMatchClick(fixture.fixtureInfo.id)}
+                >
                   <p
                     className={`px-2 rounded-lg ${
                       fixture.teams.home.winner
@@ -150,6 +163,15 @@ const TeamOverview = ({ team, fixtures }: TeamOverviewProps) => {
             </div>
           ))}
         </div>
+
+        {/* TABLE */}
+      </div>
+      <div className="mt-4">
+        <Table
+          standing={standing}
+          handleFetchTeam={handleFetchTeam}
+          currentTeam={team}
+        />
       </div>
     </div>
   );
