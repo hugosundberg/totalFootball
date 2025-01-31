@@ -96,8 +96,8 @@ const Team = ({
                 to={`/team/${id}/fixtures`}
                 className={({ isActive }) =>
                   isActive
-                    ? "text-green-700 active hidden sm:flex"
-                    : "text-gray-400 hover:text-gray-500 hidden sm:flex"
+                    ? "text-green-700 active"
+                    : "text-gray-400 hover:text-gray-500"
                 }
               >
                 <div className="pb-2 px-2">Matches</div>
@@ -137,7 +137,10 @@ const Team = ({
         {/* Dynamic Routes */}
         <div className="flex w-full sm:w-11/12 sm:mt-4 justify-self-center">
           <Routes>
-            <Route path="/" element={<TeamOverview team={team} />} />
+            <Route
+              path="/"
+              element={<TeamOverview team={team} fixtures={fixtures} />}
+            />
             <Route
               path="table"
               element={

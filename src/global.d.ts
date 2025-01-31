@@ -20,6 +20,7 @@ interface TeamProps {
 
 interface TeamOverviewProps {
   team: Team
+  fixtures: Fixture[] | undefined
 } 
 
 interface Fixture {
