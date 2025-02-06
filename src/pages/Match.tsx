@@ -32,8 +32,8 @@ const Match = ({
 
   if (!fixture) return;
 
-
-
+  console.log("Match events: ", matchEvents);
+  
 
   const dateFormatter = (date: string) => {
     try {
