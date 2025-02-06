@@ -545,6 +545,29 @@ const fetchMatchEvents = async (matchID: number) => {
         },
       }
     );
+
+    const data = await response.json();
+
+    const matchEvents: MatchEvent[] = data.response.map((event: any) => ({
+      time: {
+        elapsed: event.elapsed,
+        extra: event.extra,
+      },
+      team: {
+        id: event.team.id,
+        name: event.team.name,
+        logo: event.team.logo,
+      },
+      player: {
+        id: event.player.id,
+        name: event.player.name,
+      },
+    }));
+
+    console.log("Match Events", data);
+
+    return matchEvents;
+    
   } catch (error) {
     console.error("Error fetching match events: ", error);
   }
@@ -671,4 +694,5 @@ export default {
   fetchMatch,
   fetchTeamSeasonStats,
   fetchHeadToHead,
+  fetchMatchEvents
 };

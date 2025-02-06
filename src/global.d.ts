@@ -128,6 +128,29 @@ interface MatchFacts {
   }
 }
 
+interface MatchEvent {
+  time: {
+    elapsed: number
+    extra: number
+  }
+  team: {
+    id: number
+    name: string
+    logo: string
+  }
+  player: {
+    id: number
+    name: string
+  }
+  assist: {
+    id: number
+    name: string
+  }
+  type: string
+  detail: string
+  comments: string
+}
+
 interface LineupProps {
   fixture: MatchFacts
 }
@@ -141,7 +164,6 @@ interface Lineup {
   formation: string
   startXI: LineupPlayer[]
   substitutes: LineupPlayer[]
-  
 }
 
 interface LineupPlayer {
@@ -182,6 +204,7 @@ interface MatchProps {
   handleFetchMatch: (matchID: number) => void;
   headToHead?: Fixture[]
   handleFetchTeam: (teamID: number) => void
+  handleFetchMatchEvents: (matchID: number) =>Promise<MatchEvent[]>
 }
 
 interface MatchStatsProps {

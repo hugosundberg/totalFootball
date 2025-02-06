@@ -1,4 +1,4 @@
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import Lineup from "../components/Lineup";
 import MatchStats from "../components/MatchStats";
@@ -9,13 +9,18 @@ const Match = ({
   handleFetchMatch,
   headToHead,
   handleFetchTeam,
+  handleFetchMatchEvents
 }: MatchProps) => {
   const { id } = useParams<{ id: string }>();
+  const [matchEvents, setMatchEvents] = useState<Promise<MatchEvent[]>>();
 
   useEffect(() => {
     if (id) {
       handleFetchMatch(Number(id));
     }
+
+    const fetchedMatchEvents = handleFetchMatchEvents(Number(id));
+    setMatchEvents(fetchedMatchEvents);
   }, [id, handleFetchMatch]);
 
   const navigate = useNavigate();
@@ -26,6 +31,9 @@ const Match = ({
   };
 
   if (!fixture) return;
+
+
+
 
   const dateFormatter = (date: string) => {
     try {
