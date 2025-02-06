@@ -532,6 +532,25 @@ const fetchMatch = async (matchID: number) => {
   }
 };
 
+const fetchMatchEvents = async (matchID: number) => {
+  try {
+    const response = await fetch(
+      `https://v3.football.api-sports.io/fixtures/events?fixture=${matchID}`,
+      {
+        method: "GET",
+        headers: {
+          "x-rapidapi-host": "v3.football.api-sports.io",
+          "x-rapidapi-key": apiKey
+
+        },
+      }
+    );
+  } catch (error) {
+    console.error("Error fetching match events: ", error);
+  }
+}
+
+
 const fetchHeadToHead = async (team1ID: number, team2ID: number) => {
   try {
     const response = await fetch(
