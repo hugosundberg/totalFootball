@@ -26,6 +26,7 @@ export default function App() {
   const [currentFixture, setCurrentFixture] = useState<MatchFacts | undefined>(
     undefined
   );
+  const [matchEvents, setMatchEvents] = useState<MatchEvent[]>();
 
   const [currentLeague, setCurrentLeague] = useState(39);
   const [headToHead, setHeadToHead] = useState<Fixture[] | undefined>();
@@ -55,12 +56,12 @@ export default function App() {
     [navigate]
   );
 
-  const handleFetchMatchEvents = async (matchID: number): Promise<MatchEvent[]> => {
+  const handleFetchMatchEvents = async (matchID: number) => {
     if (matchID) {
       try {
         const fetchedMatchEvents = await footballApi.fetchMatchEvents(matchID);
 
-        return fetchedMatchEvents !== undefined ? fetchedMatchEvents : [];
+        setMatchEvents(fetchedMatchEvents);
       } catch (error) {
         console.error("Error fetching match events: ", error);
         return [];
@@ -185,6 +186,7 @@ export default function App() {
               headToHead={headToHead}
               handleFetchTeam={handleFetchTeam}
               handleFetchMatchEvents={handleFetchMatchEvents}
+              matchEvents={matchEvents}
             />
           }
         />

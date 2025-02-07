@@ -129,6 +129,7 @@ interface MatchFacts {
 }
 
 interface MatchEvent {
+  id: number
   time: {
     elapsed: number
     extra: number
@@ -152,6 +153,11 @@ interface MatchEvent {
 }
 
 interface LineupProps {
+  fixture: MatchFacts
+}
+
+interface MatchEventProps {
+  matchEvents: MatchEvent[] | undefined
   fixture: MatchFacts
 }
 
@@ -204,7 +210,8 @@ interface MatchProps {
   handleFetchMatch: (matchID: number) => void;
   headToHead?: Fixture[]
   handleFetchTeam: (teamID: number) => void
-  handleFetchMatchEvents: (matchID: number) =>Promise<MatchEvent[]>
+  handleFetchMatchEvents: (matchID: number) => void
+  matchEvents?: MatchEvent[]
 }
 
 interface MatchStatsProps {

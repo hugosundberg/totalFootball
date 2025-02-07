@@ -1,27 +1,28 @@
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import Lineup from "../components/Lineup";
 import MatchStats from "../components/MatchStats";
 import HeadToHead from "../components/HeadToHead";
+import MatchEvents from "../components/MatchEvents";
 
 const Match = ({
   fixture,
   handleFetchMatch,
   headToHead,
   handleFetchTeam,
-  handleFetchMatchEvents
+  handleFetchMatchEvents,
+  matchEvents
 }: MatchProps) => {
   const { id } = useParams<{ id: string }>();
-  const [matchEvents, setMatchEvents] = useState<Promise<MatchEvent[]>>();
+
 
   useEffect(() => {
     if (id) {
       handleFetchMatch(Number(id));
     }
 
-    const fetchedMatchEvents = handleFetchMatchEvents(Number(id));
-    setMatchEvents(fetchedMatchEvents);
-  }, [id, handleFetchMatch]);
+    handleFetchMatchEvents(Number(id));
+  }, [id, handleFetchMatch ]);
 
   const navigate = useNavigate();
 
@@ -32,7 +33,8 @@ const Match = ({
 
   if (!fixture) return;
 
-  console.log("Match events: ", matchEvents);
+  console.log("Match events:", matchEvents);
+  
   
 
   const dateFormatter = (date: string) => {
@@ -69,6 +71,13 @@ const Match = ({
       return null;
     }
   };
+
+  const getGoalEvents = (events: MatchEvent[]) => {
+    return events.filter((event) => event.type === "Goal");
+  }
+
+  console.log("Match events in Match.tsx:", matchEvents);
+  
 
   return (
     <div className="bg-slate-200 dark:bg-black h-full pt-14 sm:pt-20  dark:text-white overflow-hidden">
@@ -212,12 +221,12 @@ const Match = ({
           <div
             className="flex flex-col sm:flex-row items-center gap-4 hover:cursor-pointer hover:underline"
             onClick={() => handleTeamClick(fixture.fixture.teams.away.id)}
-          >
+            >
             <img
               src={fixture.fixture.teams.away.logo}
               alt="away-team-logo"
               className="h-10"
-            />
+              />
             <p className="text-sm sm:text-xl">
               {fixture.fixture.teams.away.name}
             </p>
@@ -225,8 +234,11 @@ const Match = ({
         </div>
       </div>
 
+      <MatchEvents matchEvents={matchEvents} fixture={fixture}/>
+
       {(fixture.fixtureInfo.status.short === "NS" ||
-        fixture.fixtureInfo.status.short === "PST") && (
+        fixture.fixtureInfo.status.short === "PST" || 
+          fixture.fixtureInfo.status.short === "TBD") && (
         <HeadToHead
           fixture={fixture.fixture}
           headToHead={headToHead}

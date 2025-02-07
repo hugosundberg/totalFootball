@@ -549,9 +549,10 @@ const fetchMatchEvents = async (matchID: number) => {
     const data = await response.json();
 
     const matchEvents: MatchEvent[] = data.response.map((event: any) => ({
+      id: event.id,
       time: {
-        elapsed: event.elapsed,
-        extra: event.extra,
+        elapsed: event.time.elapsed,
+        extra: event.time.extra,
       },
       team: {
         id: event.team.id,
@@ -562,6 +563,13 @@ const fetchMatchEvents = async (matchID: number) => {
         id: event.player.id,
         name: event.player.name,
       },
+      assist: {
+        id: event.assist.id,
+        name: event.assist.name,
+      },
+      type: event.type,
+      detail: event.detail,
+      comments: event.comments,
     }));
 
     console.log("Match Events", data);
