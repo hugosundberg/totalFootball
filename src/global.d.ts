@@ -226,9 +226,35 @@ interface TeamStats {
 
 interface TeamSeasonStats {
   form: string
+  fixtures: {
+    played: {
+      home: number
+      away: number
+      total: number
+    }
+    wins: {
+      home: number
+      away: number
+      total: number
+    }
+    draws: {
+      home: number
+      away: number
+      total: number
+    }
+    losses: {
+      home: number
+      away: number
+      total: number
+    }
+  }
+  cards?: {
+    yellow: number
+    red: number
+  }
   goals: {
     for: {
-      avarage: {
+      average: {
         home: number
         away: number
         total: number
@@ -240,7 +266,7 @@ interface TeamSeasonStats {
       }
     }
     against: {
-      avarage: {
+      average: {
         home: number
         away: number
         total: number

@@ -540,8 +540,7 @@ const fetchMatchEvents = async (matchID: number) => {
         method: "GET",
         headers: {
           "x-rapidapi-host": "v3.football.api-sports.io",
-          "x-rapidapi-key": apiKey
-
+          "x-rapidapi-key": apiKey,
         },
       }
     );
@@ -575,12 +574,10 @@ const fetchMatchEvents = async (matchID: number) => {
     console.log("Match Events", data);
 
     return matchEvents;
-    
   } catch (error) {
     console.error("Error fetching match events: ", error);
   }
-}
-
+};
 
 const fetchHeadToHead = async (team1ID: number, team2ID: number) => {
   try {
@@ -683,7 +680,65 @@ const fetchTeamSeasonStats = async (teamID: number) => {
 
     const data = await response.json();
 
-    return data;
+    const teamStats = data.response[0];
+
+    const teamSeasonStats: TeamSeasonStats = {
+      form: teamStats.form,
+      fixtures: {
+        played: {
+          home: teamStats.fixtures.played.home,
+          away: teamStats.fixtures.played.away,
+          total: teamStats.fixtures.played.total,
+        },
+        wins: {
+          home: teamStats.fixtures.wins.home,
+          away: teamStats.fixtures.wins.away,
+          total: teamStats.fixtures.wins.total,
+        },
+        draws: {
+          home: teamStats.fixtures.draws.home,
+          away: teamStats.fixtures.draws.away,
+          total: teamStats.fixtures.draws.total,
+        },
+        losses: {
+          home: teamStats.fixtures.losses.home,
+          away: teamStats.fixtures.losses.away,
+          total: teamStats.fixtures.losses.total,
+        },
+      },
+      
+      goals: {
+        for: {
+          average: {
+            home: teamStats.goals.for.average.home,
+            away: teamStats.goals.for.average.away,
+            total: teamStats.goals.for.average.total,
+          },
+          total: {
+            home: teamStats.goals.for.total.home,
+            away: teamStats.goals.for.total.away,
+            total: teamStats.goals.for.total.total,
+          },
+        },
+        against: {
+          average: {
+            home: teamStats.goals.against.average.home,
+            away: teamStats.goals.against.average.away,
+            total: teamStats.goals.against.average.total,
+          },
+          total: {
+            home: teamStats.goals.against.total.home,
+            away: teamStats.goals.against.total.away,
+            total: teamStats.goals.against.total.total,
+          },
+        },
+      },
+    }
+
+
+    console.log("Team Stats", data);
+
+    return teamSeasonStats;
   } catch (error) {
     console.error("Error fetching team stats: ", error);
   }
@@ -702,5 +757,5 @@ export default {
   fetchMatch,
   fetchTeamSeasonStats,
   fetchHeadToHead,
-  fetchMatchEvents
+  fetchMatchEvents,
 };

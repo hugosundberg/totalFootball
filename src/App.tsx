@@ -10,7 +10,7 @@ import Match from "./pages/Match";
 
 export default function App() {
   const [currentTeam, setCurrentTeam] = useState<Team | undefined>(undefined);
-  const [currentTeamSeasonStats, setCurrentTeamSeasonStats] = useState();
+  const [currentTeamSeasonStats, setCurrentTeamSeasonStats] = useState<TeamSeasonStats | undefined>(undefined);
   const [currentPlayer, setCurrentPlayer] = useState<Player | undefined>(
     undefined
   );
