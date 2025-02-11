@@ -679,9 +679,12 @@ const fetchTeamSeasonStats = async (teamID: number) => {
     );
 
     const data = await response.json();
+    
 
-    const teamStats = data.response[0];
+    const teamStats = data.response;
 
+    console.log("Team Stats", teamStats);
+    
     const teamSeasonStats: TeamSeasonStats = {
       form: teamStats.form,
       fixtures: {
@@ -701,9 +704,9 @@ const fetchTeamSeasonStats = async (teamID: number) => {
           total: teamStats.fixtures.draws.total,
         },
         losses: {
-          home: teamStats.fixtures.losses.home,
-          away: teamStats.fixtures.losses.away,
-          total: teamStats.fixtures.losses.total,
+          home: teamStats.fixtures.loses.home,
+          away: teamStats.fixtures.loses.away,
+          total: teamStats.fixtures.loses.total,
         },
       },
       
@@ -734,9 +737,6 @@ const fetchTeamSeasonStats = async (teamID: number) => {
         },
       },
     }
-
-
-    console.log("Team Stats", data);
 
     return teamSeasonStats;
   } catch (error) {
