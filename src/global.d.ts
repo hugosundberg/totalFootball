@@ -15,7 +15,7 @@ interface TeamProps {
   handleFetchPlayer: (playerID: number) => void;
   fixtures?: Fixture[];
   handleMatchClick: (matchID: number) => void;
-  seasonStats?: TeamStats;  
+  seasonStats?: TeamSeasonStats | undefined;  
 }
 
 interface TeamOverviewProps {
@@ -219,9 +219,10 @@ interface MatchStatsProps {
 }
 
 interface TeamStats {
-  played: number
-  seasonStats: TeamSeasonStats
+  played?: number
+  seasonStats: TeamSeasonStats | undefined
 }
+
 
 interface TeamSeasonStats {
   form: string

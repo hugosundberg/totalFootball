@@ -179,7 +179,7 @@ const Team = ({
                 <Squad squad={squad} handlePlayerClick={handleFetchPlayer} />
               }
             />
-            <Route path="stats" element={<TeamStats />} />
+            <Route path="stats" element={<TeamStats seasonStats={seasonStats}/>} />
           </Routes>
         </div>
       </div>
