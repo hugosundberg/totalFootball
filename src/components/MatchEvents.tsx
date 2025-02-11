@@ -18,20 +18,20 @@ const MatchEvents = ({ matchEvents, fixture }: MatchEventProps) => {
               </div>
 
               {event.type === "Goal" && (
-                <div className="flex items-center gap-2">
+                <div className={`flex items-center gap-3 ${event.team.id !== fixture.fixture.teams.home.id ? "flex-row-reverse" : ""}`}>
                   <div className="p-2 border-2 rounded-full border-zinc-700">
                     <img src={football} alt="" className="h-4 w-4" />
                   </div>
-                  <div>
+                  <div className={`${event.team.id !== fixture.fixture.teams.home.id ? "flex flex-col items-end" : ""}`}>
                     <p>{event.player.name}</p>
                     <p className="text-xs text-slate-400">
-                      {event.assist.name}
+                       {event.assist.name !== null ? `Assist: ${event.assist.name}` : ""}                    
                     </p>
                   </div>
                 </div>
               )}
               {event.type === "Card" && (
-                <div className="flex items-center justify-center gap-5">
+                <div className={`flex items-center gap-3 ${event.team.id !== fixture.fixture.teams.home.id ? "flex-row-reverse" : ""}`}>
                   <div className="p-2 h-10 w-10 border-2 rounded-full border-zinc-700">
                     <div
                       className={`flex items-center h-5 w-4 rounded-sm justify-self-center ${event.detail === "Yellow Card" ? "bg-yellow-500" : "bg-red-600"} `}
@@ -42,12 +42,18 @@ const MatchEvents = ({ matchEvents, fixture }: MatchEventProps) => {
               )}
 
               {event.type === "subst" && (
-                <div>
+                <div className={`flex items-center gap-3 ${event.team.id !== fixture.fixture.teams.home.id ? "flex-row-reverse" : ""}`}>
                   <div className="p-2 border-2 rounded-full border-zinc-700">
                     <img src={sub} alt="" className="h-5" />
                   </div>
+                  <div className={`${event.team.id !== fixture.fixture.teams.home.id ? "flex flex-col items-end" : ""}`}>
+                    <p className="text-green-600">{event.assist.name}</p>
+                    <p className="text-xs text-red-700">{event.player.name}</p>
+                  </div>
                 </div>
               )}
+
+
             </div>
           </div>
         ))}
