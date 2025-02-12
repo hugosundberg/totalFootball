@@ -50,10 +50,10 @@ const Team = ({
   }
 
   return (
-    <div className="flex w-full dark:text-white dark:bg-black h-screen justify-center">
+    <div className="flex w-full bg-slate-200 dark:text-white dark:bg-black h-screen justify-center">
       <div className="relative pt-16 dark:bg-black h-full w-full md:lg:max-w-screen-xl">
         {/* Team Header */}
-        <div className="dark:bg-zinc-900 p-4 sm:p-8 flex flex-col w-full relative sm:rounded-2xl sm:mt-4 sm:w-11/12 sm:justify-self-center">
+        <div className="bg-white dark:bg-zinc-900 p-4 sm:p-8 flex flex-col w-full relative sm:rounded-2xl sm:mt-4 sm:w-11/12 sm:justify-self-center shadow-lg">
           <div className="flex">
             <img
               src={team.logo}

@@ -81,7 +81,7 @@ const TeamOverview = ({
   return (
     <div className="w-full">
       {/* Next match */}
-      <div className="bg-zinc-800 w-full p-6 rounded-xl">
+      <div className="bg-white dark:bg-zinc-800 w-full p-6 rounded-xl shadow-lg">
         <div className="flex justify-between">
           <p>Next match</p>
           <div className="flex items-center gap-2">
@@ -118,7 +118,7 @@ const TeamOverview = ({
       </div>
 
       {/* Current form */}
-      <div className="bg-zinc-800 w-full p-6 rounded-xl mt-4">
+      <div className="bg-white dark:bg-zinc-800 w-full p-6 rounded-xl mt-4 shadow-lg">
         <p>Team form</p>
         <div className="flex justify-between">
           {currentForm?.map((fixture, index) => (

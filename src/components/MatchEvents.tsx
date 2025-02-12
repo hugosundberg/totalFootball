@@ -14,8 +14,8 @@ const MatchEvents = ({ matchEvents, fixture }: MatchEventProps) => {
   if (!matchEvents) return null;
 
   return (
-    <div className="flex flex-col items-center gap-4 h-fit p-4 bg-zinc-900 my-4 w-full sm:w-11/12 max-w-[1200px] justify-self-center rounded-2xl">
-      <h2>Events</h2>
+    <div className="flex flex-col items-center gap-4 h-fit p-4 bg-white dark:bg-zinc-900 my-4 w-full sm:w-11/12 max-w-[1200px] justify-self-center rounded-2xl shadow-xl">
+      <h2 className="font-bold text-xl">Events</h2>
 
       <div className="w-full text-sm sm:text-base">
         {matchEvents.map((event) => (
@@ -29,7 +29,7 @@ const MatchEvents = ({ matchEvents, fixture }: MatchEventProps) => {
                             <div className="flex items-center gap-3">
                                 <div className="flex flex-col items-end">
                                     <p>{event.player.name}</p>
-                                    <p className="text-xs text-slate-400">
+                                    <p className="text-xs dark:text-slate-400">
                                     {event.assist.name !== null
                                         ? `Assist: ${event.assist.name}`
                                         : ""}
@@ -67,7 +67,7 @@ const MatchEvents = ({ matchEvents, fixture }: MatchEventProps) => {
                 ) : (
                     <div></div>
                 )}
-                <div className="bg-zinc-700 w-10 h-10 rounded-full flex items-center justify-center justify-self-center">
+                <div className="text-white bg-zinc-700 w-10 h-10 rounded-full flex items-center justify-center justify-self-center">
                   <p>{event.time.elapsed + "'"}</p>
                 </div>
                 {event.team.id !== fixture.fixture.teams.home.id ? (

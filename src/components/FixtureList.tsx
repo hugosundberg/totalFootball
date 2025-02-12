@@ -101,17 +101,17 @@ const FixtureList = ({
   };
 
   return (
-    <div className="flex flex-col bg-zinc-900 w-full h-fit rounded-2xl overflow-auto mb-10">
+    <div className="flex flex-col bg-white dark:bg-zinc-900 w-full h-fit rounded-2xl overflow-auto mb-10">
       {/* Pagination Controls */}
       <div className="flex justify-center mt-4">
         {Array.from({ length: totalPages }, (_, index) => (
           <button
             key={index}
             onClick={() => handlePageChange(index + 1)}
-            className={`mx-1 px-3 py-1 rounded ${
+            className={`mx-1 px-3 py-1 rounded-full ${
               currentPage === index + 1
-                ? "bg-blue-500 text-white"
-                : "bg-gray-300"
+                ? "bg-green-600 text-white"
+                : "text-green-800 bg-gray-200"
             }`}
           >
             {index + 1}
@@ -127,10 +127,10 @@ const FixtureList = ({
           onClick={() => handleMatchClick(fixture.fixtureInfo.id)}
         >
           <div className="flex justify-between p-6">
-            <p className="text-sm text-gray-400">
+            <p className="text-sm dark:text-gray-400">
               {dateFormatter(fixture.fixtureInfo?.date)}
             </p>
-            <div className="flex gap-2 items-center text-sm text-gray-400">
+            <div className="flex gap-2 items-center text-sm dark:text-gray-400">
               {fixture.league.name}
               <img
                 src={fixture.league.logo}
@@ -160,7 +160,7 @@ const FixtureList = ({
 
             {fixture.fixtureInfo.status.short === "FT" && (
               <div
-                className={`text-center rounded-lg ${getFixtureBackgroundColor(fixture, teamID)}`}
+                className={`text-center rounded-lg text-white ${getFixtureBackgroundColor(fixture, teamID)}`}
               >
                 {fixture.goals.home} - {fixture.goals.away}
               </div>
@@ -224,10 +224,10 @@ const FixtureList = ({
           <button
             key={index}
             onClick={() => handlePageChange(index + 1)}
-            className={`mx-1 px-3 py-1 rounded ${
+            className={`mx-1 px-3 py-1 rounded-full ${
               currentPage === index + 1
-                ? "bg-blue-500 text-white"
-                : "bg-gray-300"
+                ? "bg-green-600 text-white"
+                : "text-green-700 bg-gray-200"
             }`}
           >
             {index + 1}

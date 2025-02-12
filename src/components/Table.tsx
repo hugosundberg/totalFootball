@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { useNavigate } from "react-router-dom";
 
 const Table = ({ standing, handleFetchTeam, currentTeam }: TableProps) => {
@@ -33,8 +33,6 @@ const Table = ({ standing, handleFetchTeam, currentTeam }: TableProps) => {
       ref={tableRef}
       className="bg-white text-black dark:text-white dark:bg-zinc-800 h-fit w-full pt-3 pb-2 rounded-2xl overflow-hidden"
     >
-      <p>Table width: {tableWidth}px</p>{" "}
-      {/* Display table width for debugging */}
       <div className="flex flex-col">
         {standing && (
           <>
@@ -50,7 +48,7 @@ const Table = ({ standing, handleFetchTeam, currentTeam }: TableProps) => {
               } `}
             >
               <div>
-                <p className="">#</p>
+                <p className="ml-4">#</p>
               </div>
               <div
                 className={`grid grid-cols-[1fr_1fr_1fr_1fr] text-center pr-2 ${
@@ -100,20 +98,22 @@ const Table = ({ standing, handleFetchTeam, currentTeam }: TableProps) => {
                 <span
                   className={`h-20px w-1 ${
                     team.description === "Champions League"
-                      ? "border-l-[5px] border-green-700"
+                      ? "border-l-[5px] border-green-400 dark:border-green-700"
                       : team.description === "UEFA Europa League"
-                        ? "border-l-[5px] border-blue-700"
+                        ? "border-l-[5px] border-blue-400 dark:border-blue-700"
                         : team.description === "Relegation"
-                          ? "border-l-[5px] border-red-600"
+                          ? "border-l-[5px] border-red-500 dark:border-red-600"
                           : ""
                   }`}
                 />
                 <p className=" text-center">{team.rank}</p>
-                <img
-                  src={team.team.logo}
-                  alt=""
-                  className="h-5 mt-1 w-5 mr-1"
-                />
+                <div className="flex items-center">
+                  <img
+                    src={team.team.logo}
+                    alt=""
+                    className="h-5 w-5 flex justify-self-center"
+                  />
+                </div>
                 <p>{team.team.name}</p>
               </div>
 
