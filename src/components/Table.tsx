@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { useNavigate } from "react-router-dom";
 
 const Table = ({ standing, handleFetchTeam, currentTeam }: TableProps) => {
@@ -7,116 +7,169 @@ const Table = ({ standing, handleFetchTeam, currentTeam }: TableProps) => {
   const [tableWidth, setTableWidth] = useState(0);
 
   useEffect(() => {
-    if (tableRef.current) {
-      setTableWidth(tableRef.current.clientWidth);
-    }
-  }, [tableWidth]);
-  
+    const updateTableWidth = () => {
+      if (tableRef.current) {
+        setTableWidth(tableRef.current.clientWidth);
+      }
+    };
+
+    updateTableWidth(); // Initial width
+    window.addEventListener("resize", updateTableWidth);
+
+    return () => {
+      window.removeEventListener("resize", updateTableWidth);
+    };
+  }, []);
+
   const handleTeamClick = (id: number) => {
     handleFetchTeam(id);
     navigate(`/team/${id}`);
-  };  
+  };
 
   console.log(standing);
 
   return (
-    <div 
-    ref={tableRef}
-    className="bg-white text-black dark:text-white dark:bg-zinc-800 h-fit w-full pt-3 pb-2 rounded-2xl overflow-hidden">
+    <div
+      ref={tableRef}
+      className="bg-white text-black dark:text-white dark:bg-zinc-800 h-fit w-full pt-3 pb-2 rounded-2xl overflow-hidden"
+    >
+      <p>Table width: {tableWidth}px</p>{" "}
+      {/* Display table width for debugging */}
       <div className="flex flex-col">
         {standing && (
           <>
-            <div className="grid grid-cols-[1fr_1fr] sm:grid-cols-[1.25fr_1fr_1fr] md:grid-cols-[1.2fr_1.25fr_0.75fr] lg:grid-cols-[2.5fr_2fr_1fr]">
+            <div
+              className={`grid grid-cols-[1fr_1fr] ${
+                tableWidth > 800
+                  ? "grid-cols-[1.2fr_2fr_0.8fr]"
+                  : tableWidth > 710
+                    ? "grid-cols-[1.2fr_1fr_0.8fr]"
+                    : tableWidth > 640
+                      ? "grid-cols-[1fr_1fr_1fr]"
+                      : "grid-cols-[1fr_1fr_1fr_1fr_1fr_1fr_1fr]"
+              } `}
+            >
               <div>
                 <p className="">#</p>
               </div>
-              <div className="grid grid-cols-[1fr_1fr_1fr_1fr] sm:grid-cols-[1fr_1fr_1fr_1fr] md:grid-cols-[1fr_1fr_1fr_1fr_1fr_1fr] lg:grid-cols-[1fr_1fr_1fr_1fr_1fr_1fr_1fr] pr-2 text-center">
+              <div
+                className={`grid grid-cols-[1fr_1fr_1fr_1fr] text-center pr-2 ${
+                  tableWidth > 800
+                    ? "grid-cols-[1fr_1fr_1fr_1fr_1fr_1fr_1fr_1fr]"
+                    : tableWidth > 710
+                      ? "grid-cols-[1fr_1fr_1fr_1fr_1fr_1fr_1fr]"
+                      : tableWidth > 640
+                        ? "grid-cols-[1fr_1fr_1fr_1fr_1fr_1fr_1fr]"
+                        : "grid-cols-[1fr_1fr_1fr_1fr_1fr_1fr_1fr]"
+                }`}
+              >
                 <p>PL</p>
-                <p className="hidden md:block">W</p>
-                <p className="hidden lg:block">D</p>
-                <p className="hidden md:block">L</p>
+                {tableWidth > 800 && <p>W</p>}
+                {tableWidth > 800 && <p>D</p>}
+                {tableWidth > 800 && <p>L</p>}
                 <p>+/-</p>
                 <p>GD</p>
                 <p>PT</p>
               </div>
-              <p className="hidden sm:block text-left">Form</p>
+              {tableWidth > 640 && (
+                <p className="hidden sm:block text-left">Form</p>
+              )}
             </div>
           </>
         )}
         {standing && standing.length > 0 ? (
           standing.map((team) => (
-            <>
-              <div
-                key={team.team.id}
-                className={`grid grid-cols-[1fr_1fr] sm:grid-cols-[1.25fr_1fr_1fr] md:grid-cols-[1.2fr_1.25fr_0.75fr] lg:grid-cols-[2.5fr_2fr_1fr] py-2 hover:cursor-pointer ${
-                  currentTeam?.id === team.team.id
-                    ? "bg-blue-100 dark:bg-zinc-900"
-                    : "dark:hover:bg-zinc-700"
-                }`}
-                onClick={() => handleTeamClick(team.team.id)}
-              >
-                <div className="grid grid-cols-[6px_30px_30px_1fr] ">
-                  <span
-                    className={`h-20px w-1 ${
-                      team.description === "Champions League"
-                        ? "border-l-[5px] border-green-700"
-                        : team.description === "UEFA Europa League"
-                          ? "border-l-[5px] border-blue-700"
-                          : team.description === "Relegation"
-                            ? "border-l-[5px] border-red-600"
-                            : ""
-                    }`}
-                  />
-                  <p className=" text-center">{team.rank}</p>
-                  <img
-                    src={team.team.logo}
-                    alt=""
-                    className="h-5 mt-1 w-5 mr-1"
-                  />
-                  <p>{team.team.name}</p>
-                </div>
+            <div
+              key={team.team.id}
+              className={`grid grid-cols-[1fr_1fr] py-2 hover:cursor-pointer ${
+                tableWidth > 800
+                  ? "grid-cols-[1.2fr_2fr_0.8fr]"
+                  : tableWidth > 710
+                    ? "grid-cols-[1.2fr_1fr_0.8fr]"
+                    : tableWidth > 640
+                      ? "grid-cols-[1fr_1fr_1fr]"
+                      : "grid-cols-[1fr_1fr_1fr_1fr_1fr_1fr_1fr]"
+              }  ${
+                currentTeam?.id === team.team.id
+                  ? "bg-blue-100 dark:bg-zinc-900"
+                  : "dark:hover:bg-zinc-700"
+              }`}
+              onClick={() => handleTeamClick(team.team.id)}
+            >
+              <div className="grid grid-cols-[6px_30px_30px_1fr] ">
+                <span
+                  className={`h-20px w-1 ${
+                    team.description === "Champions League"
+                      ? "border-l-[5px] border-green-700"
+                      : team.description === "UEFA Europa League"
+                        ? "border-l-[5px] border-blue-700"
+                        : team.description === "Relegation"
+                          ? "border-l-[5px] border-red-600"
+                          : ""
+                  }`}
+                />
+                <p className=" text-center">{team.rank}</p>
+                <img
+                  src={team.team.logo}
+                  alt=""
+                  className="h-5 mt-1 w-5 mr-1"
+                />
+                <p>{team.team.name}</p>
+              </div>
 
-                <div className="grid pr-2 text-center">
-                  <div className="grid grid-cols-[1fr_1fr_1fr_1fr] sm:grid-cols-[1fr_1fr_1fr_1fr] md:grid-cols-[1fr_1fr_1fr_1fr_1fr_1fr] lg:grid-cols-[1fr_1fr_1fr_1fr_1fr_1fr_1fr] text-center">
-                    <p>{team.all.played}</p>
-                    <p className="hidden md:block">{team.all.win}</p>
-                    <p className="hidden lg:block">{team.all.draw}</p>
-                    <p className="hidden md:block">{team.all.lose}</p>
-                    <p>
-                      {team.all.goals.for}-{team.all.goals.against}
-                    </p>
-                    <p>{team.goalsDiff}</p>
-                    <p>{team.points}</p>
-                  </div>
-                </div>
-                <div className="pr-2">
-                  <p className="hidden sm:flex">
-                    {team.form.split("").map((char, index) => (
-                      <span
-                        key={index}
-                        className={`mx-1 w-6 rounded text-center ${
-                          char === "L"
-                            ? "bg-red-600 text-white"
-                            : char === "W"
-                              ? "bg-green-600 text-white"
-                              : char === "D"
-                                ? "bg-gray-500 text-white"
-                                : ""
-                        }`}
-                      >
-                        {char}
-                      </span>
-                    ))}
+              <div className="grid pr-2 text-center">
+                <div
+                  className={`grid grid-cols-[1fr_1fr_1fr_1fr] ${
+                    tableWidth > 800
+                      ? "grid-cols-[1fr_1fr_1fr_1fr_1fr_1fr_1fr_1fr]"
+                      : tableWidth > 710
+                        ? "grid-cols-[1fr_1fr_1fr_1fr_1fr_1fr_1fr]"
+                        : tableWidth > 640
+                          ? "grid-cols-[1fr_1fr_1fr_1fr]"
+                          : ""
+                  }`}
+                >
+                  <p>{team.all.played}</p>
+                  {tableWidth > 800 && <p>{team.all.win}</p>}
+                  {tableWidth > 800 && <p>{team.all.draw}</p>}
+                  {tableWidth > 800 && <p>{team.all.lose}</p>}
+                  <p>
+                    {team.all.goals.for}-{team.all.goals.against}
                   </p>
+                  <p>{team.goalsDiff}</p>
+                  <p>{team.points}</p>
                 </div>
               </div>
-            </>
+              <div className="pr-2">
+                <p
+                  className={`hidden ${
+                    tableWidth > 640 ? "sm:flex" : "hidden"
+                  }`}
+                >
+                  {team.form.split("").map((char, index) => (
+                    <span
+                      key={index}
+                      className={`mx-1 w-6 rounded text-center ${
+                        char === "L"
+                          ? "bg-red-600 text-white"
+                          : char === "W"
+                            ? "bg-green-600 text-white"
+                            : char === "D"
+                              ? "bg-gray-500 text-white"
+                              : ""
+                      }`}
+                    >
+                      {char}
+                    </span>
+                  ))}
+                </p>
+              </div>
+            </div>
           ))
         ) : (
           <p className="px-4 pb-4">No standings available</p>
         )}
       </div>
-      <p>{tableWidth}</p>
     </div>
   );
 };
