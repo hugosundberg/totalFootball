@@ -679,12 +679,9 @@ const fetchTeamSeasonStats = async (teamID: number) => {
     );
 
     const data = await response.json();
-    
 
     const teamStats = data.response;
 
-    console.log("Team Stats", teamStats);
-    
     const teamSeasonStats: TeamSeasonStats = {
       form: teamStats.form,
       fixtures: {
@@ -709,7 +706,7 @@ const fetchTeamSeasonStats = async (teamID: number) => {
           total: teamStats.fixtures.loses.total,
         },
       },
-      
+
       goals: {
         for: {
           average: {
@@ -736,7 +733,7 @@ const fetchTeamSeasonStats = async (teamID: number) => {
           },
         },
       },
-    }
+    };
 
     return teamSeasonStats;
   } catch (error) {

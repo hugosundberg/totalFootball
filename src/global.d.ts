@@ -367,6 +367,17 @@ interface PlayerProps {
 }
 
 interface TeamStanding {
+  description: string
+  all: {
+    played: number;
+    win: number;
+    draw: number;
+    lose: number;
+    goals: {
+      for: number;
+      against: number;
+    };
+  }
   rank: number;
   team: {
     name: string;
@@ -377,4 +388,10 @@ interface TeamStanding {
   goalsDiff: number;
   points: number;
   form: string;
+}
+
+interface TableProps {
+  standing?: TeamStanding[];
+  handleFetchTeam: (id: number) => void;
+  currentTeam?: Team;
 }
