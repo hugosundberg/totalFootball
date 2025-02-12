@@ -129,9 +129,9 @@ const TeamOverview = ({
                   onClick={() => handleMatchClick(fixture.fixtureInfo.id)}
                 >
                   <p
-                    className={`px-2 rounded-lg ${
+                    className={`px-2 rounded-lg text-white ${
                       fixture.teams.away.winner
-                        ? "bg-green-500"
+                        ? "bg-green-600"
                         : fixture.teams.home.winner
                           ? "bg-red-500"
                           : "bg-gray-500"
@@ -147,9 +147,9 @@ const TeamOverview = ({
                   onClick={() => handleMatchClick(fixture.fixtureInfo.id)}
                 >
                   <p
-                    className={`px-2 rounded-lg ${
+                    className={`px-2 rounded-lg text-white ${
                       fixture.teams.home.winner
-                        ? "bg-green-500"
+                        ? "bg-green-600"
                         : fixture.teams.away.winner
                           ? "bg-red-500"
                           : "bg-gray-500"

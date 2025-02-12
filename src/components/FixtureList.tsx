@@ -134,7 +134,7 @@ const FixtureList = ({
               {fixture.league.name}
               <img
                 src={fixture.league.logo}
-                className="h-8 bg-gray-400 p-1 rounded-full"
+                className="h-8 dark:bg-gray-100 p-1 rounded-full"
                 alt="league-logo"
               />
             </div>
@@ -214,7 +214,7 @@ const FixtureList = ({
               {fixture.teams.away.name}
             </span>
           </div>
-          <span className="block w-full h-0.5 bg-zinc-800" />
+          <span className="block w-full h-0.5 bg-zinc-200 dark:bg-zinc-800" />
         </div>
       ))}
 
