@@ -14,7 +14,7 @@ const MatchEvents = ({ matchEvents, fixture }: MatchEventProps) => {
   if (!matchEvents) return null;
 
   return (
-    <div className="flex flex-col items-center gap-4 h-fit p-4 bg-white dark:bg-zinc-900 my-4 w-full sm:w-11/12 max-w-[1200px] justify-self-center rounded-2xl shadow-xl">
+    <div className="flex flex-col items-center gap-4 h-fit p-4 bg-white dark:bg-zinc-900 my-4 w-full sm:w-11/12 max-w-[1200px] justify-self-center rounded-3xl shadow-xl">
       <h2 className="font-bold text-xl">Events</h2>
 
       <div className="w-full text-sm sm:text-base">
@@ -120,7 +120,7 @@ const MatchEvents = ({ matchEvents, fixture }: MatchEventProps) => {
                 className={`flex items-center gap-4 p-2 ${event.team.id !== fixture.fixture.teams.home.id ? "flex-row-reverse ml-auto" : ""}`}
                 >
                   {/* SMALLER SCREENS */}
-                <div className="bg-zinc-700 w-10 h-10 rounded-full flex items-center justify-center">
+                <div className="text-white bg-zinc-700 w-10 h-10 rounded-full flex items-center justify-center">
                   <p>{event.time.elapsed + "'"}</p>
                 </div>
 

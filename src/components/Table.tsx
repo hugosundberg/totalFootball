@@ -38,13 +38,15 @@ const Table = ({ standing, handleFetchTeam, currentTeam }: TableProps) => {
           <>
             <div
               className={`grid grid-cols-[1fr_1fr] ${
-                tableWidth > 800
-                  ? "grid-cols-[1.2fr_2fr_0.8fr]"
-                  : tableWidth > 710
-                    ? "grid-cols-[1.2fr_1fr_0.8fr]"
-                    : tableWidth > 640
-                      ? "grid-cols-[1fr_1fr_1fr]"
-                      : "grid-cols-[1fr_1fr_1fr_1fr_1fr_1fr_1fr]"
+                tableWidth > 1100
+                  ? "grid-cols-[1fr_1fr_0.35fr]"
+                  : tableWidth > 800
+                    ? "grid-cols-[1fr_1.5fr_0.7fr]"
+                    : tableWidth > 710
+                      ? "grid-cols-[2fr_1fr_1fr]"
+                      : tableWidth > 640
+                        ? "grid-cols-[1.5fr_1fr_1fr]"
+                        : ""
               } `}
             >
               <div>
@@ -55,10 +57,10 @@ const Table = ({ standing, handleFetchTeam, currentTeam }: TableProps) => {
                   tableWidth > 800
                     ? "grid-cols-[1fr_1fr_1fr_1fr_1fr_1fr_1fr_1fr]"
                     : tableWidth > 710
-                      ? "grid-cols-[1fr_1fr_1fr_1fr_1fr_1fr_1fr]"
+                      ? "grid-cols-[1fr_1fr_1fr_1fr]"
                       : tableWidth > 640
-                        ? "grid-cols-[1fr_1fr_1fr_1fr_1fr_1fr_1fr]"
-                        : "grid-cols-[1fr_1fr_1fr_1fr_1fr_1fr_1fr]"
+                        ? "grid-cols-[1fr_1fr_1fr_1fr]"
+                        : ""
                 }`}
               >
                 <p>PL</p>
@@ -80,13 +82,15 @@ const Table = ({ standing, handleFetchTeam, currentTeam }: TableProps) => {
             <div
               key={team.team.id}
               className={`grid grid-cols-[1fr_1fr] py-2 hover:cursor-pointer ${
-                tableWidth > 800
-                  ? "grid-cols-[1.2fr_2fr_0.8fr]"
-                  : tableWidth > 710
-                    ? "grid-cols-[1.2fr_1fr_0.8fr]"
-                    : tableWidth > 640
-                      ? "grid-cols-[1fr_1fr_1fr]"
-                      : "grid-cols-[1fr_1fr_1fr_1fr_1fr_1fr_1fr]"
+                tableWidth > 1100
+                  ? "grid-cols-[1fr_1fr_0.35fr]"
+                  : tableWidth > 800
+                    ? "grid-cols-[1fr_1.5fr_0.7fr]"
+                    : tableWidth > 710
+                      ? "grid-cols-[2fr_1fr_1fr]"
+                      : tableWidth > 640
+                        ? "grid-cols-[1.5fr_1fr_1fr]"
+                        : ""
               }  ${
                 currentTeam?.id === team.team.id
                   ? "bg-blue-100 dark:bg-zinc-900"
@@ -123,7 +127,7 @@ const Table = ({ standing, handleFetchTeam, currentTeam }: TableProps) => {
                     tableWidth > 800
                       ? "grid-cols-[1fr_1fr_1fr_1fr_1fr_1fr_1fr_1fr]"
                       : tableWidth > 710
-                        ? "grid-cols-[1fr_1fr_1fr_1fr_1fr_1fr_1fr]"
+                        ? "grid-cols-[1fr_1fr_1fr_1fr]"
                         : tableWidth > 640
                           ? "grid-cols-[1fr_1fr_1fr_1fr]"
                           : ""
