@@ -33,7 +33,6 @@ const Table = ({ standing, handleFetchTeam, currentTeam }: TableProps) => {
       ref={tableRef}
       className="bg-white text-black dark:text-white dark:bg-zinc-900 h-fit w-full pt-3 pb-2 rounded-2xl overflow-hidden"
     >
-      <p className="mb-20">{tableWidth}</p>
       <div className="flex flex-col">
         {standing && (
           <>
@@ -76,6 +75,7 @@ const Table = ({ standing, handleFetchTeam, currentTeam }: TableProps) => {
                 <p className="hidden sm:block text-left">Form</p>
               )}
             </div>
+              <span className="h-[3px] w-full bg-zinc-800 mt-1"/>
           </>
         )}
         {standing && standing.length > 0 ? (
