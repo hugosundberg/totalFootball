@@ -31,7 +31,7 @@ const Table = ({ standing, handleFetchTeam, currentTeam }: TableProps) => {
   return (
     <div
       ref={tableRef}
-      className="bg-white text-black dark:text-white dark:bg-zinc-800 h-fit w-full pt-3 pb-2 rounded-2xl overflow-hidden"
+      className="bg-white text-black dark:text-white dark:bg-zinc-900 h-fit w-full pt-3 pb-2 rounded-2xl overflow-hidden"
     >
       <div className="flex flex-col">
         {standing && (
@@ -93,7 +93,7 @@ const Table = ({ standing, handleFetchTeam, currentTeam }: TableProps) => {
                         : ""
               }  ${
                 currentTeam?.id === team.team.id
-                  ? "bg-blue-100 dark:bg-zinc-900"
+                  ? "bg-blue-100 dark:bg-zinc-950"
                   : "dark:hover:bg-zinc-700"
               }`}
               onClick={() => handleTeamClick(team.team.id)}

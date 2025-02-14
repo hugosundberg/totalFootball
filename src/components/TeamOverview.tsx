@@ -81,7 +81,7 @@ const TeamOverview = ({
   return (
     <div className="w-full">
       {/* Next match */}
-      <div className="bg-white dark:bg-zinc-800 w-full p-6 rounded-xl shadow-lg">
+      <div className="bg-white dark:bg-zinc-900 w-full p-6 rounded-xl shadow-lg">
         <div className="flex justify-between">
           <p>Next match</p>
           <div className="flex items-center gap-2">
@@ -118,14 +118,14 @@ const TeamOverview = ({
       </div>
 
       {/* Current form */}
-      <div className="bg-white dark:bg-zinc-800 w-full p-6 rounded-xl mt-4 shadow-lg">
+      <div className="bg-white dark:bg-zinc-900 w-full p-6 rounded-xl mt-4 shadow-lg">
         <p>Team form</p>
         <div className="flex justify-between">
           {currentForm?.map((fixture, index) => (
             <div key={index} className="flex flex-col items-center gap-2 mt-2">
               {fixture.teams.away.teamID === team.id ? (
                 <div
-                  className="flex flex-col items-center gap-4 hover:cursor-pointer p-2 sm:px-6 hover:bg-zinc-900 rounded-xl"
+                  className="flex flex-col items-center gap-4 hover:cursor-pointer p-2 sm:px-6 hover:bg-zinc-950 rounded-xl"
                   onClick={() => handleMatchClick(fixture.fixtureInfo.id)}
                 >
                   <p
@@ -143,7 +143,7 @@ const TeamOverview = ({
                 </div>
               ) : (
                 <div
-                  className="flex flex-col items-center gap-4 hover:cursor-pointer p-2 sm:px-6 hover:bg-zinc-900 rounded-xl"
+                  className="flex flex-col items-center gap-4 hover:cursor-pointer p-2 sm:px-6 hover:bg-zinc-950 rounded-xl"
                   onClick={() => handleMatchClick(fixture.fixtureInfo.id)}
                 >
                   <p

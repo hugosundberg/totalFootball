@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
 import football from "../../assets/football.webp";
+import footballDark from "../../assets/football2.webp";
 import sub from "../../assets/sub.png";
 
 const MatchEvents = ({ matchEvents, fixture }: MatchEventProps) => {
@@ -26,9 +27,9 @@ const MatchEvents = ({ matchEvents, fixture }: MatchEventProps) => {
               isSecondHalf(event) &&
               !isSecondHalf(matchEvents[index - 1]) && (
                 <div className="flex items-center gap-4 justify-center">
-                  <div className="w-full h-1 bg-zinc-700 my-4 rounded-full"></div>
+                  <div className="w-full h-1 bg-zinc-200 dark:bg-zinc-700 my-4 rounded-full"></div>
                   <p>HT</p>
-                  <div className="w-full h-1 bg-zinc-700 my-4 rounded-full"></div>
+                  <div className="w-full h-1 bg-zinc-200 dark:bg-zinc-700 my-4 rounded-full"></div>
                 </div>
               )}
             {/* LARGER SCREENS */}
@@ -49,7 +50,12 @@ const MatchEvents = ({ matchEvents, fixture }: MatchEventProps) => {
                           </p>
                         </div>
                         <div className="p-2 border-2 rounded-full border-zinc-700">
-                          <img src={football} alt="" className="h-4 w-4" />
+                          <img
+                            src={footballDark}
+                            alt=""
+                            className="h-4 w-4 dark:hidden"
+                          />
+                          <img src={football} alt="" className="h-4 w-4 hidden dark:block" />
                         </div>
                       </div>
                     )}
@@ -88,7 +94,12 @@ const MatchEvents = ({ matchEvents, fixture }: MatchEventProps) => {
                     {event.type === "Goal" && (
                       <div className="flex items-center gap-3">
                         <div className="p-2 border-2 rounded-full border-zinc-700">
-                          <img src={football} alt="" className="h-4 w-4" />
+                          <img
+                            src={footballDark}
+                            alt=""
+                            className="h-4 w-4 dark:hidden"
+                          />
+                          <img src={football} alt="" className="h-4 w-4 hidden dark:block" />
                         </div>
                         <div>
                           <p>{event.player.name}</p>
@@ -142,7 +153,16 @@ const MatchEvents = ({ matchEvents, fixture }: MatchEventProps) => {
                     className={`flex items-center gap-3 ${event.team.id !== fixture.fixture.teams.home.id ? "flex-row-reverse" : ""}`}
                   >
                     <div className="p-2 border-2 rounded-full border-zinc-700">
-                      <img src={football} alt="" className="h-4 w-4" />
+                      <img
+                        src={footballDark}
+                        alt=""
+                        className="h-4 w-4 dark:hidden"
+                      />
+                      <img
+                        src={football}
+                        alt=""
+                        className="h-4 w-4 hidden dark:block"
+                      />
                     </div>
                     <div
                       className={`${event.team.id !== fixture.fixture.teams.home.id ? "flex flex-col items-end" : ""}`}

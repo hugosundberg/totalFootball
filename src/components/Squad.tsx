@@ -56,7 +56,7 @@ const Squad = ({ squad, handlePlayerClick }: SquadProps) => {
           {goalKeepers.length > 0 ? (
             goalKeepers.map((player) => (
               <div
-                className="flex w-60 h-20 border border-zinc-300 dark:bg-zinc-700 rounded-md gap-2 p-2 items-center hover:cursor-pointer"
+                className="flex w-60 h-20 border border-zinc-300 dark:border-none dark:border-none dark:bg-zinc-700 rounded-md gap-2 p-2 items-center hover:cursor-pointer"
                 onClick={() => handlePlayerClick(player.id)}
               >
                 <img
@@ -82,7 +82,7 @@ const Squad = ({ squad, handlePlayerClick }: SquadProps) => {
           {defenders.length > 0 ? (
             defenders.map((player) => (
               <div
-                className="flex w-60 h-20 border border-zinc-300 dark:bg-zinc-700 rounded-md gap-2 p-2 items-center hover:cursor-pointer"
+                className="flex w-60 h-20 border border-zinc-300 dark:border-none dark:bg-zinc-700 rounded-md gap-2 p-2 items-center hover:cursor-pointer"
                 onClick={() => handlePlayerClick(player.id)}
               >
                 <img
@@ -108,7 +108,7 @@ const Squad = ({ squad, handlePlayerClick }: SquadProps) => {
           {midfielders.length > 0 ? (
             midfielders.map((player) => (
               <div
-                className="flex w-60 h-20 border border-zinc-300 dark:bg-zinc-700 rounded-md gap-2 p-2 items-center hover:cursor-pointer"
+                className="flex w-60 h-20 border border-zinc-300 dark:border-none dark:bg-zinc-700 rounded-md gap-2 p-2 items-center hover:cursor-pointer"
                 onClick={() => handlePlayerClick(player.id)}
               >
                 <img
@@ -134,7 +134,7 @@ const Squad = ({ squad, handlePlayerClick }: SquadProps) => {
           {forwards.length > 0 ? (
             forwards.map((player) => (
               <div
-                className="flex w-60 h-20 border border-zinc-300 dark:bg-zinc-700 rounded-md gap-2 p-2 items-center hover:cursor-pointer"
+                className="flex w-60 h-20 border border-zinc-300 dark:border-none dark:bg-zinc-700 rounded-md gap-2 p-2 items-center hover:cursor-pointer"
                 onClick={() => handlePlayerClick(player.id)}
               >
                 <img
