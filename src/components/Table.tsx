@@ -33,6 +33,7 @@ const Table = ({ standing, handleFetchTeam, currentTeam }: TableProps) => {
       ref={tableRef}
       className="bg-white text-black dark:text-white dark:bg-zinc-900 h-fit w-full pt-3 pb-2 rounded-2xl overflow-hidden"
     >
+      <p className="mb-20">{tableWidth}</p>
       <div className="flex flex-col">
         {standing && (
           <>
@@ -41,11 +42,11 @@ const Table = ({ standing, handleFetchTeam, currentTeam }: TableProps) => {
                 tableWidth > 1100
                   ? "grid-cols-[1fr_1fr_0.35fr]"
                   : tableWidth > 800
-                    ? "grid-cols-[1fr_1.5fr_0.7fr]"
+                    ? "grid-cols-[1.2fr_1.4fr_0.7fr]"
                     : tableWidth > 710
                       ? "grid-cols-[2fr_1fr_1fr]"
                       : tableWidth > 640
-                        ? "grid-cols-[1.5fr_1fr_1fr]"
+                        ? "grid-cols-[1.5fr_1.2fr_1fr]"
                         : ""
               } `}
             >
@@ -85,11 +86,11 @@ const Table = ({ standing, handleFetchTeam, currentTeam }: TableProps) => {
                 tableWidth > 1100
                   ? "grid-cols-[1fr_1fr_0.35fr]"
                   : tableWidth > 800
-                    ? "grid-cols-[1fr_1.5fr_0.7fr]"
+                    ? "grid-cols-[1.2fr_1.4fr_0.7fr]"
                     : tableWidth > 710
                       ? "grid-cols-[2fr_1fr_1fr]"
                       : tableWidth > 640
-                        ? "grid-cols-[1.5fr_1fr_1fr]"
+                        ? "grid-cols-[1.5fr_1.2fr_1fr]"
                         : ""
               }  ${
                 currentTeam?.id === team.team.id
