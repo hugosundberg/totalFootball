@@ -4,6 +4,7 @@ import Lineup from "../components/Lineup";
 import MatchStats from "../components/MatchStats";
 import HeadToHead from "../components/HeadToHead";
 import MatchEvents from "../components/MatchEvents";
+import football from "../../assets/football.webp"
 
 const Match = ({
   fixture,
@@ -11,10 +12,9 @@ const Match = ({
   headToHead,
   handleFetchTeam,
   handleFetchMatchEvents,
-  matchEvents
+  matchEvents,
 }: MatchProps) => {
   const { id } = useParams<{ id: string }>();
-
 
   useEffect(() => {
     if (id) {
@@ -22,7 +22,7 @@ const Match = ({
     }
 
     handleFetchMatchEvents(Number(id));
-  }, [id, handleFetchMatch ]);
+  }, [id, handleFetchMatch]);
 
   const navigate = useNavigate();
 
@@ -31,11 +31,7 @@ const Match = ({
     navigate(`/team/${id}`);
   };
 
-  if (!fixture) return;
-
-  console.log("Match events:", matchEvents);
-  
-  
+  if (!fixture) return null;
 
   const dateFormatter = (date: string) => {
     try {
@@ -73,14 +69,15 @@ const Match = ({
   };
 
   const getGoalEvents = (events: MatchEvent[]) => {
-    return events.filter((event) => event.type === "Goal");
-  }
+    const goals = events.filter((event) => event.type === "Goal");
+
+    return goals;
+  };
 
   console.log("Match events in Match.tsx:", matchEvents);
-  
 
   return (
-    <div className="bg-slate-200 dark:bg-black h-full pt-14 sm:pt-20  dark:text-white overflow-hidden">
+    <div className="bg-slate-200 dark:bg-black h-full pt-14 sm:pt-20 dark:text-white overflow-hidden">
       <div className="bg-white dark:bg-zinc-900 h-fit w-full sm:w-11/12 justify-self-center sm:rounded-3xl max-w-[1200px] shadow-lg">
         <div className="hidden sm:flex gap-4 justify-center p-5 items-center">
           <img
@@ -221,24 +218,55 @@ const Match = ({
           <div
             className="flex flex-col sm:flex-row items-center gap-4 hover:cursor-pointer hover:underline"
             onClick={() => handleTeamClick(fixture.fixture.teams.away.id)}
-            >
+          >
             <img
               src={fixture.fixture.teams.away.logo}
               alt="away-team-logo"
               className="h-10"
-              />
+            />
             <p className="text-sm sm:text-xl">
               {fixture.fixture.teams.away.name}
             </p>
           </div>
         </div>
+        <div className="flex flex-col w-full justify-center items-center pb-3">
+          {fixture.fixtureInfo.status.short === "FT" && matchEvents && (
+            <div className="grid grid-cols-[1fr-auto] text-zinc-500 text-xs justify-self-center w-full justify-center">
+              <div className="flex flex-col gap-1">
+                {getGoalEvents(matchEvents).map((event) => (
+                  <>
+                    {event.team.id === fixture.fixture.teams.home.id && (
+                      <p className="flex justify-end">
+                        {event.player.name} {event.time.elapsed}'
+                      </p>
+                    )}
+                  </>
+                ))}
+              </div>
+              <div>
+                <img src={football} alt="" className="h-[10px] mt-1 opacity-65" />
+              </div>
+              <div>
+                {getGoalEvents(matchEvents).map((event) => (
+                  <>
+                    {event.team.id === fixture.fixture.teams.away.id && (
+                      <p className="flex justify-start">
+                        {event.player.name} {event.time.elapsed}'
+                      </p>
+                    )}
+                  </>
+                ))}
+              </div>
+            </div>
+          )}
+        </div>
       </div>
 
-      <MatchEvents matchEvents={matchEvents} fixture={fixture}/>
+      <MatchEvents matchEvents={matchEvents} fixture={fixture} />
 
       {(fixture.fixtureInfo.status.short === "NS" ||
-        fixture.fixtureInfo.status.short === "PST" || 
-          fixture.fixtureInfo.status.short === "TBD") && (
+        fixture.fixtureInfo.status.short === "PST" ||
+        fixture.fixtureInfo.status.short === "TBD") && (
         <HeadToHead
           fixture={fixture.fixture}
           headToHead={headToHead}
