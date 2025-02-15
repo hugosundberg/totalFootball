@@ -4,7 +4,7 @@ import Lineup from "../components/Lineup";
 import MatchStats from "../components/MatchStats";
 import HeadToHead from "../components/HeadToHead";
 import MatchEvents from "../components/MatchEvents";
-import football from "../../assets/football.webp"
+import football from "../../assets/football.webp";
 
 const Match = ({
   fixture,
@@ -32,6 +32,8 @@ const Match = ({
   };
 
   if (!fixture) return null;
+
+  console.log(fixture.fixtureInfo.status.short);
 
   const dateFormatter = (date: string) => {
     try {
@@ -191,9 +193,27 @@ const Match = ({
               ) : fixture.fixtureInfo.status.short === "FT" ? (
                 <p>Full Time</p>
               ) : fixture.fixtureInfo.status.short === "1H" ? (
-                <p>{fixture.fixtureInfo.status.elapsed}</p>
+                <p>
+                  {fixture.fixtureInfo.status.extra === 0 &&
+                    fixture.fixtureInfo.status.elapsed + "'"}
+
+                  {fixture.fixtureInfo.status.extra !== 0 &&
+                    fixture.fixtureInfo.status.elapsed +
+                      " + " +
+                      fixture.fixtureInfo.status.extra +
+                      "'"}
+                </p>
               ) : fixture.fixtureInfo.status.short === "2H" ? (
-                <p>{fixture.fixtureInfo.status.elapsed}</p>
+                <p>
+                  {fixture.fixtureInfo.status.extra === 0 &&
+                    fixture.fixtureInfo.status.elapsed + "'"}
+
+                  {fixture.fixtureInfo.status.extra !== 0 &&
+                    fixture.fixtureInfo.status.elapsed +
+                      " + " +
+                      fixture.fixtureInfo.status.extra +
+                      "'"}
+                </p>
               ) : fixture.fixtureInfo.status.short === "PEN" ? (
                 <p>
                   {fixture.penalties
@@ -202,9 +222,14 @@ const Match = ({
                 </p>
               ) : fixture.fixtureInfo.status.extra !== null ? (
                 <p>
-                  {fixture.fixtureInfo.status.elapsed +
-                    " + " +
-                    fixture.fixtureInfo.status.extra}
+                  {fixture.fixtureInfo.status.extra === 0 &&
+                    fixture.fixtureInfo.status.elapsed + "'"}
+
+                  {fixture.fixtureInfo.status.extra !== 0 &&
+                    fixture.fixtureInfo.status.elapsed +
+                      " + " +
+                      fixture.fixtureInfo.status.extra +
+                      "'"}
                 </p>
               ) : fixture.fixtureInfo.status.short === "NS" ||
                 fixture.fixtureInfo.status.short === "PST" ? (
@@ -244,7 +269,11 @@ const Match = ({
                 ))}
               </div>
               <div>
-                <img src={football} alt="" className="h-[10px] mt-1 opacity-65" />
+                <img
+                  src={football}
+                  alt=""
+                  className="h-[10px] mt-1 opacity-65"
+                />
               </div>
               <div>
                 {getGoalEvents(matchEvents).map((event) => (
