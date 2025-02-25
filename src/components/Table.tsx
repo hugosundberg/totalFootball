@@ -26,8 +26,6 @@ const Table = ({ standing, handleFetchTeam, currentTeam }: TableProps) => {
     navigate(`/team/${id}`);
   };
 
-  console.log(standing);
-
   return (
     <div
       ref={tableRef}
@@ -41,11 +39,11 @@ const Table = ({ standing, handleFetchTeam, currentTeam }: TableProps) => {
                 tableWidth > 1100
                   ? "grid-cols-[1fr_1fr_0.35fr]"
                   : tableWidth > 800
-                    ? "grid-cols-[1.2fr_1.4fr_0.8fr]"
+                    ? "grid-cols-[1.2fr_1.4fr_0.7fr]"
                     : tableWidth > 710
                       ? "grid-cols-[2fr_1fr_1fr]"
                       : tableWidth > 640
-                        ? "grid-cols-[1.5fr_1.2fr_1.1fr]"
+                        ? "grid-cols-[1.5fr_1.2fr_1fr]"
                         : ""
               } `}
             >
@@ -86,11 +84,11 @@ const Table = ({ standing, handleFetchTeam, currentTeam }: TableProps) => {
                 tableWidth > 1100
                   ? "grid-cols-[1fr_1fr_0.35fr]"
                   : tableWidth > 800
-                    ? "grid-cols-[1.2fr_1.4fr_0.8fr]"
+                    ? "grid-cols-[1.2fr_1.4fr_0.7fr]"
                     : tableWidth > 710
                       ? "grid-cols-[2fr_1fr_1fr]"
                       : tableWidth > 640
-                        ? "grid-cols-[1.5fr_1.2fr_1.1fr]"
+                        ? "grid-cols-[1.5fr_1.2fr_1fr]"
                         : ""
               }  ${
                 currentTeam?.id === team.team.id
