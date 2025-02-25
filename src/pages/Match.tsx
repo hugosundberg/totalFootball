@@ -33,8 +33,6 @@ const Match = ({
 
   if (!fixture) return null;
 
-  console.log(fixture.fixtureInfo.status.short);
-
   const dateFormatter = (date: string) => {
     try {
       const extractedDate = date.slice(0, 10);
@@ -256,7 +254,7 @@ const Match = ({
         </div>
         <div className="flex flex-col w-full justify-center items-center pb-3">
           {fixture.fixtureInfo.status.short === "FT" && matchEvents && (
-            <div className="grid grid-cols-[1fr-auto] text-zinc-500 text-xs justify-self-center w-full justify-center">
+            <div className="grid grid-cols-[1fr_auto_1fr] text-zinc-500 text-xs justify-self-center w-full justify-center">
               <div className="flex flex-col gap-1">
                 {getGoalEvents(matchEvents).map((event) => (
                   <>
@@ -272,7 +270,7 @@ const Match = ({
                 <img
                   src={football}
                   alt=""
-                  className="h-[10px] mt-1 opacity-65"
+                  className="h-[10px] px-5 mt-1 opacity-65"
                 />
               </div>
               <div>
