@@ -1,4 +1,4 @@
-import { useEffect } from "react";
+import { useDebugValue, useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import Lineup from "../components/Lineup";
 import MatchStats from "../components/MatchStats";
@@ -15,6 +15,8 @@ const Match = ({
   matchEvents,
 }: MatchProps) => {
   const { id } = useParams<{ id: string }>();
+  const [homeReds, setHomeReds] = useState(0);
+  const [awayReds, setAwayReds] = useState(0);
 
   useEffect(() => {
     if (id) {
@@ -74,11 +76,26 @@ const Match = ({
     return goals;
   };
 
-  console.log("Match events in Match.tsx:", matchEvents);
+  const getRedCardEvents = (events: MatchEvent[]) => {
+    const redCards = events.filter((event) => event.type === "Card" && event.detail === "Red Card");  
+
+    let homeReds = 0;
+    let awayReds = 0;
+
+    redCards.forEach((card) => {
+      if (card.team.id === fixture.fixture.teams.home.id) homeReds++;
+      if (card.team.id === fixture.fixture.teams.away.id) awayReds++;
+    });
+
+    setHomeReds(homeReds);
+    setAwayReds(awayReds);
+  };
 
   return (
     <div className="bg-slate-200 dark:bg-black h-full pt-14 sm:pt-20 dark:text-white overflow-hidden">
+
       <div className="bg-white dark:bg-zinc-900 h-fit w-full sm:w-11/12 justify-self-center sm:rounded-3xl max-w-[1200px] shadow-lg">
+        {/* Header */}
         <div className="hidden sm:flex gap-4 justify-center p-5 items-center">
           <img
             src={fixture.league.logo}
@@ -158,6 +175,7 @@ const Match = ({
         </div>
 
         <div className="grid grid-cols-3 gap-16 sm:gap-4 justify-self-center p-6 items-center">
+          {/* Home Team */}
           <div
             className="flex flex-col sm:flex-row items-center gap-4 justify-self-end hover:cursor-pointer hover:underline"
             onClick={() => handleTeamClick(fixture.fixture.teams.home.id)}
@@ -238,6 +256,7 @@ const Match = ({
             </div>
           </div>
 
+          {/* Away Team */}
           <div
             className="flex flex-col sm:flex-row items-center gap-4 hover:cursor-pointer hover:underline"
             onClick={() => handleTeamClick(fixture.fixture.teams.away.id)}
@@ -252,6 +271,8 @@ const Match = ({
             </p>
           </div>
         </div>
+
+        {/* Match Events */}
         <div className="flex flex-col w-full justify-center items-center pb-3">
           {fixture.fixtureInfo.status.short === "FT" && matchEvents && (
             <div className="grid grid-cols-[1fr_auto_1fr] text-zinc-500 text-xs justify-self-center w-full justify-center">
@@ -265,6 +286,7 @@ const Match = ({
                     )}
                   </>
                 ))}
+                
               </div>
               <div>
                 <img
