@@ -80,9 +80,6 @@ const FixtureList = ({
     const isHomeTeam = fixture.teams.home.teamID === teamID;
     const isAwayTeam = fixture.teams.away.teamID === teamID;
 
-    console.log("Home team: ", isHomeTeam);
-    console.log("Away team: ", isAwayTeam);
-
     if (isHomeTeam) {
       return fixture.teams.home.winner
         ? "bg-green-700"

@@ -22,7 +22,6 @@ const fetchCountryCode = async (
     );
 
     if (!result) {
-      console.log(`Country not found: ${countryName}`);
       return undefined;
     }
 
@@ -571,8 +570,6 @@ const fetchMatchEvents = async (matchID: number) => {
       comments: event.comments,
     }));
 
-    console.log("Match Events", data);
-
     return matchEvents;
   } catch (error) {
     console.error("Error fetching match events: ", error);
@@ -661,7 +658,7 @@ const fetchCoach = async (teamID: number) => {
     );
     const data = await response.json();
 
-    return data
+    return data;
   } catch (error) {
     console.error("Error fetching coach: ", error);
   }
@@ -742,8 +739,56 @@ const fetchTeamSeasonStats = async (teamID: number) => {
     console.error("Error fetching team stats: ", error);
   }
 };
-fetchCoach(40);
-fetchTeamSeasonStats(42);
+
+const fetchPlayerMatchStatistics = async (
+  fixutureID: number,
+) => {
+  try {
+    const response = await fetch(
+      `https://v3.football.api-sports.io/fixtures/players?fixture=${fixutureID}`,
+      {
+        method: "GET",
+        headers: {
+          "x-rapidapi-host": "v3.football.api-sports.io",
+          "x-rapidapi-key": apiKey,
+        },
+      }
+    );
+
+    const data = await response.json();
+
+    console.log(data);
+    
+
+    const homePlayerStats = data.response[0].players;
+    const awayPlayerStats = data.response[1].players;
+
+    const homeTeamStats: PlayerMatchStats[] = homePlayerStats.map(
+      (player: any) => ({
+        id: player.player.id,
+        name: player.player.name,
+        position: player.player.position,
+        stats: player.statistics,
+      })
+    );
+
+    const awayTeamStats: PlayerMatchStats[] = awayPlayerStats.map(
+      (player: any) => ({
+        id: player.player.id,
+        name: player.player.name,
+        position: player.player.position,
+        stats: player.statistics,
+      })
+    );
+
+    const allPlayers = [...homeTeamStats, ...awayTeamStats];
+  
+    return { allPlayers };
+
+  } catch (error) {
+    console.error("Error fetching player match statistics: ", error);
+  }
+};
 
 export default {
   fetchTeams,
@@ -757,4 +802,5 @@ export default {
   fetchTeamSeasonStats,
   fetchHeadToHead,
   fetchMatchEvents,
+  fetchPlayerMatchStatistics
 };

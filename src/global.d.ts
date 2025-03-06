@@ -212,6 +212,7 @@ interface MatchProps {
   handleFetchTeam: (teamID: number) => void
   handleFetchMatchEvents: (matchID: number) => void
   matchEvents?: MatchEvent[]
+  playerMatchStats?: PlayerMatchStats[]
 }
 
 interface MatchStatsProps {
@@ -223,6 +224,43 @@ interface TeamStats {
   seasonStats: TeamSeasonStats | undefined
 }
 
+interface PlayerMatchStatsProps {
+  stats?: PlayerMatchStats[]
+}
+
+
+interface PlayerMatchStats {
+  player: {
+    id: number
+    name: string
+    photo: string
+  }
+  stats: {
+    cards: {
+      yellow: number
+      red: number
+    }
+    dribbles: {
+      attempts: number
+      success: number
+    }
+    duels: {
+      total: number
+      won: number
+    }
+    fouls: {
+      drawn: number
+      committed: number
+    }
+    games: {
+      minutes: number, 
+      position: string,
+      rating: string,
+      substitute: boolean,
+      captain: boolean
+    }
+  }
+}
 
 interface TeamSeasonStats {
   form: string

@@ -1,10 +1,11 @@
-import { useDebugValue, useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import Lineup from "../components/Lineup";
 import MatchStats from "../components/MatchStats";
 import HeadToHead from "../components/HeadToHead";
 import MatchEvents from "../components/MatchEvents";
 import football from "../../assets/football.webp";
+import PlayerMatchStats from "../components/PlayerMatchStats";
 
 const Match = ({
   fixture,
@@ -13,6 +14,7 @@ const Match = ({
   handleFetchTeam,
   handleFetchMatchEvents,
   matchEvents,
+  playerMatchStats,
 }: MatchProps) => {
   const { id } = useParams<{ id: string }>();
   const [homeReds, setHomeReds] = useState(0);
@@ -77,7 +79,9 @@ const Match = ({
   };
 
   const getRedCardEvents = (events: MatchEvent[]) => {
-    const redCards = events.filter((event) => event.type === "Card" && event.detail === "Red Card");  
+    const redCards = events.filter(
+      (event) => event.type === "Card" && event.detail === "Red Card"
+    );
 
     let homeReds = 0;
     let awayReds = 0;
@@ -93,7 +97,6 @@ const Match = ({
 
   return (
     <div className="bg-slate-200 dark:bg-black h-full pt-14 sm:pt-20 dark:text-white overflow-hidden">
-
       <div className="bg-white dark:bg-zinc-900 h-fit w-full sm:w-11/12 justify-self-center sm:rounded-3xl max-w-[1200px] shadow-lg">
         {/* Header */}
         <div className="hidden sm:flex gap-4 justify-center p-5 items-center">
@@ -105,6 +108,7 @@ const Match = ({
           <p>
             {fixture.league.name} {fixture.league.round}
           </p>
+          {fixture.fixtureInfo.id}
         </div>
 
         <div>
@@ -286,7 +290,6 @@ const Match = ({
                     )}
                   </>
                 ))}
-                
               </div>
               <div>
                 <img
@@ -311,23 +314,28 @@ const Match = ({
         </div>
       </div>
 
-      <MatchEvents matchEvents={matchEvents} fixture={fixture} />
-
-      {(fixture.fixtureInfo.status.short === "NS" ||
-        fixture.fixtureInfo.status.short === "PST" ||
-        fixture.fixtureInfo.status.short === "TBD") && (
+      {fixture.fixtureInfo.status.short === "NS" ||
+      fixture.fixtureInfo.status.short === "PST" ||
+      fixture.fixtureInfo.status.short === "TBD" ? (
         <HeadToHead
           fixture={fixture.fixture}
           headToHead={headToHead}
           handleMatchClick={handleFetchMatch}
         />
+      ) : (
+        <>
+          <MatchEvents matchEvents={matchEvents} fixture={fixture} />
+          <MatchStats fixture={fixture} />
+          <div className="w-11/12 justify-self-center mb-32">
+            <Lineup fixture={fixture} />
+          </div>
+          {playerMatchStats && (
+            <PlayerMatchStats
+              stats={playerMatchStats}
+            />
+          )}
+        </>
       )}
-
-      <MatchStats fixture={fixture} />
-
-      <div className="w-11/12 justify-self-center mb-32">
-        <Lineup fixture={fixture} />
-      </div>
     </div>
   );
 };

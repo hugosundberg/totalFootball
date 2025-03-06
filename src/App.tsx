@@ -27,6 +27,8 @@ export default function App() {
     undefined
   );
   const [matchEvents, setMatchEvents] = useState<MatchEvent[]>();
+  const [playerMatchStats, setPlayerMatchStats] = useState<PlayerMatchStats[]>();
+
 
   const [currentLeague, setCurrentLeague] = useState(39);
   const [headToHead, setHeadToHead] = useState<Fixture[] | undefined>();
@@ -34,7 +36,7 @@ export default function App() {
   const [standing, setStanding] = useState();
   const navigate = useNavigate();
 
-  const handleMatchClick = useCallback(
+  const handleFetchMatch = useCallback(
     async (matchID: number) => {
       try {
         const fetchedMatch = await footballApi.fetchMatch(matchID);
@@ -46,6 +48,9 @@ export default function App() {
             fetchedMatch.fixture.teams.home.id,
             fetchedMatch.fixture.teams.away.id
           );
+
+          handleFetchPlayerMatchStats(matchID);
+
         }
 
         navigate(`/match/${matchID}`);
@@ -55,6 +60,18 @@ export default function App() {
     },
     [navigate]
   );
+
+  const handleFetchPlayerMatchStats = async (matchID: number) => {
+    try {
+      const fetchedPlayerMatchStats = await footballApi.fetchPlayerMatchStatistics(matchID);
+      
+      setPlayerMatchStats(fetchedPlayerMatchStats?.allPlayers);
+
+    } catch (error) {
+      console.error("Error fetching player match stats: ", error);
+      return [];
+    }
+  };
 
   const handleFetchMatchEvents = async (matchID: number) => {
     if (matchID) {
@@ -161,7 +178,7 @@ export default function App() {
               squad={currentSquad}
               handleFetchPlayer={handleFetchPlayer}
               fixtures={currentFixtureList}
-              handleMatchClick={handleMatchClick}
+              handleMatchClick={handleFetchMatch}
               seasonStats={currentTeamSeasonStats}
             />
           }
@@ -182,11 +199,12 @@ export default function App() {
           element={
             <Match
               fixture={currentFixture}
-              handleFetchMatch={handleMatchClick}
+              handleFetchMatch={handleFetchMatch}
               headToHead={headToHead}
               handleFetchTeam={handleFetchTeam}
               handleFetchMatchEvents={handleFetchMatchEvents}
               matchEvents={matchEvents}
+              playerMatchStats={playerMatchStats}
             />
           }
         />

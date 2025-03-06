@@ -1,3 +1,5 @@
+import PlayerStats from "./PlayerStats";
+
 const TeamStats = ({ seasonStats }: TeamStats) => {
   if (!seasonStats) return null;
 
