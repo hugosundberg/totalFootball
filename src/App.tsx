@@ -142,7 +142,7 @@ export default function App() {
       <Navigation />
       <Routes>
         <Route
-          path="/"
+          path="/totalFootball"
           element={
             <Home
               standing={standing}
