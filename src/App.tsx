@@ -119,6 +119,9 @@ export default function App() {
 
         const fetchedSquad = await footballApi.fetchSquad(teamID);
         setCurrentSquad(fetchedSquad);
+
+        const fetchedLeague = await footballApi.fetchTeamLeague(teamID);
+        setCurrentLeague(fetchedLeague);
       } catch (error) {
         console.error("Error fetching team: ", error);
       }
