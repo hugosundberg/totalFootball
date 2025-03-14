@@ -97,7 +97,7 @@ export default function App() {
         setCurrentPlayer(fetchedPlayer?.formattedPlayer);
         setPlayerCurrentStats(fetchedPlayer?.formattedPlayerStats);
         setCurrentPlayerTeam(fetchedPlayerTeam);
-        navigate(`/player/${playerID}`);
+        navigate(`/totalFootball/player/${playerID}`);
       } catch (error) {
         console.error("Error fetching player: ", error);
       }
@@ -155,7 +155,7 @@ export default function App() {
         />
         <Route path="/totalFootball/about" element={<About />} />
         <Route
-          path="/team/:id/*"
+          path="/totalFootball/team/:id/*"
           element={
             <Team
               team={currentTeam}
@@ -170,7 +170,7 @@ export default function App() {
           }
         />
         <Route
-          path="/player/:id"
+          path="/totalFootball/player/:id"
           element={
             <Player
               player={currentPlayer}

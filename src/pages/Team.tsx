@@ -72,7 +72,7 @@ const Team = ({
               className="flex gap-2 relative text-sm sm:text-lg"
             >
               <NavLink
-                to={`/team/${id}`}
+                to={`/totalFootball/team/${team.id}`}
                 className={({ isActive }) =>
                   isActive
                     ? "text-green-700 active"
@@ -83,7 +83,7 @@ const Team = ({
                 <div className="pb-2 px-2">Overview</div>
               </NavLink>
               <NavLink
-                to={`/team/${id}/table`}
+                to={`/totalFootball/team/${team.id}/table`}
                 className={({ isActive }) =>
                   isActive
                     ? "text-green-700 active"
@@ -93,7 +93,7 @@ const Team = ({
                 <div className="pb-2 px-2">Table</div>
               </NavLink>
               <NavLink
-                to={`/team/${id}/fixtures`}
+                to={`/totalFootball/team/${team.id}/fixtures`}
                 className={({ isActive }) =>
                   isActive
                     ? "text-green-700 active"
@@ -103,7 +103,7 @@ const Team = ({
                 <div className="pb-2 px-2">Matches</div>
               </NavLink>
               <NavLink
-                to={`/team/${id}/squad`}
+                to={`/totalFootball/team/${team.id}/squad`}
                 className={({ isActive }) =>
                   isActive
                     ? "text-green-700 active"
@@ -113,7 +113,7 @@ const Team = ({
                 <div className="pb-2 px-2">Squad</div>
               </NavLink>
               <NavLink
-                to={`/team/${id}/stats`}
+                to={`/totalFootball/team/${team.id}/stats`}
                 className={({ isActive }) =>
                   isActive
                     ? "text-green-700 active"

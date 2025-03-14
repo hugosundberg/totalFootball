@@ -4,12 +4,12 @@ const Table = ({
   standing = [],
   handleFetchTeam,
   currentTeam,
-}: TableProps & { currentTeam: number }) => {
+}: TableProps) => {
   const navigate = useNavigate();
 
   const handleTeamClick = (id: number) => {
     handleFetchTeam(id);
-    navigate(`/team/${id}`);
+    navigate(`/totalFootball/team/${id}`);
   };
 
   return (
