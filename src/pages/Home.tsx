@@ -36,27 +36,7 @@ const Home = ({ standing, setCurrentLeague, handleFetchTeam }: any) => {
         <div className="flex justify-center md:md:ml-4 text-white bg-zinc-900 h-fit w-full rounded-2xl shadow-lg">
           <Table standing={standing} handleFetchTeam={handleFetchTeam} />
         </div>
-        <div className="hidden md:lg:flex gap-4 h-fit ml-4 bg-white dark:text-white dark:bg-zinc-900 w-1/4 rounded-2xl flex-col overflow-hidden shadow-lg">
-          <h2 className="dark:bg-zinc-800 p-4 font-semibold">Premier League</h2>
-          <div className="flex flex-col gap-3 ml-4 pb-3">
-            <p>Team 1</p>
-            <p>Team 1</p>
-            <p>Team 1</p>
-            <p>Team 1</p>
-            <p>Team 1</p>
-            <p>Team 1</p>
-            <p>Team 1</p>
-            <p>Team 1</p>
-            <p>Team 1</p>
-            <p>Team 1</p>
-            <p>Team 1</p>
-            <p>Team 1</p>
-            <p>Team 1</p>
-            <p>Team 1</p>
-            <p>Team 1</p>
-            <p>Team 1</p>
-          </div>
-        </div>
+        
       </div>
     </div>
   );
