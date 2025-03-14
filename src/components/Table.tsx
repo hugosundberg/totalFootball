@@ -12,6 +12,11 @@ const Table = ({
     navigate(`/team/${id}`);
   };
 
+  console.log(currentTeam.id);
+
+  
+  
+
   return (
     <div className="flex-col w-full bg-zinc-900 rounded-2xl overflow-auto">
       <div className="flex w-full justify-between bg-zinc-800 p-4">
@@ -29,8 +34,8 @@ const Table = ({
       {standing.map((team) => (
         <div
           key={team.team.id}
-          className={`flex w-full justify-between items-center py-2 px-4 ${
-            currentTeam && currentTeam === team.team.id ? "bg-gray-100" : ""
+          className={`flex w-full justify-between items-center py-2 px-4 hover:cursor-pointer hover:bg-zinc-700 ${
+            currentTeam && currentTeam === team.team.id ? "bg-zinc-700" : ""
           }`}
           onClick={() => handleTeamClick(team.team.id)}
         >
