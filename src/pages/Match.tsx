@@ -30,7 +30,7 @@ const Match = ({
 
   const handleTeamClick = (id: number) => {
     handleFetchTeam(id);
-    navigate(`/team/${id}`);
+    navigate(`/totalFootball/team/${id}`);
   };
 
   if (!fixture) return null;
