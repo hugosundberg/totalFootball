@@ -12,14 +12,9 @@ const Table = ({
     navigate(`/team/${id}`);
   };
 
-  console.log(currentTeam.id);
-
-  
-  
-
   return (
     <div className="flex-col w-full bg-zinc-900 rounded-2xl overflow-auto">
-      <div className="flex w-full justify-between bg-zinc-800 p-4">
+      <div className="flex w-full justify-between border-b-4 border-zinc-800 p-4">
         <div className="w-5 flex justify-center">#</div>
         <div className="flex gap-4">
           <p className="w-10 flex justify-center">PL</p>
@@ -35,11 +30,14 @@ const Table = ({
         <div
           key={team.team.id}
           className={`flex w-full justify-between items-center py-2 px-4 hover:cursor-pointer hover:bg-zinc-700 ${
-            currentTeam && currentTeam === team.team.id ? "bg-zinc-700" : ""
+            currentTeam?.id === team.team.id
+            ? "bg-blue-100 dark:bg-zinc-800"
+            : "dark:hover:bg-zinc-700"
           }`}
           onClick={() => handleTeamClick(team.team.id)}
         >
           <div className="flex items-center gap-4 w-full">
+            
             <div className="w-5 flex justify-center">{team.rank}</div>
             <div className="flex items-center gap-4 w-full">
               <img
@@ -83,3 +81,4 @@ const Table = ({
 };
 
 export default Table;
+
