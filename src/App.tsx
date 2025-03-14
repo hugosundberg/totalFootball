@@ -10,7 +10,9 @@ import Match from "./pages/Match";
 
 export default function App() {
   const [currentTeam, setCurrentTeam] = useState<Team | undefined>(undefined);
-  const [currentTeamSeasonStats, setCurrentTeamSeasonStats] = useState<TeamSeasonStats | undefined>(undefined);
+  const [currentTeamSeasonStats, setCurrentTeamSeasonStats] = useState<
+    TeamSeasonStats | undefined
+  >(undefined);
   const [currentPlayer, setCurrentPlayer] = useState<Player | undefined>(
     undefined
   );
@@ -68,7 +70,7 @@ export default function App() {
       }
     }
     return [];
-  }
+  };
 
   const handleFetchHeadToHead = async (
     teamOneID: number,
@@ -151,6 +153,7 @@ export default function App() {
             />
           }
         />
+        <Route path="/totalFootball/about" element={<About />} />
         <Route
           path="/team/:id/*"
           element={
@@ -190,7 +193,6 @@ export default function App() {
             />
           }
         />
-        <Route path="/about" element={<About />} />
       </Routes>
     </>
   );
