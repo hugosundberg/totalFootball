@@ -1,11 +1,16 @@
 import { useNavigate } from "react-router-dom";
 
-const Table = ({
-  standing = [],
-  handleFetchTeam,
-  currentTeam,
-}: TableProps) => {
+const Table = ({ standing = [], handleFetchTeam, currentTeam }: TableProps) => {
   const navigate = useNavigate();
+
+  console.log(standing);
+  
+
+  function isSubstring(a: string, b: string) {
+    if (!a || !b) return false;
+    
+    return a.includes(b);
+  }
 
   const handleTeamClick = (id: number) => {
     handleFetchTeam(id);
@@ -40,12 +45,18 @@ const Table = ({
           <div className={`flex items-center gap-2 lg:gap-4 w-full `}>
             <span
               className={`w-2 h-6 rounded-lg ${
-                team.description === "Champions League"
-                  ? "bg-green-800"
-                  : team.description === "UEFA Europa League"
-                    ? "bg-blue-800"
-                    : team.description === "Relegation"
-                      ? "bg-red-800"
+                isSubstring(team.description, "Champions League")
+                  ? "bg-green-500"
+                  : team.description === "Promotion"
+                  ? "bg-green-500"
+                  : isSubstring(team.description, "Playoff")
+                    ? "bg-yellow-400"
+                  : isSubstring(team.description, "Europa League")
+                    ? "bg-blue-500"
+                    : isSubstring(team.description, "Conference League")
+                      ? "bg-blue-200"
+                    : isSubstring(team.description, "Relegation")
+                      ? "bg-red-500"
                       : ""
               }`}
             />
@@ -68,7 +79,9 @@ const Table = ({
             <p className="hidden lg:flex w-10 justify-center">
               {team.all.lose}
             </p>
-            <p className="w-16 flex justify-center">{team.all.goals.for} - {team.all.goals.against}</p>
+            <p className="w-16 flex justify-center">
+              {team.all.goals.for} - {team.all.goals.against}
+            </p>
             <p className="w-10 flex justify-center">{team.goalsDiff}</p>
             <p className="w-10 flex justify-center">{team.points}</p>
             <div className="hidden sm:flex gap-2 ">

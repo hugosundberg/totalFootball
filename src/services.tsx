@@ -102,8 +102,6 @@ const fetchTeam = async (teamID: number) => {
 
     const team = data.response[0];
 
-    console.log(team);
-
     const processedTeam: Team = {
       id: team.team.id,
       name: team.team.name,
@@ -163,8 +161,6 @@ const fetchTeamLeague = async (teamID: number) => {
     }
 
     const data = await response.json();
-
-    console.log(data);
 
     for (let i = 0; i < data.response.length; i++) {
       if (data.response[i].league.country !== "World") {
