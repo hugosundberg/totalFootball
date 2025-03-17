@@ -14,9 +14,6 @@ const MatchEvents = ({ matchEvents, fixture }: MatchEventProps) => {
 
   if (!matchEvents) return null;
 
-  console.log(matchEvents);
-  
-
   const isSecondHalf = (event: MatchEvent) => event.time.elapsed > 45;
 
   return (

@@ -1,5 +1,3 @@
-
-
 const apiKey = import.meta.env.VITE_FOOTBALL_API_KEY;
 
 // REPLACE WITH INPUT VALUES
@@ -579,8 +577,7 @@ const fetchMatchEvents = async (matchID: number) => {
     );
 
     const data = await response.json();
-    console.log(data);
-    
+
 
     const matchEvents: MatchEvent[] = data.response.map((event: any) => ({
       id: event.id,
@@ -621,18 +618,23 @@ const fetchMatchEvents = async (matchID: number) => {
       // Sort by total time
       return totalA - totalB;
     });
-    
 
     for (let i = 0; i < matchEvents.length; i++) {
       if (matchEvents[i].detail === "Red Card") {
-        if (matchEvents[i - 1].type === "Card" && matchEvents[i - 1].player.id === matchEvents[i].player.id) {
+        if (
+          matchEvents[i - 1].type === "Card" &&
+          matchEvents[i - 1].player.id === matchEvents[i].player.id
+        ) {
           matchEvents[i - 1].detail = "Second Yellow";
           matchEvents.splice(i, 1);
-        } else if (matchEvents[i + 1].type === "Card" && matchEvents[i + 1].player.id === matchEvents[i].player.id) {
+        } else if (
+          matchEvents[i + 1].type === "Card" &&
+          matchEvents[i + 1].player.id === matchEvents[i].player.id
+        ) {
           matchEvents[i + 1].detail = "Second Yellow";
           matchEvents.splice(i, 1);
         }
-      } 
+      }
     }
 
     return matchEvents;
@@ -655,8 +657,6 @@ const fetchHeadToHead = async (team1ID: number, team2ID: number) => {
     );
 
     const data = await response.json();
-
-    
 
     const fixtures: Fixture[] = data.response.map((fixture: any) => ({
       fixtureInfo: {
