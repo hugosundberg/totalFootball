@@ -50,7 +50,7 @@ export default function App() {
           );
         }
 
-        navigate(`/match/${matchID}`);
+        navigate(`/totalFootball/match/${matchID}`);
       } catch (error) {
         console.error("Error fetching player: ", error);
       }
@@ -184,7 +184,7 @@ export default function App() {
           }
         />
         <Route
-          path="/match/:id"
+          path="/totalFootball/match/:id"
           element={
             <Match
               fixture={currentFixture}

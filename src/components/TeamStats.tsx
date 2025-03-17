@@ -1,8 +1,6 @@
 const TeamStats = ({ seasonStats }: TeamStats) => {
   if (!seasonStats) return null;
 
-  console.log("FETCHED Team season statistics " + seasonStats);
-
   return (
     <div className="flex flex-col items-center justify-center w-full h-full dark:bg-black text-sm sm:text-base shadow-xl">
       <div className="flex flex-col w-full h-full bg-white dark:bg-zinc-900 pt-4 sm:rounded-2xl overflow-hidden">

@@ -1,3 +1,5 @@
+
+
 const apiKey = import.meta.env.VITE_FOOTBALL_API_KEY;
 
 // REPLACE WITH INPUT VALUES
@@ -577,6 +579,8 @@ const fetchMatchEvents = async (matchID: number) => {
     );
 
     const data = await response.json();
+    console.log(data);
+    
 
     const matchEvents: MatchEvent[] = data.response.map((event: any) => ({
       id: event.id,
@@ -602,7 +606,34 @@ const fetchMatchEvents = async (matchID: number) => {
       comments: event.comments,
     }));
 
-    console.log("Match Events", data);
+    matchEvents.sort((a, b) => {
+      // Calculate total time for each event
+      const totalA = a.time.elapsed + (a.time.extra || 0);
+      const totalB = b.time.elapsed + (b.time.extra || 0);
+
+      // Handle transition between first half and second half
+      if (a.time.elapsed <= 45 && b.time.elapsed > 45) {
+        return -1;
+      } else if (a.time.elapsed > 45 && b.time.elapsed <= 45) {
+        return 1;
+      }
+
+      // Sort by total time
+      return totalA - totalB;
+    });
+    
+
+    for (let i = 0; i < matchEvents.length; i++) {
+      if (matchEvents[i].detail === "Red Card") {
+        if (matchEvents[i - 1].type === "Card" && matchEvents[i - 1].player.id === matchEvents[i].player.id) {
+          matchEvents[i - 1].detail = "Second Yellow";
+          matchEvents.splice(i, 1);
+        } else if (matchEvents[i + 1].type === "Card" && matchEvents[i + 1].player.id === matchEvents[i].player.id) {
+          matchEvents[i + 1].detail = "Second Yellow";
+          matchEvents.splice(i, 1);
+        }
+      } 
+    }
 
     return matchEvents;
   } catch (error) {
@@ -624,6 +655,8 @@ const fetchHeadToHead = async (team1ID: number, team2ID: number) => {
     );
 
     const data = await response.json();
+
+    
 
     const fixtures: Fixture[] = data.response.map((fixture: any) => ({
       fixtureInfo: {
@@ -675,26 +708,6 @@ const fetchHeadToHead = async (team1ID: number, team2ID: number) => {
     return fixtures;
   } catch (error) {
     console.error("Error fetching head to head: ", error);
-  }
-};
-
-const fetchCoach = async (teamID: number) => {
-  try {
-    const response = await fetch(
-      `https://v3.football.api-sports.io/coachs?team=${teamID}`,
-      {
-        method: "GET",
-        headers: {
-          "x-rapidapi-host": "v3.football.api-sports.io",
-          "x-rapidapi-key": apiKey,
-        },
-      }
-    );
-    const data = await response.json();
-
-    return data;
-  } catch (error) {
-    console.error("Error fetching coach: ", error);
   }
 };
 
@@ -773,8 +786,6 @@ const fetchTeamSeasonStats = async (teamID: number) => {
     console.error("Error fetching team stats: ", error);
   }
 };
-fetchCoach(40);
-fetchTeamSeasonStats(42);
 
 export default {
   fetchTeams,

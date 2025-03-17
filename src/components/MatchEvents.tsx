@@ -14,6 +14,9 @@ const MatchEvents = ({ matchEvents, fixture }: MatchEventProps) => {
 
   if (!matchEvents) return null;
 
+  console.log(matchEvents);
+  
+
   const isSecondHalf = (event: MatchEvent) => event.time.elapsed > 45;
 
   return (
@@ -55,7 +58,11 @@ const MatchEvents = ({ matchEvents, fixture }: MatchEventProps) => {
                             alt=""
                             className="h-4 w-4 dark:hidden"
                           />
-                          <img src={football} alt="" className="h-4 w-4 hidden dark:block" />
+                          <img
+                            src={football}
+                            alt=""
+                            className="h-4 w-4 hidden dark:block"
+                          />
                         </div>
                       </div>
                     )}
@@ -99,7 +106,11 @@ const MatchEvents = ({ matchEvents, fixture }: MatchEventProps) => {
                             alt=""
                             className="h-4 w-4 dark:hidden"
                           />
-                          <img src={football} alt="" className="h-4 w-4 hidden dark:block" />
+                          <img
+                            src={football}
+                            alt=""
+                            className="h-4 w-4 hidden dark:block"
+                          />
                         </div>
                         <div>
                           <p>{event.player.name}</p>
@@ -113,12 +124,24 @@ const MatchEvents = ({ matchEvents, fixture }: MatchEventProps) => {
                     )}
                     {event.type === "Card" && (
                       <div className="flex items-center gap-3">
-                        <div className="p-2 h-10 w-10 border-2 rounded-full border-zinc-700">
-                          <div
-                            className={`flex items-center h-5 w-4 rounded-sm justify-self-center ${event.detail === "Yellow Card" ? "bg-yellow-500" : "bg-red-600"} `}
-                          />
-                        </div>
-                        <p>{event.player.name}</p>
+                        {event.detail === "Second Yellow" ? (
+                          <>
+                            <div className="p-2 h-10 w-10 border-2 rounded-full border-zinc-700">
+                              <div className="flex relative top-0.5 h-5 w-4 bg-yellow-500 rounded-sm" />
+                              <div className="flex relative bottom-[22px] left-1 h-5 w-4 bg-red-600 rounded-sm" />
+                            </div>
+                            <p>{event.player.name}</p>
+                          </>
+                        ) : (
+                          <>
+                            <div className="p-2 h-10 w-10 border-2 rounded-full border-zinc-700">
+                              <div
+                                className={`flex items-center h-5 w-4 rounded-sm justify-self-center ${event.detail === "Yellow Card" ? "bg-yellow-500" : "bg-red-600"} `}
+                              />
+                            </div>
+                            <p>{event.player.name}</p>
+                          </>
+                        )}
                       </div>
                     )}
                     {event.type === "subst" && (
@@ -180,12 +203,24 @@ const MatchEvents = ({ matchEvents, fixture }: MatchEventProps) => {
                   <div
                     className={`flex items-center gap-3 ${event.team.id !== fixture.fixture.teams.home.id ? "flex-row-reverse" : ""}`}
                   >
-                    <div className="p-2 h-10 w-10 border-2 rounded-full border-zinc-700">
-                      <div
-                        className={`flex items-center h-5 w-4 rounded-sm justify-self-center ${event.detail === "Yellow Card" ? "bg-yellow-500" : "bg-red-600"} `}
-                      />
-                    </div>
-                    <p>{event.player.name}</p>
+                    {event.detail === "Second Yellow" ? (
+                      <>
+                        <div className="p-2 h-10 w-10 border-2 rounded-full border-zinc-700">
+                          <div className="flex relative top-0.5 h-5 w-4 bg-yellow-500 rounded-sm" />
+                          <div className="flex relative bottom-[22px] left-1 h-5 w-4 bg-red-600 rounded-sm" />
+                        </div>
+                        <p>{event.player.name}</p>
+                      </>
+                    ) : (
+                      <>
+                        <div className="p-2 h-10 w-10 border-2 rounded-full border-zinc-700">
+                          <div
+                            className={`flex items-center h-5 w-4 rounded-sm justify-self-center ${event.detail === "Yellow Card" ? "bg-yellow-500" : "bg-red-600"} `}
+                          />
+                        </div>
+                        <p>{event.player.name}</p>
+                      </>
+                    )}
                   </div>
                 )}
 
