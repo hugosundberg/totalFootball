@@ -2,10 +2,7 @@ import { useNavigate } from "react-router-dom";
 
 const Table = ({ standing = [], handleFetchTeam, currentTeam }: TableProps) => {
   const navigate = useNavigate();
-
-  console.log(standing);
   
-
   function isSubstring(a: string, b: string) {
     if (!a || !b) return false;
     
@@ -44,7 +41,7 @@ const Table = ({ standing = [], handleFetchTeam, currentTeam }: TableProps) => {
         >
           <div className={`flex items-center gap-2 lg:gap-4 w-full `}>
             <span
-              className={`w-2 h-6 rounded-lg ${
+              className={`w-2 ml-2 h-6 rounded-full ${
                 isSubstring(team.description, "Champions League")
                   ? "bg-green-500"
                   : team.description === "Promotion"
