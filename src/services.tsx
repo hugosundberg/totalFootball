@@ -754,7 +754,7 @@ const fetchHeadToHead = async (team1ID: number, team2ID: number) => {
   }
 };
 
-const fetchTeamSeasonStats = async (teamID: number) => {
+const fetchTeamSeasonStats = async (leagueID: number, teamID: number) => {
   try {
     const response = await fetch(
       `https://v3.football.api-sports.io/teams/statistics/?team=${teamID}&season=${season}&league=${leagueID}`,

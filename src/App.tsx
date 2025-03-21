@@ -106,6 +106,20 @@ export default function App() {
     [navigate]
   );
 
+  const handleFetchStats = async (leagueID: number, teamID: number) => {
+    try {
+      const fetchedStats = await footballApi.fetchTeamSeasonStats(
+        leagueID,
+        teamID
+      );
+
+      setCurrentTeamSeasonStats(fetchedStats);
+    }
+    catch (error) {
+      console.error("Error fetching team stats: ", error);
+    }
+  };
+
   const handleFetchTeam = useCallback(
     async (teamID: number) => {
       try {
@@ -115,14 +129,14 @@ export default function App() {
         const fetchedFixtureList = await footballApi.fetchTeamFixtures(teamID);
         setCurrentFixtureList(fetchedFixtureList);
 
-        const fetchedTeamStats = await footballApi.fetchTeamSeasonStats(teamID);
-        setCurrentTeamSeasonStats(fetchedTeamStats);
-
         const fetchedSquad = await footballApi.fetchSquad(teamID);
         setCurrentSquad(fetchedSquad);
-
+        
         const fetchedLeague = await footballApi.fetchTeamLeague(teamID);
         setCurrentLeague(fetchedLeague);
+        
+        const fetchedTeamStats = await footballApi.fetchTeamSeasonStats(currentLeague, teamID);
+        setCurrentTeamSeasonStats(fetchedTeamStats);
 
         const fetchedComps = await footballApi.fetchTeamCompetitions(teamID);
         setCompetitions(fetchedComps);
@@ -175,6 +189,7 @@ export default function App() {
               handleMatchClick={handleMatchClick}
               seasonStats={currentTeamSeasonStats}
               competitions={competitions}
+              handleFetchStats={handleFetchStats}
             />
           }
         />

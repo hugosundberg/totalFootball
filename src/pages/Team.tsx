@@ -21,7 +21,8 @@ const Team = ({
   fixtures,
   handleMatchClick,
   seasonStats,
-  competitions
+  competitions,
+  handleFetchStats
 }: TeamProps) => {
   const { id } = useParams<{ id: string }>();
   const location = useLocation();
@@ -180,7 +181,17 @@ const Team = ({
                 <Squad squad={squad} handlePlayerClick={handleFetchPlayer} />
               }
             />
-            <Route path="stats" element={<TeamStats competitions={competitions || []} seasonStats={seasonStats}/>} />
+            <Route
+              path="stats"
+              element={
+                <TeamStats
+                  competitions={competitions || []}
+                  seasonStats={seasonStats}
+                  handleFetchStats={handleFetchStats}
+                  teamID={team.id}
+                />
+              }
+            />
           </Routes>
         </div>
       </div>

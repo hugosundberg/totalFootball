@@ -17,6 +17,7 @@ interface TeamProps {
   handleMatchClick: (matchID: number) => void;
   seasonStats?: TeamSeasonStats | undefined;
   competitions?: TeamCompetitions[];
+  handleFetchStats: (teamID: number, competitionID: number) => void;
 }
 
 interface TeamOverviewProps {
@@ -220,9 +221,11 @@ interface MatchStatsProps {
 }
 
 interface TeamStats {
+  teamID: number;
   competitions: Competitions[];
   played?: number;
   seasonStats: TeamSeasonStats | undefined;
+  handleFetchStats: (teamID: number, competitionID: number) => void;
 }
 
 interface League {
@@ -292,6 +295,7 @@ interface TeamCompetitions {
 }
 
 interface Competition {
+  competitions: any;
   country: {
     name: string;
     code: string;
