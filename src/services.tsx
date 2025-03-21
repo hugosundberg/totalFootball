@@ -136,6 +136,9 @@ const fetchStandings = async (leagueID: number) => {
 
     const data = await response.json();
 
+    console.log(data);
+    
+
     const standings = data.response[0].league.standings[0];
     return standings;
   } catch (error) {
@@ -173,6 +176,45 @@ const fetchTeamLeague = async (teamID: number) => {
     console.error("Error fetching team standings: ", error);
   }
 };
+
+const fetchComps = async (teamID: number) => {
+
+  try {
+    const response = await fetch(
+      `https://v3.football.api-sports.io/leagues?team=${teamID}&season=${season}`,
+      {
+        method: "GET",
+        headers: {
+          "x-rapidapi-host": "v3.football.api-sports.io",
+          "x-rapidapi-key": apiKey
+        },
+      }
+    );
+
+    if (!response.ok) {
+      throw new Error(`HTTP error! status: ${response.status}`);
+    }
+
+    const data = await response.json();
+
+    console.log("Competitions", data);
+    
+    
+    const comps = data.response.map((comp: any) => ({
+      id: comp.league.id,
+      name: comp.league.name,
+      country: comp.league.country,
+      logo: comp.league.logo,
+      flag: comp.league.flag,
+    }));
+
+    return comps;
+  } catch (error) {
+    console.error("Error fetching competitions: ", error);
+  }
+}
+
+fetchComps(47);
 
 const fetchSquad = async (teamID: number) => {
   try {

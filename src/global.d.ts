@@ -219,6 +219,9 @@ interface MatchStatsProps {
 }
 
 interface TeamStats {
+  competition: string;
+  competitionLogo: string;
+  competitionId: number;
   played?: number;
   seasonStats: TeamSeasonStats | undefined;
 }

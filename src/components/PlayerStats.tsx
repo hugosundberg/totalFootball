@@ -1,5 +1,4 @@
 const PlayerStats = ({ currentStats, player }: PlayerStatsProps) => {
-  console.log(currentStats);
 
   return (
     <div className="h-fit w-full sm:w-11/12 sm:rounded-xl sm:mt-4 bg-white dark:bg-zinc-900 items-center p-4 shadow-xl">

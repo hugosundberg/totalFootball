@@ -15,8 +15,8 @@ const Table = ({ standing = [], handleFetchTeam, currentTeam }: TableProps) => {
   };
 
   return (
-    <div className="flex-col w-full pb-2 bg-zinc-900 rounded-2xl overflow-auto">
-      <div className="flex w-full justify-between border-b-4 border-zinc-800 p-4">
+    <div className="flex-col text-sm w-full pb-2 bg-zinc-900 rounded-2xl overflow-auto">
+      <div className="flex text-xs w-full justify-between border-b-4 border-zinc-800 p-4">
         <div className="w-8 flex justify-center">#</div>
         <div className="flex gap-2 lg:gap-4">
           <p className="w-10 flex justify-center">PL</p>
@@ -39,7 +39,7 @@ const Table = ({ standing = [], handleFetchTeam, currentTeam }: TableProps) => {
           }`}
           onClick={() => handleTeamClick(team.team.id)}
         >
-          <div className={`flex items-center gap-2 lg:gap-4 w-full `}>
+          <div className={`flex items-center gap-2 w-full `}>
             <span
               className={`w-2 ml-2 h-6 rounded-full ${
                 isSubstring(team.description, "Champions League")
@@ -85,7 +85,7 @@ const Table = ({ standing = [], handleFetchTeam, currentTeam }: TableProps) => {
               {team.form.split("").map((char, index) => (
                 <span
                   key={index}
-                  className={`w-6 rounded text-center ${
+                  className={`w-6 h-6 rounded flex justify-center items-center ${
                     char === "L"
                       ? "bg-red-600 text-white"
                       : char === "W"
