@@ -136,9 +136,6 @@ const fetchStandings = async (leagueID: number) => {
 
     const data = await response.json();
 
-    console.log(data);
-    
-
     const standings = data.response[0].league.standings[0];
     return standings;
   } catch (error) {
@@ -177,7 +174,7 @@ const fetchTeamLeague = async (teamID: number) => {
   }
 };
 
-const fetchComps = async (teamID: number) => {
+const fetchTeamCompetitions = async (teamID: number) => {
 
   try {
     const response = await fetch(
@@ -198,14 +195,20 @@ const fetchComps = async (teamID: number) => {
     const data = await response.json();
 
     console.log("Competitions", data);
-    
-    
-    const comps = data.response.map((comp: any) => ({
-      id: comp.league.id,
-      name: comp.league.name,
-      country: comp.league.country,
-      logo: comp.league.logo,
-      flag: comp.league.flag,
+
+    const comps: TeamCompetitions[] = data.response.map((comp: any) => ({
+      competitions: {
+        league: {
+          id: comp.league.id,
+          name: comp.league.name,
+          type: comp.league.type,
+          logo: comp.league.logo,
+        },
+        country: {
+          name: comp.country.name,
+          code: comp.country.code,
+        }
+      },
     }));
 
     return comps;
@@ -213,8 +216,6 @@ const fetchComps = async (teamID: number) => {
     console.error("Error fetching competitions: ", error);
   }
 }
-
-fetchComps(47);
 
 const fetchSquad = async (teamID: number) => {
   try {
@@ -842,4 +843,5 @@ export default {
   fetchHeadToHead,
   fetchMatchEvents,
   fetchTeamLeague,
+  fetchTeamCompetitions,
 };

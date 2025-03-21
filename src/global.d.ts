@@ -16,6 +16,7 @@ interface TeamProps {
   fixtures?: Fixture[];
   handleMatchClick: (matchID: number) => void;
   seasonStats?: TeamSeasonStats | undefined;
+  competitions?: TeamCompetitions[];
 }
 
 interface TeamOverviewProps {
@@ -219,9 +220,7 @@ interface MatchStatsProps {
 }
 
 interface TeamStats {
-  competition: string;
-  competitionLogo: string;
-  competitionId: number;
+  competitions: Competitions[];
   played?: number;
   seasonStats: TeamSeasonStats | undefined;
 }
@@ -285,6 +284,23 @@ interface TeamSeasonStats {
         total: number;
       };
     };
+  };
+}
+
+interface TeamCompetitions {
+  competitions: Competition[];
+}
+
+interface Competition {
+  country: {
+    name: string;
+    code: string;
+  }
+  league: {
+    id: number;
+    name: string;
+    type: string;
+    logo: string;
   };
 }
 

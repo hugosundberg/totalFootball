@@ -32,6 +32,7 @@ export default function App() {
 
   const [currentLeague, setCurrentLeague] = useState(39);
   const [headToHead, setHeadToHead] = useState<Fixture[] | undefined>();
+  const [competitions, setCompetitions] = useState<TeamCompetitions[] | undefined>();
 
   const [standing, setStanding] = useState();
   const navigate = useNavigate();
@@ -122,6 +123,10 @@ export default function App() {
 
         const fetchedLeague = await footballApi.fetchTeamLeague(teamID);
         setCurrentLeague(fetchedLeague);
+
+        const fetchedComps = await footballApi.fetchTeamCompetitions(teamID);
+        setCompetitions(fetchedComps);
+
       } catch (error) {
         console.error("Error fetching team: ", error);
       }
@@ -169,6 +174,7 @@ export default function App() {
               fixtures={currentFixtureList}
               handleMatchClick={handleMatchClick}
               seasonStats={currentTeamSeasonStats}
+              competitions={competitions}
             />
           }
         />
