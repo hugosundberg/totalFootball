@@ -221,9 +221,6 @@ const fetchTeamCompetitions = async (teamID: number) => {
       }
     });
 
-    console.log("Competitions are ", comps);
-    
-
     return comps;
   } catch (error) {
     console.error("Error fetching competitions: ", error);

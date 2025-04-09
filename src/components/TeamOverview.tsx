@@ -93,7 +93,7 @@ const TeamOverview = ({
             />
           </div>
         </div>
-        <div className="flex justify-between mt-6 px-10">
+        <div className="flex justify-between mt-6 px-10 hover:cursor-pointer hover:opacity-70" onClick={() => nextFixture?.fixtureInfo.id !== undefined && handleMatchClick(nextFixture.fixtureInfo.id)}>
           <div className="flex flex-col items-center gap-2">
             <img src={nextFixture?.teams.home.logo} alt="" className="h-10" />
             <p>{nextFixture?.teams.home.name}</p>

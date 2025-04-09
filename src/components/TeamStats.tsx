@@ -22,8 +22,6 @@ const TeamStats = ({
 
   if (!seasonStats || !competitions) return null;
 
-  console.log("Season stats are ", seasonStats);
-
   return (
     <div className="flex flex-col items-center justify-center w-full h-full dark:bg-black text-sm sm:text-base shadow-xl">
       <div className="flex flex-col w-full h-full bg-white dark:bg-zinc-900 sm:rounded-2xl overflow-hidden">
