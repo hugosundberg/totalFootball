@@ -129,7 +129,7 @@ const fetchStandings = async (leagueID: number) => {
         },
       }
     );
-
+    
     if (!response.ok) {
       throw new Error(`HTTP error! status: ${response.status}`);
     }
@@ -194,7 +194,7 @@ const fetchTeamCompetitions = async (teamID: number) => {
 
     const data = await response.json();
 
-    console.log("Competitions", data);
+    const teamLeague = await fetchTeamLeague(teamID);
 
     const comps: TeamCompetitions[] = data.response.map((comp: any) => ({
       competitions: {
@@ -210,6 +210,19 @@ const fetchTeamCompetitions = async (teamID: number) => {
         }
       },
     }));
+
+    comps.sort((a, b) => {
+      if (a.competitions.league.id === teamLeague) {
+        return -1;
+      } else if (b.competitions.league.id === teamLeague) {
+        return 1;
+      } else {
+        return 0;
+      }
+    });
+
+    console.log("Competitions are ", comps);
+    
 
     return comps;
   } catch (error) {

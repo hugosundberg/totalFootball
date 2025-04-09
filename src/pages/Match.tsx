@@ -18,6 +18,9 @@ const Match = ({
   const [homeReds, setHomeReds] = useState(0);
   const [awayReds, setAwayReds] = useState(0);
 
+  console.log(fixture);
+  
+
   useEffect(() => {
     if (id) {
       handleFetchMatch(Number(id));
@@ -77,7 +80,9 @@ const Match = ({
   };
 
   const getRedCardEvents = (events: MatchEvent[]) => {
-    const redCards = events.filter((event) => event.type === "Card" && event.detail === "Red Card");  
+    const redCards = events.filter(
+      (event) => event.type === "Card" && event.detail === "Red Card"
+    );
 
     let homeReds = 0;
     let awayReds = 0;
@@ -93,7 +98,6 @@ const Match = ({
 
   return (
     <div className="bg-slate-200 dark:bg-black h-full pt-14 sm:pt-20 dark:text-white overflow-hidden">
-
       <div className="bg-white dark:bg-zinc-900 h-fit w-full sm:w-11/12 justify-self-center sm:rounded-3xl max-w-[1200px] shadow-lg">
         {/* Header */}
         <div className="hidden sm:flex gap-4 justify-center p-5 items-center">
@@ -272,7 +276,6 @@ const Match = ({
           </div>
         </div>
 
-        {/* Match Events */}
         <div className="flex flex-col w-full justify-center items-center pb-3">
           {fixture.fixtureInfo.status.short === "FT" && matchEvents && (
             <div className="grid grid-cols-[1fr_auto_1fr] text-zinc-500 text-xs justify-self-center w-full justify-center">
@@ -286,7 +289,6 @@ const Match = ({
                     )}
                   </>
                 ))}
-                
               </div>
               <div>
                 <img
@@ -311,7 +313,12 @@ const Match = ({
         </div>
       </div>
 
-      <MatchEvents matchEvents={matchEvents} fixture={fixture} />
+      {(fixture.fixtureInfo.status.short === "FT" ||
+      fixture.fixtureInfo.status.short === "1H" || 
+      fixture.fixtureInfo.status.short === "2H" || 
+      fixture.fixtureInfo.status.short === "ET") &&  (
+        <MatchEvents matchEvents={matchEvents} fixture={fixture} />
+      )}
 
       {(fixture.fixtureInfo.status.short === "NS" ||
         fixture.fixtureInfo.status.short === "PST" ||
