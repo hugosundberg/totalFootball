@@ -129,7 +129,7 @@ const fetchStandings = async (leagueID: number) => {
         },
       }
     );
-    
+
     if (!response.ok) {
       throw new Error(`HTTP error! status: ${response.status}`);
     }
@@ -175,7 +175,6 @@ const fetchTeamLeague = async (teamID: number) => {
 };
 
 const fetchTeamCompetitions = async (teamID: number) => {
-
   try {
     const response = await fetch(
       `https://v3.football.api-sports.io/leagues?team=${teamID}&season=${season}`,
@@ -183,7 +182,7 @@ const fetchTeamCompetitions = async (teamID: number) => {
         method: "GET",
         headers: {
           "x-rapidapi-host": "v3.football.api-sports.io",
-          "x-rapidapi-key": apiKey
+          "x-rapidapi-key": apiKey,
         },
       }
     );
@@ -207,25 +206,29 @@ const fetchTeamCompetitions = async (teamID: number) => {
         country: {
           name: comp.country.name,
           code: comp.country.code,
-        }
+        },
       },
     }));
 
+    console.log("Comps: ", comps);
+
     comps.sort((a, b) => {
+      // Check if either competition matches the teamLeague
       if (a.competitions.league.id === teamLeague) {
-        return -1;
+        return -1; // Place `a` first
       } else if (b.competitions.league.id === teamLeague) {
-        return 1;
-      } else {
-        return 0;
+        return 1; // Place `b` first
       }
+    
+      // If neither matches, sort by league.id in ascending order
+      return a.competitions.league.id - b.competitions.league.id;
     });
 
     return comps;
   } catch (error) {
     console.error("Error fetching competitions: ", error);
   }
-}
+};
 
 const fetchSquad = async (teamID: number) => {
   try {
@@ -630,7 +633,6 @@ const fetchMatchEvents = async (matchID: number) => {
     );
 
     const data = await response.json();
-
 
     const matchEvents: MatchEvent[] = data.response.map((event: any) => ({
       id: event.id,

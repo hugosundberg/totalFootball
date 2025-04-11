@@ -291,7 +291,18 @@ interface TeamSeasonStats {
 }
 
 interface TeamCompetitions {
-  competitions: Competition[];
+  competitions: {
+    league: {
+      id: number;
+      name: string;
+      logo: string;
+      type: string;
+    };
+    country: {
+      name: string;
+      code: string;
+    };
+  };
 }
 
 interface Competition {
