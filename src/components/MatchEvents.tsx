@@ -90,9 +90,21 @@ const MatchEvents = ({ matchEvents, fixture }: MatchEventProps) => {
                 ) : (
                   <div></div>
                 )}
-                <div className="text-white bg-zinc-700 w-10 h-10 rounded-full flex items-center justify-center justify-self-center">
-                  <p>{event.time.elapsed + "'"}</p>
-                </div>
+
+                {/* TIME */}
+                {event.time.extra === null ? (
+                  <p className="text-white bg-zinc-700 w-10 h-10 rounded-full flex items-center justify-center justify-self-center">
+                    {event.time.elapsed + "'"}
+                  </p>
+                ) : (
+                  <div className="text-white bg-zinc-700 w-10 h-10 rounded-full flex items-center justify-center justify-self-center">
+                    <p className="flex absolute">
+                      {event.time.elapsed + "'"}
+                    </p>
+                    <p className="flex text-xs p-[4px] relative left-5 top-4 bg-zinc-500 rounded-full">+ {event.time.extra}</p>
+                  </div>
+                )}
+
                 {event.team.id !== fixture.fixture.teams.home.id ? (
                   <div className={`flex items-center gap-4 p-2`}>
                     {event.type === "Goal" && (

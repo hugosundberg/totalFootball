@@ -5,6 +5,7 @@ const MatchStats = ({ fixture }: MatchStatsProps) => {
     return null;
   }
 
+  
   return (
     <div className="flex flex-col bg-white dark:bg-zinc-900 h-fit mt-4 rounded-3xl items-center py-3 sm:py-10 w-full sm:w-11/12 max-w-[1200px] justify-self-center shadow-lg">
       <h2 className="text-lg sm:text-2xl mb-4">Statistics</h2>
@@ -222,22 +223,22 @@ const MatchStats = ({ fixture }: MatchStatsProps) => {
           )}
         </div>
 
-        <div className="grid grid-cols-4 w-full">
-          {fixture.statistics.home.redCards === null ? (
-            <p className="px-4">0</p>
-          ) : (
-            <p className="px-4">{fixture.statistics.home.redCards}</p>
-          )}
+        <div className="grid grid-cols-4 w-full items-center">
+          <p className={`px-4 ${
+            (fixture.statistics.home.redCards ?? 0) < (fixture.statistics.away.redCards ?? 0)
+              ? "w-fit bg-slate-400 dark:bg-slate-700 p-2 rounded-full"
+              : ""
+          }`}>{fixture.statistics.home.redCards}</p>
           <div className="flex items-center gap-3 justify-self-center col-start-2 col-span-2">
             <p>Red cards</p>
             <div className="bg-red-700 h-6 w-4 rounded-sm"></div>
           </div>
           <p className="justify-self-end">
-            {fixture.statistics.away.redCards === null ? (
-              <p className="px-4">0</p>
-            ) : (
-              <p className="px-4">{fixture.statistics.away.redCards}</p>
-            )}
+            <p className={`px-4 ${
+              (fixture.statistics.home.redCards ?? 0) > (fixture.statistics.away.redCards ?? 0)
+                ? "w-fit bg-gray-300 dark:bg-gray-500 p-2 rounded-full"
+                : ""
+            }`}>{fixture.statistics.away.redCards}</p>
           </p>
         </div>
       </div>
